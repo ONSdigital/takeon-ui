@@ -5,6 +5,6 @@ def check_status(status):
         'Saved - run validation': 'status status--error',
         'Validations Triggered' : 'status status--error',
         'Clear'                 : 'status status--success',
-        'Clear - overidden'     : 'status status--success'
+        'Clear - overridden'     : 'status status--success'
     }
     return status_code.get(status, 'status status--info')
