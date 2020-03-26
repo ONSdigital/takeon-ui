@@ -42,32 +42,6 @@ def view_form(inqcode, period, ruref):
         zip(["survey", "period", "reference"], [inqcode, period, ruref]))
     parameters = build_uri(url_parameters)
 
-    # if request.form and request.form['action'] == 'saveForm':
-    #     save_form(parameters, request.form, inqcode, period, ruref)
-
-    contributor_details = api_caller.contributor_search(parameters=parameters)
-    validation_outputs = api_caller.validation_outputs(parameters=parameters)
-    view_forms = api_caller.view_form_responses(parameters=parameters)
-
-    contributor_data = json.loads(contributor_details)
-    validations = json.loads(validation_outputs)
-    status_message = ""
-    status = contributor_data['data'][0]['status']
-    status_colour = check_status(status)
-
-    view_form_data = json.loads(view_forms)
-
-    response_and_validations = combine_response_validations(view_form_data, filter_validations(validations))
-    override_button = override_all_button(response_and_validations)
-
-    log.info("Contributor Details: %s", contributor_data)
-    log.info("Contributor Details[0]: %s", contributor_data['data'][0])
-    log.info("View Form Data: %s", view_form_data)
-    log.info("Validations output: %s", validations)
-    log.info("Filtered Validations output: %s",
-             filter_validations(validations))
-    log.info("Combined Response and Validation Info Data: %s", response_and_validations)
-
     contributor_details = api_caller.contributor_search(parameters=parameters)
     validation_outputs = api_caller.validation_outputs(parameters=parameters)
     view_forms = api_caller.view_form_responses(parameters=parameters)
