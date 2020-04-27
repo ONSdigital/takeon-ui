@@ -40,8 +40,6 @@ class SeleniumCore:
         # uncomment the below url and use instead of the url from ConfigTest
         url = URL_CONFIG.get('env_url').strip()
         # url from ConfigTest is a placeholder tests will fail as there is no url
-        # and check before committing the code that url is not been used from url_config
-        # and only use the place holder one from ConfigTest
         # url = ConfigTest.UI_URL
         context.driver.get(url)
         context.driver.implicitly_wait(2)
