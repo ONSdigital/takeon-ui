@@ -1,12 +1,16 @@
 # import time
+import time
 
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages.base_page import BasePage
 
 
-class ContributionDetailsPage(BasePage):
+class SandAndGravelLandDetails(BasePage):
     question_codes = {
         '601': '0601',
         '602': '0602',
@@ -14,7 +18,8 @@ class ContributionDetailsPage(BasePage):
     }
 
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
-    STATUS = By.CLASS_NAME, 'status status--success'
+    STATUS = By.XPATH, "//span[@class='status status--error']"
+    QUESTION_PANEL_ERROR_MESSAGE = By.XPATH, "//div[1]/div[1]/p[1]/strong[1]"
     QUESTION_146_ELEMENT = By.ID, '0146',
     QUESTION_147_ELEMENT = By.ID, '0147',
     QUESTION_601_ELEMENT = By.ID, '0601',
@@ -27,15 +32,67 @@ class ContributionDetailsPage(BasePage):
     QUESTION_608_ELEMENT = By.ID, '0608',
     QUESTION_9001_ELEMENT = By.ID, '9001',
 
-    def validate_the_period_details(self, question_code, value):
+    def validate_the_previous_period_details(self, question_code, previous_value):
+        self.previous_value = previous_value
+        self.submit_the_period_details(question_code, self.previous_value)
+        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        self.switch_to_alert_box()
+        window_before = self.driver.window_handles[0]
+        # close the current tab
+        self.driver.close()
+        self.driver.switch_to_window(window_before)
+        self.driver.refresh()
+
+    def validate_the_current_period_details(self, question_code, current_value):
+        self.current_value = current_value
+        self.submit_the_period_details(question_code, self.current_value)
+        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        self.switch_to_alert_box()
+
+    def submit_the_period_details(self, question_code, value):
         window_after = self.driver.window_handles[1]
         self.driver.switch_to_window(window_after)
         question_code_ele = self.driver.find_element_by_id(self.get_question_codes(question_code))
+        question_code_ele.clear()
         question_code_ele.send_keys(value)
 
     def get_question_codes(self, question_code):
         return self.question_codes[question_code]
 
-    def check_status(self):
-        status = self.driver.find_element(*ContributionDetailsPage.STATUS)
-        assert status.text == 'Clear'
+    def check_the_threshold_value(self, previous_value, current_value, threshold_value):
+        result_value = int(current_value) - int(previous_value)
+        if result_value > int(threshold_value):
+            return 'false'
+        else:
+            return 'true'
+
+    def check_status(self, status_type):
+        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        self.switch_to_alert_box()
+        self.driver.refresh()
+        return self.driver.find_element(*SandAndGravelLandDetails.STATUS)
+
+    def check_validation_message(self):
+        error_message = self.driver.find_element(*SandAndGravelLandDetails.QUESTION_PANEL_ERROR_MESSAGE)
+        assert error_message.text == 'This has changed significantly since the last submission'
+
+    def switch_to_alert_box(self):
+        # Click on the "Refresh" button to generate the Confirmation Alert
+        self.driver.refresh()
+        try:
+            # Switch the control to the Alert window
+            WebDriverWait(self.driver, 5).until(EC.alert_is_present(), 'Timed out waiting for alert')
+            alert = self.driver.switch_to.alert
+            # Retrieve the message on the Alert window
+            message = alert.text
+            print("Alert shows following message: " + message)
+            time.sleep(2)
+            # use the accept() method to accept the alert
+            alert.accept()
+            print("Alert accepted")
+            # get the text returned when OK Button is clicked.
+            txt = self.driver.find_element_by_id('msg')
+            print(txt.text)
+            time.sleep(2)
+        except TimeoutException:
+            print("No Alert")
