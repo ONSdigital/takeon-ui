@@ -3,7 +3,7 @@ from behave import given, when, then
 
 @given(u'the url is {location}')
 def step_impl(context, location):
-    context.browser.get(location)
+    context.driver.get(location)
 
 @given(u'{name} column is {col}')
 def step_impl(context, name, col):
