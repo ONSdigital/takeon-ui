@@ -4,41 +4,36 @@ from pages.sand_and_gravel_land_details_page import SandAndGravelLandDetails
 from pages.search_by_page import SearchByPage
 
 
-@given(u'As a BMI user I want to set the search criteria options for the forms returned by the contributor')
+@given(u'As a BMI user I set the search criteria options for the forms returned by the contributor')
 def step_impl(context):
     page = SearchByPage(context.driver)
     page.set_search_criteria_options()
 
 
 @given(u'I search for the survey with {reference} for previous period {period}')
+@when(u'I search for the survey with {reference} for current period {period}')
 def step_impl(context, reference, period):
     context.search_page = ContributorSearchPage(context.driver)
     context.search_page.select_the_reference_view_form(reference, period)
 
 
-@given(u'I run the validation process on {question_code} for previous period with {previous_value}')
-def step_impl(context, question_code, previous_value):
+@given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
+@when(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
+def step_impl(context, period_type, question_code, period_value):
     context.page = SandAndGravelLandDetails(context.driver)
-    context.page.previous_value = previous_value
-    context.page.validate_the_previous_period_details(question_code, context.page.previous_value)
+    if period_type == "previous":
+        context.previous_period_value = period_value
+        context.page.validate_the_previous_period_details(question_code, context.previous_period_value)
+    elif period_type == "current":
+        context.current_period_value = period_value
+        context.page.validate_the_current_period_details(question_code, context.current_period_value)
 
 
-@when(u'I search for the survey with {reference} for current period {period}')
-def step_impl(context, reference, period):
-    context.search_page.select_the_reference_view_form(reference, period)
-
-
-@when(u'I run the validation process on {question_code} for current period with {current_value}')
-def step_impl(context, question_code, current_value):
-    context.page.current_value = current_value
-    context.page.validate_the_current_period_details(question_code, context.page.current_value)
-
-
-@then(u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold} value')
-def step_impl(context, result, threshold):
-    threshold_result = context.page. \
-        check_threshold_value(context.page.previous_value,
-                              context.page.current_value, threshold)
+@then(u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold_value}')
+def step_impl(context, result, threshold_value):
+    previous_value = context.previous_period_value
+    current_value = context.current_period_value
+    threshold_result = context.page.check_threshold_value(previous_value, current_value, threshold_value)
     assert threshold_result == result
 
 
