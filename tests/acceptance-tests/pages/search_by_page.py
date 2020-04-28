@@ -9,14 +9,7 @@ class SearchByPage(BasePage):
     SURVEY = By.NAME, 'survey'
     SEARCH_BUTTON = By.XPATH, "//button[@class='btn btn--small']"
 
-    def select_search_by(self, reference_number):
-        self.select_search_by_options()
-        # ele = self.driver.find_element(*SearchByPage.REFERENCE)
-        # ele.send_keys(reference_number)
-        # elem = self.driver.find_element(*SearchByPage.SEARCH_BUTTON)
-        # elem.click()
-
-    def select_search_by_options(self):
+    def set_search_criteria_options(self):
         self.is_checked(*SearchByPage.REFERENCE)
         self.is_checked(*SearchByPage.PERIOD)
         self.is_checked(*SearchByPage.SURVEY)

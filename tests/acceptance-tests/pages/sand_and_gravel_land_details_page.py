@@ -33,8 +33,7 @@ class SandAndGravelLandDetails(BasePage):
     QUESTION_9001_ELEMENT = By.ID, '9001',
 
     def validate_the_previous_period_details(self, question_code, previous_value):
-        self.previous_value = previous_value
-        self.submit_the_period_details(question_code, self.previous_value)
+        self.submit_the_period_details(question_code, previous_value)
         self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
         self.switch_to_alert_box()
         window_before = self.driver.window_handles[0]
@@ -44,10 +43,10 @@ class SandAndGravelLandDetails(BasePage):
         self.driver.refresh()
 
     def validate_the_current_period_details(self, question_code, current_value):
-        self.current_value = current_value
-        self.submit_the_period_details(question_code, self.current_value)
+        self.submit_the_period_details(question_code, current_value)
         self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
         self.switch_to_alert_box()
+        self.driver.refresh()
 
     def submit_the_period_details(self, question_code, value):
         window_after = self.driver.window_handles[1]
@@ -59,22 +58,18 @@ class SandAndGravelLandDetails(BasePage):
     def get_question_codes(self, question_code):
         return self.question_codes[question_code]
 
-    def check_the_threshold_value(self, previous_value, current_value, threshold_value):
+    def check_threshold_value(self, previous_value, current_value, threshold_value):
         result_value = int(current_value) - int(previous_value)
         if result_value > int(threshold_value):
-            return 'false'
-        else:
             return 'true'
+        else:
+            return 'false'
 
-    def check_status(self, status_type):
-        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
-        self.switch_to_alert_box()
-        self.driver.refresh()
-        return self.driver.find_element(*SandAndGravelLandDetails.STATUS)
+    def get_status(self, status_type):
+        return self.driver.find_element(*SandAndGravelLandDetails.STATUS).text
 
-    def check_validation_message(self):
-        error_message = self.driver.find_element(*SandAndGravelLandDetails.QUESTION_PANEL_ERROR_MESSAGE)
-        assert error_message.text == 'This has changed significantly since the last submission'
+    def get_validation_message(self):
+        return self.driver.find_element(*SandAndGravelLandDetails.QUESTION_PANEL_ERROR_MESSAGE).text
 
     def switch_to_alert_box(self):
         # Click on the "Refresh" button to generate the Confirmation Alert
