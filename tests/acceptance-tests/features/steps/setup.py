@@ -12,4 +12,4 @@ def step_impl(context, name, col):
     except AttributeError:
         context.columns = dict()
         context.columns[name] = int(col)
-    
+

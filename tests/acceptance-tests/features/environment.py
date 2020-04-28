@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from base.selenium_core import SeleniumCore
 
 
-def before_scenario(context, scenario):
+def before_feature(context, feature):
     SeleniumCore.initialize_the_browser(context)
 
 
