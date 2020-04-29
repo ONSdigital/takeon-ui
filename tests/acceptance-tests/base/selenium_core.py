@@ -42,7 +42,7 @@ class SeleniumCore:
         # IMPORTANT: add url_configs.py to git exclude in order to ignore the class by git to stop accidentally committing it to repo
         url = ConfigTest.UI_URL
         try:
-            if not url:
+            if url:
                 context.driver.get(url)
                 context.driver.maximize_window()
                 context.driver.implicitly_wait(2)

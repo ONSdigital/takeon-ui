@@ -8,4 +8,4 @@ import os.path
 class ConfigTest:
     HOMEDIR = os.path.expanduser("~")
     CHROME_DRIVER_LOCATION = HOMEDIR + '/chromedriver'
-    UI_URL = ' '
+    UI_URL = ''
