@@ -4,6 +4,8 @@ Functions that are not test or feature specific.
 """
 from selenium import webdriver
 from config_files.config_test import ConfigTest
+
+
 # from config_files.url_configs import URL_CONFIG
 
 
@@ -40,7 +42,6 @@ class SeleniumCore:
         # IMPORTANT: add url_configs.py to git exclude in order to ignore the class by git to stop accidentally committing it to repo
         url = ConfigTest.UI_URL
         try:
-
             if not url:
                 context.driver.get(url)
                 context.driver.maximize_window()
