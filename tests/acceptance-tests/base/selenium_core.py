@@ -1,18 +1,10 @@
 """
-Module containing common function used in several tests-tests.
+Class containing common functions used in several tests.
 Functions that are not test or feature specific.
 """
 from selenium import webdriver
-
 from config_files.config_test import ConfigTest
-
-
-# Create a class called url_configs in config_files package folder
-# and create a dictionary list URL_CONFIG add a env_url as key and url as value
-# locally to able to run the tests against that environment
-# uncomment the below import after doing the above steps
-# IMPORTANT: add url_configs.py to git exclude in order to ignore the class by git
-from config_files.url_configs import URL_CONFIG
+# from config_files.url_configs import URL_CONFIG
 
 
 class SeleniumCore:
@@ -33,20 +25,31 @@ class SeleniumCore:
         else:
             raise Exception("The browser type '{}' is not supported".format(browser_type))
 
+        SeleniumCore.navigate_to_the_url(context)
+
+    @staticmethod
+    def navigate_to_the_url(context):
+
         # clean the url and go to the url
-        # Create a class called url_configs in config_files package folder
+        # Create a class called url_configs in config_files folder
         # and create a dictionary list URL_CONFIG add a env_url as key and url as value
         # locally to able to run the tests against that environment
         # uncomment the below url and use instead of the url from ConfigTest
-        url = URL_CONFIG.get('env_url').strip()
-        # url from ConfigTest is a placeholder tests will fail as there is no url
-        # url = ConfigTest.UI_URL
-        context.driver.get(url)
-        context.driver.implicitly_wait(2)
-        return context.driver
-
-    def navigate_to_the_url(context):
-        pass
         # url = URL_CONFIG.get('env_url').strip()
-        # context.driver.get(url)
-        # context.driver.implicitly_wait(2)
+        # url from ConfigTest is a placeholder and will fail as there is no url been set up
+        # IMPORTANT: add url_configs.py to git exclude in order to ignore the class by git to stop accidentally committing it to repo
+        url = ConfigTest.UI_URL
+        try:
+
+            if not url:
+                context.driver.get(url)
+                context.driver.maximize_window()
+                context.driver.implicitly_wait(2)
+                return context.driver
+            else:
+                raise ValueError(
+                    'empty url.'
+                    'Please set the url in url_configs file.'
+                    ' Follow the steps mentioned in the comments')
+        except ValueError as e:
+            print(e)
