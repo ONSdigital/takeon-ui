@@ -25,11 +25,8 @@ class ContributorSearchPage(BasePage):
     def submit_search_details(self, reference, period):
         ele = self.find_element_by(*ContributorSearchPage.REFERENCE_TEXT_FIELD)
         ele.send_keys(reference)
-
         ele = self.find_element_by(*ContributorSearchPage.PERIOD_TEXT_FIELD)
         ele.send_keys(period)
-
-        # self.find_element_by_text(*ContributorSearchPage.PERIOD_TEXT_FIELD, period)
         self.driver.find_element(*ContributorSearchPage.SEARCH_BUTTON).click()
 
     def find_element_by(self, *element):
