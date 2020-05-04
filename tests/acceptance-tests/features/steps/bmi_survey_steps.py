@@ -6,7 +6,7 @@ from pages.search_by_page import SearchByPage
 
 @given(u'As a BMI user I set the search criteria options for the forms returned by the contributor')
 def step_impl(context):
-    page = SearchByPage(context.driver)
+    page = SearchByPage()
     page.set_search_criteria_options()
 
 
@@ -14,14 +14,14 @@ def step_impl(context):
 @given(u'I search for the {survey} with {reference} for period {period}')
 @when(u'I search for the {survey} with {reference} for period {period}')
 def step_impl(context, survey, reference, period):
-    context.search_page = ContributorSearchPage(context.driver)
+    context.search_page = ContributorSearchPage()
     context.search_page.select_the_reference_view_form(survey, reference, period)
 
 
 @given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
 @when(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
 def step_impl(context, period_type, question_code, period_value):
-    context.page = SandAndGravelLandDetails(context.driver)
+    context.page = SandAndGravelLandDetails()
     if period_type == "previous":
         context.previous_period_value = period_value
         context.page.validate_the_previous_period_details(question_code, context.previous_period_value)
@@ -32,7 +32,7 @@ def step_impl(context, period_type, question_code, period_value):
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
 def step_impl(context, existing_value, new_value):
-    pass
+    context.page.submit_the_values_for_all_question_codes(existing_value,new_value)
 
 
 @when(u'I trigger the validation process')
