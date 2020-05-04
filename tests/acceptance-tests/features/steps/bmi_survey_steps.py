@@ -10,11 +10,12 @@ def step_impl(context):
     page.set_search_criteria_options()
 
 
-@given(u'I search for the survey with {reference} for previous period {period}')
-@when(u'I search for the survey with {reference} for current period {period}')
-def step_impl(context, reference, period):
+# @given(u'I search for the survey with {reference} for previous period {period}')
+@given(u'I search for the {survey} with {reference} for period {period}')
+@when(u'I search for the {survey} with {reference} for period {period}')
+def step_impl(context, survey, reference, period):
     context.search_page = ContributorSearchPage(context.driver)
-    context.search_page.select_the_reference_view_form(reference, period)
+    context.search_page.select_the_reference_view_form(survey, reference, period)
 
 
 @given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
@@ -29,7 +30,23 @@ def step_impl(context, period_type, question_code, period_value):
         context.page.validate_the_current_period_details(question_code, context.current_period_value)
 
 
-@then(u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold_value}')
+@when(u'I change the {existing_value} to {new_value} for all the question codes')
+def step_impl(context, existing_value, new_value):
+    pass
+
+
+@when(u'I trigger the validation process')
+def step_impl(context):
+    pass
+
+
+@then(u'the {validation_message} message should {is_validation_exists} displayed')
+def step_impl(context, validation_message, is_validation_exists):
+    pass
+
+
+@then(
+    u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold_value}')
 def step_impl(context, result, threshold_value):
     previous_value = context.previous_period_value
     current_value = context.current_period_value
