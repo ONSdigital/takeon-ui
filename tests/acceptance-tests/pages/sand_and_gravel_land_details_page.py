@@ -1,11 +1,9 @@
-# import time
 import time
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from base.selenium_core import SeleniumCore
 from pages.base_page import BasePage
 
 
@@ -36,20 +34,17 @@ class SandAndGravelLandDetails(BasePage):
         self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
         self.switch_to_alert_box()
         window_before = self.driver.window_handles[0]
-        # close the current tab
-        self.driver.close()
-        self.driver.switch_to_window(window_before)
-        self.driver.refresh()
+        SeleniumCore.close_the_current_window()
 
     def validate_the_current_period_details(self, question_code, current_value):
+        self.driver.refresh()
         self.submit_the_period_details(question_code, current_value)
         self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
         self.switch_to_alert_box()
         self.driver.refresh()
 
     def submit_the_period_details(self, question_code, value):
-        window_after = self.driver.window_handles[1]
-        self.driver.switch_to_window(window_after)
+        SeleniumCore.switch_window()
         question_code_ele = self.driver.find_element_by_id(self.get_question_codes(question_code))
         question_code_ele.clear()
         question_code_ele.send_keys(value)
@@ -90,3 +85,28 @@ class SandAndGravelLandDetails(BasePage):
             time.sleep(2)
         except TimeoutException:
             print("No Alert")
+
+    def submit_the_values_for_all_question_codes(self, existing_value, new_value):
+        SeleniumCore.switch_window()
+        self.submit_the_values(existing_value)
+        self.save_the_application()
+        self.submit_the_values(new_value)
+        self.save_the_application()
+
+    def save_the_application(self):
+        self.SAVE_AND_VALIDATE.click()
+        self.switch_to_alert_box()
+        self.driver.refresh()
+
+    def submit_the_values(self, value):
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_146_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_147_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_601_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_602_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_603_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_604_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_605_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_606_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_607_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_608_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_9001_ELEMENT).send_keys(value)
