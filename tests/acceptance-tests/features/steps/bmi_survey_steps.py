@@ -1,6 +1,6 @@
 from behave import given, when, then
 from pages.contributor_search_page import ContributorSearchPage
-from pages.sand_and_gravel_land_details_page import SandAndGravelLandDetails
+from pages.sand_and_gravel_land_details_page import SandAndGravelLandDetailsPage
 from pages.search_by_page import SearchByPage
 
 
@@ -19,7 +19,7 @@ def step_impl(context, survey, reference, period):
 @given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
 @when(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
 def step_impl(context, period_type, question_code, period_value):
-    context.sgl_page = SandAndGravelLandDetails()
+    context.sgl_page = SandAndGravelLandDetailsPage()
     if period_type == "previous":
         context.previous_period_value = period_value
         context.sgl_page.validate_the_previous_period_details(question_code, context.previous_period_value)
@@ -30,18 +30,18 @@ def step_impl(context, period_type, question_code, period_value):
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
 def step_impl(context, existing_value, new_value):
-    SandAndGravelLandDetails().submit_the_values_for_all_question_codes(existing_value, new_value)
+    SandAndGravelLandDetailsPage().submit_the_values_for_all_question_codes(existing_value, new_value)
 
 
 @when(u'I trigger the validation process')
 def step_impl(context):
-    SandAndGravelLandDetails().save_the_application()
+    SandAndGravelLandDetailsPage().save_the_application()
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 def step_impl(context, validation_message, is_validation_exists):
-    error_msg_elements = SandAndGravelLandDetails().get_the_validation_messages_for_all_question_codes()
-    fixed_msg_elements = SandAndGravelLandDetails().get_the_fixed_validation_messages_for_all_question_codes()
+    error_msg_elements = SandAndGravelLandDetailsPage().get_the_validation_messages_for_all_question_codes()
+    fixed_msg_elements = SandAndGravelLandDetailsPage().get_the_fixed_validation_messages_for_all_question_codes()
 
     for i in range(0, len(error_msg_elements)):
         for j in range(0, len(fixed_msg_elements)):
@@ -59,7 +59,7 @@ def step_impl(context, validation_message, is_validation_exists):
 def step_impl(context, result, threshold_value):
     previous_value = context.previous_period_value
     current_value = context.current_period_value
-    result_value = SandAndGravelLandDetails().check_threshold_value(previous_value, current_value)
+    result_value = SandAndGravelLandDetailsPage().check_threshold_value(previous_value, current_value)
     if result_value > int(threshold_value):
         assert True
     else:
@@ -68,7 +68,7 @@ def step_impl(context, result, threshold_value):
 
 @then(u'the form status should change to {status_type}')
 def step_impl(context, status_type):
-    validation_message = SandAndGravelLandDetails().get_validation_message()
+    validation_message = SandAndGravelLandDetailsPage().get_validation_message()
     assert validation_message == 'This has changed significantly since the last submission'
-    status = SandAndGravelLandDetails().get_status(status_type)
+    status = SandAndGravelLandDetailsPage().get_status(status_type)
     assert status.lower() == status_type.lower()

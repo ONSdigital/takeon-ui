@@ -4,7 +4,7 @@ from base.selenium_core import SeleniumCore
 from pages.base_page import BasePage
 
 
-class SandAndGravelLandDetails(BasePage):
+class SandAndGravelLandDetailsPage(BasePage):
     question_codes = {
         '601': '0601',
         '602': '0602',
@@ -32,14 +32,14 @@ class SandAndGravelLandDetails(BasePage):
 
     def validate_the_previous_period_details(self, question_code, previous_value):
         self.submit_the_period_details(question_code, previous_value)
-        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        self.driver.find_element(*SandAndGravelLandDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
         SeleniumCore.close_the_current_window()
 
     def validate_the_current_period_details(self, question_code, current_value):
         self.driver.refresh()
         self.submit_the_period_details(question_code, current_value)
-        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        self.driver.find_element(*SandAndGravelLandDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
         self.driver.refresh()
 
@@ -56,10 +56,10 @@ class SandAndGravelLandDetails(BasePage):
         return int(current_value) - int(previous_value)
 
     def get_status(self, status_type):
-        return self.driver.find_element(*SandAndGravelLandDetails.STATUS).text
+        return self.driver.find_element(*SandAndGravelLandDetailsPage.STATUS).text
 
     def get_validation_message(self):
-        return self.driver.find_element(*SandAndGravelLandDetails.QUESTION_PANEL_ERROR_MESSAGE).text
+        return self.driver.find_element(*SandAndGravelLandDetailsPage.QUESTION_PANEL_ERROR_MESSAGE).text
 
     def submit_the_values_for_all_question_codes(self, existing_value, new_value):
         SeleniumCore.switch_window()
@@ -68,34 +68,35 @@ class SandAndGravelLandDetails(BasePage):
         self.submit_the_values(new_value)
 
     def save_the_application(self):
-        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        self.driver.find_element(*SandAndGravelLandDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
         self.driver.refresh()
 
     def submit_the_values(self, value):
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_146_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_147_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_601_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_602_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_603_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_604_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_605_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_606_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_607_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_608_ELEMENT).send_keys(value)
-        SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_9001_ELEMENT).send_keys(value)
+
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_146_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_147_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_601_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_602_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_603_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_604_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_605_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_606_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_607_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_608_ELEMENT).send_keys(value)
+        SeleniumCore.find_element_by(*SandAndGravelLandDetailsPage.QUESTION_9001_ELEMENT).send_keys(value)
 
     def get_the_validation_messages_for_all_question_codes(self):
-        error_msg_elements = self.driver.find_elements(*SandAndGravelLandDetails.QUESTION_CODE_PANELS_ERROR_MESSAGES)
+        error_msg_elements = self.driver.find_elements(*SandAndGravelLandDetailsPage.QUESTION_CODE_PANELS_ERROR_MESSAGES)
         return error_msg_elements
 
     def get_the_fixed_validation_messages_for_all_question_codes(self):
         error_msg_elements = self.driver.find_elements(
-            *SandAndGravelLandDetails.QUESTION_CODE_FIXED_VALIDATION_MESSAGES)
+            *SandAndGravelLandDetailsPage.QUESTION_CODE_FIXED_VALIDATION_MESSAGES)
         return error_msg_elements
 
     def get_all_question_codes(self):
-        label_elements = self.driver.find_elements(*SandAndGravelLandDetails.QUESTION_CODE_PANEL_LABEL)
+        label_elements = self.driver.find_elements(*SandAndGravelLandDetailsPage.QUESTION_CODE_PANEL_LABEL)
         val = []
         for i in range(0, len(label_elements)):
             val.append(label_elements[i].text)
