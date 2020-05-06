@@ -7,10 +7,10 @@ from base.browser import Browser
 from base.driver_context import DriverContext
 
 
-def before_feature(context, feature):
+def before_scenario(context, scenario):
     Browser.initialize_the_browser(context)
 
 
 # After all the tests we need to close the browser
-def after_feature(context, feature):
+def after_scenario(context, scenario):
     DriverContext.driver.quit()

@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+from base.selenium_core import SeleniumCore
 from pages.base_page import BasePage
 
 
@@ -9,8 +10,8 @@ class ContributorSearchPage(BasePage):
     SURVEY_TEXT_FIELD = By.ID, 'survey'
     SEARCH_BUTTON = By.XPATH, "//button[@class='btn btn--small']"
 
-    def select_the_reference_view_form(self, reference, period):
-        self.submit_search_details(reference, period)
+    def select_the_reference_view_form(self, survey, reference, period):
+        self.submit_search_details(survey, reference, period)
         table = self.driver.find_element_by_id("ResultsTable")
         rows = table.find_elements_by_tag_name("tr")
         # Ignore the first row
@@ -18,18 +19,14 @@ class ContributorSearchPage(BasePage):
             cols = rows[i].find_elements_by_tag_name("td")
             # Check to see if any references appear that shouldn't be there
             if (cols[i].text == reference and cols[i + 1].text == period):
-                window_before = self.driver.window_handles[0]
                 cols[i - 1].click()
                 break
 
-    def submit_search_details(self, reference, period):
-        ele = self.find_element_by(*ContributorSearchPage.REFERENCE_TEXT_FIELD)
+    def submit_search_details(self, survey, reference, period):
+        ele = SeleniumCore.find_element_by(*ContributorSearchPage.REFERENCE_TEXT_FIELD)
         ele.send_keys(reference)
-        ele = self.find_element_by(*ContributorSearchPage.PERIOD_TEXT_FIELD)
+        ele = SeleniumCore.find_element_by(*ContributorSearchPage.PERIOD_TEXT_FIELD)
         ele.send_keys(period)
+        ele = SeleniumCore.find_element_by(*ContributorSearchPage.SURVEY_TEXT_FIELD)
+        ele.send_keys(survey)
         self.driver.find_element(*ContributorSearchPage.SEARCH_BUTTON).click()
-
-    def find_element_by(self, *element):
-        ele = self.driver.find_element(*element)
-        ele.clear()
-        return ele

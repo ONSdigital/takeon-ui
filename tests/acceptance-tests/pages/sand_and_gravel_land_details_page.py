@@ -1,8 +1,5 @@
-import time
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 from base.selenium_core import SeleniumCore
 from pages.base_page import BasePage
 
@@ -13,6 +10,7 @@ class SandAndGravelLandDetails(BasePage):
         '602': '0602',
         '603': '0603',
     }
+    question_codes_list = ["Q601", "Q602", "Q603", "Q604", "Q605", "Q606", "Q607", 'Q608', 'Q9001']
 
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     STATUS = By.XPATH, "//span[@class='status status--error']"
@@ -28,19 +26,21 @@ class SandAndGravelLandDetails(BasePage):
     QUESTION_607_ELEMENT = By.ID, '0607',
     QUESTION_608_ELEMENT = By.ID, '0608',
     QUESTION_9001_ELEMENT = By.ID, '9001',
+    QUESTION_CODE_FIXED_VALIDATION_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[2]/strong'
+    QUESTION_CODE_PANELS_ERROR_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[1]/strong'
+    QUESTION_CODE_PANEL_LABEL = By.XPATH, '//*[@id="responseForm"]/div/div/p/label'
 
     def validate_the_previous_period_details(self, question_code, previous_value):
         self.submit_the_period_details(question_code, previous_value)
         self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
-        self.switch_to_alert_box()
-        window_before = self.driver.window_handles[0]
+        SeleniumCore.switch_to_alert_box()
         SeleniumCore.close_the_current_window()
 
     def validate_the_current_period_details(self, question_code, current_value):
         self.driver.refresh()
         self.submit_the_period_details(question_code, current_value)
         self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
-        self.switch_to_alert_box()
+        SeleniumCore.switch_to_alert_box()
         self.driver.refresh()
 
     def submit_the_period_details(self, question_code, value):
@@ -52,12 +52,8 @@ class SandAndGravelLandDetails(BasePage):
     def get_question_codes(self, question_code):
         return self.question_codes[question_code]
 
-    def check_threshold_value(self, previous_value, current_value, threshold_value):
-        result_value = int(current_value) - int(previous_value)
-        if result_value > int(threshold_value):
-            return 'true'
-        else:
-            return 'false'
+    def check_threshold_value(self, previous_value, current_value):
+        return int(current_value) - int(previous_value)
 
     def get_status(self, status_type):
         return self.driver.find_element(*SandAndGravelLandDetails.STATUS).text
@@ -65,37 +61,15 @@ class SandAndGravelLandDetails(BasePage):
     def get_validation_message(self):
         return self.driver.find_element(*SandAndGravelLandDetails.QUESTION_PANEL_ERROR_MESSAGE).text
 
-    def switch_to_alert_box(self):
-        # Click on the "Refresh" button to generate the Confirmation Alert
-        self.driver.refresh()
-        try:
-            # Switch the control to the Alert window
-            WebDriverWait(self.driver, 5).until(EC.alert_is_present(), 'Timed out waiting for alert')
-            alert = self.driver.switch_to.alert
-            # Retrieve the message on the Alert window
-            message = alert.text
-            print("Alert shows following message: " + message)
-            time.sleep(2)
-            # use the accept() method to accept the alert
-            alert.accept()
-            print("Alert accepted")
-            # get the text returned when OK Button is clicked.
-            txt = self.driver.find_element_by_id('msg')
-            print(txt.text)
-            time.sleep(2)
-        except TimeoutException:
-            print("No Alert")
-
     def submit_the_values_for_all_question_codes(self, existing_value, new_value):
         SeleniumCore.switch_window()
         self.submit_the_values(existing_value)
         self.save_the_application()
         self.submit_the_values(new_value)
-        self.save_the_application()
 
     def save_the_application(self):
-        self.SAVE_AND_VALIDATE.click()
-        self.switch_to_alert_box()
+        self.driver.find_element(*SandAndGravelLandDetails.SAVE_AND_VALIDATE).click()
+        SeleniumCore.switch_to_alert_box()
         self.driver.refresh()
 
     def submit_the_values(self, value):
@@ -110,3 +84,19 @@ class SandAndGravelLandDetails(BasePage):
         SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_607_ELEMENT).send_keys(value)
         SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_608_ELEMENT).send_keys(value)
         SeleniumCore.find_element_by(*SandAndGravelLandDetails.QUESTION_9001_ELEMENT).send_keys(value)
+
+    def get_the_validation_messages_for_all_question_codes(self):
+        error_msg_elements = self.driver.find_elements(*SandAndGravelLandDetails.QUESTION_CODE_PANELS_ERROR_MESSAGES)
+        return error_msg_elements
+
+    def get_the_fixed_validation_messages_for_all_question_codes(self):
+        error_msg_elements = self.driver.find_elements(
+            *SandAndGravelLandDetails.QUESTION_CODE_FIXED_VALIDATION_MESSAGES)
+        return error_msg_elements
+
+    def get_all_question_codes(self):
+        label_elements = self.driver.find_elements(*SandAndGravelLandDetails.QUESTION_CODE_PANEL_LABEL)
+        val = []
+        for i in range(0, len(label_elements)):
+            val.append(label_elements[i].text)
+        return val
