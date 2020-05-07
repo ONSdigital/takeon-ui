@@ -12,8 +12,9 @@ def step_impl(context):
 @given(u'I search for the {survey} with {reference} for the period {period}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
 def step_impl(context, survey, reference, period):
+    context.survey = survey
     context.contributor_page = ContributorSearchPage()
-    context.contributor_page.select_the_reference_view_form(survey, reference, period)
+    context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
 
 @given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
@@ -30,7 +31,27 @@ def step_impl(context, period_type, question_code, period_value):
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
 def step_impl(context, existing_value, new_value):
-    SandAndGravelLandDetailsPage().submit_the_values_for_all_question_codes(existing_value, new_value)
+    if context.survey == '0066':
+        SandAndGravelLandDetailsPage().submit_the_values_for_land_survey_question_codes(existing_value, new_value)
+    elif context.survey == '0076':
+        SandAndGravelLandDetailsPage().submit_the_values_for_marine_survey_question_codes(existing_value, new_value)
+
+
+@when(u'I change the {existing_value} to {new_value} for the questionCodes')
+def step_impl(context, existing_value, new_value):
+    context.codes = []
+    for row in context.table.rows:
+        for cell in row.cells:
+            context.codes.append(cell)
+    if context.survey == '0066':
+        SandAndGravelLandDetailsPage().submit_the_numeric_fields_values_for_survey(context.codes,
+                                                                                   context.survey,
+                                                                                   existing_value, new_value)
+    elif context.survey == '0076':
+        SandAndGravelLandDetailsPage().submit_the_numeric_fields_values_for_survey(context.codes,
+                                                                                   context.survey,
+                                                                                   existing_value,
+                                                                                   new_value)
 
 
 @when(u'I trigger the validation process')
@@ -40,18 +61,17 @@ def step_impl(context):
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 def step_impl(context, validation_message, is_validation_exists):
-    error_msg_elements = SandAndGravelLandDetailsPage().get_the_validation_messages_for_all_question_codes()
-    fixed_msg_elements = SandAndGravelLandDetailsPage().get_the_fixed_validation_messages_for_all_question_codes()
+    SandAndGravelLandDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
 
-    for i in range(0, len(error_msg_elements)):
-        for j in range(0, len(fixed_msg_elements)):
-            if len(fixed_msg_elements) > 0:
-                error_msg_ele = error_msg_elements[i]
-                fixed_ele = fixed_msg_elements[j]
-                if validation_message in fixed_ele.text and validation_message not in error_msg_ele.text:
-                    assert is_validation_exists == 'be'
-                elif validation_message not in fixed_ele.text and validation_message not in error_msg_ele.text:
-                    assert is_validation_exists == 'not be'
+
+@then(u'the fixed validation should {is_validation_exists} exists')
+def step_impl(context, is_validation_exists):
+    if context.survey == '0066':
+        SandAndGravelLandDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
+                                                                                     is_validation_exists)
+    elif context.survey == '0076':
+        SandAndGravelLandDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
+                                                                                     is_validation_exists)
 
 
 @then(
