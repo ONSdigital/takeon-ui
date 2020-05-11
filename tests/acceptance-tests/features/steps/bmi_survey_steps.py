@@ -43,7 +43,7 @@ def step_impl(context, existing_value, new_value):
                                                                                      new_value)
 
 
-@when(u'I change the {existing_value} to {new_value} for the questionCodes')
+@when(u'I change the {existing_value} to {new_value} for the question codes')
 def step_impl(context, existing_value, new_value):
     context.codes = []
     for row in context.table.rows:
@@ -58,6 +58,11 @@ def step_impl(context, existing_value, new_value):
                                                                                          context.survey,
                                                                                          existing_value,
                                                                                          new_value)
+    elif context.survey == '0074':
+        BricksSurveyDetailsPage().submit_the_numeric_fields_values_for_survey(context.codes,
+                                                                              context.survey,
+                                                                              existing_value,
+                                                                              new_value)
 
 
 @when(u'I trigger the validation process')
@@ -81,6 +86,12 @@ def step_impl(context, is_validation_exists):
     elif context.survey == '0076':
         SandGravelLandAndMarineDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
                                                                                            is_validation_exists)
+    elif context.survey == '0073':
+        SandGravelLandAndMarineDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
+                                                                                           is_validation_exists)
+    elif context.survey == '0074':
+        BricksSurveyDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
+                                                                                is_validation_exists)
 
 
 @then(

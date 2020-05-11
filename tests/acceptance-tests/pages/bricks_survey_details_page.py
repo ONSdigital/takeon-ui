@@ -14,6 +14,12 @@ class BricksSurveyDetailsPage(BasePage):
         (By.ID, '9214'), (By.ID, '9224'), (By.ID, '9501'), (By.ID, '9502'),
         (By.ID, '9503'), (By.ID, '9504')]
 
+    bricks_numeric_question_codes = {
+        'Q145': '0145',
+        'Q146': '0146',
+        'Q8000': '8000'
+    }
+
     question_codes_list = [
         'Q001', 'Q002', 'Q003', 'Q004', 'Q011', 'Q012', 'Q013', 'Q014', 'Q021', 'Q022', 'Q023', 'Q024',
         'Q501', 'Q502', 'Q503', 'Q504', 'Q8000', 'Q9204', 'Q9214', 'Q9224', 'Q9501', 'Q9502', 'Q9503', 'Q9504']
@@ -21,7 +27,8 @@ class BricksSurveyDetailsPage(BasePage):
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     NO_OF_QUESTIONS = By.XPATH, "//p[@class='field']"
     QUESTION_CODE_PANEL_CLASS_ELEMENTS = By.XPATH, "//div[@class='panel panel--error panel--simple']"
-    QCODE_VALIDATION_ONE = '//div[@class="panel panel--error panel--simple"]//label[contains(text(),"'
+    Q_CODE_VALIDATION_ONE = '//div[@class="panel panel--error panel--simple"]//label[contains(text(),"'
+    NO_OF_VALIDATION_ELEMENTS = '//*[@id="responseForm"]/div/div/p/strong'
     Q_CODE_PART_ONE = '//*[@id="responseForm"]/div['
     Q_CODE_PART_TWO = ']/div/p/strong'
     Q_CODE_PART_THREE = ']/div//label[contains(text(),"'
@@ -46,7 +53,6 @@ class BricksSurveyDetailsPage(BasePage):
         self.driver.refresh()
 
     def check_fixed_validations_exists(self, validation_message, is_validation_exists):
-
         count = 0
         # get the number of validation message groups exists for all questions
         elements = self.driver.find_elements(*BricksSurveyDetailsPage.QUESTION_CODE_PANEL_CLASS_ELEMENTS)
@@ -90,3 +96,44 @@ class BricksSurveyDetailsPage(BasePage):
         else:
             assert False, 'fixed validations exists which is not expected for question code: ' + \
                           self.question_codes_list[i - 1] + ' Please check'
+
+    def submit_the_numeric_fields_values_for_survey(self, *questions):
+        questions_list = questions[0]
+        survey = questions[1]
+        existing_value = questions[2]
+        new_value = questions[3]
+        SeleniumCore.switch_window()
+        if survey == '0074':
+            self.submit_the_numeric_fields_values(questions_list, existing_value)
+            self.save_the_application()
+            self.submit_the_numeric_fields_values(questions_list, new_value)
+        elif survey == '0073':
+            self.submit_the_numeric_fields_values(questions_list, existing_value)
+            self.save_the_application()
+            self.submit_the_numeric_fields_values(questions_list, new_value)
+
+    def submit_the_numeric_fields_values(self, questions_list, value):
+        for question in questions_list:
+            question_element = self.bricks_numeric_question_codes.get(question)
+            self.driver.find_element_by_id(question_element).clear()
+            self.driver.find_element_by_id(question_element).send_keys(value)
+
+    def check_numeric_fields_fixed_validations_exists(self, survey, is_validation_exists):
+
+        if survey == '0073':
+            self.check_numeric_fixed_validation(self.land_numeric_question_codes_list, is_validation_exists)
+        elif survey == '0074':
+            self.check_numeric_fixed_validation(self.bricks_numeric_question_codes.keys(), is_validation_exists)
+
+    def check_numeric_fixed_validation(self, questions_list, is_validation_exists):
+        # iterate through the list of expected question codes
+        for q in questions_list:
+            question_validation_ele = self.Q_CODE_VALIDATION_ONE + q + self.Q_CODE_PART_FOUR
+            # check if any validation exists for a question
+            if len(self.driver.find_elements_by_xpath(question_validation_ele)) > 0:
+                error_elements = self.driver.find_elements_by_xpath(self.NO_OF_VALIDATION_ELEMENTS)
+                for error_element in error_elements:
+                    if error_element.text == 'Value set to default, please check':
+                        assert False
+            else:
+                assert is_validation_exists == 'not'
