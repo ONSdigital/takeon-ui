@@ -38,7 +38,7 @@ class SandGravelLandAndMarineDetailsPage(BasePage):
     # QUESTION_CODE_ELEMENTS_PART_FOUR = ']/div/p[3]'
     # QUESTION_ONE = '//label[contains(text(),'
 
-    QUESTION_CODE_PANEL_CLASS_ELEMENTS = By.XPATH, "//p[@class='panel__error u-mb-no']"
+    QUESTION_CODE_PANEL_CLASS_ELEMENTS = By.XPATH, "//div[@class='panel panel--error panel--simple']"
     QCODE_VALIDATION_ONE = '//div[@class="panel panel--error panel--simple"]//label[contains(text(),"'
     Q_CODE_PART_ONE = '//*[@id="responseForm"]/div['
     Q_CODE_PART_TWO = ']/div/p/strong'
@@ -167,49 +167,46 @@ class SandGravelLandAndMarineDetailsPage(BasePage):
                 assert is_validation_exists == 'not'
 
     def check_fixed_validations_exists(self, validation_message, is_validation_exists):
-
-        i = 0
-        # iterate through the list of expected question codes
-        while i < len(self.question_codes_list):
-            question_validation_ele = self.QCODE_VALIDATION_ONE + self.question_codes_list[
-                i] + self.Q_CODE_PART_FOUR
+        count = 0
+        # get the number of validation message groups exists for all questions
+        elements = self.driver.find_elements(*SandGravelLandAndMarineDetailsPage.QUESTION_CODE_PANEL_CLASS_ELEMENTS)
+        # iterate through the validation messages
+        for i in range(1, len(elements) + 1):
+            count += 1
+            error_element = self.Q_CODE_PART_ONE + str(count) + self.Q_CODE_PART_TWO
+            no_of_error_msgs_per_question = self.driver.find_elements_by_xpath(error_element)
 
             # check if any validation exists for a question
-            if len(self.driver.find_elements_by_xpath(question_validation_ele)) > 0:
+            self.check_fixed_validation_msgs(is_validation_exists, i, no_of_error_msgs_per_question,
+                                             validation_message)
 
-                # get the number of validation groups exists for all questions
-                elements = self.driver.find_elements(*SandGravelLandAndMarineDetailsPage.QUESTION_CODE_PANEL_CLASS_ELEMENTS)
-                for j in range(0, len(elements)):
-                    error_element = self.Q_CODE_PART_ONE + str(j + 1) + self.Q_CODE_PART_TWO
-                    no_of_error_messages_per_question = self.driver.find_elements_by_xpath(error_element)
+    def check_fixed_validation_msgs(self, is_validation_exists, i, no_of_error_msgs, actual_msg):
+        if is_validation_exists == 'be':
+            if len(no_of_error_msgs) == 1:
+                self.check_fixed_val_msgs(actual_msg, no_of_error_msgs[0].text, i)
+            elif len(no_of_error_msgs) == 2:
+                self.check_fixed_val_msgs(actual_msg, no_of_error_msgs[1].text, i)
+            elif len(no_of_error_msgs) == 0:
+                print("No validation exists for the question code: " + self.question_codes_list[i - 1])
 
-                    # check if there are more than one validation exists for the question
-                    if len(no_of_error_messages_per_question) == 2:
-                        question_element = self.Q_CODE_PART_ONE + str(j + 1) + self.Q_CODE_PART_THREE + \
-                                           self.question_codes_list[i] + self.Q_CODE_PART_FOUR
-                        question_ele = self.driver.find_element_by_xpath(question_element)
+        elif is_validation_exists == 'not be':
+            if len(no_of_error_msgs) == 1:
+                self.check_no_fixed_val_msgs(actual_msg, no_of_error_msgs[0].text, i)
+            elif len(no_of_error_msgs) == 2:
+                self.check_no_fixed_val_msgs(actual_msg, no_of_error_msgs[1].text, i)
+            elif len(no_of_error_msgs) == 0:
+                print("No validation exists for the question code: " + self.question_codes_list[i - 1])
 
-                        # check right question has the validation
-                        if self.question_codes_list[i] in question_ele.text:
-                            if validation_message in elements[1].text:
-                                assert is_validation_exists == 'be'
-                                i += 1
-                            else:
-                                assert False
+    def check_fixed_val_msgs(self, actual_msg, exp_msg, i):
+        if actual_msg == exp_msg:
+            assert True
+        else:
+            assert False, 'fixed validations exists which is not expected for question code: ' + \
+                          self.question_codes_list[i - 1] + ' Please check'
 
-                    # check if there are more than one validation exists for the question
-                    if len(no_of_error_messages_per_question) == 1:
-                        question_element = self.Q_CODE_PART_ONE + str(
-                            j + 1) + self.Q_CODE_PART_THREE + \
-                                           self.question_codes_list[i] + self.Q_CODE_PART_FOUR
-                        question_ele = self.driver.find_element_by_xpath(question_element)
-
-                        # check right question has the validation
-                        if self.question_codes_list[i] in question_ele.text:
-                            if validation_message not in elements[0].text:
-                                assert is_validation_exists == 'not be'
-                                i += 1
-                            else:
-                                assert False
-            else:
-                i += 1
+    def check_no_fixed_val_msgs(self, actual_msg, exp_msg, i):
+        if actual_msg != exp_msg:
+            assert True
+        else:
+            assert False, 'fixed validations exists which is not expected for question code: ' + \
+                          self.question_codes_list[i - 1] + ' Please check'

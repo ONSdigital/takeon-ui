@@ -1,4 +1,6 @@
 from behave import given, when, then
+
+from pages.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.contributor_search_page import ContributorSearchPage
 from pages.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 from pages.search_by_page import SearchByPage
@@ -34,7 +36,11 @@ def step_impl(context, existing_value, new_value):
     if context.survey == '0066':
         SandGravelLandAndMarineDetailsPage().submit_the_values_for_land_survey_question_codes(existing_value, new_value)
     elif context.survey == '0076':
-        SandGravelLandAndMarineDetailsPage().submit_the_values_for_marine_survey_question_codes(existing_value, new_value)
+        SandGravelLandAndMarineDetailsPage().submit_the_values_for_marine_survey_question_codes(existing_value,
+                                                                                                new_value)
+    elif context.survey == '0074':
+        BricksSurveyDetailsPage().submit_the_values_for_bricks_survey_question_codes(existing_value,
+                                                                                     new_value)
 
 
 @when(u'I change the {existing_value} to {new_value} for the questionCodes')
@@ -61,7 +67,10 @@ def step_impl(context):
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 def step_impl(context, validation_message, is_validation_exists):
-    SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
+    if context.survey == '0074':
+        BricksSurveyDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
+    else:
+        SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
 
 
 @then(u'the fixed validation should {is_validation_exists} exists')
