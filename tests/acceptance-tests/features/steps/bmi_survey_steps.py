@@ -1,6 +1,8 @@
 from behave import given, when, then
 
+from pages.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bricks_survey_details_page import BricksSurveyDetailsPage
+from pages.contributor_details_page import ContributorDetailsPage
 from pages.contributor_search_page import ContributorSearchPage
 from pages.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 from pages.search_by_page import SearchByPage
@@ -33,14 +35,15 @@ def step_impl(context, period_type, question_code, period_value):
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
 def step_impl(context, existing_value, new_value):
-    if context.survey == '0066':
-        SandGravelLandAndMarineDetailsPage().submit_the_values_for_land_survey_question_codes(existing_value, new_value)
-    elif context.survey == '0076':
-        SandGravelLandAndMarineDetailsPage().submit_the_values_for_marine_survey_question_codes(existing_value,
-                                                                                                new_value)
+    if context.survey == '0073':
+        BlocksSurveyDetailsPage().submit_the_values_for_blocks_survey_question_codes(existing_value, new_value)
+
     elif context.survey == '0074':
         BricksSurveyDetailsPage().submit_the_values_for_bricks_survey_question_codes(existing_value,
                                                                                      new_value)
+    else:
+        SandGravelLandAndMarineDetailsPage().submit_the_values_for_survey_question_codes(context.survey, existing_value,
+                                                                                         new_value)
 
 
 @when(u'I change the {existing_value} to {new_value} for the question codes')
@@ -60,22 +63,28 @@ def step_impl(context, existing_value, new_value):
                                                                                          new_value)
     elif context.survey == '0074':
         BricksSurveyDetailsPage().submit_the_numeric_fields_values_for_survey(context.codes,
-                                                                              context.survey,
-                                                                              existing_value,
+                                                                              context.survey, existing_value,
+                                                                              new_value)
+    elif context.survey == '0073':
+        BlocksSurveyDetailsPage().submit_the_numeric_fields_values_for_survey(context.codes,
+                                                                              context.survey, existing_value,
                                                                               new_value)
 
 
 @when(u'I trigger the validation process')
 def step_impl(context):
-    SandGravelLandAndMarineDetailsPage().save_the_application()
+    ContributorDetailsPage().save_the_application()
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 def step_impl(context, validation_message, is_validation_exists):
-    if context.survey == '0074':
+    if context.survey == '0073':
+        BlocksSurveyDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
+    elif context.survey == '0074':
         BricksSurveyDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
     else:
-        SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
+        SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
+                                                                            is_validation_exists)
 
 
 @then(u'the fixed validation should {is_validation_exists} exists')
@@ -110,5 +119,5 @@ def step_impl(context, result, threshold_value):
 def step_impl(context, status_type):
     validation_message = SandGravelLandAndMarineDetailsPage().get_validation_message()
     assert validation_message == 'This has changed significantly since the last submission'
-    status = SandGravelLandAndMarineDetailsPage().get_status(status_type)
+    status = SandGravelLandAndMarineDetailsPage().get_status()
     assert status.lower() == status_type.lower()
