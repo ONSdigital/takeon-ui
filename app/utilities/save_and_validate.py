@@ -52,7 +52,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
 def validate(inqcode, period, ruref, response_and_validations, override_button, contributor_data, validations, status_colour):
     log.info('save validation button pressed')
     json_data = {"survey": inqcode, "period": period,
-                 "reference": ruref, "bpmId": "0"}
+                 "reference": ruref, "BPMvalidationCallId": "0"}
     header = {"x-api-key": api_key}
     status_message = 'Validation Run Successfully'
     try:
