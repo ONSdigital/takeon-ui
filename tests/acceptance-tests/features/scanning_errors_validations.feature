@@ -12,9 +12,9 @@ Feature: Scanning Errors Validation
     Then the <fixedValidation> message should <isValidationExists> displayed
     Examples:
       | reference   | survey | period | existingValue | newValue    | fixedValidation                    | isValidationExists |
-      | 10000000003 | 0066   | 201809 | blank         | 99999999999 | Value set to default, please check | be                 |
-      | 10000000003 | 0066   | 201809 | 1234          | 99999999999 | Value set to default, please check | be                 |
-      | 10000000003 | 0066   | 201809 | 99999999999   | 1234        | Value set to default, please check | not be             |
+      | 49900012765 | 0066   | 201903 | blank         | 99999999999 | Value set to default, please check | be                 |
+      | 49900012765 | 0066   | 201903 | 1234          | 99999999999 | Value set to default, please check | be                 |
+      | 49900012765 | 0066   | 201903 | 99999999999   | 1234        | Value set to default, please check | not be             |
 
   Scenario Outline: Sand and Gravel Marine Survey 0076 - Check there is a fixed value validation to numerical fields for illegible values
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
@@ -54,7 +54,6 @@ Feature: Scanning Errors Validation
       | 49900229065 | 0074   | 201905 | 1234          | 99999999999 | Value set to default, please check | be                 |
       | 49900229065 | 0074   | 201905 | 99999999999   | 1234        | Value set to default, please check | not be             |
 
-
   Scenario Outline:  Sand and Gravel Land Survey 0066  - Check there isn't any fixed value validation to numerical fields for comments field questions
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the <survey> with <reference> for the period <period>
@@ -66,9 +65,9 @@ Feature: Scanning Errors Validation
     Then the fixed validation should <isValidationExists> exists
     Examples:
       | reference   | survey | period | existingValue | newValue    | isValidationExists |
-      | 10000000006 | 0066   | 201809 | blank         | 99999999999 | not                |
-      | 10000000006 | 0066   | 201809 | 1234          | 99999999999 | not                |
-      | 10000000006 | 0066   | 201809 | 99999999999   | 1234        | not                |
+      | 49900012765 | 0066   | 201903 | blank         | 99999999999 | not                |
+      | 49900012765 | 0066   | 201903 | 1234          | 99999999999 | not                |
+      | 49900012765 | 0066   | 201903 | 99999999999   | 1234        | not                |
 
   Scenario Outline: Sand and Gravel Marine Survey 0076 - Check there isn't any fixed value validation to numerical fields for comments field questions
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
@@ -81,9 +80,9 @@ Feature: Scanning Errors Validation
     Then the fixed validation should <isValidationExists> exists
     Examples:
       | reference   | survey | period | existingValue | newValue    | isValidationExists |
-      | 49900049245 | 0076   | 201903 | blank         | 99999999999 | not                |
-      | 49900049245 | 0076   | 201903 | 1234          | 99999999999 | not                |
-      | 49900049245 | 0076   | 201903 | 99999999999   | 1234        | not                |
+      | 49900004791 | 0076   | 201903 | blank         | 99999999999 | not                |
+      | 49900004791 | 0076   | 201903 | 1234          | 99999999999 | not                |
+      | 49900004791 | 0076   | 201903 | 99999999999   | 1234        | not                |
 
 
   Scenario Outline: Blocks Survey 0073 - Check there isn't any fixed value validation to numerical fields for comments field questions
@@ -116,4 +115,3 @@ Feature: Scanning Errors Validation
       | 49900356828 | 0074   | 201905 | blank         | 99999999999 | not                |
       | 49900356828 | 0074   | 201905 | 1234          | 99999999999 | not                |
       | 49900356828 | 0074   | 201905 | 99999999999   | 1234        | not                |
-    
