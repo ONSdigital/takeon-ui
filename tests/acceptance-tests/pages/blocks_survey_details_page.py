@@ -28,7 +28,7 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
 
     def submit_the_blocks_question_values(self, value):
         for question in self.QUESTION_CODES:
-            SeleniumCore.find_element_by(*question).send_keys(value)
+            SeleniumCore.set_element_text(*question, value)
 
     def check_fixed_validations_exists(self, validation_message, is_validation_exists):
         count = 0

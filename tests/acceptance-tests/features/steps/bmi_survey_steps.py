@@ -99,7 +99,7 @@ def step_impl(context, is_validation_exists):
         SandGravelLandAndMarineDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
                                                                                            is_validation_exists)
     elif context.survey == '0074':
-        BricksSurveyDetailsPage().check_numeric_fields_fixed_validations_exists(context.survey,
+        BricksSurveyDetailsPage().check_numeric_fields_fixed_validations_exists(
                                                                                 is_validation_exists)
 
 

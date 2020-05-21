@@ -8,10 +8,16 @@ from base.driver_context import DriverContext
 
 class SeleniumCore:
 
-    def find_element_by(*element):
-        ele = DriverContext.driver.find_element(*element)
+    @staticmethod
+    def set_element_text(*element):
+        ele = DriverContext.driver.find_element(element[0], element[1])
         ele.clear()
-        return ele
+        return ele.send_keys(element[2])
+
+    @staticmethod
+    def get_element_by_text(element):
+        ele = DriverContext.driver.find_element(element[0], element[1])
+        return ele.text
 
     @staticmethod
     def switch_to_alert_box():

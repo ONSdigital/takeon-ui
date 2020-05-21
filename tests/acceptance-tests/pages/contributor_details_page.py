@@ -73,7 +73,7 @@ class ContributorDetailsPage(BasePage):
         if actual_msg == exp_msg:
             assert True
         else:
-            assert False, 'Fixed validation did not exists - expected message: "' + exp_msg + \
+            assert False, 'Fixed validation did not exist - expected message: "' + exp_msg + \
                           '" did not match with the actual message : "' + actual_msg + '" for question code: ' + \
                           question_codes_list[i - 1]
 

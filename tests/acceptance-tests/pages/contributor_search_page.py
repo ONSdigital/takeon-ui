@@ -23,10 +23,10 @@ class ContributorSearchPage(BasePage):
                 break
 
     def submit_search_details(self, survey, reference, period):
-        ele = SeleniumCore.find_element_by(*ContributorSearchPage.REFERENCE_TEXT_FIELD)
-        ele.send_keys(reference)
-        ele = SeleniumCore.find_element_by(*ContributorSearchPage.PERIOD_TEXT_FIELD)
-        ele.send_keys(period)
-        ele = SeleniumCore.find_element_by(*ContributorSearchPage.SURVEY_TEXT_FIELD)
-        ele.send_keys(survey)
+        ele = SeleniumCore.set_element_text(*ContributorSearchPage.REFERENCE_TEXT_FIELD, reference)
+        # ele.send_keys(reference)
+        ele = SeleniumCore.set_element_text(*ContributorSearchPage.PERIOD_TEXT_FIELD,period)
+        # ele.send_keys(period)
+        ele = SeleniumCore.set_element_text(*ContributorSearchPage.SURVEY_TEXT_FIELD,survey)
+        # ele.send_keys(survey)
         self.driver.find_element(*ContributorSearchPage.SEARCH_BUTTON).click()
