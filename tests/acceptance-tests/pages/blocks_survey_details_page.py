@@ -30,7 +30,7 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
         for question in self.QUESTION_CODES:
             SeleniumCore.set_element_text(*question, value)
 
-    def check_fixed_validations_exists(self, validation_message, is_validation_exists):
+    def check_fixed_validations_exists(self, survey, validation_message, is_validation_exists):
         count = 0
         # get the number of validation message groups exists for all questions
         elements = self.driver.find_elements(*BlocksSurveyDetailsPage.QUESTION_CODE_PANEL_CLASS_ELEMENTS)
@@ -39,7 +39,7 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
             count += 1
             error_element = self.Q_CODE_PART_ONE + str(count) + self.Q_CODE_PART_TWO
             no_of_error_msgs_per_question = self.driver.find_elements_by_xpath(error_element)
-            self.check_fixed_validation_messages('0073', self.question_codes_list, is_validation_exists, i,
+            self.check_fixed_validation_messages(survey, self.question_codes_list, is_validation_exists, i,
                                                  no_of_error_msgs_per_question, validation_message)
 
     def submit_the_numeric_fields_values_for_survey(self, *questions):

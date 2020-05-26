@@ -59,7 +59,7 @@ class ContributorDetailsPage(BasePage):
             elif len(no_of_error_msgs) == 2:
                 self.check_fixed_val_msgs(question_codes_list, actual_msg, no_of_error_msgs[1].text, i)
             elif len(no_of_error_msgs) == 0:
-                print("No validation exists for the question code: " + question_codes_list[i - 1])
+                self.no_validation_exists(question_codes_list, i)
 
         elif is_validation_exists == 'not be':
             if len(no_of_error_msgs) == 1:
@@ -67,19 +67,18 @@ class ContributorDetailsPage(BasePage):
             elif len(no_of_error_msgs) == 2:
                 self.check_no_fixed_val_msgs(question_codes_list, actual_msg, no_of_error_msgs[1].text, i)
             elif len(no_of_error_msgs) == 0:
-                print("No validation exists for the question code: " + question_codes_list[i - 1])
+                self.no_validation_exists(question_codes_list, i)
 
-    def check_fixed_val_msgs(self, question_codes_list, actual_msg, exp_msg, i):
-        if actual_msg == exp_msg:
-            assert True
-        else:
-            assert False, 'Fixed validation did not exist - expected message: "' + exp_msg + \
-                          '" did not match with the actual message : "' + actual_msg + '" for question code: ' + \
+    def check_fixed_val_msgs(self, question_codes_list, exp_msg, actual_msg, i):
+        if actual_msg != exp_msg:
+            assert False, 'validations triggered but no fixed validation exists for question code: ' + \
                           question_codes_list[i - 1]
 
     def check_no_fixed_val_msgs(self, question_codes_list, actual_msg, exp_msg, i):
-        if actual_msg != exp_msg:
-            assert True
-        else:
-            assert False, 'fixed validations exists which is not expected for question code: ' + \
+        if actual_msg == exp_msg:
+            assert False, 'validations triggered but fixed validation exists for question code: ' + \
                           question_codes_list[i - 1] + ' Please check'
+
+    def no_validation_exists(self, question_codes_list, i):
+        print('No validation exists for the question code: ' + \
+              question_codes_list[i - 1])

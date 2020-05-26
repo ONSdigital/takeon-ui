@@ -79,9 +79,9 @@ def step_impl(context):
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 def step_impl(context, validation_message, is_validation_exists):
     if context.survey == '0073':
-        BlocksSurveyDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
+        BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message, is_validation_exists)
     elif context.survey == '0074':
-        BricksSurveyDetailsPage().check_fixed_validations_exists(validation_message, is_validation_exists)
+        BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message, is_validation_exists)
     else:
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
