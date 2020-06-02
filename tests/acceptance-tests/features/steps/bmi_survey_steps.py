@@ -3,22 +3,7 @@ from behave import given, when, then
 from pages.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.contributor_details_page import ContributorDetailsPage
-from pages.contributor_search_page import ContributorSearchPage
 from pages.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
-from pages.search_by_page import SearchByPage
-
-
-@given(u'As a BMI user I set the search criteria options for the forms returned by the contributor')
-def step_impl(context):
-    SearchByPage().set_search_criteria_options()
-
-
-@given(u'I search for the {survey} with {reference} for the period {period}')
-@when(u'I search for the {survey} with {reference} for the period {period}')
-def step_impl(context, survey, reference, period):
-    context.survey = survey
-    context.contributor_page = ContributorSearchPage()
-    context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
 
 @given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
@@ -79,9 +64,11 @@ def step_impl(context):
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 def step_impl(context, validation_message, is_validation_exists):
     if context.survey == '0073':
-        BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message, is_validation_exists)
+        BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
+                                                                 is_validation_exists)
     elif context.survey == '0074':
-        BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message, is_validation_exists)
+        BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
+                                                                 is_validation_exists)
     else:
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
@@ -100,7 +87,7 @@ def step_impl(context, is_validation_exists):
                                                                                            is_validation_exists)
     elif context.survey == '0074':
         BricksSurveyDetailsPage().check_numeric_fields_fixed_validations_exists(
-                                                                                is_validation_exists)
+            is_validation_exists)
 
 
 @then(
