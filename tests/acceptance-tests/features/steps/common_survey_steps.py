@@ -6,6 +6,7 @@ from pages.search_by_page import SearchByPage
 
 @given(u'As a {survey} user I set the search criteria options for the forms returned by the contributor')
 def step_impl(context, survey):
+    context.survey = survey
     SearchByPage().set_search_criteria_options()
 
 
