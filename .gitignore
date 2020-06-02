@@ -11,6 +11,9 @@ __pycache__
 .DS_Store
 *.xml
 
+# acceptance-tests
+url_configs.py
+
 # Script to Set Env vars
 /env.bat
 
