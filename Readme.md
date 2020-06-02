@@ -7,7 +7,7 @@
  2. Chromedriver:
     - Chromedriver version - 83.0.4103.39
    
-      Make sure the browser version and chromedriver are compatible to each other and you can check that in 
+      As long as the browser version and chromedriver are compatible to each other even if you don't have the same browser version mentioned here and you can check that in 
       https://chromedriver.chromium.org/downloads when downloading the chromedriver if not the tests will fail.
       and install it in your $HOMEDIR location.
       
@@ -17,24 +17,26 @@
        
          Set-up the python path in your bash profile:
 
-             PYTHONPATH=/Users/{Username}/takeon-ui/tests/acceptance-tests/:$PYTHONPATH"
+             PYTHONPATH="/Users/{Username}/takeon-ui/tests/acceptance-tests/:$PYTHONPATH"
              export PYTHONPATH
-
+          
+         or if your project path is in a different location than the path mentioned above then add that the path only.
+         
 4.  Project Dependencies
 
     Install packages $ pip install -r requirements.txt
     
 ### Running Tests
 
-1.  Set-up the environment url 
+1.  Setting up the environment url.
 
      -  Create a class called url_configs in config_files folder.Add the url.
                
                URL_CONFIG = { 'env_url': '' }
-     - Make sure add url_configs.py to git exclude in order to ignore the class by git to stop accidentally committing it to repo.
+     - And replace the empty string with the environment url you want to run the tests against.
     
             
  
-2.  To run the tests you need to be in the features folder.
+2.  To run the tests you need to switch to the features folder first.
         
          cd takeon-ui/tests/acceptance-tests/features/ and to run the tests use -  behave {feature file name}
