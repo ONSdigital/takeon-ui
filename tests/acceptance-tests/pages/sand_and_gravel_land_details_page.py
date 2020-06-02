@@ -20,6 +20,8 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
     COMMON_QUESTION_CODES_ELEMENTS = [(By.ID, '0601'), (By.ID, '0602'), (By.ID, '0603'), (By.ID, '0604'),
                                       (By.ID, '0605'),
                                       (By.ID, '0606'), (By.ID, '0607'), (By.ID, '0608'), (By.ID, '9001')]
+    ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
+    ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
 
     def validate_the_previous_period_details(self, question_code, previous_value):
         self.submit_the_period_details(question_code, previous_value)
@@ -47,7 +49,9 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
         return SeleniumCore.get_element_by_text(self.STATUS)
 
     def get_validation_message(self):
-        return SeleniumCore.get_element_by_text(self.QUESTION_PANEL_ERROR_MESSAGE)
+        element_text = "This has changed significantly since the last submission"
+        element = self.ERROR_MESSAGE_ELEMENT_STRING_PART_ONE + element_text + self.ERROR_MESSAGE_ELEMENT_STRING_PART_TWO
+        return self.driver.find_element_by_xpath(element).text
 
     def submit_the_numeric_fields_values_for_survey(self, *questions):
         questions_list = questions[0]
