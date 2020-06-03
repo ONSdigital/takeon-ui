@@ -50,4 +50,4 @@ def step_impl(context, validation_message, is_validation_exists):
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
     elif context.survey == '0023':
-        pass
+        RsiContributorDetailsPage().check_comment_present_val_msg(validation_message, is_validation_exists)

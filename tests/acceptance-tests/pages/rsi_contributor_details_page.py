@@ -29,6 +29,8 @@ class RsiContributorDetailsPage(BasePage):
 
     def submit_comment_value(self, comment):
         SeleniumCore.switch_window()
+        if comment == 'empty':
+            comment = ''
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
 
     def validate_the_current_period_details(self, internet_sales):
@@ -47,3 +49,6 @@ class RsiContributorDetailsPage(BasePage):
             return True
         else:
             return False
+
+    def check_comment_present_val_msg(self, exp_msg, is_val_exists):
+        ContributorDetailsPage().check_validation_message('Q146', exp_msg, is_val_exists)
