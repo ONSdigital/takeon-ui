@@ -19,7 +19,7 @@ def step_impl(context, internet_sales, total_sales):
         TestSurveyContributorDetailsPage().submit_pp_sales_values(internet_sales, total_sales)
 
 
-@when(u'I run the validation process')
+@when(u'I validate the current period details')
 def step_impl(context):
     if context.survey == '0023':
         RsiContributorDetailsPage().validate_the_current_period_details(context.internet_sales_value)

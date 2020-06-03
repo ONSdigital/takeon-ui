@@ -8,7 +8,7 @@ Feature: RSI
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "0023" with <reference> for the period <currentPeriodValue>
-    And I run the validation process
+    And I validate the current period details
     Then the validation should return <result> if the turnover ratio is <operator> threshold value <thresholdValue>
 
     Examples:
@@ -24,7 +24,7 @@ Feature: RSI
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "0023" with <reference> for the period <currentPeriodValue>
-    And I run the validation process
+    And I validate the current period details
     Then the validation should return <result> if the turnover ratio is <operator> threshold value <thresholdValue>
 
     Examples:
@@ -40,7 +40,7 @@ Feature: RSI
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "0023" with <reference> for the period <currentPeriodValue>
-    And I run the validation process
+    And I validate the current period details
     Then the validation should return <result> if the turnover ratio is <operator> threshold value <thresholdValue>
 
     Examples:

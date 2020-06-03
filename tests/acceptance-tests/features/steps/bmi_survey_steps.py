@@ -56,24 +56,6 @@ def step_impl(context, existing_value, new_value):
                                                                               new_value)
 
 
-@when(u'I trigger the validation process')
-def step_impl(context):
-    ContributorDetailsPage().save_the_application()
-
-
-@then(u'the {validation_message} message should {is_validation_exists} displayed')
-def step_impl(context, validation_message, is_validation_exists):
-    if context.survey == '0073':
-        BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
-                                                                 is_validation_exists)
-    elif context.survey == '0074':
-        BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
-                                                                 is_validation_exists)
-    else:
-        SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
-                                                                            is_validation_exists)
-
-
 @then(u'the fixed validation should {is_validation_exists} exists')
 def step_impl(context, is_validation_exists):
     if context.survey == '0066':
