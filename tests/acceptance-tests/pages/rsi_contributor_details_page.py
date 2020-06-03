@@ -10,6 +10,7 @@ class RsiContributorDetailsPage(BasePage):
     QUESTION_TWO_ELEMENT = By.ID, '0021'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
+    QUESTION_NO_146 = By.ID, '0146'
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
@@ -25,6 +26,10 @@ class RsiContributorDetailsPage(BasePage):
         self.set_total_turnover_sales_value(total_sales)
         ContributorDetailsPage().save_the_application()
         SeleniumCore.close_the_current_window()
+
+    def submit_comment_value(self, comment):
+        SeleniumCore.switch_window()
+        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
 
     def validate_the_current_period_details(self, internet_sales):
         SeleniumCore.switch_window()

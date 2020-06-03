@@ -6,6 +6,7 @@ from pages.contributor_details_page import ContributorDetailsPage
 from pages.contributor_search_page import ContributorSearchPage
 from pages.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 from pages.search_by_page import SearchByPage
+from pages.rsi_contributor_details_page import RsiContributorDetailsPage
 
 
 @given(u'As a {survey} user I set the search criteria options for the forms returned by the contributor')
@@ -27,7 +28,7 @@ def step_impl(context, survey, reference, period):
 @when(u'I submit the comment {comment_value} about reason for turnover changes')
 def step_impl(context, comment_value):
     if context.survey == '0023':
-        pass
+        RsiContributorDetailsPage().submit_comment_value(comment_value)
     else:
         pass
 
