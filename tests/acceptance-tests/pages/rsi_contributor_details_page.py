@@ -8,8 +8,6 @@ from pages.contributor_details_page import ContributorDetailsPage
 class RsiContributorDetailsPage(BasePage):
     QUESTION_ONE_ELEMENT = By.ID, '0020'
     QUESTION_TWO_ELEMENT = By.ID, '0021'
-    ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
-    ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
     QUESTION_NO_146 = By.ID, '0146'
 
     def set_internet_sales_value(self, value):
@@ -43,9 +41,9 @@ class RsiContributorDetailsPage(BasePage):
             return False
 
     def check_validation_message(self):
-        element_text = "This value is 0. Previous period it was more than a certain percentage of the total."
-        element = self.ERROR_MESSAGE_ELEMENT_STRING_PART_ONE + element_text + self.ERROR_MESSAGE_ELEMENT_STRING_PART_TWO
-        if len(self.driver.find_elements_by_xpath(element)) > 0:
+        exp_msg = "This value is 0. Previous period it was more than a certain percentage of the total."
+        actual_msg = ContributorDetailsPage().get_validation_error_message('Q21')
+        if exp_msg == actual_msg:
             return True
         else:
             return False
