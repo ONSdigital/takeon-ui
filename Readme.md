@@ -39,4 +39,8 @@
  
 2.  To run the tests you need to switch to the features folder first.
         
-         cd takeon-ui/tests/acceptance-tests/features/ and to run the tests use -  behave {feature file name}
+         cd takeon-ui/tests/acceptance-tests/features/{survey_folder} and  
+         survey_folder eg: bmi or rsi
+         to run one feature file scenarios use -  behave {feature file name}
+         and to run all the scenarios just use - 'behave' with no feature file name.
+         
