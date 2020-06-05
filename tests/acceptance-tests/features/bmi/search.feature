@@ -1,60 +1,43 @@
 Feature: Search function
-    Background: Setting the correct url
-        Given the url is http://localhost:5000/contributor_search/Contributor/GeneralSearch?criteria=reference%3Bsurvey
-        And reference column is 1
-        And period column is 2
-        And survey column is 3
-    Scenario Outline: Using an existing full reference entry
-        Given a <reference> has been entered into the reference search input
-        When it is submitted
-        Then <reference> and <period> and <survey> will be displayed
 
-        Examples:
-            | reference   | period | survey |
-            | 49900000119 | 201712 | 066    |
-            | 49900000119 | 201712 | 067    |
-            | 49900000103 | 201712 | 066    |
-            | 49900000105 | 201712 | 066    |
+  Background: Setting the correct url
+    Given reference column is 1
+    And period column is 2
+    And survey column is 3
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
 
-    Scenario Outline: Using a non-existing full reference entry
-        Given a <reference> has been entered into the reference search input
-        When it is submitted
-        Then no table should appear
+  Scenario Outline: Using an existing full reference entry
+    Given I search for the <survey> with <reference> for the period <period>
+    Then <reference> and <period> and <survey> will be displayed
+    Examples:
+      | reference   | period | survey |
+      | 49900012765 | 201906 | 0066   |
+      | 49900004791 | 201906 | 0076   |
+      | 49900138556 | 201905 | 0073   |
+      | 49900229065 | 201905 | 0074   |
 
-        Examples:
-            | reference   |
-            | 49900000999 |
-            | 65900000103 |
-            | 4998800105  |
+  Scenario Outline: Using a non-existing full reference entry
+    Given I search for the survey with reference <reference>
+    Then no table should appear
+    Examples:
+      | reference   |
+      | 49900000999 |
+      | 65900000103 |
+      | 4998800105  |
 
 
-    Scenario Outline: Searching using a partial reference
-        Given a <partreference> has been entered into the reference search input
-        When it is submitted
-        Then <reference> and <period> and <survey> will be displayed
+  Scenario Outline: Using an existing Survey id
+    Given I search for the <survey> with <reference> for the period <period>
+    Then <reference> and <period> and <survey> will be displayed
+    Examples:
+      | survey | reference   | period |
+      | 0066   | 49900000796 | 201903 |
+      | 0076   | 49900004791 | 201906 |
 
-        Examples:
-            | partreference | reference |period | survey |
-            | 499       | 49900000119 |201712 | 066    |
-            | 103       | 49900000103 |201712 | 066    |
-            | 011       | 49900000119 |201712 | 067    |
-
-
-    Scenario Outline: Using an existing Survey id
-        Given a <survey> has been entered into the survey search input
-        When it is submitted
-        Then <reference> and <period> and <survey> will be displayed
-        Examples:
-            | survey | reference   | period |
-            | 066    | 49900000119 | 201712 |
-            | 067    | 49900000119 | 201712 |
-
-    Scenario Outline: Using an existing survey ID and reference
-     Given a <survey> has been entered into the survey search input
-     And a <reference> has been entered into the reference search input
-        When it is submitted
-        Then <reference> and <period> and <survey> will be displayed
-        Examples:
-            | survey | reference   | period |
-            | 066    | 49900000100 | 201712 |
-            | 067    | 49900000119 | 201712 |
+  Scenario Outline: Using an existing survey Id and reference
+    Given I search for the <survey> with reference <reference>
+    Then <reference> and <period> and <survey> will be displayed
+    Examples:
+      | survey | reference   | period |
+      | 0066   | 49900000796 | 201903 |
+      | 0076   | 49900004791 | 201906 |
