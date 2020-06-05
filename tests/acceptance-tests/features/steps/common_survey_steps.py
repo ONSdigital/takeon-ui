@@ -15,11 +15,18 @@ def step_impl(context, survey):
     SearchByPage().set_search_criteria_options()
 
 
+@given(u'I search for the {survey_value} with reference {reference}')
+def step_impl(context, reference, survey_value=None, period=None):
+    context.contributor_page = ContributorSearchPage()
+    if survey_value == 'survey' and not period:
+        context.contributor_page.submit_search_details(reference, 'empty', 'empty')
+    elif not period:
+        context.contributor_page.submit_search_details(reference, 'empty', survey_value)
+
+
 @given(u'I search for the {survey} with {reference} for the period {period}')
-@given(u'I search for the survey "{survey}" with {reference} for the period {period}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
-@when(u'I search for the survey "{survey}" with {reference} for the period {period}')
-def step_impl(context, survey, reference, period):
+def step_impl(context, reference, survey, period):
     context.survey = survey
     context.contributor_page = ContributorSearchPage()
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
@@ -29,8 +36,6 @@ def step_impl(context, survey, reference, period):
 def step_impl(context, comment_value):
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_comment_value(comment_value)
-    else:
-        pass
 
 
 @when(u'I trigger the validation process')

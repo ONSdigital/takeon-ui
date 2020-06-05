@@ -1,23 +1,10 @@
-from selenium.webdriver.common.keys import Keys
-from behave import given, when, then
-
-
-@given('a {reference} has been entered into the reference search input')
-def step_impl(context, reference):
-    elem = context.driver.find_element_by_name("reference")
-    elem.clear()
-    elem.send_keys(reference)
-
-
-@when(u'it is submitted')
-def step_impl(context):
-    elem = context.driver.find_element_by_name("reference")
-    elem.send_keys(Keys.RETURN)
+from behave import given, then
+from base.driver_context import DriverContext
 
 
 @then(u'{ref} and {period} and {survey} will be displayed')
 def step_impl(context, ref, period, survey):
-    table = context.driver.find_element_by_id("ResultsTable")
+    table = DriverContext.driver.find_element_by_id("ResultsTable")
     rows = table.find_elements_by_tag_name("tr")
     failed = []
     # True if ref is found
@@ -39,15 +26,13 @@ def step_impl(context, ref, period, survey):
 
 @then(u'no table should appear')
 def step_impl(context):
-    table = context.driver.find_elements_by_id("ResultsTable")
-    # table = context.driver.find_elements_by_xpath("//*[@id ='ResultsTable']")
-    # rows = table.find_elements_by_tag_name("tr")
+    table = DriverContext.driver.find_elements_by_id("ResultsTable")
     if (len(table) > 1):
         assert False, "Survey table should not be shown"
 
 
 @given(u'a {surveyId} has been entered into the survey search input')
 def step_impl(context, surveyId):
-    elem = context.driver.find_element_by_name("survey")
+    elem = DriverContext.driver.find_element_by_name("survey")
     elem.clear()
     elem.send_keys(surveyId)

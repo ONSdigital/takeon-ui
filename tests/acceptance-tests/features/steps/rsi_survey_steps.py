@@ -48,4 +48,5 @@ def step_impl(context, result, operator_type, threshold_value):
         if inter_sales > total_sales:
             assert result == 'true'
             is_message_exists = page.check_validation_message()
-            assert str(is_message_exists).lower() == 'true'
+            if not is_message_exists:
+                assert False, 'validations triggered but no validation message exists'
