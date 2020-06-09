@@ -28,13 +28,10 @@
     
 ### Running Tests
 
-1.  Setting up the environment url.
+1.  Setting up the environment URL:
 
-     -  Create a class called url_configs in config_files folder.Add the url.
-               
-               URL_CONFIG = { 'env_url': '' }
-     - And replace the empty string with the environment url you want to run the tests against.
-    
+        export TAKEON_URL="URL"
+        Replace URL with the enviroment url you wish to test.
             
  
 2.  To run the tests you need to switch to the features folder first.
