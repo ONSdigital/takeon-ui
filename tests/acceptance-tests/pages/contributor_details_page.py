@@ -20,6 +20,16 @@ class ContributorDetailsPage(BasePage):
     STATUS = By.XPATH, "//span[@class='status status--error']"
     QUESTION_PANEL_ERROR_MESSAGE = By.XPATH, "//div[1]/div[1]/p[1]/strong[1]"
     QUESTION_CODE_FIXED_VALIDATION_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[2]/strong'
+    QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
+    QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
+
+    def get_validation_error_message(self, question_type):
+        element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
+        ele = SeleniumCore.find_elements_by_xpath(element)
+        if len(ele) > 0:
+            return self.driver.find_element_by_xpath(element).text
+        else:
+            return ''
 
     def save_the_application(self):
         self.driver.find_element(*ContributorDetailsPage.SAVE_AND_VALIDATE).click()
@@ -82,3 +92,10 @@ class ContributorDetailsPage(BasePage):
     def no_validation_exists(self, question_codes_list, i):
         print('No validation exists for the question code: ' + \
               question_codes_list[i - 1])
+
+    def check_validation_message(self, question_type, exp_msg, is_validation_exists):
+        actual_msg = ContributorDetailsPage().get_validation_error_message(question_type)
+        if actual_msg == exp_msg:
+            assert is_validation_exists == 'be'
+        else:
+            assert is_validation_exists == 'not be'

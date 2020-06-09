@@ -9,7 +9,7 @@ from selenium.common.exceptions import TimeoutException
 
 from base.driver_context import DriverContext
 from config_files.config_test import ConfigTest
-from config_files.url_configs import URL_CONFIG
+
 
 
 class Browser:
@@ -37,14 +37,7 @@ class Browser:
     @staticmethod
     def navigate_to_the_url():
         # clean the url and go to the url
-        # Create a class called url_configs in config_files folder
-        # and create a dictionary list URL_CONFIG add a env_url as key and url as value
-        # locally to able to run the tests against that environment
-        # uncomment the below url and use instead of the url from ConfigTest
-        url = URL_CONFIG.get('env_url').strip()
-        # url from ConfigTest is a placeholder and will fail as there is no url been set up
-        # IMPORTANT: add url_configs.py to git exclude in order to ignore the class by git to stop accidentally committing it to repo
-        # url = ConfigTest.UI_URL
+        url = ConfigTest.UI_URL
         try:
             if url:
                 t = time.time()

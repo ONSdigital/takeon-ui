@@ -11,7 +11,7 @@ class ContributorSearchPage(BasePage):
     SEARCH_BUTTON = By.XPATH, "//button[@class='btn btn--small']"
 
     def select_the_reference_view_form(self, survey, reference, period):
-        self.submit_search_details(survey, reference, period)
+        self.submit_search_details(reference, period, survey)
         table = self.driver.find_element_by_id("ResultsTable")
         rows = table.find_elements_by_tag_name("tr")
         # Ignore the first row
@@ -22,11 +22,17 @@ class ContributorSearchPage(BasePage):
                 cols[i - 1].click()
                 break
 
-    def submit_search_details(self, survey, reference, period):
-        ele = SeleniumCore.set_element_text(*ContributorSearchPage.REFERENCE_TEXT_FIELD, reference)
-        # ele.send_keys(reference)
-        ele = SeleniumCore.set_element_text(*ContributorSearchPage.PERIOD_TEXT_FIELD,period)
-        # ele.send_keys(period)
-        ele = SeleniumCore.set_element_text(*ContributorSearchPage.SURVEY_TEXT_FIELD,survey)
-        # ele.send_keys(survey)
+    def submit_search_details(self, *search_types):
+        reference = search_types[0]
+        period = search_types[1]
+        survey = search_types[2]
+        if reference == 'empty':
+            reference = ''
+        elif period == 'empty':
+            period = ''
+        elif survey == 'empty':
+            survey = ''
+        SeleniumCore.set_element_text(*ContributorSearchPage.REFERENCE_TEXT_FIELD, reference)
+        SeleniumCore.set_element_text(*ContributorSearchPage.PERIOD_TEXT_FIELD, period)
+        SeleniumCore.set_element_text(*ContributorSearchPage.SURVEY_TEXT_FIELD, survey)
         self.driver.find_element(*ContributorSearchPage.SEARCH_BUTTON).click()
