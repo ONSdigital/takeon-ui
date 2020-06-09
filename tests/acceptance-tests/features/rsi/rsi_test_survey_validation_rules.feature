@@ -1,9 +1,9 @@
-Feature: RSI
+Feature: Rsi Test Survey Validation Rules
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-6261 - POPMRTZ rule A - Validation Check
+  Scenario Outline: LU-6261 - PoPMRZ rule A - Validation Check
     Given I search for the <survey> with <reference> for the period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>

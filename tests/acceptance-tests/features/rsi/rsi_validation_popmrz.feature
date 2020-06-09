@@ -1,9 +1,9 @@
-Feature: RSI
+Feature: RSI Validation PoPMRZ
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: RSI LU-5033 - POPMRTZ rule A - Validation Check on form 5
+  Scenario Outline: RSI LU-5033 - PoPMRZ rule A - Validation Check on form 5
     Given I search for the <survey> with <reference> for the period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
@@ -19,7 +19,7 @@ Feature: RSI
       | 0023   | 201903              | 201904             | 49900572358 | 0               | 0               | 1000            | false  | less than    | 10%            |
       | 0023   | 201903              | 201904             | 49900589234 | 0               | 0               | 0               | false  | less than    | 10%            |
 
-  Scenario Outline: RSI LU-5033 - POPMRTZ rule A - Validation Check on form 6
+  Scenario Outline: RSI LU-5033 - PoPMRZ rule A - Validation Check on form 6
     Given I search for the <survey> with <reference> for the period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
@@ -35,7 +35,7 @@ Feature: RSI
       | 0023   | 201903              | 201904             | 49900694171 | 0               | 0               | 1000            | false  | less than    | 10%            |
       | 0023   | 201903              | 201904             | 49900818161 | 0               | 0               | 0               | false  | less than    | 10%            |
 
-  Scenario Outline: RSI LU-5033 - POPMRTZ rule A - Validation Check on form 7
+  Scenario Outline: RSI LU-5033 - PoPMRZ rule A - Validation Check on form 7
     Given I search for the <survey> with <reference> for the period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>

@@ -1,4 +1,4 @@
-Feature: RSI Validation Comment Present
+Feature: RSI Validation Question Versus Value
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
