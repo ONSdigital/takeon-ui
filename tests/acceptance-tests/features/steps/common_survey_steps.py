@@ -25,7 +25,9 @@ def step_impl(context, reference, survey_value=None, period=None):
 
 
 @given(u'I search for the {survey} with {reference} for the period {period}')
+@given(u'I search for the survey "{survey}" with {reference} for the period {period}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
+@when(u'I search for the survey "{survey}" with {reference} for the period {period}')
 def step_impl(context, reference, survey, period):
     context.survey = survey
     context.contributor_page = ContributorSearchPage()
