@@ -1,4 +1,4 @@
-Feature: Rsi Test Survey Validation Rules
+Feature: PoPMRZ rule A - Validation rule
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
