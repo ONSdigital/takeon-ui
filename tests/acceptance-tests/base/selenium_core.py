@@ -15,14 +15,18 @@ class SeleniumCore:
         return ele.send_keys(element[2])
 
     @staticmethod
-    def get_element_by_text(element):
+    def get_element_text(*element):
         ele = DriverContext.driver.find_element(element[0], element[1])
         return ele.text
 
     @staticmethod
-    def find_elements_by_xpath(element):
-         return DriverContext.driver.find_elements_by_xpath(element)
+    def get_attribute_element_text(*element):
+        ele = DriverContext.driver.find_element(element[0], element[1])
+        return ele.get_attribute("value")
 
+    @staticmethod
+    def find_elements_by_xpath(element):
+        return DriverContext.driver.find_elements_by_xpath(element)
 
     @staticmethod
     def switch_to_alert_box():

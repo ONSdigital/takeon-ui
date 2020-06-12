@@ -1,5 +1,8 @@
 Feature:  Comment Present Validation rule
 
+  Background:
+    Given As a RSI user I set the search criteria options for the forms returned by the contributor
+
   Scenario Outline: RSI LU-6403 - Comment Present Validation test survey
     Given I search for the survey "999A" with <reference> for the period <period>
     When I submit the comment <comment> about reason for turnover changes for <field type>

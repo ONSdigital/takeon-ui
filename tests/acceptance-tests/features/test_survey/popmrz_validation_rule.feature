@@ -9,7 +9,7 @@ Feature: PoPMRZ rule A - Validation rule
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "999A" with <reference> for the period <currentPeriodValue>
     And I validate the current period details
-    Then the validation should return <result> if the turnover ratio is <operator> threshold value <thresholdValue>
+    Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | cpInternetSales | ppInternetSales | ppTotalTurnover | result | operator     | thresholdValue |
