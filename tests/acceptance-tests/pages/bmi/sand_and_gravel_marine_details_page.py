@@ -1,4 +1,4 @@
-from pages.base_page import BasePage
+from pages.common.base_page import BasePage
 
 
 class SandAndGravelMarineDetailsPage(BasePage):

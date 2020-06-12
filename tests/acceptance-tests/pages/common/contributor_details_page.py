@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from base.selenium_core import SeleniumCore
-from pages.base_page import BasePage
+from pages.common.base_page import BasePage
 
 
 class ContributorDetailsPage(BasePage):

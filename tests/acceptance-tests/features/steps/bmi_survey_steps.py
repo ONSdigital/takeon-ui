@@ -1,8 +1,8 @@
 from behave import given, when, then
 
-from pages.blocks_survey_details_page import BlocksSurveyDetailsPage
-from pages.bricks_survey_details_page import BricksSurveyDetailsPage
-from pages.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
+from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
+from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
+from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 
 
 @given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')

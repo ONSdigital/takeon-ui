@@ -1,12 +1,13 @@
 from behave import given, when, then
 
-from pages.blocks_survey_details_page import BlocksSurveyDetailsPage
-from pages.bricks_survey_details_page import BricksSurveyDetailsPage
-from pages.contributor_details_page import ContributorDetailsPage
-from pages.contributor_search_page import ContributorSearchPage
-from pages.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
-from pages.search_by_page import SearchByPage
-from pages.rsi_contributor_details_page import RsiContributorDetailsPage
+from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
+from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
+from pages.common.contributor_details_page import ContributorDetailsPage
+from pages.common.contributor_search_page import ContributorSearchPage
+from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
+from pages.common.search_by_page import SearchByPage
+from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
+from pages.test_survey.test_survey_contributor_details_page import TestSurveyContributorDetailsPage
 
 
 @given(u'As a {survey} user I set the search criteria options for the forms returned by the contributor')
@@ -46,7 +47,8 @@ def step_impl(context):
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
-def step_impl(context, validation_message, is_validation_exists):
+@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
+def step_impl(context, validation_message, is_validation_exists, question_code):
     if context.survey == '0073':
         BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                  is_validation_exists)
@@ -58,3 +60,6 @@ def step_impl(context, validation_message, is_validation_exists):
                                                                             is_validation_exists)
     elif context.survey == '0023':
         RsiContributorDetailsPage().check_comment_present_val_msg(validation_message, is_validation_exists)
+    else:
+        TestSurveyContributorDetailsPage().check_validation_msg(question_code, validation_message,
+                                                                    is_validation_exists)

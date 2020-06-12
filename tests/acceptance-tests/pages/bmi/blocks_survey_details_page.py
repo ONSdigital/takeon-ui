@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from base.selenium_core import SeleniumCore
-from pages.contributor_details_page import ContributorDetailsPage
+from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class BlocksSurveyDetailsPage(ContributorDetailsPage):
