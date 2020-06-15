@@ -9,9 +9,12 @@ class TestSurveyContributorDetailsPage(BasePage):
     QUESTION_ONE_ELEMENT = By.ID, '1000'
     QUESTION_TWO_ELEMENT = By.ID, '1001'
     QUESTION_DERIVED_ELEMENT = By.ID, '4001'
-
+    COMMENT_QUESTION_NOT_BLANK = By.ID, '5000'
+    COMMENT_QUESTION_VALUE = By.ID, '5001'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
+    QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
+    QUESTION_LABEL_PART_TWO = "')]"
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
@@ -57,4 +60,11 @@ class TestSurveyContributorDetailsPage(BasePage):
     def check_validation_msg(self, question_code, exp_msg, is_val_exists):
         ContributorDetailsPage().check_validation_message(question_code, exp_msg, is_val_exists)
 
-
+    def submit_comment_value(self, comment, question):
+        SeleniumCore.switch_window()
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
+            comment = ''
+        if question.upper() == 'Q7':
+            SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.COMMENT_QUESTION_NOT_BLANK, comment)
+        if question.upper() == 'Q8':
+            SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.COMMENT_QUESTION_VALUE, comment)
