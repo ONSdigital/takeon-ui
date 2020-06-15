@@ -1,4 +1,4 @@
-from behave import given, when, then
+from behave import given, when, then, use_step_matcher
 
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
@@ -35,10 +35,13 @@ def step_impl(context, reference, survey, period):
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
 
-@when(u'I submit the comment {comment_value} about reason for turnover changes')
-def step_impl(context, comment_value):
+@when(u'I submit the comment {comment_value} for question {question}')
+def step_impl(context, comment_value, question):
     if context.survey == '0023':
-        RsiContributorDetailsPage().submit_comment_value(comment_value)
+        RsiContributorDetailsPage().submit_comment_value(comment_value, question)
+    elif context.survey == '999A':
+        context.question_code = question.upper()
+        TestSurveyContributorDetailsPage().submit_comment_value(comment_value, question)
 
 
 @when(u'I trigger the validation process')
@@ -48,7 +51,10 @@ def step_impl(context):
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
-def step_impl(context, validation_message, is_validation_exists, question_code):
+def step_impl(context, validation_message, is_validation_exists, question_code=None):
+    if not question_code:
+        question_code = context.question_code
+
     if context.survey == '0073':
         BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                  is_validation_exists)
@@ -62,4 +68,4 @@ def step_impl(context, validation_message, is_validation_exists, question_code):
         RsiContributorDetailsPage().check_comment_present_val_msg(validation_message, is_validation_exists)
     else:
         TestSurveyContributorDetailsPage().check_validation_msg(question_code, validation_message,
-                                                                    is_validation_exists)
+                                                                is_validation_exists)
