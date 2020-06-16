@@ -1,7 +1,10 @@
+import time
+
 from selenium.webdriver.common.by import By
 
+from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
-from pages.base_page import BasePage
+from pages.common.base_page import BasePage
 
 
 class ContributorDetailsPage(BasePage):
@@ -35,6 +38,7 @@ class ContributorDetailsPage(BasePage):
         self.driver.find_element(*ContributorDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
         self.driver.refresh()
+        time.sleep(2)
 
     def check_numeric_fixed_validation(self, questions_list, is_validation_exists):
         # iterate through the list of expected question codes
@@ -95,7 +99,7 @@ class ContributorDetailsPage(BasePage):
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
         actual_msg = ContributorDetailsPage().get_validation_error_message(question_type)
-        if actual_msg == exp_msg:
-            assert is_validation_exists == 'be'
-        else:
-            assert is_validation_exists == 'not be'
+        if is_validation_exists == 'be':
+            ReportingHelper.check_values_matches(question_type, actual_msg, exp_msg)
+        elif is_validation_exists == 'not be':
+            ReportingHelper.check_values_not_matches(question_type, actual_msg, exp_msg)

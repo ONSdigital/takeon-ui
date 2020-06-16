@@ -1,14 +1,16 @@
 from selenium.webdriver.common.by import By
 
 from base.selenium_core import SeleniumCore
-from pages.base_page import BasePage
-from pages.contributor_details_page import ContributorDetailsPage
+from pages.common.base_page import BasePage
+from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class RsiContributorDetailsPage(BasePage):
     QUESTION_ONE_ELEMENT = By.ID, '0020'
     QUESTION_TWO_ELEMENT = By.ID, '0021'
     QUESTION_NO_146 = By.ID, '0146'
+    QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
+    QUESTION_LABEL_PART_TWO = "')]"
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
@@ -25,11 +27,12 @@ class RsiContributorDetailsPage(BasePage):
         ContributorDetailsPage().save_the_application()
         SeleniumCore.close_the_current_window()
 
-    def submit_comment_value(self, comment):
+    def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
         if comment == 'empty':
             comment = ''
-        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
+        if question.upper() == 'Q146':
+            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
 
     def validate_the_current_period_details(self, internet_sales):
         SeleniumCore.switch_window()

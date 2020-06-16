@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from base.selenium_core import SeleniumCore
-from pages.contributor_details_page import ContributorDetailsPage
+from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
@@ -46,7 +46,7 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
         return int(current_value) - int(previous_value)
 
     def get_status(self):
-        return SeleniumCore.get_element_by_text(self.STATUS)
+        return SeleniumCore.get_element_text(*SandGravelLandAndMarineDetailsPage.STATUS)
 
     def get_validation_message(self):
         element_text = "This has changed significantly since the last submission"
