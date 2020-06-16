@@ -1,4 +1,4 @@
-Feature:  Comment Present Validation rule
+Feature: Test Survey - Comment Present(Question vs Value) Validation rule
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor

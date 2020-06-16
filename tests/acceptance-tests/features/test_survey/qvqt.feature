@@ -1,9 +1,9 @@
-Feature: QvQT validation rule
+Feature: Test Survey - QvQT validation rule
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-6401 RSI Survey - current period value vs derived value greater than threshold value
+  Scenario Outline: LU-6401 - current period value vs derived value greater than threshold value
     Given I search for the survey "999A" with <reference> for the period <period>
     When I run the validation process for <totalTurnoverValue> against the <derivedQValue>
     Then the validation should return <result> if the "absolute difference between the values are" <operator> threshold value <thresholdValue>

@@ -36,11 +36,12 @@ def step_impl(context, reference, survey, period):
 
 
 @when(u'I submit the comment {comment_value} for question {question}')
+@when(u'I submit the comment {comment_value} for question "{question}"')
 def step_impl(context, comment_value, question):
+    context.question_code = question.upper()
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_comment_value(comment_value, question)
     elif context.survey == '999A':
-        context.question_code = question.upper()
         TestSurveyContributorDetailsPage().submit_comment_value(comment_value, question)
 
 

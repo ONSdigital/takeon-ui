@@ -39,13 +39,11 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
         page = RsiContributorDetailsPage()
     else:
         page = TestSurveyContributorDetailsPage()
-    context.comparison_val_one = ''
-    context.comparison_val_two = ''
 
     if validation_check == 'turnover ratio is':
         context.comparison_val_one = int(context.pp_internet_sales)
         thre_val = float(threshold_value[:-1]) / 100
-        context.comparison_val_ones = thre_val * int(context.pp_total_sales)
+        context.comparison_val_two = thre_val * int(context.pp_total_sales)
 
     elif validation_check == 'absolute difference between the values are':
         context.comparison_val_one = abs(page.get_derived_question_value())
@@ -54,12 +52,6 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
     if operator_type == 'less than' or operator_type == 'equal to':
         if context.comparison_val_one < context.comparison_val_two or context.comparison_val_one == context.comparison_val_two:
             assert result == 'false'
-            # is_message_exists = page.check_validation_message()
-            # assert str(is_message_exists).lower() == 'false'
-    elif operator_type == 'greater than':
-        if context.comparison_val_one > context.comparison_val_two:
-            assert result == 'true'
-            # is_message_exists = page.check_comment_present_val_msg()
-            # RsiContributorDetailsPage().check_comment_present_val_msg(validation_message, is_validation_exists)
-            # if not is_message_exists:
-            #     assert False, 'validations triggered but no validation message exists'
+        elif operator_type == 'greater than':
+            if context.comparison_val_one > context.comparison_val_two:
+                assert result == 'true'
