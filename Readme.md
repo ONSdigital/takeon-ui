@@ -36,8 +36,25 @@
  
 2.  To run the tests you need to switch to the features folder first.
         
-         cd takeon-ui/tests/acceptance-tests/features/{survey_folder} and  
-         survey_folder eg: bmi or rsi
-         to run one feature file scenarios use -  behave {feature file name}
-         and to run all the scenarios just use - 'behave' with no feature file name.
+   - To run one feature file eg: rsi_validation_qvv.feature
+
+                         
+        You need to switch to feature file -
+        cd takeon-ui/tests/acceptance-tests/features/{survey_folder} and  
+        and use - behave {feature_file_name}
+          
+                
+   - To run all feature files part of a sub-folder. eg:bmi/rsi/test-survey
+      
+      
+        You need to switch to features folder -
+        cd takeon-ui/tests/acceptance-tests/features/
+        and use - behave {survey_folder_name} e.g, behave rsi/
+         
+   - To run all the scenarios irrespective of survey types 
+        
+        
+        You can be anywhere with in the acceptance tests or in any features folders path
+        cd takeon-ui/tests/acceptance-tests/
+        and use - 'behave' with no feature file name.
          
