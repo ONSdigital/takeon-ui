@@ -14,4 +14,4 @@ Feature: Test Survey - Comment Present(Question vs Value) Validation rule
       | 201801 | 12345678003 | blank   | Q7       | There is a comment from this contributor | not be             |
       | 201801 | 12345678003 | 2       | Q8       | There is a comment from this contributor | be                 |
       | 201801 | 12345678003 | blank   | Q8       | There is a comment from this contributor | not be             |
-      | 201801 | 12345678003 | -2      | Q8       | There is a comment from this contributor | not be             |
+      | 201801 | 12345678003 | 1       | Q8       | There is a comment from this contributor | not be             |
