@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
@@ -36,6 +38,7 @@ class ContributorDetailsPage(BasePage):
         self.driver.find_element(*ContributorDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
         self.driver.refresh()
+        time.sleep(2)
 
     def check_numeric_fixed_validation(self, questions_list, is_validation_exists):
         # iterate through the list of expected question codes
