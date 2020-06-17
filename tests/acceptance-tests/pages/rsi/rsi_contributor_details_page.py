@@ -1,23 +1,32 @@
 from selenium.webdriver.common.by import By
 
+from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from pages.common.base_page import BasePage
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
-class RsiContributorDetailsPage(BasePage):
-    QUESTION_ONE_ELEMENT = By.ID, '0020'
+class RsiContributorDetailsPage(ContributorDetailsPage):
+    QUESTION_TOTAL_TURNOVER_ELEMENT = By.ID, '0020'
     QUESTION_TWO_ELEMENT = By.ID, '0021'
     QUESTION_NO_146 = By.ID, '0146'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
-    QUESTION_DERIVED_ELEMENT = '7034'
+    QUESTION_DERIVED_ELEMENT = By.ID, '7034'
+
+    question_codes = {
+        'Q22': '0022',
+        'Q23': '0023',
+        'Q24': '0024',
+        'Q25': '0025',
+        'Q26': '0026',
+    }
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
 
     def set_total_turnover_sales_value(self, value):
-        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_ONE_ELEMENT, value)
+        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TOTAL_TURNOVER_ELEMENT, value)
 
     def submit_pp_sales_values(self, internet_sales, total_sales):
         SeleniumCore.switch_window()
@@ -54,6 +63,34 @@ class RsiContributorDetailsPage(BasePage):
 
     def check_comment_present_val_msg(self, exp_msg, is_val_exists):
         ContributorDetailsPage().check_validation_message('Q146', exp_msg, is_val_exists)
-    
+
     def get_derived_question_value(self):
-        return int(SeleniumCore.get_attribute_element_text(*TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
+        return int(SeleniumCore.get_attribute_element_text(*RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
+
+    def run_the_validation_process(self, total_turnover_value, exp_derived_value):
+        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TOTAL_TURNOVER_ELEMENT, total_turnover_value)
+        ContributorDetailsPage().save_the_application()
+        actual_derived_val = SeleniumCore.get_attribute_element_text(
+            *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
+        ReportingHelper.check_values_matches('Q7034', actual_derived_val, exp_derived_value)
+
+    def submit_the_sales_values_for_survey(self, *questions):
+        questions_list = questions[0]
+        commodity_values = self.get_values_as_a_list(questions[1])
+        SeleniumCore.switch_window()
+        self.submit_the_commodity_values(questions_list, commodity_values)
+
+    def submit_the_commodity_values(self, questions_list, values, ):
+        count = 0
+        for value in values:
+            count += 1
+            question_element = self.question_codes.get(questions_list[count - 1])
+            self.driver.find_element_by_id(question_element).clear()
+            self.driver.find_element_by_id(question_element).send_keys(value)
+
+    def get_values_as_a_list(self, values):
+        new_values = values.split(',')
+        commodity_values = []
+        for new_val in new_values:
+            commodity_values.append(new_val)
+        return commodity_values
