@@ -24,4 +24,3 @@ Feature: RSI Survey - QvQT validation rule
       | 49900694171 | 201903 | 1,2,3,2,2 | 5                  | 10          | false  | equal than   | 5              | Total different to calculated total (allowing for margin) | not be             |
       | 49900694171 | 201903 | 1,1,1,1,2 | 10                 | 6           | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
       | 49900694171 | 201903 | 1,2,3,2,2 | 6                  | 10          | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
-    

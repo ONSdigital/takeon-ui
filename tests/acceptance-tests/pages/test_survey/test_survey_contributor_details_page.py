@@ -57,8 +57,7 @@ class TestSurveyContributorDetailsPage(BasePage):
         else:
             return False
 
-    def check_validation_msg(self, question_code, exp_msg, is_val_exists):
-        ContributorDetailsPage().check_validation_message(question_code, exp_msg, is_val_exists)
+
 
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()

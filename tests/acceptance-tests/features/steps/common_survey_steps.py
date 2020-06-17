@@ -50,6 +50,15 @@ def step_impl(context):
     ContributorDetailsPage().save_the_application()
 
 
+@when(u'I run the validation process for {total_turnover_value} against the {derived_value}')
+def step_impl(context, total_turnover_value, derived_value):
+    context.total_turnover_value = total_turnover_value
+    if context.survey == '0023':
+        RsiContributorDetailsPage().run_the_validation_process(total_turnover_value, derived_value)
+    elif context.survey == '999A':
+        TestSurveyContributorDetailsPage().run_the_validation_process(total_turnover_value, derived_value)
+
+
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
@@ -65,8 +74,6 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     elif context.survey == '0076':
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
-    elif context.survey == '0023':
-        RsiContributorDetailsPage().check_comment_present_val_msg(validation_message, is_validation_exists)
     else:
-        TestSurveyContributorDetailsPage().check_validation_msg(question_code, validation_message,
-                                                                is_validation_exists)
+        ContributorDetailsPage().check_validation_msg(question_code, validation_message,
+                                                      is_validation_exists)
