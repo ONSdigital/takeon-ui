@@ -96,7 +96,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
         context.comparison_val_one = int(context.pp_internet_sales)
         thre_val = float(threshold_value[:-1]) / 100
         context.comparison_val_two = thre_val * int(context.pp_total_sales)
-
     elif validation_check == 'absolute difference between the values are':
         context.comparison_val_two = int(threshold_value)
+
     ReportingHelper.compare_the_values(operator_type, context.comparison_val_one, context.comparison_val_two, result)

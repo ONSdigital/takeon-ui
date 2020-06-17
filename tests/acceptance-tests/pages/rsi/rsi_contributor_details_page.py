@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
-from pages.common.base_page import BasePage
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
@@ -14,12 +13,21 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     QUESTION_LABEL_PART_TWO = "')]"
     QUESTION_DERIVED_ELEMENT = By.ID, '7034'
 
-    question_codes = {
+    form_6_question_codes = {
         'Q22': '0022',
         'Q23': '0023',
         'Q24': '0024',
         'Q25': '0025',
         'Q26': '0026',
+    }
+
+    form_7_question_codes = {
+        'Q22': '0022',
+        'Q23': '0023',
+        'Q24': '0024',
+        'Q25': '0025',
+        'Q26': '0026',
+        'Q27': '0027',
     }
 
     def set_internet_sales_value(self, value):
@@ -80,11 +88,15 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         SeleniumCore.switch_window()
         self.submit_the_commodity_values(questions_list, commodity_values)
 
-    def submit_the_commodity_values(self, questions_list, values, ):
+    def submit_the_commodity_values(self, questions_list, values):
+        if len(questions_list) == 5:
+            question_codes = self.form_6_question_codes
+        elif len(questions_list) == 6:
+            question_codes = self.form_7_question_codes
         count = 0
         for value in values:
             count += 1
-            question_element = self.question_codes.get(questions_list[count - 1])
+            question_element = question_codes.get(questions_list[count - 1])
             self.driver.find_element_by_id(question_element).clear()
             self.driver.find_element_by_id(question_element).send_keys(value)
 
