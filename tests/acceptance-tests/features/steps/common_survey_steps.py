@@ -1,5 +1,6 @@
-from behave import given, when, then, use_step_matcher
+from behave import given, when, then
 
+from base.reporting_helper import ReportingHelper
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
@@ -77,3 +78,25 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     else:
         ContributorDetailsPage().check_validation_msg(question_code, validation_message,
                                                       is_validation_exists)
+
+
+@then(
+    u'the validation should return {result} if the "{validation_check}" {operator_type} threshold value {threshold_value}')
+def step_impl(context, result, validation_check, operator_type, threshold_value):
+    if context.survey == '0023':
+        page = RsiContributorDetailsPage()
+        total_turnover_value = int(context.total_turnover_value)
+        derived_value = page.get_derived_question_value()
+        context.comparison_val_one = abs(total_turnover_value - derived_value)
+    else:
+        page = TestSurveyContributorDetailsPage()
+        context.comparison_val_one = abs(page.get_derived_question_value())
+
+    if validation_check == 'turnover ratio is':
+        context.comparison_val_one = int(context.pp_internet_sales)
+        thre_val = float(threshold_value[:-1]) / 100
+        context.comparison_val_two = thre_val * int(context.pp_total_sales)
+
+    elif validation_check == 'absolute difference between the values are':
+        context.comparison_val_two = int(threshold_value)
+    ReportingHelper.compare_the_values(operator_type, context.comparison_val_one, context.comparison_val_two, result)

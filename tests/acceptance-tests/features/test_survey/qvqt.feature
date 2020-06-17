@@ -13,7 +13,7 @@ Feature: Test Survey - QvQT validation rule
       | reference   | period | totalTurnoverValue | derivedQValue | result | operator     | thresholdValue | validation                                                | isValidationExists |
       | 12345678012 | 201712 | 1000               | 1006          | true   | greater than | 5              | Total different to calculated total (allowing for margin) | be                 |
       | 12345678012 | 201712 | 1000               | 994           | true   | greater than | 5              | Total different to calculated total (allowing for margin) | be                 |
-      | 12345678012 | 201712 | 1000               | 1005          | false  | equal than   | 5              | Total different to calculated total (allowing for margin) | not be             |
-      | 12345678012 | 201712 | 1000               | 995           | false  | equal than   | 5              | Total different to calculated total (allowing for margin) | not be             |
+      | 12345678012 | 201712 | 1000               | 1005          | false  | equal to     | 5              | Total different to calculated total (allowing for margin) | not be             |
+      | 12345678012 | 201712 | 1000               | 995           | false  | equal to     | 5              | Total different to calculated total (allowing for margin) | not be             |
       | 12345678012 | 201712 | 1000               | 1004          | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
       | 12345678012 | 201712 | 1000               | 996           | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
