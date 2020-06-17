@@ -11,6 +11,7 @@ class RsiContributorDetailsPage(BasePage):
     QUESTION_NO_146 = By.ID, '0146'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
+    QUESTION_DERIVED_ELEMENT = '7034'
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
@@ -53,3 +54,6 @@ class RsiContributorDetailsPage(BasePage):
 
     def check_comment_present_val_msg(self, exp_msg, is_val_exists):
         ContributorDetailsPage().check_validation_message('Q146', exp_msg, is_val_exists)
+    
+    def get_derived_question_value(self):
+        return int(SeleniumCore.get_attribute_element_text(*TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
