@@ -86,7 +86,7 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     elif context.survey == '0074':
         BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                  is_validation_exists)
-    elif context.survey == '0076':
+    elif context.survey == '0076' or context.survey == '0066':
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
     else:
