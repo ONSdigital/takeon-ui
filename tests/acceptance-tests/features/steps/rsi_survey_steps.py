@@ -18,16 +18,6 @@ def step_impl(context, internet_sales, total_sales):
         TestSurveyContributorDetailsPage().submit_pp_sales_values(internet_sales, total_sales)
 
 
-@given(u'I submit the commodity {values} for questions')
-def step_impl(context, values):
-    context.codes = []
-    for row in context.table.rows:
-        for cell in row.cells:
-            context.codes.append(cell)
-    if context.survey == '0023':
-        RsiContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
-
-
 @when(u'I validate the current period details')
 def step_impl(context):
     if context.survey == '0023':
