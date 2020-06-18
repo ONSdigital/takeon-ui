@@ -99,7 +99,6 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
 def step_impl(context, result, validation_check, operator_type, threshold_value):
     if context.survey == '0023':
         page = RsiContributorDetailsPage()
-        context.total_turnover_value = int(context.total_turnover_value)
     else:
         page = TestSurveyContributorDetailsPage()
 
@@ -108,6 +107,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
         thre_val = float(threshold_value[:-1]) / 100
         context.comparison_val_two = thre_val * int(context.pp_total_sales)
     elif validation_check == 'absolute difference between the values are':
+        context.total_turnover_value = int(context.total_turnover_value)
         context.derived_value = page.get_derived_question_value()
         context.comparison_val_one = abs(context.total_turnover_value - context.derived_value)
         context.comparison_val_two = int(threshold_value)
