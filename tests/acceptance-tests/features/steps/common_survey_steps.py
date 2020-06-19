@@ -35,14 +35,21 @@ def step_impl(context, reference, survey, period):
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
 
-@when(u'I submit the comment {comment_value} for question {question}')
-@when(u'I submit the comment {comment_value} for question "{question}"')
-def step_impl(context, comment_value, question):
+@when(u'I submit the {value_type} value {comment_value} for question {question}')
+@when(u'I submit the {value_type} {comment_value} for question "{question}"')
+def step_impl(context, value_type, comment_value, question):
     context.question_code = question.upper()
     if context.survey == '0023':
-        RsiContributorDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_comment_value(comment_value, question)
+        RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
+    # elif context.survey == '999A':
+    #     ContributorDetailsPage().submit_comment_value(value_type, comment_value, question)
+
+
+@when(u'I submit the value {value} for question {question}')
+def step_impl(context, value, question):
+    context.question_code = question.upper()
+    if context.survey == '0023':
+        RsiContributorDetailsPage().submit_total_turnover_value(value, question)
 
 
 @when(u'I trigger the validation process')
@@ -66,7 +73,8 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
     elif context.survey == '0023':
-        RsiContributorDetailsPage().check_comment_present_val_msg(validation_message, is_validation_exists)
+        ContributorDetailsPage().check_validation_message(question_code, validation_message,
+                                                          is_validation_exists)
     else:
         TestSurveyContributorDetailsPage().check_validation_msg(question_code, validation_message,
                                                                 is_validation_exists)

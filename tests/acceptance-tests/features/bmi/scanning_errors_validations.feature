@@ -9,7 +9,7 @@ Feature: Scanning Errors Validation
     And I search for the survey "0066" with <reference> for the period <period>
     When I change the <existingValue> to <newValue> for all the question codes
     And I trigger the validation process
-    Then the <fixedValidation> message should <isValidationExists> displayed
+    Then the fixed validation <fixedValidation> message should <isValidationExists> displayed
     Examples:
       | reference   | period | existingValue | newValue    | fixedValidation                    | isValidationExists |
       | 49900012765 | 201903 | blank         | 99999999999 | Value set to default, please check | be                 |
