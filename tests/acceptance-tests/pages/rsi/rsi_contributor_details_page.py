@@ -47,7 +47,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
-        if comment == 'empty':
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q146':
             SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
