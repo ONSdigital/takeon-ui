@@ -97,6 +97,9 @@ class ContributorDetailsPage(BasePage):
         print('No validation exists for the question code: ' + \
               question_codes_list[i - 1])
 
+    def check_validation_msg(self, question_code, exp_msg, is_val_exists):
+        self.check_validation_message(question_code, exp_msg, is_val_exists)
+
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
         actual_msg = ContributorDetailsPage().get_validation_error_message(question_type)
         if is_validation_exists == 'be':

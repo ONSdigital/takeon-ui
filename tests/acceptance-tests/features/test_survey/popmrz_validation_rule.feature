@@ -17,4 +17,4 @@ Feature: Test Survey - PoPMRZ rule A Validation rule
       | 201712              | 201801             | 12345678011 | 0               | 100             | 1000            | false  | equal to     | 10%            |
       | 201712              | 201801             | 12345678011 | 0               | 101             | 1000            | true   | greater than | 10%            |
       | 201712              | 201801             | 12345678011 | 0               | 0               | 1000            | false  | less than    | 10%            |
-      | 201712              | 201801             | 12345678011 | 0               | 0               | 0               | false  | less than    | 10%            |
+      | 201712              | 201801             | 12345678011 | 0               | 0               | 0               | false  | equal to     | 10%            |

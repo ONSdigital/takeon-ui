@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from pages.common.base_page import BasePage
 from pages.common.contributor_details_page import ContributorDetailsPage
@@ -15,6 +16,11 @@ class TestSurveyContributorDetailsPage(BasePage):
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
+
+    question_codes = {
+        'Q1': '1000',
+        'Q2': '1001'
+    }
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
@@ -36,11 +42,11 @@ class TestSurveyContributorDetailsPage(BasePage):
         self.set_internet_sales_value(internet_sales)
         ContributorDetailsPage().save_the_application()
 
-    def run_the_validation_process(self, ques_val_1, ques_val_2):
-        SeleniumCore.switch_window()
-        SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.QUESTION_ONE_ELEMENT, ques_val_1)
-        SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.QUESTION_TWO_ELEMENT, ques_val_2)
+    def run_the_validation_process(self, exp_derived_value):
         ContributorDetailsPage().save_the_application()
+        actual_derived_val = SeleniumCore.get_attribute_element_text(
+            *TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
+        ReportingHelper.check_values_matches('Q6', actual_derived_val, exp_derived_value)
 
     def get_derived_question_value(self):
         return int(SeleniumCore.get_attribute_element_text(*TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
@@ -57,9 +63,6 @@ class TestSurveyContributorDetailsPage(BasePage):
         else:
             return False
 
-    def check_validation_msg(self, question_code, exp_msg, is_val_exists):
-        ContributorDetailsPage().check_validation_message(question_code, exp_msg, is_val_exists)
-
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
         if comment.lower() == 'empty' or comment.lower() == 'blank':
@@ -68,3 +71,24 @@ class TestSurveyContributorDetailsPage(BasePage):
             SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.COMMENT_QUESTION_NOT_BLANK, comment)
         if question.upper() == 'Q8':
             SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.COMMENT_QUESTION_VALUE, comment)
+
+    def submit_the_sales_values_for_survey(self, *questions):
+        questions_list = questions[0]
+        commodity_values = self.get_values_as_a_list(questions[1])
+        SeleniumCore.switch_window()
+        self.submit_the_commodity_values(questions_list, commodity_values)
+
+    def submit_the_commodity_values(self, questions_list, values):
+        count = 0
+        for value in values:
+            count += 1
+            question_element = self.question_codes.get(questions_list[count - 1])
+            self.driver.find_element_by_id(question_element).clear()
+            self.driver.find_element_by_id(question_element).send_keys(value)
+
+    def get_values_as_a_list(self, values):
+        new_values = values.split(',')
+        commodity_values = []
+        for new_val in new_values:
+            commodity_values.append(new_val)
+        return commodity_values
