@@ -5,8 +5,8 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class BlocksSurveyDetailsPage(ContributorDetailsPage):
+    QUESTION_NO_145 = By.ID, '0145'
     QUESTION_NO_146 = By.ID, '0146'
-    QUESTION_NO_147 = By.ID, '0147'
     QUESTION_CODES = [
         (By.ID, '0101'), (By.ID, '0102'), (By.ID, '0103'), (By.ID, '0104'),
         (By.ID, '0111'), (By.ID, '0112'), (By.ID, '0113'), (By.ID, '0114'),
@@ -68,7 +68,7 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
         SeleniumCore.switch_window()
         if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
-        if question.upper() == 'Q146':
+        if question.upper() == 'Q145':
+            SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_145, comment)
+        elif question.upper() == 'Q146':
             SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_146, comment)
-        elif question.upper() == 'Q147':
-            SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_147, comment)

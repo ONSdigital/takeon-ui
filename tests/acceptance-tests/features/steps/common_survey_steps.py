@@ -58,6 +58,10 @@ def step_impl(context, comment_value, question):
         TestSurveyContributorDetailsPage().submit_comment_value(comment_value, question)
     elif context.survey == '0066' or context.survey == '0076':
         SandGravelLandAndMarineDetailsPage().submit_comment_value(comment_value, question)
+    elif context.survey == '0073':
+        BlocksSurveyDetailsPage().submit_comment_value(comment_value, question)
+    elif context.survey == '0074':
+        BricksSurveyDetailsPage().submit_comment_value(comment_value, question)
 
 
 @when(u'I trigger the validation process')
