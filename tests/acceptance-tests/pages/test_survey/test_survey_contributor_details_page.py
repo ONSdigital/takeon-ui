@@ -63,8 +63,14 @@ class TestSurveyContributorDetailsPage(BasePage):
         else:
             return False
 
-    def submit_comment_value(self, comment, question):
+    def submit_question_value(self, value_type, value, question):
         SeleniumCore.switch_window()
+        if value_type == 'value':
+            pass
+        elif value_type == 'comment':
+            self.submit_comment_value(value, question)
+
+    def submit_comment_value(self, comment, question):
         if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q7':

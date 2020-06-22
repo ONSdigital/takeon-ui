@@ -3,9 +3,9 @@ from behave import given, when, then
 from base.reporting_helper import ReportingHelper
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
+from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.common.contributor_search_page import ContributorSearchPage
-from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 from pages.common.search_by_page import SearchByPage
 from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 from pages.test_survey.test_survey_contributor_details_page import TestSurveyContributorDetailsPage
@@ -53,15 +53,8 @@ def step_impl(context, value_type, comment_value, question):
     context.question_code = question.upper()
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
-    # elif context.survey == '999A':
-    #     ContributorDetailsPage().submit_comment_value(value_type, comment_value, question)
-
-
-@when(u'I submit the value {value} for question {question}')
-def step_impl(context, value, question):
-    context.question_code = question.upper()
-    if context.survey == '0023':
-        RsiContributorDetailsPage().submit_total_turnover_value(value, question)
+    elif context.survey == '999A':
+        TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
 
 
 @when(u'I trigger the validation process')
