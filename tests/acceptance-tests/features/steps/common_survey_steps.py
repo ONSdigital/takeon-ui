@@ -1,5 +1,6 @@
-from behave import given, when, then, use_step_matcher
+from behave import given, when, then
 
+from base.reporting_helper import ReportingHelper
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
@@ -35,8 +36,19 @@ def step_impl(context, reference, survey, period):
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
 
-@when(u'I submit the {value_type} value {comment_value} for question {question}')
-@when(u'I submit the {value_type} {comment_value} for question "{question}"')
+@given(u'I submit the commodity {values} for questions')
+def step_impl(context, values):
+    context.codes = []
+    for row in context.table.rows:
+        for cell in row.cells:
+            context.codes.append(cell)
+    if context.survey == '0023':
+        RsiContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+    elif context.survey == '999A':
+        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+
+
+@when(u'I submit the {value_type} {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
     context.question_code = question.upper()
     if context.survey == '0023':
@@ -57,6 +69,17 @@ def step_impl(context):
     ContributorDetailsPage().save_the_application()
 
 
+@when(u'I run the validation process for {total_turnover_value} against the {derived_value}')
+@when(u'I run the validation process against the {derived_value}')
+def step_impl(context, derived_value, total_turnover_value=None):
+    if context.survey == '0023':
+        context.total_turnover_value = total_turnover_value
+        RsiContributorDetailsPage().run_the_validation_process(total_turnover_value, derived_value)
+    elif context.survey == '999A':
+        context.total_turnover_value = 0
+        TestSurveyContributorDetailsPage().run_the_validation_process(derived_value)
+
+
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
@@ -69,12 +92,29 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     elif context.survey == '0074':
         BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                  is_validation_exists)
-    elif context.survey == '0076':
+    elif context.survey == '0076' or context.survey == '0066':
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
     elif context.survey == '0023':
         ContributorDetailsPage().check_validation_message(question_code, validation_message,
                                                           is_validation_exists)
+
+@then(
+    u'the validation should return {result} if the "{validation_check}" {operator_type} threshold value {threshold_value}')
+def step_impl(context, result, validation_check, operator_type, threshold_value):
+    if context.survey == '0023':
+        page = RsiContributorDetailsPage()
     else:
-        TestSurveyContributorDetailsPage().check_validation_msg(question_code, validation_message,
-                                                                is_validation_exists)
+        page = TestSurveyContributorDetailsPage()
+
+    if validation_check == 'turnover ratio is':
+        context.comparison_val_one = int(context.pp_internet_sales)
+        thre_val = float(threshold_value[:-1]) / 100
+        context.comparison_val_two = thre_val * int(context.pp_total_sales)
+    elif validation_check == 'absolute difference between the values are':
+        context.total_turnover_value = int(context.total_turnover_value)
+        context.derived_value = page.get_derived_question_value()
+        context.comparison_val_one = abs(context.total_turnover_value - context.derived_value)
+        context.comparison_val_two = int(threshold_value)
+
+    ReportingHelper.compare_the_values(operator_type, context.comparison_val_one, context.comparison_val_two, result)

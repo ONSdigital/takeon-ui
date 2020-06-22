@@ -19,6 +19,7 @@ def step_impl(context, period_type, question_code, period_value):
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
 def step_impl(context, existing_value, new_value):
+    context.question_code = 0
     if context.survey == '0073':
         BlocksSurveyDetailsPage().submit_the_values_for_blocks_survey_question_codes(existing_value, new_value)
 

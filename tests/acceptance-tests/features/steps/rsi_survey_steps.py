@@ -1,5 +1,4 @@
-from behave import given, when, then
-
+from behave import given, when
 from pages.test_survey.test_survey_contributor_details_page import TestSurveyContributorDetailsPage
 from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 
@@ -25,33 +24,3 @@ def step_impl(context):
         RsiContributorDetailsPage().validate_the_current_period_details(context.internet_sales_value)
     else:
         TestSurveyContributorDetailsPage().validate_the_current_period_details(context.internet_sales_value)
-
-
-@when(u'I run the validation process for {question_value} against the {comparison_ques_val}')
-def step_impl(context, question_value, comparison_ques_val):
-    TestSurveyContributorDetailsPage().run_the_validation_process(question_value, comparison_ques_val)
-
-
-@then(
-    u'the validation should return {result} if the "{validation_check}" {operator_type} threshold value {threshold_value}')
-def step_impl(context, result, validation_check, operator_type, threshold_value):
-    if context.survey == '0023':
-        page = RsiContributorDetailsPage()
-    else:
-        page = TestSurveyContributorDetailsPage()
-
-    if validation_check == 'turnover ratio is':
-        context.comparison_val_one = int(context.pp_internet_sales)
-        thre_val = float(threshold_value[:-1]) / 100
-        context.comparison_val_two = thre_val * int(context.pp_total_sales)
-
-    elif validation_check == 'absolute difference between the values are':
-        context.comparison_val_one = abs(page.get_derived_question_value())
-        context.comparison_val_two = int(threshold_value)
-
-    if operator_type == 'less than' or operator_type == 'equal to':
-        if context.comparison_val_one < context.comparison_val_two or context.comparison_val_one == context.comparison_val_two:
-            assert result == 'false'
-        elif operator_type == 'greater than':
-            if context.comparison_val_one > context.comparison_val_two:
-                assert result == 'true'
