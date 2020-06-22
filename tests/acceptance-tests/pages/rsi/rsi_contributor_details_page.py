@@ -49,7 +49,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def submit_question_value(self, value_type, value, question):
         if value_type == 'comment':
             self.submit_comment_value(value, question)
-        elif value_type == 'total turnover value':
+        elif value_type == 'total turnover':
             self.submit_total_turnover_value(value, question)
 
     def submit_comment_value(self, comment, question):

@@ -48,7 +48,7 @@ def step_impl(context, values):
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
 
 
-@when(u'I submit the {value_type} {comment_value} for question {question}')
+@when(u'I submit the "{value_type}" value {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
     context.question_code = question.upper()
     if context.survey == '0023':

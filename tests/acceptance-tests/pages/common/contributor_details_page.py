@@ -30,7 +30,7 @@ class ContributorDetailsPage(BasePage):
         element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
         ele = SeleniumCore.find_elements_by_xpath(element)
         if len(ele) > 0:
-            return self.driver.find_element_by_xpath(element).text
+            return ele
         else:
             return ''
 

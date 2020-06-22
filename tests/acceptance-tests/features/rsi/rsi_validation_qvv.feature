@@ -5,7 +5,7 @@ Feature: RSI Validation Question Versus Value
 
   Scenario Outline: RSI LU-5033 - Comment Present Validation Check on forms 5, 6 and 7
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the comment <comment> for question <question>
+    When I submit the "comment" value <comment> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed for question code "Q146"
 
