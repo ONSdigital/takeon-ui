@@ -28,11 +28,7 @@ class ContributorDetailsPage(BasePage):
 
     def get_validation_error_message(self, question_type):
         element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
-        ele = SeleniumCore.find_elements_by_xpath(element)
-        if len(ele) > 0:
-            return ele
-        else:
-            return ''
+        return SeleniumCore.find_elements_by_xpath(element)
 
     def save_the_application(self):
         self.driver.find_element(*ContributorDetailsPage.SAVE_AND_VALIDATE).click()
@@ -101,8 +97,18 @@ class ContributorDetailsPage(BasePage):
         self.check_validation_message(question_code, exp_msg, is_val_exists)
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
-        actual_msg = ContributorDetailsPage().get_validation_error_message(question_type)
-        if is_validation_exists == 'be':
-            ReportingHelper.check_values_matches(question_type, actual_msg, exp_msg)
-        elif is_validation_exists == 'not be':
-            ReportingHelper.check_values_not_matches(question_type, actual_msg, exp_msg)
+        no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
+        if len(no_of_msgs) == 1:
+            actual_msg = no_of_msgs[0].text
+            if is_validation_exists == 'be':
+                ReportingHelper.check_single_message_matches(question_type, actual_msg, exp_msg)
+            elif is_validation_exists == 'not be':
+                ReportingHelper.check_single_message_not_matches(question_type, actual_msg, exp_msg)
+        elif len(no_of_msgs) == 2:
+            if is_validation_exists == 'be':
+                ReportingHelper.check_multiple_messages_matches(question_type, no_of_msgs, exp_msg)
+            elif is_validation_exists == 'not be':
+                ReportingHelper.check_multiple_messages_not_matches(question_type, no_of_msgs, exp_msg)
+        elif len(no_of_msgs) == 0:
+            act_msg = ''
+            ReportingHelper.check_multiple_messages_not_matches(question_type, act_msg, exp_msg)

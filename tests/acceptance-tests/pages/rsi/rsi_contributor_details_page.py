@@ -54,7 +54,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
-        if comment == 'empty':
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q146':
             SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
@@ -94,7 +94,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
-        ReportingHelper.check_values_matches('Q7034', actual_derived_val, exp_derived_value)
+        ReportingHelper.check_single_message_matches('Q7034', actual_derived_val, exp_derived_value)
 
     def submit_the_sales_values_for_survey(self, *questions):
         questions_list = questions[0]

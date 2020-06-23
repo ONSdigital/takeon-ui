@@ -1,5 +1,4 @@
 from behave import given, when, then
-
 from base.reporting_helper import ReportingHelper
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
@@ -48,13 +47,19 @@ def step_impl(context, values):
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
 
 
-@when(u'I submit the "{value_type}" value {comment_value} for question {question}')
+@when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
     context.question_code = question.upper()
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
     elif context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
+    elif context.survey == '0066' or context.survey == '0076':
+        SandGravelLandAndMarineDetailsPage().submit_comment_value(comment_value, question)
+    elif context.survey == '0073':
+        BlocksSurveyDetailsPage().submit_comment_value(comment_value, question)
+    elif context.survey == '0074':
+        BricksSurveyDetailsPage().submit_comment_value(comment_value, question)
 
 
 @when(u'I trigger the validation process')
@@ -78,19 +83,9 @@ def step_impl(context, derived_value, total_turnover_value=None):
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
     if not question_code:
         question_code = context.question_code
-
-    if context.survey == '0073':
-        BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
-                                                                 is_validation_exists)
-    elif context.survey == '0074':
-        BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
-                                                                 is_validation_exists)
-    elif context.survey == '0076' or context.survey == '0066':
-        SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
-                                                                            is_validation_exists)
-    elif context.survey == '0023':
         ContributorDetailsPage().check_validation_message(question_code, validation_message,
                                                           is_validation_exists)
+
 
 @then(
     u'the validation should return {result} if the "{validation_check}" {operator_type} threshold value {threshold_value}')

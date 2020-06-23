@@ -5,6 +5,9 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
+    QUESTION_NO_146 = By.ID, '0146'
+    QUESTION_NO_147 = By.ID, '0147'
+    QUESTION_NO_148 = By.ID, '0148'
     question_codes = {
         '601': '0601',
         '602': '0602',
@@ -131,3 +134,14 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
             # check if any validation exists for a question
             self.check_fixed_validation_messages(survey, self.question_codes_list, is_validation_exists, i,
                                                  no_of_error_msgs_per_question, validation_message)
+                            
+    def submit_comment_value(self, comment, question):
+        SeleniumCore.switch_window()
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
+            comment = ''
+        if question.upper() == 'Q146':
+            SeleniumCore.set_element_text(*SandGravelLandAndMarineDetailsPage.QUESTION_NO_146, comment)
+        elif question.upper() == 'Q147':
+            SeleniumCore.set_element_text(*SandGravelLandAndMarineDetailsPage.QUESTION_NO_147, comment)
+        elif question.upper() == 'Q148':
+            SeleniumCore.set_element_text(*SandGravelLandAndMarineDetailsPage.QUESTION_NO_148, comment)

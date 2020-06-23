@@ -5,7 +5,7 @@ Feature: RSI Validation Value is Versus Value
 
   Scenario Outline: RSI LU-6579 - Value is Blank and Validation is Zero Check on forms 5
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the "total turnover" value <value> for question <question>
+    When I submit the "total turnover" <value> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
 
@@ -18,7 +18,7 @@ Feature: RSI Validation Value is Versus Value
 
   Scenario Outline: RSI LU-6579 - Value is Blank and Validation is Zero Check on forms 6
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the "total turnover" value <value> for question <question>
+    When I submit the "total turnover" <value> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
 
@@ -31,7 +31,7 @@ Feature: RSI Validation Value is Versus Value
 
   Scenario Outline: RSI LU-6579 - Value is Blank and Validation is Zero Check on forms 7
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the "total turnover" value <value> for question <question>
+    When I submit the "total turnover" <value> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
 
