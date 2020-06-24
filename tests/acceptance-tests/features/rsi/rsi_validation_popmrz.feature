@@ -50,4 +50,3 @@ Feature: RSI Validation PoPMRZ
       | 201903              | 201904             | 49900767172 | 0               | 101             | 1000            | true   | greater than | 10%            |
       | 201903              | 201904             | 49900791240 | 0               | 0               | 1000            | false  | less than    | 10%            |
       | 201903              | 201904             | 49900792013 | 0               | 0               | 0               | false  | equal to     | 10%            |
-

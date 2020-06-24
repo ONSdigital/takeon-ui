@@ -5,6 +5,8 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class BlocksSurveyDetailsPage(ContributorDetailsPage):
+    QUESTION_NO_145 = By.ID, '0145'
+    QUESTION_NO_146 = By.ID, '0146'
     QUESTION_CODES = [
         (By.ID, '0101'), (By.ID, '0102'), (By.ID, '0103'), (By.ID, '0104'),
         (By.ID, '0111'), (By.ID, '0112'), (By.ID, '0113'), (By.ID, '0114'),
@@ -19,6 +21,7 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
     question_codes_list = [
         'Q101', 'Q102', 'Q103', 'Q104', 'Q111', 'Q112', 'Q113', 'Q114', 'Q121', 'Q122', 'Q123', 'Q124',
         'Q9001', 'Q9002', 'Q9003']
+    
 
     def submit_the_values_for_blocks_survey_question_codes(self, existing_value, new_value):
         SeleniumCore.switch_window()
@@ -60,3 +63,12 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
 
     def check_numeric_fields_fixed_validations_exists(self, is_validation_exists):
         self.check_numeric_fixed_validation(self.blocks_numeric_question_codes.keys(), is_validation_exists)
+    
+    def submit_comment_value(self, comment, question):
+        SeleniumCore.switch_window()
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
+            comment = ''
+        if question.upper() == 'Q145':
+            SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_145, comment)
+        elif question.upper() == 'Q146':
+            SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_146, comment)

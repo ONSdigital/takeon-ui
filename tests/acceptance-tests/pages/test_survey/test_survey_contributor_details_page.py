@@ -46,7 +46,7 @@ class TestSurveyContributorDetailsPage(BasePage):
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
-        ReportingHelper.check_values_matches('Q6', actual_derived_val, exp_derived_value)
+        ReportingHelper.check_single_message_matches('Q6', actual_derived_val, exp_derived_value)
 
     def get_derived_question_value(self):
         return int(SeleniumCore.get_attribute_element_text(*TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
@@ -63,8 +63,14 @@ class TestSurveyContributorDetailsPage(BasePage):
         else:
             return False
 
-    def submit_comment_value(self, comment, question):
+    def submit_question_value(self, value_type, value, question):
         SeleniumCore.switch_window()
+        if value_type == 'value':
+            pass
+        elif value_type == 'comment':
+            self.submit_comment_value(value, question)
+
+    def submit_comment_value(self, comment, question):
         if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q7':

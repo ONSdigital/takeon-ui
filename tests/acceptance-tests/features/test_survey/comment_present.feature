@@ -5,7 +5,7 @@ Feature: Test Survey - Comment Present(Question vs Value) Validation rule
 
   Scenario Outline: LU-6403 - Comment Present Validation test survey
     Given I search for the survey "999A" with <reference> for the period <period>
-    When I submit the comment <comment> for question <question>
+    When I submit the "comment" <comment> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
     Examples:

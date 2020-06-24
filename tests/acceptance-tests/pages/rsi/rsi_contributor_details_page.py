@@ -9,6 +9,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     QUESTION_TOTAL_TURNOVER_ELEMENT = By.ID, '0020'
     QUESTION_TWO_ELEMENT = By.ID, '0021'
     QUESTION_NO_146 = By.ID, '0146'
+    QUESTION_TURNOVER_ELEMENT = By.ID, '0020'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
     QUESTION_DERIVED_ELEMENT = By.ID, '7034'
@@ -45,12 +46,25 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         ContributorDetailsPage().save_the_application()
         SeleniumCore.close_the_current_window()
 
+    def submit_question_value(self, value_type, value, question):
+        if value_type == 'comment':
+            self.submit_comment_value(value, question)
+        elif value_type == 'total turnover':
+            self.submit_total_turnover_value(value, question)
+
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
-        if comment == 'empty':
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q146':
             SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
+
+    def submit_total_turnover_value(self, value, question):
+        SeleniumCore.switch_window()
+        if value == 'blank':
+            value = ''
+        if question.upper() == 'Q20':
+            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TURNOVER_ELEMENT, value)
 
     def validate_the_current_period_details(self, internet_sales):
         SeleniumCore.switch_window()
@@ -80,7 +94,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
-        ReportingHelper.check_values_matches('Q7034', actual_derived_val, exp_derived_value)
+        ReportingHelper.check_single_message_matches('Q7034', actual_derived_val, exp_derived_value)
 
     def submit_the_sales_values_for_survey(self, *questions):
         questions_list = questions[0]

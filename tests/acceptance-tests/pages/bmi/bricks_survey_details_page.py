@@ -5,6 +5,8 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class BricksSurveyDetailsPage(ContributorDetailsPage):
+    QUESTION_NO_145 = By.ID, '0145'
+    QUESTION_NO_146 = By.ID, '0146'
     QUESTION_CODES = [
         (By.ID, '0001'), (By.ID, '0002'), (By.ID, '0003'), (By.ID, '0004'),
         (By.ID, '0011'), (By.ID, '0012'), (By.ID, '0013'), (By.ID, '0014'),
@@ -66,3 +68,12 @@ class BricksSurveyDetailsPage(ContributorDetailsPage):
 
     def check_numeric_fields_fixed_validations_exists(self, is_validation_exists):
         self.check_numeric_fixed_validation(self.bricks_numeric_question_codes.keys(), is_validation_exists)
+
+    def submit_comment_value(self, comment, question):
+        SeleniumCore.switch_window()
+        if comment.lower() == 'empty' or comment.lower() == 'blank':
+            comment = ''
+        if question.upper() == 'Q145':
+            SeleniumCore.set_element_text(*BricksSurveyDetailsPage.QUESTION_NO_145, comment)
+        elif question.upper() == 'Q146':
+            SeleniumCore.set_element_text(*BricksSurveyDetailsPage.QUESTION_NO_146, comment)

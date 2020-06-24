@@ -72,6 +72,19 @@ def step_impl(context, is_validation_exists):
             is_validation_exists)
 
 
+@then(u'the fixed validation message {validation_message} should {is_validation_exists} displayed')
+def step_impl(context, validation_message, is_validation_exists):
+    if context.survey == '0073':
+        BlocksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
+                                                                 is_validation_exists)
+    elif context.survey == '0074':
+        BricksSurveyDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
+                                                                 is_validation_exists)
+    elif context.survey == '0076':
+        SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
+                                                                            is_validation_exists)
+
+
 @then(
     u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold_value}')
 def step_impl(context, result, threshold_value):
