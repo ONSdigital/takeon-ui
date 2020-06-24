@@ -3,7 +3,7 @@ Feature: Sand and Gravel Marine Survey - Comment Present(Question vs Value) Vali
   Background:
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-6531 - Comment Present Validation Sand Gravel land survey on form 2
+  Scenario Outline: LU-6531 - Comment Present Validation Sand Gravel marine survey on form 2
     Given I search for the survey "0076" with <reference> for the period <period>
     When I submit the "comment" <comment> for question <question>
     And I trigger the validation process
