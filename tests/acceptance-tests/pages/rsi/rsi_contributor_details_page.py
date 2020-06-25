@@ -51,6 +51,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
             self.submit_comment_value(value, question)
         elif value_type == 'total turnover':
             self.submit_total_turnover_value(value, question)
+        elif value_type == 'internet sales':
+            self.set_total_turnover_sales_value(value)
 
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
