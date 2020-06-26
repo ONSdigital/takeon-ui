@@ -5,36 +5,42 @@ Feature: RSI Survey - Question vs Question Validation rule
 
   Scenario Outline: LU-6831 - Comment Present Validation RSI survey on form 5
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the "total turnover" <TotalTurnover> for question <turnoverQuestion>
-    And I submit the "internet sales" <InternetSales> for question <internetSalesQuestion>
-    And I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    And I submit the "sales" <values> for questions
+      | question_codes |
+      | Q20            |
+      | Q21            |
+    When I trigger the validation process
+    Then the <validation> message should <isValidationExists> displayed question code "Q21"
     Examples:
-      | period | reference   | validation                                               | InternetSales | TotalTurnover | isValidationExists | turnoverQuestion | internetSalesQuestion |
-      | 201903 | 49900551526 | This is greater than the question we compare it to       | 100           | 99            | be                 | Q20              | Q21                   |
-      | 201903 | 49900551526 | This is greater than the question we compare it to       | 99            | 100           | not be             | Q20              | Q21                   |
-      | 201903 | 49900551526 | This is greater than the question we compare it to       | 999999        | 100           | be                 | Q20              | Q21                   |
+      | period | reference   | validation                                               | values      | isValidationExists |
+      | 201903 | 49900551526 | This is greater than the question we compare it to       | 100,99      | be                 |
+      | 201903 | 49900551526 | This is greater than the question we compare it to       | 99,100      | not be             |
+      | 201903 | 49900551526 | This is greater than the question we compare it to       | 999999,100  | be                 |
 
   Scenario Outline: LU-6831 - Comment Present Validation RSI survey on form 6
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the "total turnover" <TotalTurnover> for question <turnoverQuestion>
-    And I submit the "internet sales" <InternetSales> for question <internetSalesQuestion>
-    And I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    And I submit the "sales" <values> for questions
+      | question_codes |
+      | Q20            |
+      | Q21            |
+    When I trigger the validation process
+    Then the <validation> message should <isValidationExists> displayed question code "Q21"
     Examples:
-      | period | reference   | validation                                               | InternetSales | TotalTurnover | isValidationExists | turnoverQuestion | internetSalesQuestion |
-      | 201903 | 49900617217 | This is greater than the question we compare it to       | 100           | 99            | be                 | Q20              | Q21                   |
-      | 201903 | 49900617217 | This is greater than the question we compare it to       | 99            | 100           | not be             | Q20              | Q21                   |
-      | 201903 | 49900617217 | This is greater than the question we compare it to       | 999999        | 100           | be                 | Q20              | Q21                   |
+      | period | reference   | validation                                               | values      | isValidationExists |
+      | 201903 | 49900617217 | This is greater than the question we compare it to       | 100,99      | be                 |
+      | 201903 | 49900617217 | This is greater than the question we compare it to       | 99,100      | not be             |
+      | 201903 | 49900617217 | This is greater than the question we compare it to       | 999999,100  | be                 |
 
   Scenario Outline: LU-6831 - Comment Present Validation RSI survey on form 7
     Given I search for the survey "0023" with <reference> for the period <period>
-    When I submit the "total turnover" <TotalTurnover> for question <turnoverQuestion>
-    And I submit the "internet sales" <InternetSales> for question <internetSalesQuestion>
-    And I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    And I submit the "sales" <values> for questions
+      | question_codes |
+      | Q20            |
+      | Q21            |
+    When I trigger the validation process
+    Then the <validation> message should <isValidationExists> displayed question code "Q21"
     Examples:
-      | period | reference   | validation                                               | InternetSales | TotalTurnover | isValidationExists | turnoverQuestion | internetSalesQuestion |
-      | 201904 | 49900756292 | This is greater than the question we compare it to       | 100           | 99            | be                 | Q20              | Q21                   |
-      | 201904 | 49900756292 | This is greater than the question we compare it to       | 99            | 100           | not be             | Q20              | Q21                   |
-      | 201904 | 49900756292 | This is greater than the question we compare it to       | 999999        | 100           | be                 | Q20              | Q21                   |
+      | period | reference   | validation                                               | values      | isValidationExists |
+      | 201904 | 49900756292 | This is greater than the question we compare it to       | 100,99      | be                 |
+      | 201904 | 49900756292 | This is greater than the question we compare it to       | 99,100      | not be             |
+      | 201904 | 49900756292 | This is greater than the question we compare it to       | 999999,100  | be                 |
