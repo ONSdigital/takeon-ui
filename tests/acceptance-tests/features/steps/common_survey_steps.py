@@ -35,16 +35,17 @@ def step_impl(context, reference, survey, period):
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
 
-@given(u'I submit the commodity {values} for questions')
-def step_impl(context, values):
+@given(u'I submit the {value_type} {values} for questions')
+def step_impl(context, value_type, values):
     context.codes = []
     for row in context.table.rows:
         for cell in row.cells:
             context.codes.append(cell)
-    if context.survey == '0023':
-        RsiContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
-    elif context.survey == '999A':
+    
+    if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+    else:
+        ContributorDetailsPage().submit_the_values_for_survey(context.codes, values)
 
 
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -83,7 +84,7 @@ def step_impl(context, derived_value, total_turnover_value=None):
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
     if not question_code:
         question_code = context.question_code
-        ContributorDetailsPage().check_validation_message(question_code, validation_message,
+    ContributorDetailsPage().check_validation_message(question_code, validation_message,
                                                           is_validation_exists)
 
 
