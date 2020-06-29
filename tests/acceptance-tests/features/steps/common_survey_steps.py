@@ -41,8 +41,7 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.codes.append(cell)
-    # if context.survey == '0023':
-    #     RsiContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+    
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
     else:
