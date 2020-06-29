@@ -116,7 +116,6 @@ class ContributorDetailsPage(BasePage):
 
     def submit_the_values_for_survey(self, *questions):
         questions_list = questions[0]
-        print(questions)
         commodity_values = self.get_values_as_a_list(questions[1])
         SeleniumCore.switch_window()
 
