@@ -47,20 +47,27 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         SeleniumCore.close_the_current_window()
 
     def submit_question_value(self, value_type, value, question):
+        SeleniumCore.switch_window()
         if value_type == 'comment':
             self.submit_comment_value(value, question)
         elif value_type == 'total turnover':
             self.submit_total_turnover_value(value, question)
+        elif value_type.lower() == 'sicvalue':
+            self.submit_internet_sales_value(value, question)
 
     def submit_comment_value(self, comment, question):
-        SeleniumCore.switch_window()
         if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q146':
             SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
 
+    def submit_internet_sales_value(self, value, question):
+        if value == 'blank':
+            value = ''
+        if question.upper() == 'Q21':
+            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
+
     def submit_total_turnover_value(self, value, question):
-        SeleniumCore.switch_window()
         if value == 'blank':
             value = ''
         if question.upper() == 'Q20':

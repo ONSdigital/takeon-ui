@@ -27,12 +27,13 @@ def step_impl(context, reference, survey_value=None, period=None):
 
 @given(u'I search for the {survey} with {reference} for the period {period}')
 @given(u'I search for the survey "{survey}" with {reference} for the period {period}')
+@given(u'I search for the survey "{survey}" with {reference} for the period {period} with SIC code {sic_code}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
 @when(u'I search for the survey "{survey}" with {reference} for the period {period}')
-def step_impl(context, reference, survey, period):
+def step_impl(context, reference, survey, period, sic_code=None):
     context.survey = survey
     context.contributor_page = ContributorSearchPage()
-    context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
+    context.contributor_page.select_the_reference_view_form(context.survey, reference, period, sic_code)
 
 
 @given(u'I submit the commodity {values} for questions')
