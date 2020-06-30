@@ -48,30 +48,18 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_question_value(self, value_type, value, question):
         SeleniumCore.switch_window()
-        if value_type == 'comment':
-            self.submit_comment_value(value, question)
-        elif value_type == 'total turnover':
-            self.submit_total_turnover_value(value, question)
-        elif value_type.lower() == 'sicvalue':
-            self.submit_internet_sales_value(value, question)
+        if value_type:
+            self.submit_sales_value(value, question)
 
-    def submit_comment_value(self, comment, question):
-        if comment.lower() == 'empty' or comment.lower() == 'blank':
-            comment = ''
+    def submit_sales_value(self, value, question):
+        if value.lower() == 'blank':
+            value = ''
         if question.upper() == 'Q146':
-            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, comment)
-
-    def submit_internet_sales_value(self, value, question):
-        if value == 'blank':
-            value = ''
-        if question.upper() == 'Q21':
-            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
-
-    def submit_total_turnover_value(self, value, question):
-        if value == 'blank':
-            value = ''
-        if question.upper() == 'Q20':
+            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, value)
+        elif question.upper() == 'Q20':
             SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TURNOVER_ELEMENT, value)
+        elif question.upper() == 'Q21':
+            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
 
     def validate_the_current_period_details(self, internet_sales):
         SeleniumCore.switch_window()
