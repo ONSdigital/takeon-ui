@@ -54,12 +54,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def submit_sales_value(self, value, question):
         if value.lower() == 'blank':
             value = ''
-        if question.upper() == 'Q146':
-            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_NO_146, value)
-        elif question.upper() == 'Q20':
-            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TURNOVER_ELEMENT, value)
-        elif question.upper() == 'Q21':
-            SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
+            SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
 
     def validate_the_current_period_details(self, internet_sales):
         SeleniumCore.switch_window()

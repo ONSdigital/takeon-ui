@@ -42,7 +42,7 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.codes.append(cell)
-    
+
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
     else:
@@ -86,7 +86,7 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     if not question_code:
         question_code = context.question_code
     ContributorDetailsPage().check_validation_message(question_code, validation_message,
-                                                          is_validation_exists)
+                                                      is_validation_exists)
 
 
 @then(
