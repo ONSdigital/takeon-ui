@@ -54,7 +54,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def submit_sales_value(self, value, question):
         if value.lower() == 'blank':
             value = ''
-            SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
+        SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
 
     def validate_the_current_period_details(self, internet_sales):
         SeleniumCore.switch_window()
