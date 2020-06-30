@@ -4,10 +4,10 @@ Feature: RSI Validation PoPMRZ
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: RSI LU-5033 - PoPMRZ rule A - Validation Check on form 5
-    Given I search for the survey "0023" with <reference> for the period <previousPeriodValue>
+    Given I search for the survey "0023" with <reference> for the previous period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
-    When I search for the survey "0023" with <reference> for the period <currentPeriodValue>
+    When I search for the survey "0023" with <reference> for the current period <currentPeriodValue>
     And I validate the current period details
     Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
 
@@ -20,10 +20,10 @@ Feature: RSI Validation PoPMRZ
       | 201903              | 201904             | 49900589234 | 0               | 0               | 0               | false  | equal to     | 10%            |
 
   Scenario Outline: RSI LU-5033 - PoPMRZ rule A - Validation Check on form 6
-    Given I search for the survey "0023" with <reference> for the period <previousPeriodValue>
+    Given I search for the survey "0023" with <reference> for the previous period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
-    When I search for the survey "0023" with <reference> for the period <currentPeriodValue>
+    When I search for the survey "0023" with <reference> for the current period <currentPeriodValue>
     And I validate the current period details
     Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
 
@@ -36,10 +36,10 @@ Feature: RSI Validation PoPMRZ
       | 201903              | 201904             | 49900818161 | 0               | 0               | 0               | false  | equal to     | 10%            |
 
   Scenario Outline: RSI LU-5033 - PoPMRZ rule A - Validation Check on form 7
-    Given I search for the survey "0023" with <reference> for the period <previousPeriodValue>
+    Given I search for the survey "0023" with <reference> for the previous period <previousPeriodValue>
     And  the current period sales value is <cpInternetSales>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
-    When I search for the survey "0023" with <reference> for the period <currentPeriodValue>
+    When I search for the survey "0023" with <reference> for the current period <currentPeriodValue>
     And I validate the current period details
     Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
 

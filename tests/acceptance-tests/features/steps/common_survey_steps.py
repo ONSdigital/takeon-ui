@@ -26,11 +26,12 @@ def step_impl(context, reference, survey_value=None, period=None):
 
 
 @given(u'I search for the {survey} with {reference} for the period {period}')
-@given(u'I search for the survey "{survey}" with {reference} for the period {period}')
+@given(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
-@when(u'I search for the survey "{survey}" with {reference} for the period {period}')
-def step_impl(context, reference, survey, period):
+@when(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
+def step_impl(context, reference, survey, period_type, period):
     context.survey = survey
+    context.period_type = period_type
     context.contributor_page = ContributorSearchPage()
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
 
@@ -41,7 +42,7 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.codes.append(cell)
-    
+
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
     else:
@@ -85,7 +86,18 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     if not question_code:
         question_code = context.question_code
     ContributorDetailsPage().check_validation_message(question_code, validation_message,
-                                                          is_validation_exists)
+                                                      is_validation_exists)
+
+
+@then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
+def step_impl(context, validation_message, is_validation_exists):
+    context.codes = []
+    for row in context.table.rows:
+        for cell in row.cells:
+            context.codes.append(cell)
+    # context.question_code = context.codes
+    ContributorDetailsPage().check_multiple_questions_validation_message(context.codes, validation_message,
+                                                                         is_validation_exists)
 
 
 @then(
@@ -97,7 +109,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
         page = TestSurveyContributorDetailsPage()
 
     if validation_check == 'turnover ratio is':
-        context.comparison_val_one = int(context.pp_internet_sales)
+        context.comparison_val_one = int(context.internet_sales)
         thre_val = float(threshold_value[:-1]) / 100
         context.comparison_val_two = thre_val * int(context.pp_total_sales)
     elif validation_check == 'absolute difference between the values are':
