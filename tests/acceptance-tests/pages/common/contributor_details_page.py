@@ -112,3 +112,23 @@ class ContributorDetailsPage(BasePage):
         elif len(no_of_msgs) == 0:
             act_msg = ''
             ReportingHelper.check_multiple_messages_not_matches(question_type, act_msg, exp_msg)
+    
+
+    def submit_the_values_for_survey(self, *questions):
+        questions_list = questions[0]
+        commodity_values = self.get_values_as_a_list(questions[1])
+        SeleniumCore.switch_window()
+
+        count = 0
+        for question in questions_list:
+            question_element = question.replace("Q", "").zfill(4)
+            self.driver.find_element_by_id(question_element).clear()
+            self.driver.find_element_by_id(question_element).send_keys(commodity_values[count])
+            count +=1
+
+    def get_values_as_a_list(self, values):
+        new_values = values.split(',')
+        commodity_values = []
+        for new_val in new_values:
+            commodity_values.append(new_val)
+        return commodity_values

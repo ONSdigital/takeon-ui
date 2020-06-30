@@ -95,28 +95,3 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
         ReportingHelper.check_single_message_matches('Q7034', actual_derived_val, exp_derived_value)
-
-    def submit_the_sales_values_for_survey(self, *questions):
-        questions_list = questions[0]
-        commodity_values = self.get_values_as_a_list(questions[1])
-        SeleniumCore.switch_window()
-        self.submit_the_commodity_values(questions_list, commodity_values)
-
-    def submit_the_commodity_values(self, questions_list, values):
-        if len(questions_list) == 5:
-            question_codes = self.form_6_question_codes
-        elif len(questions_list) == 6:
-            question_codes = self.form_7_question_codes
-        count = 0
-        for value in values:
-            count += 1
-            question_element = question_codes.get(questions_list[count - 1])
-            self.driver.find_element_by_id(question_element).clear()
-            self.driver.find_element_by_id(question_element).send_keys(value)
-
-    def get_values_as_a_list(self, values):
-        new_values = values.split(',')
-        commodity_values = []
-        for new_val in new_values:
-            commodity_values.append(new_val)
-        return commodity_values
