@@ -18,7 +18,7 @@ class ContributorSearchPage(BasePage):
         # Ignore the first row
         for i in range(1, len(rows)):
             cols = rows[i].find_elements_by_tag_name("td")
-            # Check to right sic code exists
+            # Check to see the sic code exists
             if sic_code:
                 ReportingHelper.check_single_message_matches(reference, cols[i + 6].text, sic_code)
             # Check to see if any references appear that shouldn't be there
