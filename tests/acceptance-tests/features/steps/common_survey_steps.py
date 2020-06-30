@@ -111,7 +111,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
     if validation_check == 'turnover ratio is':
         context.comparison_val_one = int(context.internet_sales)
         thre_val = float(threshold_value[:-1]) / 100
-        context.comparison_val_two = thre_val * int(context.pp_total_sales)
+        context.comparison_val_two = thre_val * int(context.total_sales)
     elif validation_check == 'absolute difference between the values are':
         context.total_turnover_value = int(context.total_turnover_value)
         context.derived_value = page.get_derived_question_value()
