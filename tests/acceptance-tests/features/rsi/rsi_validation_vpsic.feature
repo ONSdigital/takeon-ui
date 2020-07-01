@@ -1,4 +1,4 @@
-Feature: RSI Validation Value Present SIC (VPSIC)
+Feature: RSI Survey - Validation Value Present SIC (VPSIC)
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor

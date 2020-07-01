@@ -1,4 +1,4 @@
-Feature: RSI Validation PoPMRZ
+Feature: RSI Survey - Validation PoPMRZ
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor

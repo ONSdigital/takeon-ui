@@ -1,4 +1,4 @@
-Feature: RSI Validation Previous Period Value Blank (PPVB)
+Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
 
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
