@@ -113,6 +113,11 @@ class ContributorDetailsPage(BasePage):
             act_msg = ''
             ReportingHelper.check_multiple_messages_not_matches(question_type, act_msg, exp_msg)
 
+    def check_multiple_questions_validation_messages(self, question_codes, exp_msg, is_validation_exists):
+        if len(question_codes) > 1:
+            for question in question_codes:
+                self.check_validation_message(question, exp_msg, is_validation_exists)
+
     def submit_the_values_for_survey(self, *questions):
         questions_list = questions[0]
         commodity_values = self.get_values_as_a_list(questions[1])

@@ -37,14 +37,27 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def set_total_turnover_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TOTAL_TURNOVER_ELEMENT, value)
 
-    def submit_pp_sales_values(self, internet_sales, total_sales):
+    def submit_sales_values(self, period_type, internet_sales, total_sales):
         SeleniumCore.switch_window()
+        if period_type == 'previous':
+            self.submit_pp_sales_values(internet_sales, total_sales)
+        if period_type == 'current':
+            self.submit_cp_sales_values(total_sales, total_sales)
+
+    def submit_pp_sales_values(self, internet_sales, total_sales):
         self.pp_internet_sales = internet_sales
         self.pp_total_sales = total_sales
         self.set_internet_sales_value(internet_sales)
         self.set_total_turnover_sales_value(total_sales)
         ContributorDetailsPage().save_the_application()
         SeleniumCore.close_the_current_window()
+
+    def submit_cp_sales_values(self, internet_sales, total_sales):
+        self.cp_internet_sales = internet_sales
+        self.cp_total_sales = total_sales
+        self.set_internet_sales_value(internet_sales)
+        self.set_total_turnover_sales_value(total_sales)
+        ContributorDetailsPage().save_the_application()
 
     def submit_question_value(self, value_type, value, question):
         SeleniumCore.switch_window()
@@ -56,9 +69,15 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
             value = ''
         SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
 
-    def validate_the_current_period_details(self, internet_sales):
+    def validate_the_current_period_internet_sales_details(self, internet_sales):
         SeleniumCore.switch_window()
         self.set_internet_sales_value(internet_sales)
+        ContributorDetailsPage().save_the_application()
+
+    def validate_the_current_period_details(self, internet_sales, total_sales):
+        SeleniumCore.switch_window()
+        self.set_internet_sales_value(internet_sales)
+        self.set_total_turnover_sales_value(total_sales)
         ContributorDetailsPage().save_the_application()
 
     def check_threshold_value(self):
@@ -80,7 +99,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         return int(SeleniumCore.get_attribute_element_text(*RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
 
     def run_the_validation_process(self, total_turnover_value, exp_derived_value):
-        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TOTAL_TURNOVER_ELEMENT, total_turnover_value)
+        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TOTAL_TURNOVER_ELEMENT,
+                                      total_turnover_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
