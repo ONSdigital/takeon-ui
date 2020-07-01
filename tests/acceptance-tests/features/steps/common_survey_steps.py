@@ -27,13 +27,15 @@ def step_impl(context, reference, survey_value=None, period=None):
 
 @given(u'I search for the {survey} with {reference} for the period {period}')
 @given(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
-@when(u'I search for the {survey} with {reference} for the period {period}')
+@given(
+    u'I search for the survey "{survey}" with {reference} for the {period_type} period {period} with SIC code {sic_code}')
 @when(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
-def step_impl(context, reference, survey, period_type, period):
+@when(u'I search for the {survey} with {reference} for the period {period}')
+def step_impl(context, reference, survey, period_type, period, sic_code=None):
     context.survey = survey
     context.period_type = period_type
     context.contributor_page = ContributorSearchPage()
-    context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
+    context.contributor_page.select_the_reference_view_form(context.survey, reference, period, sic_code)
 
 
 @given(u'I submit the {value_type} {values} for questions')
@@ -95,9 +97,8 @@ def step_impl(context, validation_message, is_validation_exists):
     for row in context.table.rows:
         for cell in row.cells:
             context.codes.append(cell)
-    # context.question_code = context.codes
-    ContributorDetailsPage().check_multiple_questions_validation_message(context.codes, validation_message,
-                                                                         is_validation_exists)
+    ContributorDetailsPage().check_multiple_questions_validation_messages(context.codes, validation_message,
+                                                                          is_validation_exists)
 
 
 @then(

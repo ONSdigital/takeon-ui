@@ -113,7 +113,7 @@ class ContributorDetailsPage(BasePage):
             act_msg = ''
             ReportingHelper.check_multiple_messages_not_matches(question_type, act_msg, exp_msg)
 
-    def check_multiple_questions_validation_message(self, question_codes, exp_msg, is_validation_exists):
+    def check_multiple_questions_validation_messages(self, question_codes, exp_msg, is_validation_exists):
         if len(question_codes) > 1:
             for question in question_codes:
                 self.check_validation_message(question, exp_msg, is_validation_exists)
@@ -125,9 +125,8 @@ class ContributorDetailsPage(BasePage):
 
         count = 0
         for question in questions_list:
-            question_element = question.replace("Q", "").zfill(4)
-            self.driver.find_element_by_id(question_element).clear()
-            self.driver.find_element_by_id(question_element).send_keys(commodity_values[count])
+            question_element = self.get_question_code_element(question)
+            SeleniumCore.set_element_text_by_id(question_element, commodity_values[count])
             count += 1
 
     def get_values_as_a_list(self, values):
@@ -136,3 +135,6 @@ class ContributorDetailsPage(BasePage):
         for new_val in new_values:
             commodity_values.append(new_val)
         return commodity_values
+
+    def get_question_code_element(self, question_code):
+        return question_code.replace("Q", "").zfill(4)

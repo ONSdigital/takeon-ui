@@ -3,7 +3,7 @@ Feature: RSI Survey - Question vs Question Validation rule
   Background:
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-6831 - Question v Question Validation RSI survey on form 5
+  Scenario Outline: LU-6831 - Question vs Question Validation RSI survey on form 5
     Given I search for the survey "0023" with <reference> for the current period <period>
     And I submit the "sales" <values> for questions
       | question_codes |
@@ -17,7 +17,8 @@ Feature: RSI Survey - Question vs Question Validation rule
       | 201903 | 49900551526 | This is greater than the question we compare it to | 100,99     | not be             |
       | 201903 | 49900551526 | This is greater than the question we compare it to | 100,999999 | be                 |
 
-  Scenario Outline: LU-6831 - Question v Question Validation RSI survey on form 6
+
+  Scenario Outline: LU-6831 - Question vs Question Validation RSI survey on form 6
     Given I search for the survey "0023" with <reference> for the current period <period>
     And I submit the "sales" <values> for questions
       | question_codes |
@@ -31,7 +32,8 @@ Feature: RSI Survey - Question vs Question Validation rule
       | 201903 | 49900617217 | This is greater than the question we compare it to | 100,99     | not be             |
       | 201903 | 49900617217 | This is greater than the question we compare it to | 100,999999 | be                 |
 
-  Scenario Outline: LU-6831 - Question v Question Validation RSI survey on form 7
+
+  Scenario Outline: LU-6831 - Question vs Question Validation RSI survey on form 7
     Given I search for the survey "0023" with <reference> for the current period <period>
     And I submit the "sales" <values> for questions
       | question_codes |
