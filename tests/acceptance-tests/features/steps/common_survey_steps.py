@@ -27,12 +27,13 @@ def step_impl(context, reference, survey_value=None, period=None):
 
 @given(u'I search for the {survey} with {reference} for the period {period}')
 @given(u'I search for the survey "{survey}" with {reference} for the period {period}')
+@given(u'I search for the survey "{survey}" with {reference} for the period {period} with SIC code {sic_code}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
 @when(u'I search for the survey "{survey}" with {reference} for the period {period}')
-def step_impl(context, reference, survey, period):
+def step_impl(context, reference, survey, period, sic_code=None):
     context.survey = survey
     context.contributor_page = ContributorSearchPage()
-    context.contributor_page.select_the_reference_view_form(context.survey, reference, period)
+    context.contributor_page.select_the_reference_view_form(context.survey, reference, period, sic_code)
 
 
 @given(u'I submit the {value_type} {values} for questions')
@@ -41,7 +42,7 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.codes.append(cell)
-    
+
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
     else:
@@ -85,7 +86,7 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
     if not question_code:
         question_code = context.question_code
     ContributorDetailsPage().check_validation_message(question_code, validation_message,
-                                                          is_validation_exists)
+                                                      is_validation_exists)
 
 
 @then(

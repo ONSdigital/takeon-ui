@@ -9,6 +9,12 @@ from base.driver_context import DriverContext
 class SeleniumCore:
 
     @staticmethod
+    def set_element_text_by_id(element, value):
+        ele = DriverContext.driver.find_element_by_id(element)
+        ele.clear()
+        return ele.send_keys(value)
+
+    @staticmethod
     def set_element_text(*element):
         ele = DriverContext.driver.find_element(element[0], element[1])
         ele.clear()
