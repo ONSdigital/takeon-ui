@@ -27,3 +27,8 @@ def step_impl(context):
                                                                         context.total_sales)
     else:
         TestSurveyContributorDetailsPage().validate_the_current_period_details(context.current_internet_sales)
+
+    @when(u'I validate the current period details for {factor} factor type')
+    def step_impl(context, factor):
+        if context.survey == '0023':
+            context.factor_type = factor
