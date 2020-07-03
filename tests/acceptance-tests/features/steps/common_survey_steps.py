@@ -84,12 +84,11 @@ def step_impl(context, derived_value, total_turnover_value=None):
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_code}"')
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
     if not question_code:
-        context.q_code = context.question_code
-    else:
-        context.q_code = question_code
-    ContributorDetailsPage().check_validation_message(context.q_code, validation_message,
+        question_code = context.question_code
+    ContributorDetailsPage().check_validation_message(question_code, validation_message,
                                                       is_validation_exists)
 
 
@@ -106,25 +105,24 @@ def step_impl(context, validation_message, is_validation_exists):
 @then(
     u'the validation should return {result} if the "{validation_check}" {operator_type} threshold value {threshold_value}')
 def step_impl(context, result, validation_check, operator_type, threshold_value):
-    if context.survey == '0023':
-        context.derived_value = RsiContributorDetailsPage().get_derived_question_value()
-
-    elif context.survey == '0023':
-        context.derived_value = TestSurveyContributorDetailsPage().get_derived_question_value()
-
     page = ContributorDetailsPage()
     if validation_check == 'turnover ratio is':
         page.check_turnover_ratio(operator_type, context.internet_sales,
                                   context.total_sales, threshold_value, result)
 
     elif validation_check == 'absolute difference between the values are':
-        page.check_absloute_difference_validation(operator_type, context.total_turnover_value,
+
+        if context.survey == '0023':
+            rsi_page = RsiContributorDetailsPage()
+            context.derived_value = rsi_page.get_derived_question_value()
+
+        elif context.survey == '999A':
+            test_survey_page = TestSurveyContributorDetailsPage()
+            context.derived_value = test_survey_page.get_derived_question_value()
+
+        page.check_absolute_difference_validation(operator_type, context.total_turnover_value,
                                                   context.derived_value, threshold_value, result)
 
-    elif validation_check == 'absolute difference between the values are':
-        page.check_pop_ratio_of_ratios_validation(context.survey, context.q_code,
-                                                  context.factor_type, operator_type,
-                                                  threshold_value, result)
-
-        ReportingHelper.compare_the_messages(operator_type, context.comparison_val_one, context.comparison_val_two,
-                                             result)
+    elif validation_check == 'period on period ratio of ratios movement is':
+        RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
+                                                                         threshold_value, result)
