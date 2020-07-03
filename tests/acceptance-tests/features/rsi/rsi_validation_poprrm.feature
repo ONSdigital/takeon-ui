@@ -43,7 +43,6 @@ Feature: RSI Survey - Validation PoPRRM
       | 201903              | 201904             | 49900672013 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
       | 201903              | 201904             | 49900672013 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
 
-
   Scenario Outline: RSI LU-6733 - PoPRRM Validation for RSI survey on form 7
     Given I search for the survey "0023" with <reference> for the previous period <previousPeriodValue>
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>

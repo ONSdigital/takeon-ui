@@ -160,4 +160,4 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def check_if_value_is_blank(self, value):
         if value.lower() == 'blank':
-            value = '',
+            value = ''

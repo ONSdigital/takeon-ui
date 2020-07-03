@@ -1,5 +1,4 @@
 from behave import given, when, then
-from base.reporting_helper import ReportingHelper
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
