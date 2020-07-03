@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from pages.common.base_page import BasePage
-from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 
 
 class ContributorDetailsPage(BasePage):
@@ -144,40 +143,12 @@ class ContributorDetailsPage(BasePage):
         comparison_val_two = thre_val * int(total_sales)
         self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
-    def check_absloute_difference_validation(self, operator_type, total_turnover_value, derived_value, threshold_value,
+    def check_absolute_difference_validation(self, operator_type, total_turnover_value, derived_value, threshold_value,
                                              result):
         total_turnover_value = int(total_turnover_value)
         comparison_val_one = abs(total_turnover_value - derived_value)
         comparison_val_two = int(threshold_value)
         self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
-
-    def check_pop_ratio_of_ratios_validation(self, survey, q_code, factor_type,
-                                             operator_type, threshold_value, result):
-
-        self.sales_values_for_both_periods(survey)
-
-        is_validation_triggered = False
-        if factor_type == 'increase_type':
-            value_one = self.cp_internet_sales * self.pp_total_sales
-            value_two = self.cp_total_sales * self.pp_internet_sales
-            is_validation_triggered = ReportingHelper.compare_the_values(operator_type, value_one,
-                                                                         threshold_value * value_two)
-
-        elif factor_type == 'decrease_type':
-            value_one = self.cp_total_sales * self.pp_internet_sales
-            value_two = self.cp_internet_sales * self.pp_total_sales
-            is_validation_triggered = ReportingHelper.compare_the_values(operator_type, value_one,
-                                                                         threshold_value * value_two)
-
-        ReportingHelper.check_single_message_matches(q_code, result, str(is_validation_triggered).lower())
-
-    def sales_values_for_both_periods(self, survey):
-        if survey == "0023":
-            rsi_page = RsiContributorDetailsPage()
-            self.pp_internet_sales = rsi_page.pp_internet_sales
-            self.pp_total_sales = rsi_page.pp_total_sales
-            self.cp_internet_sales = rsi_page.cp_internet_sales
-            self.cp_total_sales = rsi_page.cp_total_sales
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
         ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
