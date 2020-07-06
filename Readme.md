@@ -1,6 +1,6 @@
 # Takeon-Ui Layer
 ### Pre-Requisites
- 1. Browser: 
+ 1. Browser:  
     - Chrome
      - Version: 83.0.4103.61  
    
