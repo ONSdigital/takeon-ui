@@ -14,6 +14,7 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
       | 201903 | 49900534932 | 0     | Q20      | This value is zero                     | be                 |
       | 201903 | 49900534932 | blank | Q20      | This value is blank                    | be                 |
       | 201903 | 49900534932 | 2     | Q20      | This value is zero,This value is blank | not be             |
+      | 201903 | 49900534932 | -2    | Q20      | This value is zero,This value is blank | not be             |
 
 
   Scenario Outline: RSI LU-6579 - Value is Blank and Value is Zero Validation RSI survey on forms 6
@@ -27,6 +28,7 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
       | 201903 | 49900694171 | 0     | Q20      | This value is zero                     | be                 |
       | 201903 | 49900694171 | blank | Q20      | This value is blank                    | be                 |
       | 201903 | 49900694171 | 2     | Q20      | This value is zero,This value is blank | not be             |
+      | 201903 | 49900534932 | -2    | Q20      | This value is zero,This value is blank | not be             |
 
 
   Scenario Outline: RSI LU-6579 - Value is Blank and Value is Zero Validation RSI survey on forms 7
@@ -40,4 +42,4 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
       | 201904 | 49900756292 | 0     | Q20      | This value is zero                     | be                 |
       | 201904 | 49900756292 | blank | Q20      | This value is blank                    | be                 |
       | 201904 | 49900756292 | 2     | Q20      | This value is zero,This value is blank | not be             |
-
+      | 201903 | 49900534932 | -2    | Q20      | This value is zero,This value is blank | not be             |

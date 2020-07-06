@@ -15,9 +15,9 @@ def step_impl(context, internet_sales, total_sales):
     context.total_sales = total_sales
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_sales_values(context.period_type, context.internet_sales,
-                                                        total_sales)
+                                                        context.total_sales)
     else:
-        TestSurveyContributorDetailsPage().submit_pp_sales_values(internet_sales, total_sales)
+        TestSurveyContributorDetailsPage().submit_pp_sales_values(context.internet_sales, context.total_sales)
 
 
 @when(u'I validate the current period details')
@@ -27,3 +27,9 @@ def step_impl(context):
                                                                         context.total_sales)
     else:
         TestSurveyContributorDetailsPage().validate_the_current_period_details(context.current_internet_sales)
+
+
+@when(u'I validate the current period details for {factor} factor type')
+def step_impl(context, factor):
+    if context.survey == '0023':
+        context.factor_type = factor

@@ -1,7 +1,5 @@
 import time
-
 from selenium.webdriver.common.by import By
-
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from pages.common.base_page import BasePage
@@ -138,3 +136,19 @@ class ContributorDetailsPage(BasePage):
 
     def get_question_code_element(self, question_code):
         return question_code.replace("Q", "").zfill(4)
+
+    def check_turnover_ratio(self, operator_type, internet_sales, total_sales, threshold_value, result):
+        comparison_val_one = int(internet_sales)
+        thre_val = float(threshold_value[:-1]) / 100
+        comparison_val_two = thre_val * int(total_sales)
+        self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
+
+    def check_absolute_difference_validation(self, operator_type, total_turnover_value, derived_value, threshold_value,
+                                             result):
+        total_turnover_value = int(total_turnover_value)
+        comparison_val_one = abs(total_turnover_value - derived_value)
+        comparison_val_two = int(threshold_value)
+        self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
+
+    def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
+        ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
