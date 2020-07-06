@@ -44,9 +44,6 @@ class ReportingHelper:
         elif operator_type == 'equal to':
             ReportingHelper.check_single_message_matches('', act_msg, exp_msg)
             ReportingHelper.check_single_message_matches('', result, 'false')
-        elif operator_type == 'equal to':
-            ReportingHelper.check_single_message_matches('', act_msg, exp_msg)
-            ReportingHelper.check_single_message_matches('', result, 'false')
 
     @staticmethod
     def check_greater_than(act_msg, exp_msg):
@@ -63,13 +60,6 @@ class ReportingHelper:
             return False
         elif operator_type == 'equal to' and value_one == value_two:
             return True
-
-    @staticmethod
-    def check_less_than(act_msg, exp_msg):
-        if act_msg < exp_msg:
-            return True
-        else:
-            assert False, 'Expected value "' + exp_msg + '" is not less than "' + act_msg
 
     @staticmethod
     def check_less_than(act_msg, exp_msg):
