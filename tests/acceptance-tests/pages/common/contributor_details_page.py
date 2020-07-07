@@ -18,11 +18,12 @@ class ContributorDetailsPage(BasePage):
     Q_CODE_LABELS_WITH_TEXT = "//label[contains(text(),'"
     QUESTION_CODE_ERROR_MESSAGES_PART_ONE = By.XPATH, "//div["
     QUESTION_CODE_ERROR_MESSAGES_PART_TWO = By.XPATH, "]/div/p[@class='panel__error u-mb-no']"
-    STATUS = By.XPATH, "//span[@class='status status--error']"
+    STATUS = By.XPATH, '//span[contains(@title,"Status")]'
     QUESTION_PANEL_ERROR_MESSAGE = By.XPATH, "//div[1]/div[1]/p[1]/strong[1]"
     QUESTION_CODE_FIXED_VALIDATION_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[2]/strong'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
+    ERROR_MESSAGES_ELEMENT = By.XPATH, '//p[@class="panel__error u-mb-no"]'
 
     def get_validation_error_message(self, question_type):
         element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
@@ -31,8 +32,17 @@ class ContributorDetailsPage(BasePage):
     def save_the_application(self):
         self.driver.find_element(*ContributorDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
-        self.driver.refresh()
-        time.sleep(2)
+        self.check_if_validation_status_changed()
+
+    def check_if_validation_status_changed(self):
+        i = 0
+        while i < 3:
+            i += 1
+            if self.get_validation_status().lower() != 'check needed':
+                self.driver.refresh()
+                time.sleep(2)
+            else:
+                break
 
     def check_numeric_fixed_validation(self, questions_list, is_validation_exists):
         # iterate through the list of expected question codes
@@ -152,3 +162,14 @@ class ContributorDetailsPage(BasePage):
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
         ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
+
+    def get_no_of_validation_error_messages(self):
+        return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))
+
+    def get_validation_status(self):
+        return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
+
+    def check_if_validation_triggered(self, status):
+        if self.get_no_of_validation_error_messages() > 0:
+            ReportingHelper.check_single_message_not_matches('Overall validation', self.get_validation_status().lower(),
+                                                             status)
