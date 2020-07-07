@@ -37,12 +37,19 @@ class ContributorDetailsPage(BasePage):
     def check_if_validation_status_changed(self):
         i = 0
         while i < 3:
-            i += 1
-            if self.get_validation_status().lower() != 'check needed':
-                self.driver.refresh()
-                time.sleep(2)
-            else:
-                break
+            status = self.get_validation_status().lower()
+
+            if status == 'check needed':
+                if i > 0:
+                    break
+                self.refresh_the_form()
+            elif status != 'check needed':
+                self.refresh_the_form()
+                i += 1
+
+    def refresh_the_form(self):
+        self.driver.refresh()
+        time.sleep(2)
 
     def check_numeric_fixed_validation(self, questions_list, is_validation_exists):
         # iterate through the list of expected question codes
@@ -70,7 +77,6 @@ class ContributorDetailsPage(BasePage):
             self.check_validation_messages(question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg)
 
     def check_validation_messages(self, question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg):
-
         if is_validation_exists == 'be':
             if len(no_of_error_msgs) == 1:
                 self.check_fixed_val_msgs(question_codes_list, actual_msg, no_of_error_msgs[0].text, i)
