@@ -87,8 +87,9 @@ def step_impl(context, derived_value, total_turnover_value=None):
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
     if not question_code:
         question_code = context.question_code
-    ContributorDetailsPage().check_validation_message(question_code, validation_message,
-                                                      is_validation_exists)
+    page = ContributorDetailsPage()
+    page.check_validation_message(question_code, validation_message,
+                                  is_validation_exists)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
@@ -125,3 +126,9 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
     elif validation_check == 'period on period ratio of ratios movement is':
         RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
                                                                          threshold_value, result)
+
+
+@then(u'the form status should not change to "{status}"')
+def step_impl(context, status):
+    page = ContributorDetailsPage()
+    page.check_if_validation_triggered(status)

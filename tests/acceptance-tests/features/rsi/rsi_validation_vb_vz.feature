@@ -8,6 +8,7 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
     When I submit the "total turnover" <value> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
+    And the form status should not change to "form saved"
 
     Examples:
       | period | reference   | value | question | validation                             | isValidationExists |
@@ -22,7 +23,7 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
     When I submit the "total turnover" <value> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
-
+    And the form status should not change to "form saved"
     Examples:
       | period | reference   | value | question | validation                             | isValidationExists |
       | 201903 | 49900694171 | 0     | Q20      | This value is zero                     | be                 |
@@ -36,7 +37,7 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
     When I submit the "total turnover" <value> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed
-
+    And the form status should not change to "form saved"
     Examples:
       | period | reference   | value | question | validation                             | isValidationExists |
       | 201904 | 49900756292 | 0     | Q20      | This value is zero                     | be                 |
