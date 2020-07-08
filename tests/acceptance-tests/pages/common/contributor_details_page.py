@@ -111,6 +111,7 @@ class ContributorDetailsPage(BasePage):
         self.check_validation_message(question_code, exp_msg, is_val_exists)
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
+        self.check_if_overall_validation_triggered()
         no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
         if len(no_of_msgs) == 1:
             actual_msg = no_of_msgs[0].text
@@ -128,6 +129,7 @@ class ContributorDetailsPage(BasePage):
             ReportingHelper.check_multiple_messages_not_matches(question_type, act_msg, exp_msg)
 
     def check_multiple_questions_validation_messages(self, question_codes, exp_msg, is_validation_exists):
+        self.check_if_overall_validation_triggered()
         if len(question_codes) > 1:
             for question in question_codes:
                 self.check_validation_message(question, exp_msg, is_validation_exists)
@@ -159,14 +161,15 @@ class ContributorDetailsPage(BasePage):
         comparison_val_two = thre_val * int(total_sales)
         self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
-    def check_absolute_difference_validation(self, operator_type, total_turnover_value, derived_value, threshold_value,
+    def check_absolute_difference_validation(self, operator_type, value_one, value_two, threshold_value,
                                              result):
-        total_turnover_value = int(total_turnover_value)
-        comparison_val_one = abs(total_turnover_value - derived_value)
+        new_value_one = int(value_one)
+        comparison_val_one = abs(new_value_one - value_two)
         comparison_val_two = int(threshold_value)
         self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
+        self.check_if_overall_validation_triggered()
         ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
 
     def get_no_of_validation_error_messages(self):
@@ -175,7 +178,6 @@ class ContributorDetailsPage(BasePage):
     def get_validation_status(self):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
 
-    def check_if_validation_triggered(self, status):
+    def check_if_overall_validation_triggered(self):
         if self.get_no_of_validation_error_messages() > 0:
-            ReportingHelper.check_single_message_not_matches('Overall validation', self.get_validation_status().lower(),
-                                                             status)
+            ReportingHelper.check_single_message_not_matches(self.get_validation_status().lower(), 'form saved')
