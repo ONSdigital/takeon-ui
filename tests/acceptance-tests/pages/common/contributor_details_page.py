@@ -45,7 +45,7 @@ class ContributorDetailsPage(BasePage):
                 self.refresh_the_form()
             elif status != 'check needed':
                 self.refresh_the_form()
-                i += 1
+            i += 1
 
     def refresh_the_form(self):
         self.driver.refresh()

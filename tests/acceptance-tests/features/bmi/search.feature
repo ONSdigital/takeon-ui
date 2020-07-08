@@ -7,7 +7,7 @@ Feature: Search function
     And As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: Using an existing full reference entry
-    Given I search for the <survey> with <reference> for the period <period>
+    Given I search for the <survey> with <reference> for the current period <period>
     Then <reference> and <period> and <survey> will be displayed
     Examples:
       | reference   | period | survey |
@@ -27,7 +27,7 @@ Feature: Search function
 
 
   Scenario Outline: Using an existing Survey id
-    Given I search for the <survey> with <reference> for the period <period>
+    Given I search for the <survey> with <reference> for the current period <period>
     Then <reference> and <period> and <survey> will be displayed
     Examples:
       | survey | reference   | period |

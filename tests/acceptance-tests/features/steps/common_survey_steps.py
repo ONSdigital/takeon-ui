@@ -24,7 +24,7 @@ def step_impl(context, reference, survey_value=None, period=None):
         context.contributor_page.submit_search_details(reference, 'empty', survey_value)
 
 
-@given(u'I search for the {survey} with {reference} for the period {period}')
+@given(u'I search for the {survey} with {reference} for the {period_type} period {period}')
 @given(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
 @given(
     u'I search for the survey "{survey}" with {reference} for the {period_type} period {period} with SIC code {sic_code}')
