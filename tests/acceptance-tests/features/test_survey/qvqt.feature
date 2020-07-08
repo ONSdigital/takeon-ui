@@ -4,7 +4,7 @@ Feature: Test Survey - QvQT validation rule
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6401 - current period value vs derived value greater than threshold value
-    Given I search for the survey "999A" with <reference> for the period <period>
+    Given I search for the survey "999A" with <reference> for the current period <period>
     And I submit the commodity <values> for questions
       | question_codes |
       | Q1             |
