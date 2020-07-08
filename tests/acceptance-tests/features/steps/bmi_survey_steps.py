@@ -82,23 +82,3 @@ def step_impl(context, validation_message, is_validation_exists):
     elif context.survey == '0076':
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
-
-
-@then(
-    u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold_value}')
-def step_impl(context, result, threshold_value):
-    previous_value = context.previous_period_value
-    current_value = context.current_period_value
-    result_value = SandGravelLandAndMarineDetailsPage().check_threshold_value(previous_value, current_value)
-    if result_value > int(threshold_value):
-        assert True
-    else:
-        assert False
-
-
-@then(u'the form status should change to {status_type}')
-def step_impl(context, status_type):
-    validation_message = SandGravelLandAndMarineDetailsPage().get_validation_message()
-    assert validation_message == 'This has changed significantly since the last submission'
-    status = SandGravelLandAndMarineDetailsPage().get_status()
-    assert status.lower() == status_type.lower()
