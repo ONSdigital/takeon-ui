@@ -8,11 +8,11 @@ class ReportingHelper:
             assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msg + '" for question ' + question
 
     @staticmethod
-    def check_single_message_not_matches(act_msg, exp_msg, question=None):
+    def check_single_message_not_matches(act_msg, exp_msg, question=None, message=None):
         if act_msg != exp_msg:
             return True
         elif act_msg == exp_msg and not question:
-            assert False, 'The actual message "' + act_msg + '" is equal to ' + exp_msg + ' " which is not expected'
+            assert False, message + 'The validation status should not be "' + act_msg + '"'
         else:
             assert False, 'This message "' + act_msg + '" is not expected for question ' + question
 

@@ -118,7 +118,7 @@ class ContributorDetailsPage(BasePage):
             if is_validation_exists == 'be':
                 ReportingHelper.check_single_message_matches(question_type, actual_msg, exp_msg)
             elif is_validation_exists == 'not be':
-                ReportingHelper.check_single_message_not_matches(question_type, actual_msg, exp_msg)
+                ReportingHelper.check_single_message_not_matches(actual_msg, exp_msg, question_type)
         elif len(no_of_msgs) == 2:
             if is_validation_exists == 'be':
                 ReportingHelper.check_multiple_messages_matches(question_type, no_of_msgs, exp_msg)
@@ -180,4 +180,6 @@ class ContributorDetailsPage(BasePage):
 
     def check_if_overall_validation_triggered(self):
         if self.get_no_of_validation_error_messages() > 0:
-            ReportingHelper.check_single_message_not_matches(self.get_validation_status().lower(), 'form saved')
+            ReportingHelper.check_single_message_not_matches(
+                self.get_validation_status().lower(), 'form saved',
+                '', 'Please check, Overall validation failed')
