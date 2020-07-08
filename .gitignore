@@ -8,6 +8,8 @@ __pycache__
 
 # Pycharm Settings
 .idea
+.DS_Store
+*.xml
 
 # Script to Set Env vars
 /env.bat
