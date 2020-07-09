@@ -24,7 +24,7 @@ def step_impl(context, reference, survey_value=None, period=None):
         context.contributor_page.submit_search_details(reference, 'empty', survey_value)
 
 
-@given(u'I search for the {survey} with {reference} for the period {period}')
+@given(u'I search for the {survey} with {reference} for the {period_type} period {period}')
 @given(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
 @given(
     u'I search for the survey "{survey}" with {reference} for the {period_type} period {period} with SIC code {sic_code}')
@@ -87,8 +87,9 @@ def step_impl(context, derived_value, total_turnover_value=None):
 def step_impl(context, validation_message, is_validation_exists, question_code=None):
     if not question_code:
         question_code = context.question_code
-    ContributorDetailsPage().check_validation_message(question_code, validation_message,
-                                                      is_validation_exists)
+    page = ContributorDetailsPage()
+    page.check_validation_message(question_code, validation_message,
+                                  is_validation_exists)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
@@ -113,14 +114,18 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
 
         if context.survey == '0023':
             rsi_page = RsiContributorDetailsPage()
-            context.derived_value = rsi_page.get_derived_question_value()
-
+            context.value_one = context.total_turnover_value
+            context.value_two = rsi_page.get_derived_question_value()
         elif context.survey == '999A':
             test_survey_page = TestSurveyContributorDetailsPage()
-            context.derived_value = test_survey_page.get_derived_question_value()
+            context.value_one = context.total_turnover_value
+            context.value_two = test_survey_page.get_derived_question_value()
+        else:
+            context.value_one = context.previous_period_value
+            context.value_two = int(context.current_period_value)
 
-        page.check_absolute_difference_validation(operator_type, context.total_turnover_value,
-                                                  context.derived_value, threshold_value, result)
+        page.check_absolute_difference_validation(operator_type, context.value_one,
+                                                  context.value_two, threshold_value, result)
 
     elif validation_check == 'period on period ratio of ratios movement is':
         RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,

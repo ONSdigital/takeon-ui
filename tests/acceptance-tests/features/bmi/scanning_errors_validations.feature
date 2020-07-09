@@ -6,7 +6,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline:  Sand and Gravel Land Survey 0066 - Check there is a fixed value validation to numerical fields for illegible values
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0066" with <reference> for the period <period>
+    And I search for the survey "0066" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for all the question codes
     And I trigger the validation process
     Then the fixed validation message <fixedValidation> should <isValidationExists> displayed
@@ -18,7 +18,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline: Sand and Gravel Marine Survey 0076 - Check there is a fixed value validation to numerical fields for illegible values
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0066" with <reference> for the period <period>
+    And I search for the survey "0066" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for all the question codes
     And I trigger the validation process
     Then the fixed validation message <fixedValidation> should <isValidationExists> displayed
@@ -32,7 +32,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline:  Blocks Survey 0073 - Check there is a fixed value validation to numerical fields for illegible values
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0073" with <reference> for the period <period>
+    And I search for the survey "0073" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for all the question codes
     And I trigger the validation process
     Then the fixed validation message <fixedValidation> should <isValidationExists> displayed
@@ -45,7 +45,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline:  Bricks Survey 0074 - Check there is a fixed value validation to numerical fields for illegible values
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0074" with <reference> for the period <period>
+    And I search for the survey "0074" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for all the question codes
     And I trigger the validation process
     Then the fixed validation message <fixedValidation> should <isValidationExists> displayed
@@ -57,7 +57,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline:  Sand and Gravel Land Survey 0066  - Check there isn't any fixed value validation to numerical fields for comments field questions
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0066" with <reference> for the period <period>
+    And I search for the survey "0066" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for the question codes
       | question_codes |
       | Q146           |
@@ -72,7 +72,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline: Sand and Gravel Marine Survey 0076 - Check there isn't any fixed value validation to numerical fields for comments field questions
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0076" with <reference> for the period <period>
+    And I search for the survey "0076" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for the question codes
       | question_codes |
       | Q146           |
@@ -88,7 +88,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline: Blocks Survey 0073 - Check there isn't any fixed value validation to numerical fields for comments field questions
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0073" with <reference> for the period <period>
+    And I search for the survey "0073" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for the question codes
       | question_codes |
       | Q145           |
@@ -103,7 +103,7 @@ Feature: Scanning Errors Validation
 
   Scenario Outline: Bricks Survey 0074 - Check there isn't any fixed value validation to numerical fields for numeric type field questions
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I search for the survey "0074" with <reference> for the period <period>
+    And I search for the survey "0074" with <reference> for the current period <period>
     When I change the <existingValue> to <newValue> for the question codes
       | question_codes |
       | Q145           |

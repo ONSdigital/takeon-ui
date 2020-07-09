@@ -8,9 +8,11 @@ class ReportingHelper:
             assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msg + '" for question ' + question
 
     @staticmethod
-    def check_single_message_not_matches(question, act_msg, exp_msg):
+    def check_single_message_not_matches(act_msg, exp_msg, question=None, message=None):
         if act_msg != exp_msg:
             return True
+        elif act_msg == exp_msg and not question:
+            assert False, message + 'The validation status should not be "' + act_msg + '"'
         else:
             assert False, 'This message "' + act_msg + '" is not expected for question ' + question
 
@@ -44,9 +46,6 @@ class ReportingHelper:
         elif operator_type == 'equal to':
             ReportingHelper.check_single_message_matches('', act_msg, exp_msg)
             ReportingHelper.check_single_message_matches('', result, 'false')
-        elif operator_type == 'equal to':
-            ReportingHelper.check_single_message_matches('', act_msg, exp_msg)
-            ReportingHelper.check_single_message_matches('', result, 'false')
 
     @staticmethod
     def check_greater_than(act_msg, exp_msg):
@@ -63,13 +62,6 @@ class ReportingHelper:
             return False
         elif operator_type == 'equal to' and value_one == value_two:
             return True
-
-    @staticmethod
-    def check_less_than(act_msg, exp_msg):
-        if act_msg < exp_msg:
-            return True
-        else:
-            assert False, 'Expected value "' + exp_msg + '" is not less than "' + act_msg
 
     @staticmethod
     def check_less_than(act_msg, exp_msg):
