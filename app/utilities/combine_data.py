@@ -8,6 +8,7 @@ def extract_question_data(form_data, index):
     question_data['response'] = response
     question_data['displayquestionnumber'] = form_data['view_form_responses'][index]['displayquestionnumber']
     question_data['displaytext'] = form_data['view_form_responses'][index]['displaytext']
+    question_data['displayorder'] = form_data['view_form_responses'][index]['displayorder']
     return question_data
 
 def extract_validation_data(extracted_form_data, validation_data):
