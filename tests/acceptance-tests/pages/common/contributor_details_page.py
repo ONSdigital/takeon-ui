@@ -18,11 +18,12 @@ class ContributorDetailsPage(BasePage):
     Q_CODE_LABELS_WITH_TEXT = "//label[contains(text(),'"
     QUESTION_CODE_ERROR_MESSAGES_PART_ONE = By.XPATH, "//div["
     QUESTION_CODE_ERROR_MESSAGES_PART_TWO = By.XPATH, "]/div/p[@class='panel__error u-mb-no']"
-    STATUS = By.XPATH, "//span[@class='status status--error']"
+    STATUS = By.XPATH, '//span[contains(@title,"Status")]'
     QUESTION_PANEL_ERROR_MESSAGE = By.XPATH, "//div[1]/div[1]/p[1]/strong[1]"
     QUESTION_CODE_FIXED_VALIDATION_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[2]/strong'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
+    ERROR_MESSAGES_ELEMENT = By.XPATH, '//p[@class="panel__error u-mb-no"]'
 
     def get_validation_error_message(self, question_type):
         element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
@@ -31,6 +32,22 @@ class ContributorDetailsPage(BasePage):
     def save_the_application(self):
         self.driver.find_element(*ContributorDetailsPage.SAVE_AND_VALIDATE).click()
         SeleniumCore.switch_to_alert_box()
+        self.check_if_validation_status_changed()
+
+    def check_if_validation_status_changed(self):
+        i = 0
+        while i < 3:
+            status = self.get_validation_status().lower()
+
+            if status == 'check needed':
+                if i > 0:
+                    break
+                self.refresh_the_form()
+            elif status != 'check needed':
+                self.refresh_the_form()
+            i += 1
+
+    def refresh_the_form(self):
         self.driver.refresh()
         time.sleep(2)
 
@@ -60,7 +77,6 @@ class ContributorDetailsPage(BasePage):
             self.check_validation_messages(question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg)
 
     def check_validation_messages(self, question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg):
-
         if is_validation_exists == 'be':
             if len(no_of_error_msgs) == 1:
                 self.check_fixed_val_msgs(question_codes_list, actual_msg, no_of_error_msgs[0].text, i)
@@ -95,13 +111,14 @@ class ContributorDetailsPage(BasePage):
         self.check_validation_message(question_code, exp_msg, is_val_exists)
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
+        self.check_if_overall_validation_triggered()
         no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
         if len(no_of_msgs) == 1:
             actual_msg = no_of_msgs[0].text
             if is_validation_exists == 'be':
                 ReportingHelper.check_single_message_matches(question_type, actual_msg, exp_msg)
             elif is_validation_exists == 'not be':
-                ReportingHelper.check_single_message_not_matches(question_type, actual_msg, exp_msg)
+                ReportingHelper.check_single_message_not_matches(actual_msg, exp_msg, question_type)
         elif len(no_of_msgs) == 2:
             if is_validation_exists == 'be':
                 ReportingHelper.check_multiple_messages_matches(question_type, no_of_msgs, exp_msg)
@@ -112,6 +129,7 @@ class ContributorDetailsPage(BasePage):
             ReportingHelper.check_multiple_messages_not_matches(question_type, act_msg, exp_msg)
 
     def check_multiple_questions_validation_messages(self, question_codes, exp_msg, is_validation_exists):
+        self.check_if_overall_validation_triggered()
         if len(question_codes) > 1:
             for question in question_codes:
                 self.check_validation_message(question, exp_msg, is_validation_exists)
@@ -143,12 +161,25 @@ class ContributorDetailsPage(BasePage):
         comparison_val_two = thre_val * int(total_sales)
         self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
-    def check_absolute_difference_validation(self, operator_type, total_turnover_value, derived_value, threshold_value,
+    def check_absolute_difference_validation(self, operator_type, value_one, value_two, threshold_value,
                                              result):
-        total_turnover_value = int(total_turnover_value)
-        comparison_val_one = abs(total_turnover_value - derived_value)
+        new_value_one = int(value_one)
+        comparison_val_one = abs(new_value_one - value_two)
         comparison_val_two = int(threshold_value)
         self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
+        self.check_if_overall_validation_triggered()
         ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
+
+    def get_no_of_validation_error_messages(self):
+        return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))
+
+    def get_validation_status(self):
+        return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
+
+    def check_if_overall_validation_triggered(self):
+        if self.get_no_of_validation_error_messages() > 0:
+            ReportingHelper.check_single_message_not_matches(
+                self.get_validation_status().lower(), 'form saved',
+                '', 'Please check, Overall validation failed')

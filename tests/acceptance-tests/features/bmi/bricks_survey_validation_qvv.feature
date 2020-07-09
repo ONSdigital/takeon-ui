@@ -4,7 +4,7 @@ Feature: Bricks Survey - Comment Present(Question vs Value) Validation rule
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6531 - Comment Present Validation Bricks survey on form 4
-    Given I search for the survey "0074" with <reference> for the period <period>
+    Given I search for the survey "0074" with <reference> for the current period <period>
     When I submit the "comment" <comment> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed

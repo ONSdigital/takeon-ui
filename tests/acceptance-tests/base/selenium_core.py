@@ -35,6 +35,10 @@ class SeleniumCore:
         return DriverContext.driver.find_elements_by_xpath(element)
 
     @staticmethod
+    def find_elements_by(*element):
+        return DriverContext.driver.find_elements(element[0], element[1])
+
+    @staticmethod
     def switch_to_alert_box():
         # Click on the "Refresh" button to generate the Confirmation Alert
         driver = DriverContext.driver
