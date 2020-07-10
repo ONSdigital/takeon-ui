@@ -140,6 +140,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def check_pop_ratio_of_ratios_validation(self, factor_type,
                                              operator_type, threshold_value, result):
+        self.check_if_overall_validation_triggered()
         is_validation_triggered = False
         if factor_type == 'increase':
             value_one = int(cp_internet_sales) * int(pp_total_sales)

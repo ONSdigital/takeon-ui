@@ -4,14 +4,14 @@ from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
 
 
-@given(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
-@when(u'I run the validation process on {question_code} for {period_type} period with {period_value}')
-def step_impl(context, period_type, question_code, period_value):
+@given(u'I run the validation process on {question_code} with {period_value}')
+@when(u'I run the validation process on {question_code} with {period_value}')
+def step_impl(context, question_code, period_value):
     context.sgl_page = SandGravelLandAndMarineDetailsPage()
-    if period_type == "previous":
+    if context.period_type == "previous":
         context.previous_period_value = period_value
         context.sgl_page.validate_the_previous_period_details(question_code, context.previous_period_value)
-    elif period_type == "current":
+    elif context.period_type == "current":
         context.current_period_value = period_value
         context.sgl_page.validate_the_current_period_details(question_code, context.current_period_value)
 
@@ -82,23 +82,3 @@ def step_impl(context, validation_message, is_validation_exists):
     elif context.survey == '0076':
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
-
-
-@then(
-    u'the validation should return {result} if the absolute difference between the periods doesnt meet the {threshold_value}')
-def step_impl(context, result, threshold_value):
-    previous_value = context.previous_period_value
-    current_value = context.current_period_value
-    result_value = SandGravelLandAndMarineDetailsPage().check_threshold_value(previous_value, current_value)
-    if result_value > int(threshold_value):
-        assert True
-    else:
-        assert False
-
-
-@then(u'the form status should change to {status_type}')
-def step_impl(context, status_type):
-    validation_message = SandGravelLandAndMarineDetailsPage().get_validation_message()
-    assert validation_message == 'This has changed significantly since the last submission'
-    status = SandGravelLandAndMarineDetailsPage().get_status()
-    assert status.lower() == status_type.lower()
