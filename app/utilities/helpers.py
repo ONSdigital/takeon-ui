@@ -143,3 +143,13 @@ def json_validator(data):
     except ValueError as error:
         print("invalid json: %s" % error)
         return False
+
+def question_order(response_and_validations):
+
+    questions = response_and_validations["form_validation_outputs"]
+
+    questions = (sorted(questions, key = lambda i: i['displayorder']))
+
+    response_and_validations = {'form_validation_outputs': questions}
+
+    return response_and_validations
