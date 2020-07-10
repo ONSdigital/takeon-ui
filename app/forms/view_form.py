@@ -42,8 +42,11 @@ def view_form(inqcode, period, ruref):
     parameters = build_uri(url_parameters)
 
     contributor_details = api_caller.contributor_search(parameters=parameters)
+    log.info("contributor_details: %s", contributor_details)
     validation_outputs = api_caller.validation_outputs(parameters=parameters)
+    log.info("validation_outputs: %s", validation_outputs)
     view_forms = api_caller.view_form_responses(parameters=parameters)
+    log.info("view_forms: %s", view_forms)
 
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
