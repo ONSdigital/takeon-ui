@@ -102,6 +102,14 @@ def general_search_screen_post():
     data = GraphData(contributor_data)
     output_data = data.nodes
     log.info("Data from GraphQL for search: %s", output_data)
+    log.info("form: %s", form)
+    log.info("output_data: %s",output_data)
+    log.info("output_data[0]: %s",output_data[0])
+    log.info("dict(form.__dict__['_fields']): %s",dict(form.__dict__["_fields"]))
+    
+    log.info("data.page_info: %s",data.page_info)
+    log.info("parameters: %s",parameters)
+
 
     return render_template(
         "./contributor_search/GeneralSearchScreenGQL.html",
