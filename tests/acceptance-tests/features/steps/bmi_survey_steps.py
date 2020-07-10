@@ -91,5 +91,5 @@ def step_impl(context, result, validation_check):
     page = ContributorDetailsPage()
 
     if validation_check == 'values are not equal':
-        page.check_validation_matches_with_no_threshold_type(context.previous_period_value,
-                                                             context.current_period_value, result)
+        page.check_values_are_not_equal(context.previous_period_value,
+                                        context.current_period_value, result)
