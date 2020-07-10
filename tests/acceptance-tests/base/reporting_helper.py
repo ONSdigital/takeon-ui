@@ -48,6 +48,13 @@ class ReportingHelper:
             ReportingHelper.check_single_message_matches('', result, 'false')
 
     @staticmethod
+    def compare_values_with_no_operator(value_one, value_two):
+        if int(value_one) != int(value_two):
+            return True
+        else:
+            return False
+
+    @staticmethod
     def check_greater_than(act_msg, exp_msg):
         if act_msg > exp_msg:
             return True

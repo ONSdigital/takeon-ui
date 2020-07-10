@@ -86,10 +86,10 @@ def step_impl(context, validation_message, is_validation_exists):
 
 
 @then(
-    u'the validation should return {result} if the "{validation_check}" are {operator_type}')
-def step_impl(context, result, validation_check, operator_type):
+    u'the validation should return {result} if the "{validation_check}"')
+def step_impl(context, result, validation_check):
     page = ContributorDetailsPage()
 
-    if validation_check == 'difference between the values are':
-        page.check_validation_msg_matches(operator_type, context.previous_period_value,
-                                          context.context.current_period_value, result)
+    if validation_check == 'values are not equal':
+        page.check_validation_matches_with_no_threshold_type(context.previous_period_value,
+                                                             context.current_period_value, result)

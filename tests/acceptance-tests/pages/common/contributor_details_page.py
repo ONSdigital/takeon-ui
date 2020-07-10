@@ -172,6 +172,11 @@ class ContributorDetailsPage(BasePage):
         self.check_if_overall_validation_triggered()
         ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
 
+    def check_values_are_not_equal(self, comparison_val_one, comparison_val_two, result):
+        self.check_if_overall_validation_triggered()
+        is_validation_exists = ReportingHelper.compare_values_with_no_operator(comparison_val_one, comparison_val_two)
+        ReportingHelper.check_single_message_matches('', result, str(is_validation_exists).lower())
+
     def get_no_of_validation_error_messages(self):
         return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))
 
