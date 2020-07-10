@@ -12,6 +12,8 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
         '601': '0601',
         '602': '0602',
         '603': '0603',
+        '101': '0101',
+        '104': '0104'
     }
 
     question_codes_list = ["Q601", "Q602", "Q603", "Q604", "Q605", "Q606", "Q607", 'Q608']
@@ -134,7 +136,7 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
             # check if any validation exists for a question
             self.check_fixed_validation_messages(survey, self.question_codes_list, is_validation_exists, i,
                                                  no_of_error_msgs_per_question, validation_message)
-                            
+
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
         if comment.lower() == 'empty' or comment.lower() == 'blank':

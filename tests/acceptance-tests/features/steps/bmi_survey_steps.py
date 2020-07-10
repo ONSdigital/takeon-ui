@@ -2,6 +2,7 @@ from behave import given, when, then
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
 from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
+from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 @given(u'I run the validation process on {question_code} with {period_value}')
@@ -82,3 +83,13 @@ def step_impl(context, validation_message, is_validation_exists):
     elif context.survey == '0076':
         SandGravelLandAndMarineDetailsPage().check_fixed_validations_exists(context.survey, validation_message,
                                                                             is_validation_exists)
+
+
+@then(
+    u'the validation should return {result} if the "{validation_check}" are {operator_type}')
+def step_impl(context, result, validation_check, operator_type):
+    page = ContributorDetailsPage()
+
+    if validation_check == 'difference between the values are':
+        page.check_validation_msg_matches(operator_type, context.previous_period_value,
+                                          context.context.current_period_value, result)
