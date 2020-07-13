@@ -1,20 +1,21 @@
 from behave import given, when, then
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
-from pages.bmi.sand_and_gravel_land_and_marine_details_page import SandGravelLandAndMarineDetailsPage
+from pages.bmi.sand_and_gravel_land_marine_details_page import SandGravelLandAndMarineDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 @given(u'I run the validation process on {question_code} with {period_value}')
 @when(u'I run the validation process on {question_code} with {period_value}')
 def step_impl(context, question_code, period_value):
-    context.sgl_page = SandGravelLandAndMarineDetailsPage()
+    page = ContributorDetailsPage()
     if context.period_type == "previous":
         context.previous_period_value = period_value
-        context.sgl_page.validate_the_previous_period_details(question_code, context.previous_period_value)
+        page.validate_the_previous_period_details(question_code, context.previous_period_value)
     elif context.period_type == "current":
+        context.question_code = question_code
         context.current_period_value = period_value
-        context.sgl_page.validate_the_current_period_details(question_code, context.current_period_value)
+        page.validate_the_current_period_details(question_code, context.current_period_value)
 
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
@@ -91,5 +92,5 @@ def step_impl(context, result, validation_check):
     page = ContributorDetailsPage()
 
     if validation_check == 'values are not equal':
-        page.check_values_are_not_equal(context.previous_period_value,
+        page.check_values_are_not_equal(context.question_code, context.previous_period_value,
                                         context.current_period_value, result)
