@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from base.selenium_core import SeleniumCore
+from base.utilities import Utilities
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
@@ -29,17 +30,14 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
 
     def validate_the_previous_period_details(self, question_code, previous_value):
+        Utilities.convert_blank_data_to_empty_string(previous_value)
         self.submit_the_period_details(question_code, previous_value)
-        self.driver.find_element(*SandGravelLandAndMarineDetailsPage.SAVE_AND_VALIDATE).click()
-        SeleniumCore.switch_to_alert_box()
-        SeleniumCore.close_the_current_window()
+        ContributorDetailsPage.save_the_application()
 
     def validate_the_current_period_details(self, question_code, current_value):
         self.driver.refresh()
         self.submit_the_period_details(question_code, current_value)
-        self.driver.find_element(*SandGravelLandAndMarineDetailsPage.SAVE_AND_VALIDATE).click()
-        SeleniumCore.switch_to_alert_box()
-        self.driver.refresh()
+        ContributorDetailsPage.save_the_application()
 
     def submit_the_period_details(self, question_code, value):
         SeleniumCore.switch_window()
@@ -139,8 +137,7 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
 
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
-        if comment.lower() == 'empty' or comment.lower() == 'blank':
-            comment = ''
+        Utilities.convert_blank_data_to_empty_string(comment)
         if question.upper() == 'Q146':
             SeleniumCore.set_element_text(*SandGravelLandAndMarineDetailsPage.QUESTION_NO_146, comment)
         elif question.upper() == 'Q147':
