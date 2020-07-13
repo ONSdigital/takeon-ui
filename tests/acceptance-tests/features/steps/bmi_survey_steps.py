@@ -1,7 +1,7 @@
 from behave import given, when, then
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
-from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
+from pages.bmi.sand_and_gravel_land_and_marine_details_page import SandGravelLandAndMarineDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
