@@ -41,17 +41,17 @@
 
                                     <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
                                         <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
-                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override '{{ output["description"] }}'</label>
+                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override '{{ output["validationmessage"] }}'</label>
                                     </span>
 
                                     {% else %}
 
                                     <p class="panel__error u-mb-no">
-                                        <strong>{{ output["description"] }} {{ datum["description"] }} {{ "test" }}</strong>
+                                        <strong>{{ output["description"] }}</strong>
                                     </p>
                                     <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
                                         <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
-                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["description"] | lower }} </span></label>
+                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
                                     </span>
 
                                     {% endif %}
@@ -59,7 +59,7 @@
                                 {% endfor %}
 
                                 <p class="field">
-                                    <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }} {{ output["description"] }}</label>
+                                    <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
                                     <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                  </p>
                             </div>
@@ -68,7 +68,7 @@
                         {% else %}
 
                         <p class="field">
-                            <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }} {{ datum["description"] }}</label>
+                            <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
                             <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                          </p>
                         
