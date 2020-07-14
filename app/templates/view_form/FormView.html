@@ -36,7 +36,6 @@
                         <div class="panel {{ datum['panel'] }} panel--simple">
                             <div class="panel__body">
                                 {% for output in datum['validation_info'] %}
-                                {% for voutput in validation['validation_outputs'] %}
 
                                     {% if output['overridden'] == True %}
 
@@ -48,7 +47,7 @@
                                     {% else %}
 
                                     <p class="panel__error u-mb-no">
-                                        <strong> output:{{output}} voutput:{{voutput}}</strong>
+                                        <strong> {{output['description']}}</strong>
                                     </p>
                                     <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
                                         <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
@@ -57,7 +56,6 @@
 
                                     {% endif %}
 
-                                {% endfor %}
                                 {% endfor %}
 
                                 <p class="field">
