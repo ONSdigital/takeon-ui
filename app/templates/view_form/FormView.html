@@ -47,7 +47,7 @@
                                     {% else %}
 
                                     <p class="panel__error u-mb-no">
-                                        <strong>{{ datum }} {{ output }}</strong>
+                                        <strong>datum: {{ datum }} output: {{ output }} data: {{ data['form_validation_outputs'] }}</strong>
                                     </p>
                                     <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
                                         <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
