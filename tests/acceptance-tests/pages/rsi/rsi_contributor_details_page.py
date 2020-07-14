@@ -146,14 +146,14 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         if factor_type == 'increase':
             value_one = int(cp_internet_sales) * int(pp_total_sales)
             value_two = int(cp_total_sales) * int(pp_internet_sales)
-            is_validation_triggered = ReportingHelper.compare_the_values(operator_type, value_one,
-                                                                         int(threshold_value) * value_two)
+            is_validation_triggered = ReportingHelper.compare_the_values_with_operator(operator_type, value_one,
+                                                                                       int(threshold_value) * value_two)
 
         elif factor_type == 'decrease':
             value_one = int(cp_total_sales) * int(pp_internet_sales)
             value_two = int(cp_internet_sales) * int(pp_total_sales)
-            is_validation_triggered = ReportingHelper.compare_the_values(operator_type, value_one,
-                                                                         int(threshold_value) * value_two)
+            is_validation_triggered = ReportingHelper.compare_the_values_with_operator(operator_type, value_one,
+                                                                                       int(threshold_value) * value_two)
 
         elif factor_type == 'not-applicable':
             is_validation_triggered = 'false'
