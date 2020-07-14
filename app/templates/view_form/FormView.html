@@ -116,8 +116,6 @@
 
 
     <script>
-        var datum = "{{ datum }}"
-        console.log(datum)
         var override_button = document.getElementById("override_button")
         override_button.addEventListener("click", function()
         {var checkboxes = document.getElementsByName("override-checkbox");
@@ -168,6 +166,8 @@
     </script>
 
     <script>
+        var datum = "{{ output[description] }}"
+        console.log(datum)
         var statusMessage = "{{ status_message }}"
         console.log(statusMessage)
         if (statusMessage == "&#34;&#34;") {
