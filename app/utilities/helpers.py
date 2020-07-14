@@ -147,7 +147,17 @@ def json_validator(data):
 
 # This function reordes the questions based off the displayorder value 
 def question_order(response_and_validations):
-    questions = response_and_validations["form_validation_outputs"]
-    questions = (sorted(questions, key = lambda i: i['displayorder']))
-    response_and_validations = {'form_validation_outputs': questions}
+    try:
+        questions = response_and_validations["form_validation_outputs"]
+        questions = (sorted(questions, key = lambda i: i['displayorder']))
+        response_and_validations = {'form_validation_outputs': questions}
+
+    except KeyError as key_error:
+        print("Data missing displayorder" + str(key_error))
+        raise KeyError
+    
+    except TypeError as type_error:
+        print("Error with data type converting to JSON " + str(type_error))
+        raise TypeError
+
     return response_and_validations
