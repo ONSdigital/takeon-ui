@@ -55,6 +55,13 @@ class ReportingHelper:
             return False
 
     @staticmethod
+    def compare_strings_with_no_operator(actual_msg, exp_msg):
+        if actual_msg != exp_msg:
+            return True
+        else:
+            return False
+
+    @staticmethod
     def check_greater_than(act_msg, exp_msg):
         if act_msg > exp_msg:
             return True

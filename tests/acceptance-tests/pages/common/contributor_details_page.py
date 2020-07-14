@@ -183,8 +183,8 @@ class ContributorDetailsPage(BasePage):
         comparison_val_one = Utilities.convert_blank_data_to_empty_string(comparison_val_one)
         comparison_val_two = Utilities.convert_blank_data_to_empty_string(comparison_val_two)
         if comparison_val_one == '' or comparison_val_two == '':
-            is_validation_exists = ReportingHelper.check_single_message_matches(question, comparison_val_one,
-                                                                                comparison_val_two)
+            is_validation_exists = ReportingHelper.compare_strings_with_no_operator(comparison_val_one,
+                                                                                    comparison_val_two)
 
         else:
             is_validation_exists = ReportingHelper.compare_values_with_no_operator(comparison_val_one,
