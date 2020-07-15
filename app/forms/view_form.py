@@ -1,7 +1,7 @@
 import json
 import os
 from flask import render_template, Blueprint, request, redirect, url_for
-from app.utilities.helpers import build_uri, get_user
+from app.utilities.helpers import build_uri, get_user, question_order
 from app.utilities.filter_validations import filter_validations
 from app.utilities.combine_data import combine_responses_and_validations
 from app.utilities.check_status import check_status
@@ -53,7 +53,9 @@ def view_form(inqcode, period, ruref):
     view_form_data = json.loads(view_forms)
 
     response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
-    override_button = override_all_button(response_and_validations)
+    ordered_response_and_validations = question_order(response_and_validations)
+    
+    override_button = override_all_button(ordered_response_and_validations)
 
     log.info("Contributor Details: %s", contributor_data)
     log.info("Contributor Details[0]: %s", contributor_data['data'][0])
@@ -61,18 +63,18 @@ def view_form(inqcode, period, ruref):
     log.info("Validations output: %s", validations)
     log.info("Filtered Validations output: %s",
              filter_validations(validations))
-    log.info("Combined Response and Validation Info Data: %s", response_and_validations)
+    log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
 
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
-        validate(inqcode, period, ruref, response_and_validations, override_button, contributor_data, validations, status_colour)
+        validate(inqcode, period, ruref, ordered_response_and_validations, override_button, contributor_data, validations, status_colour)
 
     return render_template(
         template_name_or_list=form_view_template_HTML,
         survey=inqcode,
         period=period,
         ruref=ruref,
-        data=response_and_validations,
+        data=ordered_response_and_validations,
         override_button=override_button,
         status_message=json.dumps(status_message),
         contributor_details=contributor_data['data'][0],
