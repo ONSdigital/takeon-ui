@@ -2,7 +2,9 @@ import time
 from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
+from base.utilities import Utilities
 from pages.common.base_page import BasePage
+import numpy as np
 
 
 class ContributorDetailsPage(BasePage):
@@ -138,12 +140,16 @@ class ContributorDetailsPage(BasePage):
         questions_list = questions[0]
         commodity_values = self.get_values_as_a_list(questions[1])
         SeleniumCore.switch_window()
-
-        count = 0
-        for question in questions_list:
-            question_element = self.get_question_code_element(question)
-            SeleniumCore.set_element_text_by_id(question_element, commodity_values[count])
-            count += 1
+        new_questions_list = np.asarray(questions_list)
+        if new_questions_list.size > 1:
+            count = 0
+            for question in questions_list:
+                question_element = self.get_question_code_element(question)
+                SeleniumCore.set_element_text_by_id(question_element, commodity_values[count])
+                count += 1
+        else:
+            question_element = self.get_question_code_element(questions_list)
+            SeleniumCore.set_element_text_by_id(question_element, commodity_values[0])
 
     def get_values_as_a_list(self, values):
         new_values = values.split(',')
@@ -172,11 +178,34 @@ class ContributorDetailsPage(BasePage):
         self.check_if_overall_validation_triggered()
         ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
 
+    def check_values_are_not_equal(self, question, comparison_val_one, comparison_val_two, result):
+        self.check_if_overall_validation_triggered()
+        comparison_val_one = Utilities.convert_blank_data_to_empty_string(comparison_val_one)
+        comparison_val_two = Utilities.convert_blank_data_to_empty_string(comparison_val_two)
+        if comparison_val_one == '' or comparison_val_two == '':
+            is_validation_exists = ReportingHelper.compare_strings(comparison_val_one,
+                                                                   comparison_val_two)
+
+        else:
+            is_validation_exists = ReportingHelper.compare_values(comparison_val_one,
+                                                                  comparison_val_two)
+
+        ReportingHelper.check_single_message_matches(question, result, str(is_validation_exists).lower())
+
     def get_no_of_validation_error_messages(self):
         return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))
 
     def get_validation_status(self):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
+
+    def validate_the_previous_period_details(self, question_code, previous_value):
+        self.submit_the_values_for_survey(question_code, previous_value)
+        self.save_the_application()
+        SeleniumCore.close_the_current_window()
+
+    def validate_the_current_period_details(self, question_code, current_value):
+        self.submit_the_values_for_survey(question_code, current_value)
+        self.save_the_application()
 
     def check_if_overall_validation_triggered(self):
         if self.get_no_of_validation_error_messages() > 0:

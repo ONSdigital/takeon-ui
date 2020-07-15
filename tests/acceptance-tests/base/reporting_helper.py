@@ -48,6 +48,20 @@ class ReportingHelper:
             ReportingHelper.check_single_message_matches('', result, 'false')
 
     @staticmethod
+    def compare_values(value_one, value_two):
+        if int(value_one) != int(value_two):
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def compare_strings(actual_msg, exp_msg):
+        if actual_msg != exp_msg:
+            return True
+        else:
+            return False
+
+    @staticmethod
     def check_greater_than(act_msg, exp_msg):
         if act_msg > exp_msg:
             return True
@@ -55,7 +69,7 @@ class ReportingHelper:
             assert False, 'Expected value "' + exp_msg + '" is not greater than "' + act_msg
 
     @staticmethod
-    def compare_the_values(operator_type, value_one, value_two):
+    def compare_the_values_with_operator(operator_type, value_one, value_two):
         if operator_type == 'greater than' and value_one > value_two:
             return True
         elif operator_type == 'less than' and value_one < value_two:

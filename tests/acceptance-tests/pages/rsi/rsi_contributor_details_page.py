@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
+from base.utilities import Utilities
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
@@ -46,8 +47,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_pp_sales_values(self, internet_sales, total_sales):
         global pp_internet_sales, pp_total_sales
-        self.check_if_value_is_blank(internet_sales)
-        self.check_if_value_is_blank(total_sales)
+        Utilities.convert_blank_data_to_empty_string(internet_sales)
+        Utilities.convert_blank_data_to_empty_string(total_sales)
         pp_internet_sales = internet_sales
         pp_total_sales = total_sales
         self.set_internet_sales_value(pp_internet_sales)
@@ -57,8 +58,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_cp_sales_values(self, internet_sales, total_sales):
         global cp_internet_sales, cp_total_sales
-        self.check_if_value_is_blank(internet_sales)
-        self.check_if_value_is_blank(total_sales)
+        Utilities.convert_blank_data_to_empty_string(internet_sales)
+        Utilities.convert_blank_data_to_empty_string(total_sales)
         cp_internet_sales = internet_sales
         cp_total_sales = total_sales
         self.set_internet_sales_value(cp_internet_sales)
@@ -76,7 +77,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
             self.submit_sales_value(value, question)
 
     def submit_sales_value(self, value, question):
-        self.check_if_value_is_blank(value)
+        Utilities.convert_blank_data_to_empty_string(value)
         SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
 
     def validate_the_current_period_internet_sales_details(self, internet_sales):
@@ -145,20 +146,16 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         if factor_type == 'increase':
             value_one = int(cp_internet_sales) * int(pp_total_sales)
             value_two = int(cp_total_sales) * int(pp_internet_sales)
-            is_validation_triggered = ReportingHelper.compare_the_values(operator_type, value_one,
-                                                                         int(threshold_value) * value_two)
+            is_validation_triggered = ReportingHelper.compare_the_values_with_operator(operator_type, value_one,
+                                                                                       int(threshold_value) * value_two)
 
         elif factor_type == 'decrease':
             value_one = int(cp_total_sales) * int(pp_internet_sales)
             value_two = int(cp_internet_sales) * int(pp_total_sales)
-            is_validation_triggered = ReportingHelper.compare_the_values(operator_type, value_one,
-                                                                         int(threshold_value) * value_two)
+            is_validation_triggered = ReportingHelper.compare_the_values_with_operator(operator_type, value_one,
+                                                                                       int(threshold_value) * value_two)
 
         elif factor_type == 'not-applicable':
             is_validation_triggered = 'false'
 
         ReportingHelper.check_single_message_matches('Q21', result, str(is_validation_triggered).lower())
-
-    def check_if_value_is_blank(self, value):
-        if value.lower() == 'blank':
-            value = ''

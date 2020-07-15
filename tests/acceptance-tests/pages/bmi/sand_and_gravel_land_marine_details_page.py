@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from base.selenium_core import SeleniumCore
+from base.utilities import Utilities
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
@@ -12,6 +13,8 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
         '601': '0601',
         '602': '0602',
         '603': '0603',
+        '101': '0101',
+        '104': '0104'
     }
 
     question_codes_list = ["Q601", "Q602", "Q603", "Q604", "Q605", "Q606", "Q607", 'Q608']
@@ -28,21 +31,18 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
 
     def validate_the_previous_period_details(self, question_code, previous_value):
         self.submit_the_period_details(question_code, previous_value)
-        self.driver.find_element(*SandGravelLandAndMarineDetailsPage.SAVE_AND_VALIDATE).click()
-        SeleniumCore.switch_to_alert_box()
+        self.save_the_application()
         SeleniumCore.close_the_current_window()
 
     def validate_the_current_period_details(self, question_code, current_value):
-        self.driver.refresh()
         self.submit_the_period_details(question_code, current_value)
-        self.driver.find_element(*SandGravelLandAndMarineDetailsPage.SAVE_AND_VALIDATE).click()
-        SeleniumCore.switch_to_alert_box()
-        self.driver.refresh()
+        self.save_the_application()
 
     def submit_the_period_details(self, question_code, value):
         SeleniumCore.switch_window()
         question_code_ele = self.driver.find_element_by_id(self.question_codes.get(question_code))
         question_code_ele.clear()
+        Utilities.convert_blank_data_to_empty_string(value)
         question_code_ele.send_keys(value)
 
     def check_threshold_value(self, previous_value, current_value):
@@ -134,11 +134,10 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
             # check if any validation exists for a question
             self.check_fixed_validation_messages(survey, self.question_codes_list, is_validation_exists, i,
                                                  no_of_error_msgs_per_question, validation_message)
-                            
+
     def submit_comment_value(self, comment, question):
         SeleniumCore.switch_window()
-        if comment.lower() == 'empty' or comment.lower() == 'blank':
-            comment = ''
+        Utilities.convert_blank_data_to_empty_string(comment)
         if question.upper() == 'Q146':
             SeleniumCore.set_element_text(*SandGravelLandAndMarineDetailsPage.QUESTION_NO_146, comment)
         elif question.upper() == 'Q147':
