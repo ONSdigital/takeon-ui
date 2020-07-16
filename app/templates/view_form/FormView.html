@@ -77,7 +77,16 @@
 
                         <p class="field">
                             <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
-                            <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                         
+                         
+
+                            {% if datum['type'] == 'NUMERIC' %}
+                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                            {% else %}
+                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                            {% endif %}
+                         
+                         
                          </p>
                         
                         {% endif %}
