@@ -15,6 +15,7 @@ def combine_response_validations(view_form_data, validations):
             combined_output['displayquestionnumber'] = contributor['displayquestionnumber']
             combined_output['displaytext'] = contributor['displaytext']
             combined_output['displayorder'] = contributor['displayorder']
+            combined_output['type'] = contributor['type']
             for validation in validations['validation_outputs']:
                 validation_failure = {}
                 if validation['primaryquestion'] == qcode:
