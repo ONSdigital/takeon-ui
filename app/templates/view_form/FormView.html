@@ -61,14 +61,12 @@
                                 <p class="field">
                                     <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
                                     
-
                                     {% if datum['type'] == 'NUMERIC' %}
                                         <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                     {% else %}
                                         <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                     {% endif %}
 
-                                    <p>{{datum}}</p>
                                  </p>
                             </div>
                         </div>
@@ -78,16 +76,12 @@
                         <p class="field">
                             <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
                          
-                         
-
                             {% if datum['type'] == 'NUMERIC' %}
                                 <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                             {% else %}
                                 <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                             {% endif %}
-                             <p>{{datum}}</p>
-                         
-                         
+                
                          </p>
                         
                         {% endif %}
