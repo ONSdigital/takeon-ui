@@ -28,7 +28,7 @@
                 </p>
 
                 <form method="post" id="responseForm">
-                    
+                    <p>{{data}}</p>
                     {% for datum in data['form_validation_outputs'] %}
                     
                         {% if datum['validation_info']|length > 0 %}
@@ -61,6 +61,7 @@
                                 <p class="field">
                                     <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
                                     <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                    <p>{{datum}}</p>
                                  </p>
                             </div>
                         </div>
