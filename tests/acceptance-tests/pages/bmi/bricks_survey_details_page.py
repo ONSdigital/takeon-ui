@@ -23,8 +23,8 @@ class BricksSurveyDetailsPage(ContributorDetailsPage):
     }
 
     question_codes_list = [
-        'Q001', 'Q002', 'Q003', 'Q004', 'Q011', 'Q012', 'Q013', 'Q014', 'Q021', 'Q022', 'Q023', 'Q024',
-        'Q501', 'Q502', 'Q503', 'Q504', 'Q8000', 'Q9204', 'Q9214', 'Q9224', 'Q9501', 'Q9502', 'Q9503', 'Q9504']
+        'Q8000', 'Q001', 'Q002', 'Q003', 'Q004', 'Q9204', 'Q011', 'Q012', 'Q013', 'Q014', 'Q9214', 'Q021', 'Q022', 'Q023', 'Q024', 'Q9224',
+        'Q501', 'Q9501', 'Q502', 'Q9502', 'Q503', 'Q9503', 'Q504', 'Q9504']
 
     def submit_the_values_for_bricks_survey_question_codes(self, existing_value, new_value):
         SeleniumCore.switch_window()
