@@ -122,7 +122,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
             context.value_two = test_survey_page.get_derived_question_value()
         else:
             context.value_one = context.previous_period_value
-            context.value_two = int(context.current_period_value)
+            context.value_two = context.current_period_value
 
         page.check_absolute_difference_validation(operator_type, context.value_one,
                                                   context.value_two, threshold_value, result)

@@ -169,10 +169,26 @@ class ContributorDetailsPage(BasePage):
 
     def check_absolute_difference_validation(self, operator_type, value_one, value_two, threshold_value,
                                              result):
-        new_value_one = int(value_one)
-        comparison_val_one = abs(new_value_one - value_two)
-        comparison_val_two = int(threshold_value)
-        self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
+        if value_one == 'blank' and value_two == 'blank':
+            self.check_for_blank_validation(operator_type, value_one, value_two, result)
+        else:
+            new_value_one = int(value_one)
+            new_value_two = int(value_two)
+            comparison_val_one = abs(new_value_one - new_value_two)
+            comparison_val_two = self.check_for_zero_value(new_value_two, threshold_value)
+            self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
+
+    def check_for_zero_value(self, value_two, threshold_value):
+        if value_two == 0:
+            comparison_val_two = value_two
+        else:
+            comparison_val_two = int(threshold_value)
+        return comparison_val_two
+
+    def check_for_blank_validation(self, operator_type, value_one, value_two, result):
+        value_one = Utilities.convert_blank_data_to_empty_string(value_one)
+        val_two = Utilities.convert_blank_data_to_empty_string(value_two)
+        self.check_validation_msg_matches(operator_type, value_one, val_two, result)
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
         self.check_if_overall_validation_triggered()
@@ -180,9 +196,9 @@ class ContributorDetailsPage(BasePage):
 
     def check_values_are_not_equal(self, question, comparison_val_one, comparison_val_two, result):
         self.check_if_overall_validation_triggered()
-        comparison_val_one = Utilities.convert_blank_data_to_empty_string(comparison_val_one)
-        comparison_val_two = Utilities.convert_blank_data_to_empty_string(comparison_val_two)
-        if comparison_val_one == '' or comparison_val_two == '':
+        if comparison_val_one == 'blank' and comparison_val_two == 'blank':
+            Utilities.convert_blank_data_to_empty_string(comparison_val_one)
+            Utilities.convert_blank_data_to_empty_string(comparison_val_two)
             is_validation_exists = ReportingHelper.compare_strings(comparison_val_one,
                                                                    comparison_val_two)
 
@@ -208,7 +224,7 @@ class ContributorDetailsPage(BasePage):
         self.save_the_application()
 
     def check_if_overall_validation_triggered(self):
-        if self.get_no_of_validation_error_messages() > 0:
+        if self.get_no_of_validation_error_messages() >= 0:
             ReportingHelper.check_single_message_not_matches(
                 self.get_validation_status().lower(), 'form saved',
                 '', 'Please check, Overall validation failed')
