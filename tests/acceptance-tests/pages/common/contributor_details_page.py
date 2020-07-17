@@ -29,7 +29,7 @@ class ContributorDetailsPage(BasePage):
 
     def get_validation_error_message(self, question_type):
         element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + \
-            question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
+                  question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
         return SeleniumCore.find_elements_by_xpath(element)
 
     def save_the_application(self):
@@ -123,7 +123,7 @@ class ContributorDetailsPage(BasePage):
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
-        if question_type > 1:
+        if len(question_type) > 1:
             self.check_comment_text()
         else:
             no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
@@ -165,13 +165,18 @@ class ContributorDetailsPage(BasePage):
             count = 0
             for question in questions_list:
                 question_element = self.get_question_code_element(question)
+                commodity_value = self.replace_blank_with_empty_string(commodity_values[count])
                 SeleniumCore.set_element_text_by_id(
-                    question_element, commodity_values[count])
-                count += 1
+                    question_element, commodity_value)
+                if len(commodity_values) > 1:
+                    count += 1
         else:
             question_element = self.get_question_code_element(questions_list)
             SeleniumCore.set_element_text_by_id(
                 question_element, commodity_values[0])
+
+    def replace_blank_with_empty_string(self, text):
+        return text.replace('<Blank>', ' ')
 
     def get_values_as_a_list(self, values):
         new_values = values.split(',')
@@ -253,6 +258,7 @@ class ContributorDetailsPage(BasePage):
             count = 0
             for question in questions_list:
                 question_element = self.get_question_code_element(question)
-                question_actual_text = SeleniumCore.get_element_text(question_element)
-                ReportingHelper.check_single_message_matches(question_element,question_actual_text,commodity_values[count])
-                count += 1
+                question_actual_text = SeleniumCore.get_attribute_element_text(By.ID, question_element)
+                commodity_value = self.replace_blank_with_empty_string(commodity_values[count])
+                ReportingHelper.check_single_message_matches(question_element, question_actual_text,
+                                                             commodity_value)
