@@ -1,6 +1,6 @@
-Feature: Sand And Gravel Land Survey
+Feature: Sand And Gravel Land Survey - Period on Period Movement(PoPM) Validation rule
 
-  Scenario Outline:  Sand and Gravel Land survey -- period on period movement for invalid values
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Sand produced for asphalt (asphalting sand)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0066" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
@@ -11,4 +11,12 @@ Feature: Sand And Gravel Land Survey
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | thresholdValue | operator     | questionCode | previousPeriod | currentPeriod | isValidationExists |
-      | 49900008900 | 30000              | 9999                | true   | 20000          | greater than | 601          | 201903         | 201906        | be                 |
+      | 49900008900 | 30000              | 9999                | true   | 20000          | greater than | Q601         | 201903         | 201906        | be                 |
+      | 49900008900 | 9999               | 30000               | true   | 20000          | greater than | Q601         | 201903         | 201906        | be                 |
+      | 49900008900 | 30000              | 10000               | false  | 20000          | equal to     | Q601         | 201903         | 201906        | not be             |
+      | 49900008900 | 10000              | 30000               | false  | 20000          | equal to     | Q601         | 201903         | 201906        | not be             |
+      | 49900008900 | 30000              | 10001               | false  | 20000          | less than    | Q601         | 201903         | 201906        | not be             |
+      | 49900008900 | 10001              | 30000               | false  | 20000          | less than    | Q601         | 201903         | 201906        | not be             |
+      | 49900008900 | 0                  | 0                   | false  | 20000          | equal to     | Q601         | 201903         | 201906        | not be             |
+      | 49900008900 | blank              | blank               | false  | 20000          | equal to     | Q601         | 201903         | 201906        | not be             |
+    

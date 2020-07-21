@@ -1,6 +1,6 @@
 Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
 
-  Scenario Outline:  LU-7033 - Period on Period Movement Validation - Aggregate blocks Total Production(Dense Aggregate)
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Aggregate blocks Total Production(Dense Aggregate)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0073" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
@@ -21,7 +21,7 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
       | 49900189484 | blank              | blank               | false  | 10000          | equal to     | Q102         | 201905         | 201906        | not be             |
 
 
-  Scenario Outline:  LU-7033 - Period on Period Movement Validation - Aggregate blocks Total Production(Lightweight Aggregate)
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Aggregate blocks Total Production(Lightweight Aggregate)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0073" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
@@ -42,7 +42,7 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
       | 49900189484 | blank              | blank               | false  | 10000          | equal to     | Q112         | 201905         | 201906        | not be             |
 
 
-  Scenario Outline:  LU-7033 - Period on Period Movement Validation - Aggregate blocks Total deliveries (Dense Aggregate)
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Aggregate blocks Total deliveries (Dense Aggregate)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0073" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
@@ -63,7 +63,7 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
       | 49900189484 | blank              | blank               | false  | 10000          | equal to     | Q103         | 201905         | 201906        | not be             |
 
 
-  Scenario Outline:  LU-7033 - Period on Period Movement Validation - Aggregate blocks Total deliveries (Lightweight Aggregate)
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Aggregate blocks Total deliveries (Lightweight Aggregate)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0073" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
@@ -84,7 +84,7 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
       | 49900189484 | blank              | blank               | false  | 10000          | equal to     | Q113         | 201905         | 201906        | not be             |
 
 
-  Scenario Outline:  LU-7033 - Period on Period Movement Validation - Aerated blocks Total production during month
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Aerated blocks Total production during month
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0073" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
@@ -105,7 +105,7 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
       | 49900189484 | blank              | blank               | false  | 10000          | equal to     | Q122         | 201905         | 201906        | not be             |
 
 
-  Scenario Outline:  LU-7033 - Period on Period Movement Validation - Aerated blocks Total deliveries during month
+  Scenario Outline: LU-7033 - Period on Period Movement Validation - Aerated blocks Total deliveries during month
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "0073" with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
