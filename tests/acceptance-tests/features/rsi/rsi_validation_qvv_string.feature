@@ -31,6 +31,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
     Given I search for the survey "0023" with <reference> for the current period <period>
     And I submit the comment <comment> for questions
       | question_codes |
+      | Q146           |
       | Q146a          |
       | Q146b          |
       | Q146c          |
@@ -55,6 +56,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
     Given I search for the survey "0023" with <reference> for the current period <period>
     And I submit the comment <comment> for questions
       | question_codes |
+      | Q146           |
       | Q146a          |
       | Q146b          |
       | Q146c          |
