@@ -214,13 +214,32 @@ class ContributorDetailsPage(BasePage):
     def get_validation_status(self):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
 
-    def validate_the_previous_period_details(self, question_code, previous_value):
-        self.submit_the_values_for_survey(question_code, previous_value)
+    # def validate_the_previous_period_details(self, question_code, previous_value):
+    #     self.submit_the_values_for_survey(question_code, previous_value)
+    #     self.save_the_application()
+    #     SeleniumCore.close_the_current_window()
+
+    def validate_the_previous_period_details(self, *questions_and_values):
+        self.submit_single_value_for_multiple_question(questions_and_values)
         self.save_the_application()
         SeleniumCore.close_the_current_window()
 
-    def validate_the_current_period_details(self, question_code, current_value):
-        self.submit_the_values_for_survey(question_code, current_value)
+    def submit_single_value_for_multiple_question(self, questions_and_values):
+        SeleniumCore.switch_window()
+        questions_list = questions_and_values[0]
+        commodity_values = questions_and_values[1]
+        new_questions_list = np.asarray(questions_list)
+        if new_questions_list.size > 1:
+            for question in questions_list:
+                question_element = self.get_question_code_element(question)
+                SeleniumCore.set_element_text_by_id(question_element, commodity_values)
+
+    # def validate_the_current_period_details(self, question_code, current_value):
+    #     self.submit_the_values_for_survey(question_code, current_value)
+    #     self.save_the_application()
+
+    def validate_the_current_period_details(self, *questions_and_values):
+        self.submit_single_value_for_multiple_question(questions_and_values)
         self.save_the_application()
 
     def check_if_overall_validation_triggered(self):
