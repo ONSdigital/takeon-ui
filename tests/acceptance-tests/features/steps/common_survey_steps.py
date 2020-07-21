@@ -39,15 +39,15 @@ def step_impl(context, reference, survey, period_type, period, sic_code=None):
 
 @given(u'I submit the {value_type} {values} for questions')
 def step_impl(context, value_type, values):
-    context.codes = []
+    context.question_codes = []
     for row in context.table.rows:
         for cell in row.cells:
-            context.codes.append(cell)
+            context.question_codes.append(cell)
 
     if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.question_codes, values)
     else:
-        ContributorDetailsPage().submit_the_values_for_survey(context.codes, values)
+        ContributorDetailsPage().submit_the_values_for_survey(context.question_codes, values)
 
 
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -93,12 +93,15 @@ def step_impl(context, validation_message, is_validation_exists, question_code=N
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question codes')
 def step_impl(context, validation_message, is_validation_exists):
-    context.codes = []
-    for row in context.table.rows:
-        for cell in row.cells:
-            context.codes.append(cell)
-    ContributorDetailsPage().check_multiple_questions_validation_messages(context.codes, validation_message,
+    if not context.question_codes:
+        context.question_codes = []
+        for row in context.table.rows:
+            for cell in row.cells:
+                context.question_codes.append(cell)
+
+    ContributorDetailsPage().check_multiple_questions_validation_messages(context.question_codes, validation_message,
                                                                           is_validation_exists)
 
 

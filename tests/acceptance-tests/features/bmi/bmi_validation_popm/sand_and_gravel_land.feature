@@ -2,7 +2,7 @@ Feature: Sand And Gravel Land Survey - Period on Period Movement(PoPM) Validatio
 
   Background:
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I have the "sand and gravel material" questions to check
+    And I have the "sand and gravel land material" questions to check
       | question_codes |
       | Q601           |
       | Q602           |
@@ -11,7 +11,6 @@ Feature: Sand And Gravel Land Survey - Period on Period Movement(PoPM) Validatio
       | Q605           |
       | Q606           |
       | Q607           |
-      | Q608           |
 
 
   Scenario Outline: LU-7033 - Period on Period Movement Validation
@@ -20,7 +19,7 @@ Feature: Sand And Gravel Land Survey - Period on Period Movement(PoPM) Validatio
     When I search for the survey "0066" with <reference> for the current period <currentPeriod>
     And I run the validation process with <currentPeriodValue>
     Then the validation should return <result> if the "absolute difference between the values are" <operator> threshold value <thresholdValue>
-    And the "This has changed significantly since the last submission" message should <isValidationExists> displayed for question code "Q601"
+    And the "This has changed significantly since the last submission" message should <isValidationExists> displayed for question codes
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | thresholdValue | operator     | previousPeriod | currentPeriod | isValidationExists |
