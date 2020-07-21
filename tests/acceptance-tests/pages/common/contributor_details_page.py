@@ -123,8 +123,8 @@ class ContributorDetailsPage(BasePage):
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
-        if len(question_type) > 1:
-            self.check_comment_text()
+        if type(question_type) == list and len(question_type) > 1:
+            self.check_multiple_comment_text_messages()
         else:
             no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
             if len(no_of_msgs) == 1:
@@ -249,7 +249,7 @@ class ContributorDetailsPage(BasePage):
                 self.get_validation_status().lower(), 'form saved',
                 '', 'Please check, Overall validation failed')
 
-    def check_comment_text(self):
+    def check_multiple_comment_text_messages(self):
         global question_codes
         questions_list = question_codes[0]
         commodity_values = self.get_values_as_a_list(question_codes[1])
