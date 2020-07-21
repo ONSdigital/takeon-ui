@@ -186,10 +186,10 @@ class ContributorDetailsPage(BasePage):
         return commodity_values
 
     def get_question_code_element(self, question_code):
-        if len(question_code) == 3:
-            return question_code.replace("Q", "").zfill(4)
-        else:
+        if len(question_code) > 4:
             return question_code.replace("Q", "")
+        else:
+            return question_code.replace("Q", "").zfill(4)
 
     def check_turnover_ratio(self, operator_type, internet_sales, total_sales, threshold_value, result):
         comparison_val_one = int(internet_sales)
