@@ -2,7 +2,7 @@ Feature: Sand And Gravel Land Survey - Period on Period Movement(PoPM) Validatio
 
   Background:
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
-    And I have the "sand and gravel land material" questions to check
+    And I have the "sand and gravel land material stock" questions to check
       | question_codes |
       | Q601           |
       | Q602           |
