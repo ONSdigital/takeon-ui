@@ -46,7 +46,7 @@ def step_impl(context, value_type, values):
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.question_codes, values)
     else:
-        ContributorDetailsPage().submit_values_for_multiple_questions(context.question_codes, values)
+        ContributorDetailsPage().submit_values_for_survey_questions(context.question_codes, values)
 
 
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')

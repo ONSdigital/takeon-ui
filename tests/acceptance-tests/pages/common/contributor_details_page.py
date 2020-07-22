@@ -226,29 +226,26 @@ class ContributorDetailsPage(BasePage):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
 
     def validate_the_previous_period_details(self, *questions_and_values):
-        self.submit_values_for_survey_questions(questions_and_values)
+        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1])
         self.save_the_application()
         SeleniumCore.close_the_current_window()
 
-    def submit_values_for_survey_questions(self, questions_and_values):
+    def submit_values_for_survey_questions(self, *questions_and_values):
         global question_codes
         question_codes = questions_and_values
         SeleniumCore.switch_window()
         questions_list = questions_and_values[0]
         new_questions_list = np.asarray(questions_list)
-        commodity_values = questions_and_values[1]
-        new_commodity_values_list = np.asarray(commodity_values)
+        commodity_values = self.get_values_as_a_list(questions_and_values[1])
 
-        if new_commodity_values_list.size > 1 and new_questions_list.size > 1:
-            self.submit_values_for_multiple_questions(questions_list, commodity_values)
-        elif new_questions_list.size > 1 and new_commodity_values_list.size == 1:
-            self.submit_single_value_for_multiple_questions(questions_list, commodity_values)
+        if len(commodity_values) > 1 and new_questions_list.size > 1:
+            self.submit_values_as_a_list_for_multiple_questions(questions_list, commodity_values)
+        elif new_questions_list.size > 1 and len(commodity_values) == 1:
+            self.submit_single_value_for_multiple_questions(questions_list, commodity_values[0])
         else:
-            question_element = self.get_question_code_element(questions_list)
-            SeleniumCore.set_element_text_by_id(
-                question_element, commodity_values)
+            self.submit_single_value_per_question(questions_list, commodity_values[0])
 
-    def submit_values_for_multiple_questions(self, questions_list, commodity_values):
+    def submit_values_as_a_list_for_multiple_questions(self, questions_list, commodity_values):
         new_questions_list = np.asarray(questions_list)
         if new_questions_list.size > 1:
             count = 0
@@ -266,8 +263,13 @@ class ContributorDetailsPage(BasePage):
             SeleniumCore.set_element_text_by_id(question_element,
                                                 self.check_blank_data_value(commodity_value))
 
+    def submit_single_value_per_question(self, questions_list, commodity_value):
+        question_element = self.get_question_code_element(questions_list)
+        SeleniumCore.set_element_text_by_id(
+            question_element, commodity_value)
+
     def validate_the_current_period_details(self, *questions_and_values):
-        self.submit_values_for_survey_questions(questions_and_values)
+        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1])
         self.save_the_application()
 
     def check_if_overall_validation_triggered(self):
