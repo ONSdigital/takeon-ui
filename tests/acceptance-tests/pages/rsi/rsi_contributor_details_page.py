@@ -47,10 +47,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_pp_sales_values(self, internet_sales, total_sales):
         global pp_internet_sales, pp_total_sales
-        Utilities.convert_blank_data_to_empty_string(internet_sales)
-        Utilities.convert_blank_data_to_empty_string(total_sales)
-        pp_internet_sales = internet_sales
-        pp_total_sales = total_sales
+        pp_internet_sales = self.check_blank_data_value(internet_sales)
+        pp_total_sales = self.check_blank_data_value(total_sales)
         self.set_internet_sales_value(pp_internet_sales)
         self.set_total_turnover_sales_value(pp_total_sales)
         ContributorDetailsPage().save_the_application()
@@ -58,13 +56,14 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
 
     def submit_cp_sales_values(self, internet_sales, total_sales):
         global cp_internet_sales, cp_total_sales
-        Utilities.convert_blank_data_to_empty_string(internet_sales)
-        Utilities.convert_blank_data_to_empty_string(total_sales)
-        cp_internet_sales = internet_sales
-        cp_total_sales = total_sales
+        cp_internet_sales = self.check_blank_data_value(internet_sales)
+        cp_total_sales = self.check_blank_data_value(total_sales)
         self.set_internet_sales_value(cp_internet_sales)
         self.set_total_turnover_sales_value(cp_total_sales)
         ContributorDetailsPage().save_the_application()
+
+    def check_blank_data_value(self, value):
+        return Utilities.convert_blank_data_to_empty_string(value)
 
     def cp_sales_values(self, internet_sales, total_sales):
         self.cp_internet_sales = internet_sales
@@ -77,7 +76,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
             self.submit_sales_value(value, question)
 
     def submit_sales_value(self, value, question):
-        Utilities.convert_blank_data_to_empty_string(value)
+        value = self.check_blank_data_value(value)
         SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
 
     def validate_the_current_period_internet_sales_details(self, internet_sales):

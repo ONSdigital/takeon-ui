@@ -43,16 +43,15 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.question_codes.append(cell)
-
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.question_codes, values)
     else:
-        ContributorDetailsPage().submit_the_values_for_survey(context.question_codes, values)
+        ContributorDetailsPage().submit_values_for_multiple_questions(context.question_codes, values)
 
 
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
-    context.question_code = question.upper()
+    context.question_codes = question.upper()
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
     elif context.survey == '999A':
@@ -82,20 +81,20 @@ def step_impl(context, derived_value, total_turnover_value=None):
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
-@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
-@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_code}"')
-def step_impl(context, validation_message, is_validation_exists, question_code=None):
-    if not question_code:
-        question_code = context.question_code
+@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')
+def step_impl(context, validation_message, is_validation_exists, question_codes=None):
+    if not question_codes:
+        question_codes = context.question_codes
     page = ContributorDetailsPage()
-    page.check_validation_message(question_code, validation_message,
+    page.check_validation_message(question_codes, validation_message,
                                   is_validation_exists)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed for question codes')
 def step_impl(context, validation_message, is_validation_exists):
-    if not context.question_codes:
+    if context.table is not None:
         context.question_codes = []
         for row in context.table.rows:
             for cell in row.cells:

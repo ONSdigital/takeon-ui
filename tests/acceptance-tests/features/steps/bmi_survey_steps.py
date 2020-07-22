@@ -5,8 +5,8 @@ from pages.bmi.sand_and_gravel_land_marine_details_page import SandGravelLandAnd
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
-@given(u'I run the validation process on {question_code} with {period_value}')
-@when(u'I run the validation process on {question_code} with {period_value}')
+@given(u'I run the validation process on {question_codes} with {period_value}')
+@when(u'I run the validation process on {question_codes} with {period_value}')
 @given(u'I run the validation process with {period_value}')
 @when(u'I run the validation process with {period_value}')
 def step_impl(context, period_value,question_codes=None):
