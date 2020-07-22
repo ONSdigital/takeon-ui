@@ -11,8 +11,7 @@ Feature: Sand And Gravel Marine Survey - Period on Period Movement(PoPM) Validat
       | Q605           |
       | Q606           |
       | Q607           |
-
-
+    
   Scenario Outline: LU-7033 - Period on Period Movement Validation
     Given I search for the survey "0076" with <reference> for the previous period <previousPeriod>
     And I run the validation process with <previousPeriodValue>
