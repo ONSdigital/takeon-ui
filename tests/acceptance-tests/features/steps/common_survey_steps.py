@@ -44,6 +44,8 @@ def step_impl(context, value_type, values):
         for cell in row.cells:
             context.codes.append(cell)
 
+    context.question_code = context.codes
+
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
     else:
