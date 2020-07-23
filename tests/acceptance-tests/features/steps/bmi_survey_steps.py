@@ -10,12 +10,12 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 def step_impl(context, question_code, period_value):
     page = ContributorDetailsPage()
     if context.period_type == "previous":
-        context.previous_period_value = period_value
-        page.validate_the_previous_period_details(question_code, context.previous_period_value)
+        context.comparison_value_one = period_value
+        page.validate_the_previous_period_details(question_code, context.comparison_value_one)
     elif context.period_type == "current":
         context.question_code = question_code
-        context.current_period_value = period_value
-        page.validate_the_current_period_details(question_code, context.current_period_value)
+        context.comparison_value_two = period_value
+        page.validate_the_current_period_details(question_code, context.comparison_value_two)
 
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
@@ -92,5 +92,5 @@ def step_impl(context, result, validation_check):
     page = ContributorDetailsPage()
 
     if validation_check == 'values are not equal':
-        page.check_values_are_not_equal(context.question_code, context.previous_period_value,
-                                        context.current_period_value, result)
+        page.check_values_are_not_equal(context.question_code, context.comparison_value_one,
+                                        context.comparison_value_two, result)

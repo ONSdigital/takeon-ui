@@ -262,3 +262,15 @@ class ContributorDetailsPage(BasePage):
                 commodity_value = self.replace_blank_with_empty_string(commodity_values[count])
                 ReportingHelper.check_single_message_matches(question_element, question_actual_text,
                                                              commodity_value)
+
+    def run_the_validation_process(self, *questions):
+        questions_list = questions[0]
+        comparing_question_value = questions[1]
+        derived_question_value = questions[2]
+        comparing_question_element = self.get_question_code_element(questions_list[0])
+        derived_question_element = self.get_question_code_element(questions_list[1])
+        SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
+        SeleniumCore.set_element_text_by_id(derived_question_element, derived_question_value)
+        ContributorDetailsPage().save_the_application()
+        actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
+        ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)

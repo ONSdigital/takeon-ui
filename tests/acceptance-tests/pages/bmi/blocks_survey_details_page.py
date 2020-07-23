@@ -72,3 +72,4 @@ class BlocksSurveyDetailsPage(ContributorDetailsPage):
             SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_145, comment)
         elif question.upper() == 'Q146':
             SeleniumCore.set_element_text(*BlocksSurveyDetailsPage.QUESTION_NO_146, comment)
+
