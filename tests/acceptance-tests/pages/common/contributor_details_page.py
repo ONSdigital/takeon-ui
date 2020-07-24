@@ -224,7 +224,6 @@ class ContributorDetailsPage(BasePage):
         else:
             is_validation_exists = ReportingHelper.compare_values(comparison_val_one,
                                                                   comparison_val_two)
-
         ReportingHelper.check_single_message_matches(
             question, result, str(is_validation_exists).lower())
 
@@ -265,12 +264,14 @@ class ContributorDetailsPage(BasePage):
 
     def run_the_validation_process(self, *questions):
         questions_list = questions[0]
-        comparing_question_value = questions[1]
-        derived_question_value = questions[2]
+        comparing_question_value = Utilities.convert_blank_data_to_empty_string(questions[1])
+        derived_question_value = Utilities.convert_blank_data_to_empty_string(questions[2])
         comparing_question_element = self.get_question_code_element(questions_list[0])
         derived_question_element = self.get_question_code_element(questions_list[1])
         SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
         SeleniumCore.set_element_text_by_id(derived_question_element, derived_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
+        if derived_question_value == '':
+            derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
