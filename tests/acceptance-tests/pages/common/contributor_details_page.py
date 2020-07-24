@@ -154,27 +154,6 @@ class ContributorDetailsPage(BasePage):
                 self.check_validation_message(
                     question, exp_msg, is_validation_exists)
 
-    def submit_the_values_for_survey(self, *questions):
-        global question_codes
-        question_codes = questions
-        questions_list = questions[0]
-        commodity_values = self.get_values_as_a_list(questions[1])
-        SeleniumCore.switch_window()
-        new_questions_list = np.asarray(questions_list)
-        if new_questions_list.size > 1:
-            count = 0
-            for question in questions_list:
-                question_element = self.get_question_code_element(question)
-                commodity_value = self.replace_blank_with_empty_string(commodity_values[count])
-                SeleniumCore.set_element_text_by_id(
-                    question_element, commodity_value)
-                if len(commodity_values) > 1:
-                    count += 1
-        else:
-            question_element = self.get_question_code_element(questions_list)
-            SeleniumCore.set_element_text_by_id(
-                question_element, commodity_values[0])
-
     def replace_blank_with_empty_string(self, text):
         return text.replace('<Blank>', ' ')
 
@@ -200,24 +179,36 @@ class ContributorDetailsPage(BasePage):
 
     def check_absolute_difference_validation(self, operator_type, value_one, value_two, threshold_value,
                                              result):
-        new_value_one = int(value_one)
-        comparison_val_one = abs(new_value_one - value_two)
-        comparison_val_two = int(threshold_value)
-        self.check_validation_msg_matches(
-            operator_type, comparison_val_one, comparison_val_two, result)
+        if value_one == 'blank' and value_two == 'blank':
+            self.check_for_blank_validation(operator_type, value_one, value_two, result)
+        else:
+            new_value_one = int(value_one)
+            new_value_two = int(value_two)
+            comparison_val_one = abs(new_value_one - new_value_two)
+            comparison_val_two = self.check_for_zero_value(new_value_two, threshold_value)
+            self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
+
+    def check_for_zero_value(self, value_two, threshold_value):
+        if value_two == 0:
+            comparison_val_two = value_two
+        else:
+            comparison_val_two = int(threshold_value)
+        return comparison_val_two
+
+    def check_for_blank_validation(self, operator_type, value_one, value_two, result):
+        value_one = Utilities.convert_blank_data_to_empty_string(value_one)
+        val_two = Utilities.convert_blank_data_to_empty_string(value_two)
+        self.check_validation_msg_matches(operator_type, value_one, val_two, result)
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
         self.check_if_overall_validation_triggered()
-        ReportingHelper.compare_the_messages(
-            operator_type, comparison_val_one, comparison_val_two, result)
+        ReportingHelper.compare_the_messages(operator_type, comparison_val_one, comparison_val_two, result)
 
     def check_values_are_not_equal(self, question, comparison_val_one, comparison_val_two, result):
         self.check_if_overall_validation_triggered()
-        comparison_val_one = Utilities.convert_blank_data_to_empty_string(
-            comparison_val_one)
-        comparison_val_two = Utilities.convert_blank_data_to_empty_string(
-            comparison_val_two)
-        if comparison_val_one == '' or comparison_val_two == '':
+        if comparison_val_one == 'blank' and comparison_val_two == 'blank':
+            comparison_val_one = Utilities.convert_blank_data_to_empty_string(comparison_val_one)
+            comparison_val_two = Utilities.convert_blank_data_to_empty_string(comparison_val_two)
             is_validation_exists = ReportingHelper.compare_strings(comparison_val_one,
                                                                    comparison_val_two)
 
@@ -233,17 +224,55 @@ class ContributorDetailsPage(BasePage):
     def get_validation_status(self):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
 
-    def validate_the_previous_period_details(self, question_code, previous_value):
-        self.submit_the_values_for_survey(question_code, previous_value)
+    def validate_the_previous_period_details(self, *questions_and_values):
+        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1])
         self.save_the_application()
         SeleniumCore.close_the_current_window()
 
-    def validate_the_current_period_details(self, question_code, current_value):
-        self.submit_the_values_for_survey(question_code, current_value)
+    def submit_values_for_survey_questions(self, *questions_and_values):
+        global question_codes
+        question_codes = questions_and_values
+        SeleniumCore.switch_window()
+        questions_list = questions_and_values[0]
+        new_questions_list = np.asarray(questions_list)
+        commodity_values = self.get_values_as_a_list(questions_and_values[1])
+
+        if len(commodity_values) > 1 and new_questions_list.size > 1:
+            self.submit_values_as_a_list_for_multiple_questions(questions_list, commodity_values)
+        elif new_questions_list.size > 1 and len(commodity_values) == 1:
+            self.submit_single_value_for_multiple_questions(questions_list, commodity_values[0])
+        else:
+            self.submit_single_value_per_question(questions_list, commodity_values[0])
+
+    def submit_values_as_a_list_for_multiple_questions(self, questions_list, commodity_values):
+        new_questions_list = np.asarray(questions_list)
+        if new_questions_list.size > 1:
+            count = 0
+        for question in questions_list:
+            question_element = self.get_question_code_element(question)
+            SeleniumCore.set_element_text_by_id(
+                question_element, self.check_blank_data_value(commodity_values[count]))
+            if len(commodity_values) > 1:
+                count += 1
+
+    def submit_single_value_for_multiple_questions(self, questions_list, commodity_value):
+        for question in questions_list:
+            question_element = self.get_question_code_element(question)
+            commodity_value = self.replace_blank_with_empty_string(commodity_value)
+            SeleniumCore.set_element_text_by_id(question_element,
+                                                self.check_blank_data_value(commodity_value))
+
+    def submit_single_value_per_question(self, questions_list, commodity_value):
+        question_element = self.get_question_code_element(questions_list)
+        SeleniumCore.set_element_text_by_id(
+            question_element, commodity_value)
+
+    def validate_the_current_period_details(self, *questions_and_values):
+        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1])
         self.save_the_application()
 
     def check_if_overall_validation_triggered(self):
-        if self.get_no_of_validation_error_messages() > 0:
+        if self.get_no_of_validation_error_messages() >= 0:
             ReportingHelper.check_single_message_not_matches(
                 self.get_validation_status().lower(), 'form saved',
                 '', 'Please check, Overall validation failed')
@@ -275,3 +304,6 @@ class ContributorDetailsPage(BasePage):
         if derived_question_value == '':
             derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
+
+    def check_blank_data_value(self, value):
+        return Utilities.convert_blank_data_to_empty_string(value)

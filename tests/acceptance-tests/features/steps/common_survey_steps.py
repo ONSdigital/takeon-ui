@@ -39,23 +39,20 @@ def step_impl(context, reference, survey, period_type, period, sic_code=None):
 
 @given(u'I submit the "{value_type}" {values} for questions')
 def step_impl(context, value_type, values):
-    context.codes = []
+    context.question_codes = []
     for row in context.table.rows:
         for cell in row.cells:
-            context.codes.append(cell)
-
-    context.question_code = context.codes
-
+            context.question_codes.append(cell)
     if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.question_codes, values)
     else:
-        ContributorDetailsPage().submit_the_values_for_survey(context.codes, values)
+        ContributorDetailsPage().submit_values_for_survey_questions(context.question_codes, values)
 
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
-    context.question_code = question.upper()
+    context.question_codes = question.upper()
     if context.survey == '0023':
         RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
     elif context.survey == '999A':
@@ -95,23 +92,26 @@ def step_impl(context, derived_value, question_value=None):
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
-@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
-@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_code}"')
-def step_impl(context, validation_message, is_validation_exists, question_code=None):
-    if not question_code:
-        question_code = context.question_code
+@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')
+def step_impl(context, validation_message, is_validation_exists, question_codes=None):
+    if not question_codes:
+        question_codes = context.question_codes
     page = ContributorDetailsPage()
-    page.check_validation_message(question_code, validation_message,
+    page.check_validation_message(question_codes, validation_message,
                                   is_validation_exists)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question codes')
 def step_impl(context, validation_message, is_validation_exists):
-    context.codes = []
-    for row in context.table.rows:
-        for cell in row.cells:
-            context.codes.append(cell)
-    ContributorDetailsPage().check_multiple_questions_validation_messages(context.codes, validation_message,
+    if context.table is not None:
+        context.question_codes = []
+        for row in context.table.rows:
+            for cell in row.cells:
+                context.question_codes.append(cell)
+
+    ContributorDetailsPage().check_multiple_questions_validation_messages(context.question_codes, validation_message,
                                                                           is_validation_exists)
 
 
@@ -135,7 +135,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
             context.value_two = test_survey_page.get_derived_question_value()
         else:
             context.value_one = context.previous_period_value
-            context.value_two = int(context.current_period_value)
+            context.value_two = context.current_period_value
 
         page.check_absolute_difference_validation(operator_type, context.value_one,
                                                   context.value_two, threshold_value, result)
