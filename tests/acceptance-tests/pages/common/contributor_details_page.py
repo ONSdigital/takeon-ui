@@ -154,22 +154,6 @@ class ContributorDetailsPage(BasePage):
                 self.check_validation_message(
                     question, exp_msg, is_validation_exists)
 
-    def replace_blank_with_empty_string(self, text):
-        return text.replace('<Blank>', ' ')
-
-    def get_values_as_a_list(self, values):
-        new_values = values.split(',')
-        commodity_values = []
-        for new_val in new_values:
-            commodity_values.append(new_val)
-        return commodity_values
-
-    def get_question_code_element(self, question_code):
-        if len(question_code) > 4:
-            return question_code.replace("Q", "")
-        else:
-            return question_code.replace("Q", "").zfill(4)
-
     def check_turnover_ratio(self, operator_type, internet_sales, total_sales, threshold_value, result):
         comparison_val_one = int(internet_sales)
         thre_val = float(threshold_value[:-1]) / 100
@@ -249,7 +233,7 @@ class ContributorDetailsPage(BasePage):
         if new_questions_list.size > 1:
             count = 0
         for question in questions_list:
-            question_element = self.get_question_code_element(question)
+            question_element = Utilities.get_question_code_element(question)
             SeleniumCore.set_element_text_by_id(
                 question_element, self.check_blank_data_value(commodity_values[count]))
             if len(commodity_values) > 1:
@@ -257,13 +241,13 @@ class ContributorDetailsPage(BasePage):
 
     def submit_single_value_for_multiple_questions(self, questions_list, commodity_value):
         for question in questions_list:
-            question_element = self.get_question_code_element(question)
-            commodity_value = self.replace_blank_with_empty_string(commodity_value)
+            question_element = Utilities.get_question_code_element(question)
+            commodity_value = Utilities.replace_blank_with_empty_string(commodity_value)
             SeleniumCore.set_element_text_by_id(question_element,
                                                 self.check_blank_data_value(commodity_value))
 
     def submit_single_value_per_question(self, questions_list, commodity_value):
-        question_element = self.get_question_code_element(questions_list)
+        question_element = Utilities.get_question_code_element(questions_list)
         SeleniumCore.set_element_text_by_id(
             question_element, commodity_value)
 
@@ -280,14 +264,14 @@ class ContributorDetailsPage(BasePage):
     def check_multiple_comment_text_messages(self):
         global question_codes
         questions_list = question_codes[0]
-        commodity_values = self.get_values_as_a_list(question_codes[1])
+        commodity_values = Utilities.get_values_as_a_list(question_codes[1])
         new_questions_list = np.asarray(questions_list)
         if new_questions_list.size > 1:
             count = 0
             for question in questions_list:
-                question_element = self.get_question_code_element(question)
+                question_element = Utilities.get_question_code_element(question)
                 question_actual_text = SeleniumCore.get_attribute_element_text(By.ID, question_element)
-                commodity_value = self.replace_blank_with_empty_string(commodity_values[count])
+                commodity_value = Utilities.replace_blank_with_empty_string(commodity_values[count])
                 ReportingHelper.check_single_message_matches(question_element, question_actual_text,
                                                              commodity_value)
 
@@ -295,10 +279,9 @@ class ContributorDetailsPage(BasePage):
         questions_list = questions[0]
         comparing_question_value = Utilities.convert_blank_data_to_empty_string(questions[1])
         derived_question_value = Utilities.convert_blank_data_to_empty_string(questions[2])
-        comparing_question_element = self.get_question_code_element(questions_list[0])
-        derived_question_element = self.get_question_code_element(questions_list[1])
+        comparing_question_element = Utilities.get_question_code_element(questions_list[0])
+        derived_question_element = Utilities.get_question_code_element(questions_list[1])
         SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
-        SeleniumCore.set_element_text_by_id(derived_question_element, derived_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
         if derived_question_value == '':
