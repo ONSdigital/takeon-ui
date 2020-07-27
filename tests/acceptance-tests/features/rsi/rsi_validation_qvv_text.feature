@@ -4,7 +4,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 5
-    Given I search for the survey "0023" with <reference> for the current period <period>
+    Given I search for the survey "023" with <reference> for the current period <period>
     And I submit the comment <comment> for questions
       | question_codes |
       | Q146           |
@@ -28,7 +28,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | 201903 | 49900551526 | <Blank>            | be                 |
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 6
-    Given I search for the survey "0023" with <reference> for the current period <period>
+    Given I search for the survey "023" with <reference> for the current period <period>
     And I submit the comment <comment> for questions
       | question_codes |
       | Q146           |
@@ -53,7 +53,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
 
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 7
-    Given I search for the survey "0023" with <reference> for the current period <period>
+    Given I search for the survey "023" with <reference> for the current period <period>
     And I submit the comment <comment> for questions
       | question_codes |
       | Q146           |

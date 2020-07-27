@@ -4,7 +4,7 @@ Feature: RSI Survey - Validation Value Present SIC (VPSIC)
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6670 - Value Present SIC (VPSIC) Validation for RSI Survey form 7
-    Given I search for the survey "0023" with <reference> for the current period <period> with SIC code <SIC>
+    Given I search for the survey "023" with <reference> for the current period <period> with SIC code <SIC>
     When I submit the "SICValue" <SICValue> for question <question>
     And I trigger the validation process
     Then the <validation> message should <isValidationExists> displayed

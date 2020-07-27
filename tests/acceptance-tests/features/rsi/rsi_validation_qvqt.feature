@@ -4,7 +4,7 @@ Feature: RSI Survey - QvQT validation rule
     Given As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6402 - current period total turnover value vs derived value greater than threshold value on form 6
-    Given I search for the survey "0023" with <reference> for the current period <period>
+    Given I search for the survey "023" with <reference> for the current period <period>
     And I submit the "commodity" <values> for questions
       | question_codes |
       | Q22            |
@@ -27,7 +27,7 @@ Feature: RSI Survey - QvQT validation rule
 
 
   Scenario Outline: LU-6402 - current period total turnover value vs derived value greater than threshold value on form 7
-    Given I search for the survey "0023" with <reference> for the current period <period>
+    Given I search for the survey "023" with <reference> for the current period <period>
     And I submit the commodity <values> for questions
       | question_codes |
       | Q22            |
