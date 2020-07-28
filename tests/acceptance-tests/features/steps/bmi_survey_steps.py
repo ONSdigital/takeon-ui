@@ -9,17 +9,17 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 @when(u'I run the validation process on {question_codes} with {period_value}')
 @given(u'I run the validation process with {period_value}')
 @when(u'I run the validation process with {period_value}')
-def step_impl(context, period_value,question_codes=None):
+def step_impl(context, period_value, question_codes=None):
     if not question_codes:
         question_codes = context.question_codes
     page = ContributorDetailsPage()
     if context.period_type == "previous":
-        context.previous_period_value = period_value
-        page.validate_the_previous_period_details(question_codes, context.previous_period_value)
+        context.comparison_value_one = period_value
+        page.validate_the_previous_period_details(question_codes, context.comparison_value_one)
     elif context.period_type == "current":
         context.question_codes = question_codes
-        context.current_period_value = period_value
-        page.validate_the_current_period_details(context.question_codes, context.current_period_value)
+        context.comparison_value_two = period_value
+        page.validate_the_current_period_details(context.question_codes, context.comparison_value_two)
 
 
 @when(u'I change the {existing_value} to {new_value} for all the question codes')
@@ -94,7 +94,6 @@ def step_impl(context, validation_message, is_validation_exists):
     u'the validation should return {result} if the "{validation_check}"')
 def step_impl(context, result, validation_check):
     page = ContributorDetailsPage()
-
     if validation_check == 'values are not equal':
-        page.check_values_are_not_equal(context.question_codes, context.previous_period_value,
-                                        context.current_period_value, result)
+        page.check_values_are_not_equal(context.question_codes, context.comparison_value_one,
+                                        context.comparison_value_two, result)

@@ -5,7 +5,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 5
     Given I search for the survey "023" with <reference> for the current period <period>
-    And I submit the comment <comment> for questions
+    And I submit the "comment" <comment> for questions
       | question_codes |
       | Q146           |
       | Q146a          |
@@ -29,7 +29,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 6
     Given I search for the survey "023" with <reference> for the current period <period>
-    And I submit the comment <comment> for questions
+    And I submit the "comment" <comment> for questions
       | question_codes |
       | Q146           |
       | Q146a          |
@@ -54,7 +54,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 7
     Given I search for the survey "023" with <reference> for the current period <period>
-    And I submit the comment <comment> for questions
+    And I submit the "comment" <comment> for questions
       | question_codes |
       | Q146           |
       | Q146a          |
