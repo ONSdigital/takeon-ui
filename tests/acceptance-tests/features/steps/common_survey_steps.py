@@ -52,15 +52,15 @@ def step_impl(context, value_type, values):
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
     context.question_codes = question.upper()
-    if context.survey == '0023':
+    if context.survey == '023':
         RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
     elif context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
-    elif context.survey == '0066' or context.survey == '0076':
+    elif context.survey == '066' or context.survey == '076':
         SandGravelLandAndMarineDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '0073':
+    elif context.survey == '073':
         BlocksSurveyDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '0074':
+    elif context.survey == '074':
         BricksSurveyDetailsPage().submit_comment_value(comment_value, question)
 
 
@@ -72,7 +72,7 @@ def step_impl(context):
 @when(u'I run the validation process for {total_turnover_value} against the {derived_value}')
 @when(u'I run the validation process against the {derived_value}')
 def step_impl(context, derived_value, total_turnover_value=None):
-    if context.survey == '0023':
+    if context.survey == '023':
         context.total_turnover_value = total_turnover_value
         RsiContributorDetailsPage().run_the_validation_process(total_turnover_value, derived_value)
     elif context.survey == '999A':
@@ -114,7 +114,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
 
     elif validation_check == 'absolute difference between the values are':
 
-        if context.survey == '0023':
+        if context.survey == '023':
             rsi_page = RsiContributorDetailsPage()
             context.value_one = context.total_turnover_value
             context.value_two = rsi_page.get_derived_question_value()

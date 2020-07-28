@@ -62,11 +62,11 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
         existing_value = questions[2]
         new_value = questions[3]
         SeleniumCore.switch_window()
-        if survey == '0066':
+        if survey == '066':
             self.submit_the_numeric_fields_values(questions_list, existing_value)
             self.save_the_application()
             self.submit_the_numeric_fields_values(questions_list, new_value)
-        elif survey == '0076':
+        elif survey == '076':
             self.submit_the_numeric_fields_values(questions_list, existing_value)
             self.save_the_application()
             self.submit_the_numeric_fields_values(questions_list, new_value)
@@ -82,11 +82,11 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
 
     def submit_the_values_for_survey_question_codes(self, survey, existing_value, new_value):
         SeleniumCore.switch_window()
-        if survey == '0066':
+        if survey == '066':
             self.submit_the_land_survey_values(existing_value)
             self.save_the_application()
             self.submit_the_land_survey_values(new_value)
-        elif survey == '0076':
+        elif survey == '076':
             self.submit_the_marine_survey_values(existing_value)
             self.save_the_application()
             self.submit_the_marine_survey_values(new_value)
@@ -116,9 +116,9 @@ class SandGravelLandAndMarineDetailsPage(ContributorDetailsPage):
         return error_msg_elements
 
     def check_numeric_fields_fixed_validations_exists(self, survey, is_validation_exists):
-        if survey == '0066':
+        if survey == '066':
             self.check_numeric_fixed_validation(self.land_numeric_question_codes_list, is_validation_exists)
-        elif survey == '0076':
+        elif survey == '076':
             self.check_numeric_fixed_validation(self.marine_numeric_question_codes_list, is_validation_exists)
 
     def check_fixed_validations_exists(self, survey, validation_message, is_validation_exists):
