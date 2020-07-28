@@ -11,10 +11,10 @@ Feature: Search function
     Then <reference> and <period> and <survey> will be displayed
     Examples:
       | reference   | period | survey |
-      | 49900012765 | 201906 | 0066   |
-      | 49900004791 | 201906 | 0076   |
-      | 49900138556 | 201905 | 0073   |
-      | 49900229065 | 201905 | 0074   |
+      | 49900012765 | 201906 | 066   |
+      | 49900004791 | 201906 | 076   |
+      | 49900138556 | 201905 | 073   |
+      | 49900229065 | 201905 | 074   |
 
   Scenario Outline: Using a non-existing full reference entry
     Given I search for the survey with reference <reference>
@@ -31,13 +31,13 @@ Feature: Search function
     Then <reference> and <period> and <survey> will be displayed
     Examples:
       | survey | reference   | period |
-      | 0066   | 49900000796 | 201903 |
-      | 0076   | 49900004791 | 201906 |
+      | 066   | 49900000796 | 201903 |
+      | 076   | 49900004791 | 201906 |
 
   Scenario Outline: Using an existing survey Id and reference
     Given I search for the <survey> with reference <reference>
     Then <reference> and <period> and <survey> will be displayed
     Examples:
       | survey | reference   | period |
-      | 0066   | 49900000796 | 201903 |
-      | 0076   | 49900004791 | 201906 |
+      | 066   | 49900000796 | 201903 |
+      | 076   | 49900004791 | 201906 |

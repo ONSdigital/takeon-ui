@@ -12,9 +12,9 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
       | Q123           |
 
   Scenario Outline: LU-7033 - Period on Period Movement Validation
-    Given I search for the survey "0073" with <reference> for the previous period <previousPeriod>
+    Given I search for the survey "073" with <reference> for the previous period <previousPeriod>
     And I run the validation process with <previousPeriodValue>
-    When I search for the survey "0073" with <reference> for the current period <currentPeriod>
+    When I search for the survey "073" with <reference> for the current period <currentPeriod>
     And I run the validation process with <currentPeriodValue>
     Then the validation should return <result> if the "absolute difference between the values are" <operator> threshold value <thresholdValue>
     And the "This has changed significantly since the last submission" message should <isValidationExists> displayed for question codes

@@ -9,5 +9,3 @@ class ConfigTest:
     HOMEDIR = os.path.expanduser("~")
     CHROME_DRIVER_LOCATION = HOMEDIR + '/chromedriver'
     UI_URL = os.environ['TAKEON_URL']
-
-    

@@ -71,11 +71,11 @@ class ContributorDetailsPage(BasePage):
 
     def check_fixed_validation_messages(self, survey, question_codes_list, is_validation_exists, i, no_of_error_msgs,
                                         actual_msg):
-        if survey == '0074':
+        if survey == '074':
             if question_codes_list[i - 1] != 'Q8000':
                 self.check_validation_messages(question_codes_list, is_validation_exists, i, no_of_error_msgs,
                                                actual_msg)
-        elif survey == '0073':
+        elif survey == '073':
             self.check_validation_messages(
                 question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg)
 
