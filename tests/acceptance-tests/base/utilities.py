@@ -3,7 +3,7 @@ class Utilities:
     @staticmethod
     def convert_blank_data_to_empty_string(data):
         if data.lower() == 'blank':
-            data = ''
+            data = ' '
         return data
 
     @staticmethod
@@ -12,11 +12,7 @@ class Utilities:
 
     @staticmethod
     def get_values_as_a_list(values):
-        new_values = values.split(',')
-        list_values = []
-        for new_val in new_values:
-            list_values.append(new_val)
-        return list_values
+        return values.split(',')
 
     @staticmethod
     def get_question_code_element(question_code):
