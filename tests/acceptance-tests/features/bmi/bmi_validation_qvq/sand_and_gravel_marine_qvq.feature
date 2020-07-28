@@ -3,7 +3,7 @@ Feature: Sand and Gravel Marine Survey - Question vs Derived Question (QvQ) Vali
   Background:
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-7034 - Question vs Question Validation BMI survey on form 4
+  Scenario Outline: LU-7034 - Question vs Question Validation BMI survey on form 2
     Given I search for the survey "076" with <reference> for the current period <period>
     And I submit the "sand and gravel marine material stock" <values> for questions
       | question_codes |

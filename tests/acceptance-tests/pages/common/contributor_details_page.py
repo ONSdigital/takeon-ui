@@ -219,7 +219,7 @@ class ContributorDetailsPage(BasePage):
         SeleniumCore.switch_window()
         questions_list = questions_and_values[0]
         new_questions_list = np.asarray(questions_list)
-        commodity_values = self.get_values_as_a_list(questions_and_values[1])
+        commodity_values = Utilities.get_values_as_a_list(questions_and_values[1])
 
         if len(commodity_values) > 1 and new_questions_list.size > 1:
             self.submit_values_as_a_list_for_multiple_questions(questions_list, commodity_values)
