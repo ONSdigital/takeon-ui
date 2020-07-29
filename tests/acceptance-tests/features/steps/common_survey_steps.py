@@ -1,7 +1,7 @@
 from behave import given, when, then
 from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
 from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
-from pages.bmi.sand_and_gravel_land_details_page import SandGravelLandAndMarineDetailsPage
+from pages.bmi.sand_and_gravel_land_marine_details_page import SandGravelLandAndMarineDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.common.contributor_search_page import ContributorSearchPage
 from pages.common.search_by_page import SearchByPage
@@ -37,31 +37,31 @@ def step_impl(context, reference, survey, period_type, period, sic_code=None):
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period, sic_code)
 
 
-@given(u'I submit the {value_type} {values} for questions')
+@given(u'I submit the "{value_type}" {values} for questions')
 def step_impl(context, value_type, values):
-    context.codes = []
+    context.question_codes = []
     for row in context.table.rows:
         for cell in row.cells:
-            context.codes.append(cell)
-
+            context.question_codes.append(cell)
     if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.codes, values)
+        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.question_codes, values)
     else:
-        ContributorDetailsPage().submit_the_values_for_survey(context.codes, values)
+        ContributorDetailsPage().submit_values_for_survey_questions(context.question_codes, values)
 
 
+@given(u'I submit the "{value_type}" {comment_value} for question {question}')
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
-    context.question_code = question.upper()
-    if context.survey == '0023':
+    context.question_codes = question.upper()
+    if context.survey == '023':
         RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
     elif context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
-    elif context.survey == '0066' or context.survey == '0076':
+    elif context.survey == '066' or context.survey == '076':
         SandGravelLandAndMarineDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '0073':
+    elif context.survey == '073':
         BlocksSurveyDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '0074':
+    elif context.survey == '074':
         BricksSurveyDetailsPage().submit_comment_value(comment_value, question)
 
 
@@ -70,35 +70,49 @@ def step_impl(context):
     ContributorDetailsPage().save_the_application()
 
 
-@when(u'I run the validation process for {total_turnover_value} against the {derived_value}')
+@when(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process against the {derived_value}')
-def step_impl(context, derived_value, total_turnover_value=None):
-    if context.survey == '0023':
-        context.total_turnover_value = total_turnover_value
-        RsiContributorDetailsPage().run_the_validation_process(total_turnover_value, derived_value)
+def step_impl(context, derived_value, question_value=None):
+    if context.survey == '023':
+        context.total_turnover_value = question_value
+        RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
     elif context.survey == '999A':
         context.total_turnover_value = 0
         TestSurveyContributorDetailsPage().run_the_validation_process(derived_value)
+    else:
+        context.comparison_value_one = question_value
+        context.comparison_value_two = derived_value
+
+        context.codes = []
+        for row in context.table.rows:
+            for cell in row.cells:
+                context.codes.append(cell)
+        context.question_code = context.codes
+        ContributorDetailsPage().run_the_validation_process(context.question_code, question_value, derived_value)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
-@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_code}"')
-@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_code}"')
-def step_impl(context, validation_message, is_validation_exists, question_code=None):
-    if not question_code:
-        question_code = context.question_code
+@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
+@then(
+    u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')
+def step_impl(context, validation_message, is_validation_exists, question_codes=None):
+    if not question_codes:
+        question_codes = context.question_codes
     page = ContributorDetailsPage()
-    page.check_validation_message(question_code, validation_message,
+    page.check_validation_message(question_codes, validation_message,
                                   is_validation_exists)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed for question codes')
 def step_impl(context, validation_message, is_validation_exists):
-    context.codes = []
-    for row in context.table.rows:
-        for cell in row.cells:
-            context.codes.append(cell)
-    ContributorDetailsPage().check_multiple_questions_validation_messages(context.codes, validation_message,
+    if context.table is not None:
+        context.question_codes = []
+        for row in context.table.rows:
+            for cell in row.cells:
+                context.question_codes.append(cell)
+
+    ContributorDetailsPage().check_multiple_questions_validation_messages(context.question_codes, validation_message,
                                                                           is_validation_exists)
 
 
@@ -112,7 +126,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
 
     elif validation_check == 'absolute difference between the values are':
 
-        if context.survey == '0023':
+        if context.survey == '023':
             rsi_page = RsiContributorDetailsPage()
             context.value_one = context.total_turnover_value
             context.value_two = rsi_page.get_derived_question_value()
@@ -122,7 +136,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
             context.value_two = test_survey_page.get_derived_question_value()
         else:
             context.value_one = context.previous_period_value
-            context.value_two = int(context.current_period_value)
+            context.value_two = context.current_period_value
 
         page.check_absolute_difference_validation(operator_type, context.value_one,
                                                   context.value_two, threshold_value, result)

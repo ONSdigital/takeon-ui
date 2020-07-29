@@ -2,93 +2,105 @@
 
 {% block title %}Dashboard{% endblock title %}
 
-
-
 {% block page_header %}
-    <h1 class="jupiter header__title">Search</h1>
+    Search
 {% endblock page_header %}
-
 
 {% block content %}
 
     <section>
-        <div id="lockedInfo" style="color:red;display:none">This form is currently checked out to</div>
         <div class="phase-banner">
-            <div class="">
-                <div class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap">
-                    <div class="field-group searchTop">
-                        <form method="post">
-                            {% from "RenderForms.html" import render_field %}
+            <div class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap">
+                <div class="field-group searchTop">
+                    <form method="post">
+                        {% from "RenderForms.html" import render_field %}
+
                             {% for i in fields.keys() %}
                                 <p class="field">
                                     <span class="input-type">
-								    <span class="input-type__inner">
-									{{ render_field(fields[i]) }}
+                                    <span class="input-type__inner">
+                                    {{ render_field(fields[i]) }}
                                     </span>
                                 </span>
                                 </p>
                             {% endfor %}
-                            <button class="btn btn--small" type="submit"><span class="btn__inner">Search</span></button>
-                        </form>
-                    </div>
+
+                        <button class="btn btn--small" type="submit"><span class="btn__inner">Search</span></button>
+                    </form>
                 </div>
             </div>
         </div>
-
 
         <div class="mainContent">
-            <div>
-                <div class="table-scrollable table-scrollable--on">
-                    <div class="table-scrollable__content" tabindex="0" role="region"
-                         aria-label="Scrollable table">
-                        <table class="table" id="ResultsTable">
-                            <thead class="table__head capitalisation">
+            <div class="table-scrollable table-scrollable--on">
+                <div class="table-scrollable__content" tabindex="0" role="region" aria-label="Scrollable table">
+                    <table class="table" id="ResultsTable">
+                        <thead class="table__head capitalisation">
+                            
                             <tr class="table__row">
-                                <th></th><!--Blank column for view form button-->
+                                <th class="" id=""></th><!--Blank column for view form button-->
                                 <!--Render each column name -->
-                                {% for column in header %}
-                                    <th class="table__header"> {{ column }}</th>
-                                {% endfor %}
+                                <th class="table__header" id="reference">Reference</th>
+                                <th class="table__header" id="period">Period</th>
+                                <th class="table__header" id="survey">Survey</th>
+                                <th class="table__header" id="name">Name</th>
+                                <th class="table__header" id="form_id">Form ID</th>
+                                <th class="table__header" id="status">Status</th>
+                                <th class="table__header" id="sic">SIC</th>
+                                <th class="table__header" id="employment">Employment</th>
+                                <th class="table__header" id="turnover">Turnover</th>
                             </tr>
+ 
+                        </thead>
+
+                        <tbody class="table__body" id="search_results_body">
+                        <!-- for each record, render each data value -->
+                        {% for record in records %}
+
+                            <tr class="table__row">
+                                <td>
+                                    <a href="{{ record['survey'] }}/{{ record['period'] }}/{{ record['reference'] }}/viewform" target="_blank">
+                                        <button type="submit" class="btn btn--small buttonWidth">
+                                            <span class="btn__inner">View Form</span>
+                                        </button>
+                                    </a>
+                                </td>
+                                <!-- Use .values() method to get values from each row dict -->
+                                <td class="table__cell">{{ record['reference'] }}</td>
+                                <td class="table__cell">{{ record['period'] }}</td>
+                                <td class="table__cell">{{ record['survey'] }}</td>
+                                <td class="table__cell">{{ record['referencename'] }}</td>
+                                <td class="table__cell">{{ record['formid'] }}</td>
+                                <td class="table__cell">{{ record['status'] }}</td>
+                                <td class="table__cell">{{ record['frozensic'] }}</td>
+                                <td class="table__cell">{{ record['frozenemployment'] }}</td>
+                                <td class="table__cell">{{ record['frozenturnover'] }}</td>
                             </tr>
-                            </thead>
-                            <tbody class="table__body" id="search_results_body">
 
-                            <!-- for each record, render each data value -->
-                            {% for record in records %}
+                        {% endfor %}
 
-                                <tr class="table__row">
-                                    <td>
-                                        <a href="{{ record['survey'] }}/{{ record['period'] }}/{{ record['reference'] }}/viewform"
-                                           target="_blank">
-                                            <button type="submit" class="btn btn--small buttonWidth">
-                                                <span class="btn__inner">View Form</span>
-                                            </button>
-                                            <!-- Use .values() method to get values from each row dict -->
-                                            {% for element in record.values() %}
-                                                <td class="table__cell">{{ element }}</td>
-                                            {% endfor %}
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
         <h1>{{ message }}</h1>
-        </div>
 
         <div id="button_div">
             <button class="btn btn--small buttonWidth" type="submit" id="prev_button" method="POST" style="display: none">
                 <span class="btn__inner">Previous</span>
             </button>
+
             <button class="btn btn--small buttonWidth" type="submit" id="next_button" form_id="next_form" method="POST" style="display:none">
                 <span class="btn__inner">Next</span>
             </button>
 
         </div>
     </section>
+    <br>
+    <br>
+    <br>
 
     <script>
         var rows = document.getElementById("ResultsTable");
@@ -135,16 +147,17 @@
                 type: 'POST',
                 url: "/contributor_search/Contributor/next",
                 contentType: "application/json",
-                data: JSON.stringify({cursor: getCursor(whichCursor="next", pagingInfo=pageData)})
+                data: JSON.stringify({cursor: getCursor(whichCursor="next", pagingInfo=pageData), "search_params": "{{ parameters }}"})
             }).done(updateResultsTable);
         }
         $('#next_button').on('click', nextPage)
         function prevPage(){
+            console.log(getCursor(whichCursor="next", pagingInfo=pageData))
             $.ajax({
                 type: 'POST',
                 url: "/contributor_search/Contributor/previous",
                 contentType: "application/json",
-                data: JSON.stringify({cursor: getCursor(whichCursor="prev", pagingInfo=pageData)})
+                data: JSON.stringify({cursor: getCursor(whichCursor="prev", pagingInfo=pageData), "search_params": "{{ parameters }}"})
             }).done(updateResultsTable);
         }
         $('#prev_button').on('click', prevPage)
@@ -163,21 +176,23 @@
             else if (whichCursor == "prev"){
                 return pageInfo["startCursor"];
             }
-            else if (whichCUrsor == false){
+            else if (whichCursor == false){
                 return null;
             }
         }
 
         function updateResultsTable(data){
             console.log("update called")
-            var headers = getTableHeaders()
+            //var headers = getTableHeaders()
+            var headers = ["reference", "period", "survey", "referencename", "formid", "status", "frozensic", "frozenemployment", "frozenturnover"];
             var some = data;
             $('#search_results_body').empty()
             for (var i=0; i < some.data.length; i++){
                 row = some.data[i]
+                console.log("Data: " + some)
                 var link = "/contributor_search/Contributor/" + row.survey + "/" + row.period + "/" + row.reference + "/viewform";
                 var newRow = `<tr class=\"table__row\"> <td> <a target= \"_blank\" href=\"${link}\"> <button type=\"submit\" class=\"btn btn--small buttonWidth\">  <span class=\"btn__inner\">View Form </span> </button></a></td>`
-                for (var j=1; j < headers.length; j++){
+                for (var j=0; j < headers.length; j++){
                     var key =  `${headers[j]}`
                     newRow += `<td class=\"table__cell\">${row[key.replace(/ /g,'')]}</td>`
                 }

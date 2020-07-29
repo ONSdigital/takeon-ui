@@ -1,12 +1,6 @@
-from os import getlogin
 from collections import OrderedDict
-from socket import timeout
-from urllib.error import URLError
-from flask import render_template
-from wtforms import (
-    StringField,
-    Form,
-)  # validators <-- Re-add when/if validation is required
+from wtforms import StringField, Form
+import json
 
 
 # ###################################### UTILITY FUNCTIONS ###########################################
@@ -15,7 +9,6 @@ def create_form_class(iterable):
     var_dict = {}
     for variable_name in iterable:
         print("adding {} to dict".format(variable_name))
-        # var_dict[variable_name] = StringField("{}".format(variable_name), [validators.DataRequired()])
         var_dict[variable_name] = StringField("{}".format(variable_name))
     class_output = type("SearchSelect", (Form,), var_dict)
     # At this point we have a class that analogous to SearchForm
@@ -116,43 +109,12 @@ def build_json(data):
 
 
 def get_user():
-    # For the moment, this just returns getLogin(), in the future this will get a cookie from the browser
+    # In the future this will get a cookie from the browser
     return "fisdba"
-
-
-def forms_connect_to_eureka(url):
-    from app.setup import discovery_service
-
-    # This was moved here because it's used in a couple of different forms
-    try:
-        return (
-            discovery_service.form_definition(url, "business-layer"),
-            discovery_service.contributor_search_without_paging(url, "business-layer"),
-            discovery_service.form_response(url, "persistence-layer"),
-        )
-    except URLError as error:
-        return render_template("UrlNotFoundError.html", error_message=error)
-
-    except timeout as error:
-        return render_template("TimeOutError.html", error_message=error)
-
-
-def forms_connect_to_eureka_validation(url):
-    from app.setup import discovery_service
-
-    # This was moved here because it's used in a couple of different forms
-    try:
-        return discovery_service.get_validation(url, "validation-persistence-layer")
-    except URLError as error:
-        return render_template("UrlNotFoundError.html", error_message=error)
-
-    except timeout as error:
-        return render_template("TimeOutError.html", error_message=error)
 
 
 def build_links(links_list, name_of_link):
     """
-
     :param links_list: List, name_of_link: String
     :return: String
     Takes a list of links which and returns the correct one depending on parameter
@@ -173,3 +135,29 @@ def find_nodes(data: dict, node_to_find: str) -> (dict, list, str):
             if item is not None:
                 return item
     raise KeyError(f'No node with name "{node_to_find}" found')
+
+def json_validator(data):
+    try:
+        json.loads(data)
+        return True
+    except ValueError as error:
+        print("invalid json: %s" % error)
+        return False
+
+
+# This function reordes the questions based off the displayorder value 
+def question_order(response_and_validations):
+    try:
+        questions = response_and_validations["form_validation_outputs"]
+        sorted_questions = (sorted(questions, key = lambda i: i['displayorder']))
+        sorted_response_and_validations = {'form_validation_outputs': sorted_questions}
+
+    except KeyError as key_error:
+        print("Data missing displayorder" + str(key_error))
+        raise KeyError
+
+    except TypeError as type_error:
+        print("Error with data type converting to JSON " + str(type_error))
+        raise TypeError
+
+    return sorted_response_and_validations

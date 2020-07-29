@@ -1,0 +1,8 @@
+{[
+    {"reference": "77700000001", "period": "201712", "survey": "888A", "receiptDate": 1, "enterpriseName": "Very shiny chairs company, esq.", "status": "Selected", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+    {"reference": "77700000001", "period": "201803", "survey": "888A", "receiptDate": 1, "enterpriseName": "31232", "status": "Validations Triggered", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+    {"reference": "77700000001", "period": "201803", "survey": "888B", "receiptDate": 1, "enterpriseName": "31233", "status": "Clear", "lastUpdatedBy": "", "lastUpdatedDate": ""},      
+    {"reference": "77700000001", "period": "201809", "survey": "888C", "receiptDate": 1, "enterpriseName": "31234", "status": "Saved", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+    {"reference": "77700000002", "period": "201703", "survey": "888B", "receiptDate": 1, "enterpriseName": "31235", "status": "Selected", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+    {"reference": "77700000002", "period": "201803", "survey": "888C", "receiptDate": 1, "enterpriseName": "31236", "status": "Selected", "lastUpdatedBy": "", "lastUpdatedDate": ""}
+]}

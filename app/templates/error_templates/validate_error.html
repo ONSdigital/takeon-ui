@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Problem {% endblock title %}
+
+{% block page_header %}
+
+    Take-on
+
+{% endblock page_header %}
+
+<br>
+{% block content %}
+
+    <div class="mainContent">
+        <main class="page__main">
+            <h1>Validation process unable to complete successfully</h1>
+            <p>Please contact the Take-on support team</p>
+            <div class="panel panel--info panel--simple">
+                <div class="panel__body">
+                    <p>Here's the error: {{error}}
+                        <br>
+                        <strong class="u-fs-l u-mt-s u-d-b">{{ message_header }}</strong>
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+{% endblock content %}

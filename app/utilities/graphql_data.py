@@ -10,7 +10,6 @@ class GraphData:
             self.page_info = find_nodes(self.data, "pageInfo")
         except KeyError as error:
             print("An error happened: {}".format(error))
-        # self.edges = find_nodes(self.data, "edges")
 
     @staticmethod
     def load_data(data):

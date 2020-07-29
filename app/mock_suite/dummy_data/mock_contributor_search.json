@@ -1,60 +1,12 @@
 {
- "data":[
-       {
-         "reference": "4990012",
-         "period": "201211",
-         "survey": "066 "
-       },
-       {
-         "reference": "4990012",
-         "period": "201212",
-         "survey": "066 "
-       },
-       {
-         "reference": "4990065",
-         "period": "201309",
-         "survey": "076 "
-       },
-       {
-         "reference": "77700000000",
-         "period": "201803",
-         "survey": "076 "
-       },
-       {
-         "reference": "77700000001",
-         "period": "201712",
-         "survey": "066 "
-       },
-       {
-         "reference": "77700000001",
-         "period": "201803",
-         "survey": "066 "
-       },
-       {
-         "reference": "77700000001",
-         "period": "201803",
-         "survey": "076 "
-       },
-       {
-         "reference": "77700000001",
-         "period": "201809",
-         "survey": "074 "
-       },
-       {
-         "reference": "77700000002",
-         "period": "201703",
-         "survey": "076 "
-       },
-       {
-         "reference": "77700000002",
-         "period": "201803",
-         "survey": "066 "
-       }
-     ],
-     "pageInfo": {
-      "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiNzc3MDAwMDAwMDIiLCIyMDE4MDMiLCIwNjYgIl1d",
-      "hasNextPage": true,
-      "startCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiNDk5MDAxMiIsIjIwMTIxMSIsIjA2NiAiXV0=",
-      "hasPreviousPage": true
-    }
+    "data":[
+        {"reference": "77700000001", "period": "201712", "survey": "888A", "receiptDate": 1, "enterpriseName": "Very shiny chairs company, esq.", "status": "Selected", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+        {"reference": "77700000001", "period": "201803", "survey": "888A", "receiptDate": 1, "enterpriseName": "31232", "status": "Validations Triggered", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+        {"reference": "77700000001", "period": "201803", "survey": "888B", "receiptDate": 1, "enterpriseName": "31233", "status": "Clear", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+        {"reference": "77700000001", "period": "201809", "survey": "888C", "receiptDate": 1, "enterpriseName": "31234", "status": "Saved", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+        {"reference": "77700000002", "period": "201703", "survey": "888B", "receiptDate": 1, "enterpriseName": "31235", "status": "Selected", "lastUpdatedBy": "", "lastUpdatedDate": ""},
+        {"reference": "77700000002", "period": "201803", "survey": "888C", "receiptDate": 1, "enterpriseName": "31236", "status": "Selected", "lastUpdatedBy": "", "lastUpdatedDate": ""}],
+    "pageInfo": {
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiNzc3MDAwMDAwMDIiLCIyMDE4MDMiLCIwNjYgIl1d", "hasNextPage": true,
+        "startCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiNDk5MDAxMiIsIjIwMTIxMSIsIjA2NiAiXV0=", "hasPreviousPage": true }
 }

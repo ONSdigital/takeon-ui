@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 import os
-from flask import Flask
 from flask_script import Manager, Server
 
 from app.setup import create_app

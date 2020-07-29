@@ -1,5 +1,4 @@
-from app.eureka_config import eureka_config
-from app.forms.contributor_search.contributor_search_form import build_uri, clean_search_parameters, build_links
+from app.forms.contributor_search_form import build_uri, clean_search_parameters
 
 
 def test_build_url_one_param():
@@ -38,22 +37,9 @@ def test_clean_search_parameters_two_params_both_with_interstitial_and_trailing_
     assert result == {"Period": "201812", "Survey": "111"}
 
 
-def test_landing_page_exists():
-    assert eureka_config.mock_contributor_search(url_connect='/').status_code == 200
+# def test_landing_page_exists():
+#     assert eureka_config.mock_contributor_search(url_connect='/').status_code == 200
 
 
-def test_main_page_exists():
-    assert eureka_config.mock_contributor_search(url_connect='/Contributor/GeneralSearch').status_code == 200
-
-def test_build_links():
-    links_list = [
-        {"rel": "first", "href": "http://localhost:8080/contributor/searchByLikePageable/reference=499;"
-                                 "period=2017?page=0&size=10&sort=period,asc",
-         "hreflang": "null", "media": "null", "title": "null", "type": "null", "deprecation": "null"},
-        {"rel": "prev", "href": "http://localhost:8080/contributor/searchByLikePageable/reference=499;"
-                                "period=2017?page=4&size=10&sort=period,asc",
-         "hreflang": "null", "media": "null", "title": "null", "type": "null", "deprecation": "null"}]
-    name_of_link = "first"
-    result = build_links(links_list, name_of_link)
-    assert result == "http://localhost:8080/contributor/searchByLikePageable/reference=499;" + \
-                     "period=2017?page=0&size=10&sort=period,asc"
+# def test_main_page_exists():
+#     assert eureka_config.mock_contributor_search(url_connect='/Contributor/GeneralSearch').status_code == 200
