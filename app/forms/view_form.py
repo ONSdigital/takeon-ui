@@ -53,8 +53,7 @@ def view_form(inqcode, period, ruref):
     view_form_data = json.loads(view_forms)
 
     response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
-    ordered_response_and_validations = question_order(response_and_validations)
-    
+    ordered_response_and_validations = question_order(response_and_validations) 
     override_button = override_all_button(ordered_response_and_validations)
 
     log.info("Contributor Details: %s", contributor_data)
