@@ -35,7 +35,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         log.info("Output JSON: %s", str(json_output))
         api_caller.save_response(parameters=parameters, data=json_output)
         response = api_caller.save_response(parameters=parameters, data=json_output)
-        print("Response from save request" + str(response))
+        log.info("Response from save request: %s", response)
         status_message = 'Responses saved successfully'
         return status_message
     except HTTPError as http_error:
