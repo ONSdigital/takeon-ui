@@ -32,6 +32,15 @@ class ContributorDetailsPage(BasePage):
                   question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
         return SeleniumCore.find_elements_by_xpath(element)
 
+    def submit_question_value(self, value_type, value, question):
+        SeleniumCore.switch_window()
+        if value_type:
+            self.submit_sales_value(value, question)
+
+    def submit_sales_value(self, value, question):
+        value = Utilities.convert_blank_data_value(value)
+        SeleniumCore.set_element_text_by_id(Utilities.get_question_code_element(question), value)
+
     def save_the_application(self):
         self.driver.find_element(
             *ContributorDetailsPage.SAVE_AND_VALIDATE).click()
@@ -54,72 +63,6 @@ class ContributorDetailsPage(BasePage):
     def refresh_the_form(self):
         self.driver.refresh()
         time.sleep(2)
-
-    def check_numeric_fixed_validation(self, questions_list, is_validation_exists):
-        # iterate through the list of expected question codes
-        for q in questions_list:
-            question_validation_ele = self.Q_CODE_VALIDATION_ONE + q + self.Q_CODE_PART_FOUR
-            # check if any validation exists for a question
-            if len(self.driver.find_elements_by_xpath(question_validation_ele)) > 0:
-                error_elements = self.driver.find_elements_by_xpath(
-                    self.NO_OF_VALIDATION_ELEMENTS)
-                for error_element in error_elements:
-                    if error_element.text == 'Value set to default, please check':
-                        assert False
-            else:
-                assert is_validation_exists == 'not'
-
-    def check_fixed_validation_messages(self, survey, question_codes_list, is_validation_exists, i, no_of_error_msgs,
-                                        actual_msg):
-        if survey == '074':
-            if question_codes_list[i - 1] != 'Q8000':
-                self.check_validation_messages(question_codes_list, is_validation_exists, i, no_of_error_msgs,
-                                               actual_msg)
-        elif survey == '073':
-            self.check_validation_messages(
-                question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg)
-
-        else:
-            self.check_validation_messages(
-                question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg)
-
-    def check_validation_messages(self, question_codes_list, is_validation_exists, i, no_of_error_msgs, actual_msg):
-        if is_validation_exists == 'be':
-            if len(no_of_error_msgs) == 1:
-                self.check_fixed_val_msgs(
-                    question_codes_list, actual_msg, no_of_error_msgs[0].text, i)
-            elif len(no_of_error_msgs) == 2:
-                self.check_fixed_val_msgs(
-                    question_codes_list, actual_msg, no_of_error_msgs[1].text, i)
-            elif len(no_of_error_msgs) == 0:
-                self.no_validation_exists(question_codes_list, i)
-
-        elif is_validation_exists == 'not be':
-            if len(no_of_error_msgs) == 1:
-                self.check_no_fixed_val_msgs(
-                    question_codes_list, actual_msg, no_of_error_msgs[0].text, i)
-            elif len(no_of_error_msgs) == 2:
-                self.check_no_fixed_val_msgs(
-                    question_codes_list, actual_msg, no_of_error_msgs[1].text, i)
-            elif len(no_of_error_msgs) == 0:
-                self.no_validation_exists(question_codes_list, i)
-
-    def check_fixed_val_msgs(self, question_codes_list, exp_msg, actual_msg, i):
-        if actual_msg != exp_msg:
-            assert False, 'validations triggered but no fixed validation exists for question code: ' + \
-                          question_codes_list[i - 1]
-
-    def check_no_fixed_val_msgs(self, question_codes_list, actual_msg, exp_msg, i):
-        if actual_msg == exp_msg:
-            assert False, 'validations triggered but fixed validation exists for question code: ' + \
-                          question_codes_list[i - 1] + ' Please check'
-
-    def no_validation_exists(self, question_codes_list, i):
-        print('No validation exists for the question code: ' +
-              question_codes_list[i - 1])
-
-    def check_validation_msg(self, question_code, exp_msg, is_val_exists):
-        self.check_validation_message(question_code, exp_msg, is_val_exists)
 
     def check_validation_message(self, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
@@ -180,8 +123,8 @@ class ContributorDetailsPage(BasePage):
         return comparison_val_two
 
     def check_for_blank_validation(self, operator_type, value_one, value_two, result):
-        value_one = Utilities.convert_blank_data_to_empty_string(value_one)
-        val_two = Utilities.convert_blank_data_to_empty_string(value_two)
+        value_one = Utilities.convert_blank_data_value(value_one)
+        val_two = Utilities.convert_blank_data_value(value_two)
         self.check_validation_msg_matches(operator_type, value_one, val_two, result)
 
     def check_validation_msg_matches(self, operator_type, comparison_val_one, comparison_val_two, result):
@@ -191,8 +134,8 @@ class ContributorDetailsPage(BasePage):
     def check_values_are_not_equal(self, question, comparison_val_one, comparison_val_two, result):
         self.check_if_overall_validation_triggered()
         if comparison_val_one == 'blank' and comparison_val_two == 'blank':
-            comparison_val_one = Utilities.convert_blank_data_to_empty_string(comparison_val_one)
-            comparison_val_two = Utilities.convert_blank_data_to_empty_string(comparison_val_two)
+            comparison_val_one = Utilities.convert_blank_data_value(comparison_val_one)
+            comparison_val_two = Utilities.convert_blank_data_value(comparison_val_two)
             is_validation_exists = ReportingHelper.compare_strings(comparison_val_one,
                                                                    comparison_val_two)
 
@@ -235,16 +178,15 @@ class ContributorDetailsPage(BasePage):
         for question in questions_list:
             question_element = Utilities.get_question_code_element(question)
             SeleniumCore.set_element_text_by_id(
-                question_element, self.check_blank_data_value(commodity_values[count]))
+                question_element, Utilities.convert_blank_data_value(commodity_values[count]))
             if len(commodity_values) > 1:
                 count += 1
 
     def submit_single_value_for_multiple_questions(self, questions_list, commodity_value):
         for question in questions_list:
             question_element = Utilities.get_question_code_element(question)
-            commodity_value = Utilities.replace_blank_with_empty_string(commodity_value)
-            SeleniumCore.set_element_text_by_id(question_element,
-                                                self.check_blank_data_value(commodity_value))
+            commodity_value = Utilities.convert_blank_data_value(commodity_value)
+            SeleniumCore.set_element_text_by_id(question_element, commodity_value)
 
     def submit_single_value_per_question(self, questions_list, commodity_value):
         question_element = Utilities.get_question_code_element(questions_list)
@@ -271,14 +213,14 @@ class ContributorDetailsPage(BasePage):
             for question in questions_list:
                 question_element = Utilities.get_question_code_element(question)
                 question_actual_text = SeleniumCore.get_attribute_element_text(By.ID, question_element)
-                commodity_value = Utilities.replace_blank_with_empty_string(commodity_values[count])
+                commodity_value = Utilities.convert_blank_data_value(commodity_values[count])
                 ReportingHelper.check_single_message_matches(question_element, question_actual_text,
                                                              commodity_value)
 
     def run_the_validation_process(self, *questions):
         questions_list = questions[0]
-        comparing_question_value = Utilities.convert_blank_data_to_empty_string(questions[1])
-        derived_question_value = Utilities.convert_blank_data_to_empty_string(questions[2])
+        comparing_question_value = Utilities.convert_blank_data_value(questions[1])
+        derived_question_value = Utilities.convert_blank_data_value(questions[2])
         comparing_question_element = Utilities.get_question_code_element(questions_list[0])
         derived_question_element = Utilities.get_question_code_element(questions_list[1])
         SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
@@ -287,6 +229,3 @@ class ContributorDetailsPage(BasePage):
         if derived_question_value == ' ':
             derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
-
-    def check_blank_data_value(self, value):
-        return Utilities.convert_blank_data_to_empty_string(value)
