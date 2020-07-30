@@ -226,6 +226,6 @@ class ContributorDetailsPage(BasePage):
         SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
-        if derived_question_value == ' ':
+        if derived_question_value == '':
             derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
