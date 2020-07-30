@@ -1,7 +1,4 @@
 from behave import given, when, then
-from pages.bmi.blocks_survey_details_page import BlocksSurveyDetailsPage
-from pages.bmi.bricks_survey_details_page import BricksSurveyDetailsPage
-from pages.bmi.sand_and_gravel_land_marine_details_page import SandGravelLandAndMarineDetailsPage
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.common.contributor_search_page import ContributorSearchPage
 from pages.common.search_by_page import SearchByPage
@@ -53,16 +50,10 @@ def step_impl(context, value_type, values):
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
     context.question_codes = question.upper()
-    if context.survey == '023':
-        RsiContributorDetailsPage().submit_question_value(value_type, comment_value, question)
-    elif context.survey == '999A':
+    if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
-    elif context.survey == '066' or context.survey == '076':
-        SandGravelLandAndMarineDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '073':
-        BlocksSurveyDetailsPage().submit_comment_value(comment_value, question)
-    elif context.survey == '074':
-        BricksSurveyDetailsPage().submit_comment_value(comment_value, question)
+    else:
+        ContributorDetailsPage().submit_question_value(value_type, comment_value, question)
 
 
 @when(u'I trigger the validation process')
