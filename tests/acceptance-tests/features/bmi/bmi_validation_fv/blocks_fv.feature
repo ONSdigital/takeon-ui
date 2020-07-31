@@ -23,12 +23,12 @@ Feature: Blocks Survey - Fixed Value(FV) Validation rule
     When I trigger the validation process
     Then the "Value set to default, please check" message should <isValidationExists> displayed for question codes
     Examples:
-      | reference   | period | values      | isValidationExists |
-      | 49900138556 | 201905 | 99999999999 | be                 |
-      | 49900138556 | 201905 | 9999999999  | not be             |
+      | reference   | period | values       | isValidationExists |
+      | 49900138556 | 201905 | 99999999999  | be                 |
+      | 49900138556 | 201905 | 9999999999   | not be             |
       | 49900138556 | 201905 | 999999999999 | not be             |
-      | 49900138556 | 201905 | 0           | not be             |
-      | 49900138556 | 201905 | blank       | not be             |
+      | 49900138556 | 201905 | 0            | not be             |
+      | 49900138556 | 201905 | blank        | not be             |
 
 
   Scenario Outline:  LU-7208 - Check Fixed Value Validation - Blocks Survey comment field questions
