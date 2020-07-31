@@ -3,6 +3,7 @@ import os
 from flask import render_template, Blueprint
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 from app.utilities.filter_validations import filter_validations
+from app.utilities.notify_baw import send_notification_to_queue
 from app.setup import log, api_caller
 from app.utilities.helpers import get_user
 
@@ -38,6 +39,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         log.info("Response from save request: %s", response)
         if response == "{\"continue\":\"No question responses to save\"}":
             log.info("No responses to save Ryan.  Continue.")
+            send_notification_to_queue(ruref, period, inqcode)
         status_message = 'Responses saved successfully'
         return status_message
     except HTTPError as http_error:
