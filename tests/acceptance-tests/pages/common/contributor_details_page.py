@@ -169,11 +169,11 @@ class ContributorDetailsPage(BasePage):
             new_value_one = int(value_one)
             new_value_two = int(value_two)
             comparison_val_one = abs(new_value_one - new_value_two)
-            comparison_val_two = self.check_for_zero_value(new_value_two, threshold_value)
+            comparison_val_two = self.check_for_zero_value(new_value_one, new_value_two, threshold_value)
             self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
-    def check_for_zero_value(self, value_two, threshold_value):
-        if value_two == 0:
+    def check_for_zero_value(self, value_one, value_two, threshold_value):
+        if value_one == 0 and value_two == 0:
             comparison_val_two = value_two
         else:
             comparison_val_two = int(threshold_value)
