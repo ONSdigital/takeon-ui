@@ -17,14 +17,14 @@ Feature: Sand and Gravel Marine Survey - Fixed Value(FV) Validation rule
       | Q607           |
       | Q608           |
     When I trigger the validation process
-    Then the "Value set to default, please check" message should <isValidationExists> displayed for question codes
+    Then the <validation> message should <isValidationExists> displayed for question codes
     Examples:
-      | reference   | period | values       | isValidationExists |
-      | 49900004791 | 201903 | 99999999999  | be                 |
-      | 49900004791 | 201903 | 9999999999   | not be             |
-      | 49900004791 | 201903 | 999999999999 | not be             |
-      | 49900004791 | 201903 | 0            | not be             |
-      | 49900004791 | 201903 | blank        | not be             |
+      | reference   | period | values       | validation                          | isValidationExists |
+      | 49900004791 | 201903 | 9999999999   | Value set to default, please check9 | be                 |
+      | 49900004791 | 201903 | 9999999999   | Value set to default, please check  | not be             |
+      | 49900004791 | 201903 | 999999999999 | Value set to default, please check  | not be             |
+      | 49900004791 | 201903 | 0            | Value set to default, please check  | not be             |
+      | 49900004791 | 201903 | blank        | Value set to default, please check  | not be             |
 
 
   Scenario Outline:  LU-7208 - Check Fixed Value Validation - Sand and Gravel Marine Survey comment field questions
@@ -34,9 +34,9 @@ Feature: Sand and Gravel Marine Survey - Fixed Value(FV) Validation rule
       | Q148           |
       | Q146           |
     When I trigger the validation process
-    Then the "Value set to default, please check" message should <isValidationExists> displayed for question codes
+    Then the <validation> message should <isValidationExists> displayed for question codes
     Examples:
-      | reference   | period | values      | isValidationExists |
-      | 49900004791 | 201903 | 99999999999 | not be             |
-      | 49900004791 | 201903 | 0           | not be             |
-      | 49900004791 | 201903 | blank       | not be             |
+      | reference   | period | values      | validation                         | isValidationExists |
+      | 49900004791 | 201903 | 99999999999 | Value set to default, please check | not be             |
+      | 49900004791 | 201903 | 0           | Value set to default, please check | not be             |
+      | 49900004791 | 201903 | blank       | Value set to default, please check | not be             |

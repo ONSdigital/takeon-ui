@@ -25,7 +25,7 @@ Feature: Bricks Survey - Fixed Value(FV) Validation rule
       | Q503           |
       | Q504           |
     When I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    Then the <validation> message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | period | values       | validation                         | isValidationExists |
       | 49900229065 | 201905 | 99999999999  | Value set to default, please check | be                 |
@@ -43,7 +43,7 @@ Feature: Bricks Survey - Fixed Value(FV) Validation rule
       | Q145           |
       | Q146           |
     When I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    Then the <validation> message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | period | values      | validation                         | isValidationExists |
       | 49900229065 | 201905 | 99999999999 | Value set to default, please check | not be             |
