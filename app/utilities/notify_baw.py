@@ -11,6 +11,6 @@ def send_notification_to_queue(reference, period, survey):
     save_notify_queue_url = 'https://sqs.eu-west-2.amazonaws.com/226575302242/dev-baw-save-notify'
     notification_to_send = {"reference": reference, "period": period, "survey": survey}
 
-    sqs = boto3.client("sqs", region_name='eu-west-2')
+    sqs = boto3.client("sqs")
     response = sqs.send_message(QueueUrl=save_notify_queue_url, MessageBody=json.dumps(notification_to_send))
     return response
