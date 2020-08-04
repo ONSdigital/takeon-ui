@@ -21,7 +21,7 @@ def send_notification_to_queue(reference, period, survey):
     # response = sqs.send_message(QueueUrl=save_notify_queue_url, MessageBody=json.dumps(notification_to_send))
     # log.info("Message sent to queue")
     # return response['MessageId']
-    log.info("BAW URL: %s"), baw_notify_url
+    log.info("BAW URL: %s", baw_notify_url)
     header = {"x-api-key": baw_notify_key}
     response = api_caller.run_validation(
         baw_notify_url, json.dumps(notification_to_send), header)
