@@ -24,4 +24,4 @@ def send_notification_to_queue(reference, period, survey):
     header = {"x-api-key": baw_notify_key}
     response = api_caller.run_validation(
         baw_notify_url, json.dumps(notification_to_send), header)
-    log.info("Response from BAW SQS: %s", response)
+    log.info("Response from BAW SQS: %s", str(response))
