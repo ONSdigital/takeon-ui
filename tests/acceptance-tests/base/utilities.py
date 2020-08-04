@@ -1,14 +1,12 @@
 class Utilities:
 
     @staticmethod
-    def convert_blank_data_to_empty_string(data):
+    def convert_blank_data_value(data):
         if data.lower() == 'blank':
-            data = ' '
+            data = ''
+        elif '<Blank>' in data:
+            data = data.replace('<Blank>', ' ')
         return data
-
-    @staticmethod
-    def replace_blank_with_empty_string(text):
-        return text.replace('<Blank>', ' ')
 
     @staticmethod
     def get_values_as_a_list(values):

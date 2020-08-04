@@ -63,7 +63,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         ContributorDetailsPage().save_the_application()
 
     def check_blank_data_value(self, value):
-        return Utilities.convert_blank_data_to_empty_string(value)
+        return Utilities.convert_blank_data_value(value)
 
     def cp_sales_values(self, internet_sales, total_sales):
         self.cp_internet_sales = internet_sales
@@ -76,8 +76,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
             self.submit_sales_value(value, question)
 
     def submit_sales_value(self, value, question):
-        value = self.check_blank_data_value(value)
-        SeleniumCore.set_element_text_by_id(self.get_question_code_element(question), value)
+        value = Utilities.convert_blank_data_value(value)
+        SeleniumCore.set_element_text_by_id(Utilities.get_question_code_element(question), value)
 
     def validate_the_current_period_internet_sales_details(self, internet_sales):
         SeleniumCore.switch_window()
