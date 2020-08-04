@@ -32,14 +32,14 @@ class ContributorDetailsPage(BasePage):
                   question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
         return SeleniumCore.find_elements_by_xpath(element)
 
-    def submit_question_value(self, value_type, value, question):
+    def submit_question_value(self, survey, value_type, value, question):
         SeleniumCore.switch_window()
         if value_type:
-            self.submit_sales_value(value, question)
+            self.submit_sales_value(survey, value, question)
 
-    def submit_sales_value(self, value, question):
+    def submit_sales_value(self, survey, value, question):
         value = Utilities.convert_blank_data_value(value)
-        SeleniumCore.set_element_text_by_id(Utilities.get_question_code_element(question), value)
+        SeleniumCore.set_element_text_by_id(Utilities.get_question_code_element(survey, question), value)
 
     def save_the_application(self):
         self.driver.find_element(
@@ -64,10 +64,10 @@ class ContributorDetailsPage(BasePage):
         self.driver.refresh()
         time.sleep(2)
 
-    def check_validation_message(self, question_type, exp_msg, is_validation_exists):
+    def check_validation_message(self, survey, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
         if type(question_type) == list and len(question_type) > 1:
-            self.check_multiple_comment_text_messages()
+            self.check_multiple_comment_text_messages(survey)
         else:
             no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
             if len(no_of_msgs) == 1:
@@ -90,12 +90,11 @@ class ContributorDetailsPage(BasePage):
                 ReportingHelper.check_multiple_messages_not_matches(
                     question_type, act_msg, exp_msg)
 
-    def check_multiple_questions_validation_messages(self, question_codes, exp_msg, is_validation_exists):
+    def check_multiple_questions_validation_messages(self, survey, question_codes, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
         if len(question_codes) > 1:
             for question in question_codes:
-                self.check_validation_message(
-                    question, exp_msg, is_validation_exists)
+                self.check_validation_message(survey, question, exp_msg, is_validation_exists)
 
     def check_turnover_ratio(self, operator_type, internet_sales, total_sales, threshold_value, result):
         comparison_val_one = int(internet_sales)
@@ -152,7 +151,8 @@ class ContributorDetailsPage(BasePage):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
 
     def validate_the_previous_period_details(self, *questions_and_values):
-        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1])
+        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1],
+                                                questions_and_values[2])
         self.save_the_application()
         SeleniumCore.close_the_current_window()
 
@@ -160,36 +160,37 @@ class ContributorDetailsPage(BasePage):
         global question_codes
         question_codes = questions_and_values
         SeleniumCore.switch_window()
-        questions_list = questions_and_values[0]
+        survey = questions_and_values[0]
+        questions_list = questions_and_values[1]
         new_questions_list = np.asarray(questions_list)
-        commodity_values = Utilities.get_values_as_a_list(questions_and_values[1])
+        commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])
 
         if len(commodity_values) > 1 and new_questions_list.size > 1:
-            self.submit_values_as_a_list_for_multiple_questions(questions_list, commodity_values)
+            self.submit_values_as_a_list_for_multiple_questions(survey, questions_list, commodity_values)
         elif new_questions_list.size > 1 and len(commodity_values) == 1:
-            self.submit_single_value_for_multiple_questions(questions_list, commodity_values[0])
+            self.submit_single_value_for_multiple_questions(survey, questions_list, commodity_values[0])
         else:
-            self.submit_single_value_per_question(questions_list, commodity_values[0])
+            self.submit_single_value_per_question(survey, questions_list, commodity_values[0])
 
-    def submit_values_as_a_list_for_multiple_questions(self, questions_list, commodity_values):
+    def submit_values_as_a_list_for_multiple_questions(self, survey, questions_list, commodity_values):
         new_questions_list = np.asarray(questions_list)
         if new_questions_list.size > 1:
             count = 0
         for question in questions_list:
-            question_element = Utilities.get_question_code_element(question)
+            question_element = Utilities.get_question_code_element(survey, question)
             SeleniumCore.set_element_text_by_id(
                 question_element, Utilities.convert_blank_data_value(commodity_values[count]))
             if len(commodity_values) > 1:
                 count += 1
 
-    def submit_single_value_for_multiple_questions(self, questions_list, commodity_value):
+    def submit_single_value_for_multiple_questions(self, survey, questions_list, commodity_value):
         for question in questions_list:
-            question_element = Utilities.get_question_code_element(question)
+            question_element = Utilities.get_question_code_element(survey, question)
             commodity_value = Utilities.convert_blank_data_value(commodity_value)
             SeleniumCore.set_element_text_by_id(question_element, commodity_value)
 
-    def submit_single_value_per_question(self, questions_list, commodity_value):
-        question_element = Utilities.get_question_code_element(questions_list)
+    def submit_single_value_per_question(self, survey, questions_list, commodity_value):
+        question_element = Utilities.get_question_code_element(survey, questions_list)
         SeleniumCore.set_element_text_by_id(
             question_element, commodity_value)
 
@@ -203,15 +204,15 @@ class ContributorDetailsPage(BasePage):
                 self.get_validation_status().lower(), 'form saved',
                 '', 'Please check, Overall validation failed')
 
-    def check_multiple_comment_text_messages(self):
+    def check_multiple_comment_text_messages(self, survey):
         global question_codes
-        questions_list = question_codes[0]
-        commodity_values = Utilities.get_values_as_a_list(question_codes[1])
+        questions_list = question_codes[1]
+        commodity_values = Utilities.get_values_as_a_list(question_codes[2])
         new_questions_list = np.asarray(questions_list)
         if new_questions_list.size > 1:
             count = 0
             for question in questions_list:
-                question_element = Utilities.get_question_code_element(question)
+                question_element = Utilities.get_question_code_element(survey, question)
                 question_actual_text = SeleniumCore.get_attribute_element_text(By.ID, question_element)
                 commodity_value = Utilities.convert_blank_data_value(commodity_values[count])
                 ReportingHelper.check_single_message_matches(question_element, question_actual_text,
@@ -221,8 +222,10 @@ class ContributorDetailsPage(BasePage):
         questions_list = questions[0]
         comparing_question_value = Utilities.convert_blank_data_value(questions[1])
         derived_question_value = Utilities.convert_blank_data_value(questions[2])
-        comparing_question_element = Utilities.get_question_code_element(questions_list[0])
-        derived_question_element = Utilities.get_question_code_element(questions_list[1])
+        survey = Utilities.convert_blank_data_value(questions[3])
+
+        comparing_question_element = Utilities.get_question_code_element(survey, questions_list[0])
+        derived_question_element = Utilities.get_question_code_element(survey, questions_list[1])
         SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)

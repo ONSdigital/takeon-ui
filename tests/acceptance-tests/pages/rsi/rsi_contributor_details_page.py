@@ -7,33 +7,15 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class RsiContributorDetailsPage(ContributorDetailsPage):
-    QUESTION_TOTAL_TURNOVER_ELEMENT = By.ID, '0020'
-    QUESTION_TWO_ELEMENT = By.ID, '0021'
-    QUESTION_NO_146 = By.ID, '0146'
-    QUESTION_TURNOVER_ELEMENT = By.ID, '0020'
+    QUESTION_TOTAL_TURNOVER_ELEMENT = By.ID, '20'
+    QUESTION_INTERNET_SALES_ELEMENT = By.ID, '21'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
     QUESTION_DERIVED_ELEMENT = By.ID, '7034'
 
-    form_6_question_codes = {
-        'Q22': '0022',
-        'Q23': '0023',
-        'Q24': '0024',
-        'Q25': '0025',
-        'Q26': '0026',
-    }
-
-    form_7_question_codes = {
-        'Q22': '0022',
-        'Q23': '0023',
-        'Q24': '0024',
-        'Q25': '0025',
-        'Q26': '0026',
-        'Q27': '0027',
-    }
 
     def set_internet_sales_value(self, value):
-        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
+        SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_INTERNET_SALES_ELEMENT, value)
 
     def set_total_turnover_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_TOTAL_TURNOVER_ELEMENT, value)
