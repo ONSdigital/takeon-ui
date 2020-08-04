@@ -28,7 +28,7 @@ Feature: RSI Survey - QvQT validation rule
 
   Scenario Outline: LU-6402 - current period total turnover value vs derived value greater than threshold value on form 7
     Given I search for the survey "023" with <reference> for the current period <period>
-    And I submit the commodity <values> for questions
+    And I submit the "commodity" <values> for questions
       | question_codes |
       | Q22            |
       | Q23            |
@@ -42,8 +42,8 @@ Feature: RSI Survey - QvQT validation rule
     Examples:
       | reference   | period | values    | totalTurnoverValue | deriveValue | result | operator     | thresholdValue | validation                                                | isValidationExists |
       | 49900791240 | 201903 | 1,1,1,1,0 | 10                 | 4           | true   | greater than | 5              | Total different to calculated total (allowing for margin) | be                 |
-      | 49900791240 | 201903 | 1,2,3,2,1 | 4                  | 9           | true   | greater than | 5              | Total different to calculated total (allowing for margin) | be                 |
+      | 49900791240 | 201903 | 1,2,3,2,1 | 3                  | 9           | true   | greater than | 5              | Total different to calculated total (allowing for margin) | be                 |
       | 49900791240 | 201903 | 1,1,1,1,1 | 10                 | 5           | false  | equal to     | 5              | Total different to calculated total (allowing for margin) | not be             |
-      | 49900791240 | 201903 | 1,2,3,2,1 | 5                  | 9           | false  | equal to     | 5              | Total different to calculated total (allowing for margin) | not be             |
-      | 49900791240 | 201903 | 1,1,1,1,1 | 10                 | 5           | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
+      | 49900791240 | 201903 | 1,2,3,2,1 | 4                  | 9           | false  | equal to     | 5              | Total different to calculated total (allowing for margin) | not be             |
+      | 49900791240 | 201903 | 1,1,1,1,1 | 9                  | 5           | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
       | 49900791240 | 201903 | 1,2,3,2,1 | 6                  | 9           | false  | less than    | 5              | Total different to calculated total (allowing for margin) | not be             |
