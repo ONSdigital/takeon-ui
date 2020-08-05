@@ -111,11 +111,11 @@ class ContributorDetailsPage(BasePage):
             new_value_one = int(value_one)
             new_value_two = int(value_two)
             comparison_val_one = abs(new_value_one - new_value_two)
-            comparison_val_two = self.check_for_zero_value(new_value_two, threshold_value)
+            comparison_val_two = self.check_for_zero_value(new_value_one, new_value_two, threshold_value)
             self.check_validation_msg_matches(operator_type, comparison_val_one, comparison_val_two, result)
 
-    def check_for_zero_value(self, value_two, threshold_value):
-        if value_two == 0:
+    def check_for_zero_value(self, value_one, value_two, threshold_value):
+        if value_one == 0 and value_two == 0:
             comparison_val_two = value_two
         else:
             comparison_val_two = int(threshold_value)
@@ -143,6 +143,22 @@ class ContributorDetailsPage(BasePage):
                                                                   comparison_val_two)
         ReportingHelper.check_single_message_matches(
             question, result, str(is_validation_exists).lower())
+
+    def check_values_movement_to_or_from_zero(self, question_codes, comparison_val_one, comparison_val_two, result):
+        self.check_if_overall_validation_triggered()
+        if len(question_codes) > 1:
+            for question in question_codes:
+                if comparison_val_one == 'blank' and comparison_val_two == 'blank':
+                    value_one = Utilities.convert_blank_data_value(comparison_val_one)
+                    value_two = Utilities.convert_blank_data_value(comparison_val_two)
+                    is_validation_exists = ReportingHelper.compare_strings(value_one,
+                                                                           value_two)
+
+                else:
+                    is_validation_exists = ReportingHelper.compare_the_zero_movement_values(comparison_val_one,
+                                                                                            comparison_val_two)
+                ReportingHelper.check_single_message_matches(
+                    question, result, str(is_validation_exists).lower())
 
     def get_no_of_validation_error_messages(self):
         return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))

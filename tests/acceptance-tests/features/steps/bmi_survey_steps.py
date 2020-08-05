@@ -26,3 +26,6 @@ def step_impl(context, result, validation_check):
     if validation_check == 'values are not equal':
         page.check_values_are_not_equal(context.question_codes, context.comparison_value_one,
                                         context.comparison_value_two, result)
+    elif validation_check == 'period vs previous frequency period movement to or from zero':
+        page.check_values_movement_to_or_from_zero(context.question_codes, context.comparison_value_one,
+                                                   context.comparison_value_two, result)
