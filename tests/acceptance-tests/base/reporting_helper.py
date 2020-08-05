@@ -55,6 +55,15 @@ class ReportingHelper:
             return False
 
     @staticmethod
+    def compare_the_zero_movement_values(value_one, value_two):
+        if int(value_one) == 0 and int(value_two) > 0:
+            return True
+        elif int(value_one) > 0 and int(value_two) == 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
     def compare_strings(actual_msg, exp_msg):
         if actual_msg != exp_msg:
             return True

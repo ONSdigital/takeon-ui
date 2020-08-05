@@ -17,11 +17,12 @@ Feature: Sand and Gravel Land Survey - Period on Period Zero Continuity(PoPZC) V
     And I run the validation process with <previousPeriodValue>
     When I search for the survey "066" with <reference> for the current period <currentPeriod>
     And I run the validation process with <currentPeriodValue>
-    Then the validation should return <result> if the "values are not equal"
+    Then the validation should return <result> if the "period vs previous frequency period movement to or from zero"
     And the "This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | previousPeriod | currentPeriod | isValidationExists |
       | 49900000796 | 1                  | 0                   | true   | 201903         | 201906        | be                 |
       | 49900000796 | 0                  | 1                   | true   | 201903         | 201906        | be                 |
+      | 49900000796 | 2                  | 3                   | false  | 201903         | 201906        | not be             |
       | 49900000796 | 0                  | 0                   | false  | 201903         | 201906        | not be             |
       | 49900000796 | blank              | blank               | false  | 201903         | 201906        | not be             |

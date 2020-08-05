@@ -14,12 +14,13 @@ Feature: Blocks Survey - Period on Period Zero Continuity(PoPZC) Validation rule
     And I run the validation process with <previousPeriodValue>
     When I search for the survey "073" with <reference> for the current period <currentPeriod>
     And I run the validation process with <currentPeriodValue>
-    Then the validation should return <result> if the "values are not equal"
+    Then the validation should return <result> if the "period vs previous frequency period movement to or from zero"
     And the "This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank" message should <isValidationExists> displayed for question codes
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | previousPeriod | currentPeriod | isValidationExists |
       | 49900189484 | 1                  | 0                   | true   | 201905         | 201906        | be                 |
       | 49900189484 | 0                  | 1                   | true   | 201905         | 201906        | be                 |
+      | 49900189484 | 2                  | 3                   | false  | 201905         | 201906        | not be             |
       | 49900189484 | 0                  | 0                   | false  | 201905         | 201906        | not be             |
       | 49900189484 | blank              | blank               | false  | 201905         | 201906        | not be             |
