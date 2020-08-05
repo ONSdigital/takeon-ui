@@ -37,8 +37,8 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         api_caller.save_response(parameters=parameters, data=json_output)
         response = api_caller.save_response(parameters=parameters, data=json_output)
         log.info("Response from save request: %s", response)
-        if response == "{\"continue\":\"No question responses to save\"}":
-            log.info("No responses to save Ryan.  Continue.")
+        if not response == "{\"continue\":\"No question responses to save\"}":
+            log.info("Data edited. Sending notification to BAW...")
             send_notification_to_queue(ruref, period, inqcode)
         status_message = 'Responses saved successfully'
         return status_message
