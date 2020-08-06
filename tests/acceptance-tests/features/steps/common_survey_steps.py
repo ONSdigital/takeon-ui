@@ -41,9 +41,10 @@ def step_impl(context, value_type, values):
         for cell in row.cells:
             context.question_codes.append(cell)
     if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.question_codes, values)
+        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.survey, context.question_codes,
+                                                                              values)
     else:
-        ContributorDetailsPage().submit_values_for_survey_questions(context.question_codes, values)
+        ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
 
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -53,7 +54,7 @@ def step_impl(context, value_type, comment_value, question):
     if context.survey == '999A':
         TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
     else:
-        ContributorDetailsPage().submit_question_value(value_type, comment_value, question)
+        ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
 
 
 @when(u'I trigger the validation process')
@@ -79,7 +80,8 @@ def step_impl(context, derived_value, question_value=None):
             for cell in row.cells:
                 context.codes.append(cell)
         context.question_code = context.codes
-        ContributorDetailsPage().run_the_validation_process(context.question_code, question_value, derived_value)
+        ContributorDetailsPage().run_the_validation_process(context.question_code, question_value, derived_value,
+                                                            context.survey)
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
@@ -90,7 +92,7 @@ def step_impl(context, validation_message, is_validation_exists, question_codes=
     if not question_codes:
         question_codes = context.question_codes
     page = ContributorDetailsPage()
-    page.check_validation_message(question_codes, validation_message,
+    page.check_validation_message(context.survey, question_codes, validation_message,
                                   is_validation_exists)
 
 
@@ -103,7 +105,8 @@ def step_impl(context, validation_message, is_validation_exists):
             for cell in row.cells:
                 context.question_codes.append(cell)
 
-    ContributorDetailsPage().check_multiple_questions_validation_messages(context.question_codes, validation_message,
+    ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, context.question_codes,
+                                                                          validation_message,
                                                                           is_validation_exists)
 
 

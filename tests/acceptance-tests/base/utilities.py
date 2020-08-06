@@ -13,8 +13,9 @@ class Utilities:
         return values.split(',')
 
     @staticmethod
-    def get_question_code_element(question_code):
-        if len(question_code) > 4:
-            return question_code.replace("Q", "")
+    def get_question_code_element(survey, question_code):
+        if survey == '023':
+            question_code = question_code.replace("Q", "")
         else:
-            return question_code.replace("Q", "").zfill(4)
+            question_code = question_code.replace("Q", "").zfill(4)
+        return question_code
