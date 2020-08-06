@@ -211,7 +211,8 @@ class ContributorDetailsPage(BasePage):
             question_element, commodity_value)
 
     def validate_the_current_period_details(self, *questions_and_values):
-        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1])
+        self.submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1],
+                                                questions_and_values[2])
         self.save_the_application()
 
     def check_if_overall_validation_triggered(self):
