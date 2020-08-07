@@ -1,7 +1,7 @@
 Feature: Bricks Survey - Invalid Value(IV) Validation rule
 
 
-  Scenario Outline:  LU-7306 - Invalid Value Validation - (Brick type - clay, concrete, sandlime)
+  Scenario Outline:  LU-7306 - Invalid Value Validation - Brick type (2 - clay, 3 - concrete or 4 - sandlime)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "074" with <reference> for the current period <period>
     When I submit the "brick type" <brickTypeValue> for question <question>
