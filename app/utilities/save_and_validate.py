@@ -34,7 +34,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
 
         # Send the data to the business layer for processing
         log.info("Output JSON: %s", str(json_output))
-        api_caller.save_response(parameters=parameters, data=json_output)
+        #api_caller.save_response(parameters=parameters, data=json_output)
         response = api_caller.save_response(parameters=parameters, data=json_output)
         log.info("Response from save request: %s", response)
         if not response == "{\"continue\":\"No question responses to save\"}":

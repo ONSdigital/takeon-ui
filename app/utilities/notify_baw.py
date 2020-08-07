@@ -1,7 +1,8 @@
 import json
 import os
-from app.setup import log, api_caller
 from uuid import uuid1
+from app.setup import log, api_caller
+
 
 baw_notify_url = os.getenv('BAW_NOTIFY_URL')
 baw_notify_key = os.getenv('BAW_NOTIFY_KEY')
