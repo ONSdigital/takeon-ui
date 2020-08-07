@@ -9,20 +9,7 @@ import numpy as np
 
 class ContributorDetailsPage(BasePage):
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
-    NO_OF_QUESTIONS = By.XPATH, "//p[@class='field']"
-    QUESTION_CODE_PANEL_CLASS_ELEMENTS = By.XPATH, "//div[@class='panel panel--error panel--simple']"
-    Q_CODE_VALIDATION_ONE = '//div[@class="panel panel--error panel--simple"]//label[contains(text(),"'
-    NO_OF_VALIDATION_ELEMENTS = '//*[@id="responseForm"]/div/div/p/strong'
-    Q_CODE_PART_ONE = '//*[@id="responseForm"]/div['
-    Q_CODE_PART_TWO = ']/div/p/strong'
-    Q_CODE_PART_THREE = ']/div//label[contains(text(),"'
-    Q_CODE_PART_FOUR = '")]'
-    Q_CODE_LABELS_WITH_TEXT = "//label[contains(text(),'"
-    QUESTION_CODE_ERROR_MESSAGES_PART_ONE = By.XPATH, "//div["
-    QUESTION_CODE_ERROR_MESSAGES_PART_TWO = By.XPATH, "]/div/p[@class='panel__error u-mb-no']"
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
-    QUESTION_PANEL_ERROR_MESSAGE = By.XPATH, "//div[1]/div[1]/p[1]/strong[1]"
-    QUESTION_CODE_FIXED_VALIDATION_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[2]/strong'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
     ERROR_MESSAGES_ELEMENT = By.XPATH, '//p[@class="panel__error u-mb-no"]'
