@@ -1,4 +1,4 @@
-Feature: Bricks Survey - Invalid Value(FV) Validation rule
+Feature: Bricks Survey - Invalid Value(IV) Validation rule
 
 
   Scenario Outline:  LU-7306 - Invalid Value Validation - Bricks Survey
