@@ -18,7 +18,7 @@ class Browser:
         """
         Function to start instance of the specified browser and navigate to the specified url.
         :param url: the url to navigate to
-        :param browser_type: the type of browser to start (Default is Chrome)
+        :param browser: the type of browser to start (Default is Chrome)
         :return: driver: browser instance
         """
         browser = context.config.userdata.get('browser')
@@ -52,9 +52,9 @@ class Browser:
                     assert False, 'Time taken to load the url: ' + str(time.time() - t)
             else:
                 raise ValueError(
-                    'empty url.'
-                    'Please set the url in url_configs file.'
-                    ' Follow the steps mentioned in the comments')
+                    'Test failed as there was no url been set.\n'
+                    'To set the url.'
+                    'Please follow the steps mentioned in the Readme file')
 
         except ValueError as e:
             print(e)
