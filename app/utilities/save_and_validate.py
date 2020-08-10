@@ -3,6 +3,7 @@ import os
 from flask import render_template, Blueprint
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 from app.utilities.filter_validations import filter_validations
+from app.utilities.notify_baw import send_notification_to_queue
 from app.setup import log, api_caller
 from app.utilities.helpers import get_user
 
@@ -33,7 +34,11 @@ def save_form(parameters, requestform, inqcode, period, ruref):
 
         # Send the data to the business layer for processing
         log.info("Output JSON: %s", str(json_output))
-        api_caller.save_response(parameters=parameters, data=json_output)
+        response = api_caller.save_response(parameters=parameters, data=json_output)
+        log.info("Response from save request: %s", response)
+        if not response == "{\"continue\":\"No question responses to save\"}":
+            log.info("Data edited. Sending notification to BAW...")
+            send_notification_to_queue(ruref, period, inqcode)
         status_message = 'Responses saved successfully'
         return status_message
     except HTTPError as http_error:
