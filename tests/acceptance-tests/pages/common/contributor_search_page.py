@@ -6,9 +6,9 @@ from pages.common.base_page import BasePage
 
 
 class ContributorSearchPage(BasePage):
-    REFERENCE_TEXT_FIELD = By.ID, 'reference'
-    PERIOD_TEXT_FIELD = By.ID, 'period'
-    SURVEY_TEXT_FIELD = By.ID, 'survey'
+    REFERENCE_TEXT_FIELD = 'reference'
+    PERIOD_TEXT_FIELD = 'period'
+    SURVEY_TEXT_FIELD = 'survey'
     SEARCH_BUTTON = By.XPATH, "//button[@class='btn btn--small']"
 
     def select_the_reference_view_form(self, survey, reference, period, sic_code):
@@ -36,7 +36,7 @@ class ContributorSearchPage(BasePage):
             period = ''
         elif survey == 'empty':
             survey = ''
-        SeleniumCore.set_element_text(*ContributorSearchPage.REFERENCE_TEXT_FIELD, reference)
-        SeleniumCore.set_element_text(*ContributorSearchPage.PERIOD_TEXT_FIELD, period)
-        SeleniumCore.set_element_text(*ContributorSearchPage.SURVEY_TEXT_FIELD, survey)
+        SeleniumCore.set_element_text(self.REFERENCE_TEXT_FIELD, reference)
+        SeleniumCore.set_element_text(self.PERIOD_TEXT_FIELD, period)
+        SeleniumCore.set_element_text(self.SURVEY_TEXT_FIELD, survey)
         self.driver.find_element(*ContributorSearchPage.SEARCH_BUTTON).click()

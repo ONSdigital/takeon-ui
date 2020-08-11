@@ -7,12 +7,11 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class RsiContributorDetailsPage(ContributorDetailsPage):
-    QUESTION_TOTAL_TURNOVER_ELEMENT = By.ID, '20'
-    QUESTION_INTERNET_SALES_ELEMENT = By.ID, '21'
+    QUESTION_TOTAL_TURNOVER_ELEMENT = '20'
+    QUESTION_INTERNET_SALES_ELEMENT = '21'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
     QUESTION_DERIVED_ELEMENT = By.ID, '7034'
-
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(*RsiContributorDetailsPage.QUESTION_INTERNET_SALES_ELEMENT, value)

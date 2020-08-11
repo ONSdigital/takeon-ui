@@ -23,7 +23,7 @@ class ReportingHelper:
             if act_msg.text == exp_msg:
                 is_validation = True
         if not is_validation:
-            assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msgs + '" for question ' + question
+            assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msg.text + '" for question ' + question
 
     @staticmethod
     def check_multiple_messages_not_matches(question, act_msg, exp_msg):
