@@ -61,9 +61,9 @@
    - To run tests in headless mode
         
         
-        You can run any tests either one or all as above steps but with an additional flag called browser.
-        behave {featurefile} -D browser=headless - Will run in headless mode.
-        behave {featurefile} will run on the chrome browser. 
+        You can run any one or all tests in headless mode with an additional flag called browser.
+        Use - behave {featurefile} -D browser=headless will run in headless mode.
+        To run in real chrome browser mode just use - behave {featurefile} without the browser option.
  
       
    
