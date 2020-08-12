@@ -9,20 +9,7 @@ import numpy as np
 
 class ContributorDetailsPage(BasePage):
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
-    NO_OF_QUESTIONS = By.XPATH, "//p[@class='field']"
-    QUESTION_CODE_PANEL_CLASS_ELEMENTS = By.XPATH, "//div[@class='panel panel--error panel--simple']"
-    Q_CODE_VALIDATION_ONE = '//div[@class="panel panel--error panel--simple"]//label[contains(text(),"'
-    NO_OF_VALIDATION_ELEMENTS = '//*[@id="responseForm"]/div/div/p/strong'
-    Q_CODE_PART_ONE = '//*[@id="responseForm"]/div['
-    Q_CODE_PART_TWO = ']/div/p/strong'
-    Q_CODE_PART_THREE = ']/div//label[contains(text(),"'
-    Q_CODE_PART_FOUR = '")]'
-    Q_CODE_LABELS_WITH_TEXT = "//label[contains(text(),'"
-    QUESTION_CODE_ERROR_MESSAGES_PART_ONE = By.XPATH, "//div["
-    QUESTION_CODE_ERROR_MESSAGES_PART_TWO = By.XPATH, "]/div/p[@class='panel__error u-mb-no']"
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
-    QUESTION_PANEL_ERROR_MESSAGE = By.XPATH, "//div[1]/div[1]/p[1]/strong[1]"
-    QUESTION_CODE_FIXED_VALIDATION_MESSAGES = By.XPATH, '//*[@id="responseForm"]/div/div/p[2]/strong'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
     QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
     ERROR_MESSAGES_ELEMENT = By.XPATH, '//p[@class="panel__error u-mb-no"]'
@@ -39,7 +26,7 @@ class ContributorDetailsPage(BasePage):
 
     def submit_sales_value(self, survey, value, question):
         value = Utilities.convert_blank_data_value(value)
-        SeleniumCore.set_element_text_by_id(Utilities.get_question_code_element(survey, question), value)
+        SeleniumCore.set_element_text(Utilities.get_question_code_element(survey, question), value)
 
     def save_the_application(self):
         self.driver.find_element(
@@ -194,7 +181,7 @@ class ContributorDetailsPage(BasePage):
             count = 0
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
-            SeleniumCore.set_element_text_by_id(
+            SeleniumCore.set_element_text(
                 question_element, Utilities.convert_blank_data_value(commodity_values[count]))
             if len(commodity_values) > 1:
                 count += 1
@@ -203,11 +190,11 @@ class ContributorDetailsPage(BasePage):
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
             commodity_value = Utilities.convert_blank_data_value(commodity_value)
-            SeleniumCore.set_element_text_by_id(question_element, commodity_value)
+            SeleniumCore.set_element_text(question_element, commodity_value)
 
     def submit_single_value_per_question(self, survey, questions_list, commodity_value):
         question_element = Utilities.get_question_code_element(survey, questions_list)
-        SeleniumCore.set_element_text_by_id(
+        SeleniumCore.set_element_text(
             question_element, commodity_value)
 
     def validate_the_current_period_details(self, *questions_and_values):
@@ -243,7 +230,7 @@ class ContributorDetailsPage(BasePage):
 
         comparing_question_element = Utilities.get_question_code_element(survey, questions_list[0])
         derived_question_element = Utilities.get_question_code_element(survey, questions_list[1])
-        SeleniumCore.set_element_text_by_id(comparing_question_element, comparing_question_value)
+        SeleniumCore.set_element_text(comparing_question_element, comparing_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
         if derived_question_value == '':
