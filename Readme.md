@@ -57,4 +57,14 @@
         You can be anywhere with in the acceptance tests or in any features folders path
         cd takeon-ui/tests/acceptance-tests/
         and use - 'behave' with no feature file name.
+   
+   - To run tests in headless mode
+        
+        
+        You can run any one or all tests in headless mode with an additional flag called browser.
+        Use - behave {featurefile} -D browser=headless will run in headless mode.
+        To run in real chrome browser mode just use - behave {featurefile} without the browser option.
+ 
+      
+   
          

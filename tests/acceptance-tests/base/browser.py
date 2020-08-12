@@ -6,33 +6,33 @@ import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-
+from selenium.webdriver.chrome.options import Options
 from base.driver_context import DriverContext
 from config_files.config_test import ConfigTest
 
 
-
 class Browser:
 
-    def initialize_the_browser(self, browser_type=None):
+    @staticmethod
+    def initialize_the_browser(context):
         """
         Function to start instance of the specified browser and navigate to the specified url.
         :param url: the url to navigate to
-        :param browser_type: the type of browser to start (Default is Chrome)
+        :param browser: the type of browser to start (Default is Chrome)
         :return: driver: browser instance
         """
-        if not browser_type:
+        browser = context.config.userdata.get('browser')
+
+        if not browser:
             # create instance of the Chrome driver
-            DriverContext.driver = webdriver.Chrome(ConfigTest.CHROME_DRIVER_LOCATION)
-            DriverContext.driver.maximize_window()
-
-        elif browser_type.lower() == 'firefox':
-            # create instance of Firefox driver the browser type is not specified
-            DriverContext.driver = webdriver.Firefox()
+            DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
+        elif browser.lower() == 'headless':
+            chrome_options = Options()
+            chrome_options.headless = True
+            DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION,
+                                                    options=chrome_options)
         else:
-            raise Exception("The browser type '{}' is not supported".format(browser_type))
-
-        # Browser.navigate_to_the_url()
+            raise Exception("The browser type '{}' is not supported".format(browser))
 
     @staticmethod
     def navigate_to_the_url():
@@ -52,9 +52,9 @@ class Browser:
                     assert False, 'Time taken to load the url: ' + str(time.time() - t)
             else:
                 raise ValueError(
-                    'empty url.'
-                    'Please set the url in url_configs file.'
-                    ' Follow the steps mentioned in the comments')
+                    'Test failed as there was no url been set.\n'
+                    'To set the url.'
+                    'Please follow the steps mentioned in the Readme file')
 
         except ValueError as e:
             print(e)

@@ -7,11 +7,11 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class TestSurveyContributorDetailsPage(BasePage):
-    QUESTION_ONE_ELEMENT = By.ID, '1000'
-    QUESTION_TWO_ELEMENT = By.ID, '1001'
-    QUESTION_DERIVED_ELEMENT = By.ID, '4001'
-    COMMENT_QUESTION_NOT_BLANK = By.ID, '5000'
-    COMMENT_QUESTION_VALUE = By.ID, '5001'
+    QUESTION_ONE_ELEMENT = '1000'
+    QUESTION_TWO_ELEMENT = '1001'
+    QUESTION_DERIVED_ELEMENT = '4001'
+    COMMENT_QUESTION_NOT_BLANK = '5000'
+    COMMENT_QUESTION_VALUE = '5001'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
@@ -23,10 +23,10 @@ class TestSurveyContributorDetailsPage(BasePage):
     }
 
     def set_internet_sales_value(self, value):
-        SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.QUESTION_TWO_ELEMENT, value)
+        SeleniumCore.set_element_text(self.QUESTION_TWO_ELEMENT, value)
 
     def set_total_turnover_sales_value(self, value):
-        SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.QUESTION_ONE_ELEMENT, value)
+        SeleniumCore.set_element_text(self.QUESTION_ONE_ELEMENT, value)
 
     def submit_pp_sales_values(self, internet_sales, total_sales):
         SeleniumCore.switch_window()
@@ -74,9 +74,9 @@ class TestSurveyContributorDetailsPage(BasePage):
         if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
         if question.upper() == 'Q7':
-            SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.COMMENT_QUESTION_NOT_BLANK, comment)
+            SeleniumCore.set_element_text(self.COMMENT_QUESTION_NOT_BLANK, comment)
         if question.upper() == 'Q8':
-            SeleniumCore.set_element_text(*TestSurveyContributorDetailsPage.COMMENT_QUESTION_VALUE, comment)
+            SeleniumCore.set_element_text(self.COMMENT_QUESTION_VALUE, comment)
 
     def submit_the_sales_values_for_survey(self, *questions):
         questions_list = questions[0]
