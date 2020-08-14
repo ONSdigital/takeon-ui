@@ -1,6 +1,13 @@
 class ValidationMessages:
     BMI_MESSAGES = {
-        'invalid value validation': 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)'
+        'fv validation': 'Value set to default, please check',
+        'iv validation': 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)',
+        'popm validation': 'This has changed significantly since the last submission',
+        'popqvq validation': 'This has changed since last submission',
+        'popzc validation': 'This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank',
+        'qvq validation': 'This total is not equal to the derived total',
+        'qvv validation': 'There is a comment from this contributor',
+
     }
 
     RSI_MESSAGES = {
@@ -17,12 +24,16 @@ class ValidationMessages:
 
     }
 
+    TEST_SURVEY_MESSAGES = {
+        'qvv validation': 'There is a comment from this contributor'
+    }
+
     @staticmethod
-    def get_validation_message(survey, message):
+    def get_expected_validation_message(survey, message):
         if survey == '023':
             messages = ValidationMessages.RSI_MESSAGES
         elif survey == '999A':
-            messages = ''
+            messages = ValidationMessages.TEST_SURVEY_MESSAGES
         else:
             messages = ValidationMessages.BMI_MESSAGES
         if message.lower() in messages:

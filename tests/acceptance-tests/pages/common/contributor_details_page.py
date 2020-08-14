@@ -54,7 +54,7 @@ class ContributorDetailsPage(BasePage):
 
     def get_validation_message(self, survey, exp_msg):
         if 'validation' in exp_msg:
-            msg = ValidationMessages().get_validation_message(survey, exp_msg)
+            msg = ValidationMessages().get_expected_validation_message(survey, exp_msg)
         else:
             msg = exp_msg
         return msg
