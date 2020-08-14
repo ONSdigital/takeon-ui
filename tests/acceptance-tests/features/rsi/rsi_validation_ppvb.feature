@@ -8,7 +8,7 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "023" with <reference> for the current period <CPeriod>
     And has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
-    Then the <validation> message should <isValidationExists> displayed for question codes
+    Then the "ppvb validation" message should <isValidationExists> displayed for question codes
       | question_codes |
       | Q20            |
       | Q21            |
@@ -24,7 +24,7 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "023" with <reference> for the current period <CPeriod>
     And has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
-    Then the <validation> message should <isValidationExists> displayed for question codes
+    Then the "ppvb validation" message should <isValidationExists> displayed for question codes
       | question_codes |
       | Q20            |
       | Q21            |
@@ -40,7 +40,7 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "023" with <reference> for the current period <CPeriod>
     And has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
-    Then the <validation> message should <isValidationExists> displayed for question codes
+    Then the "ppvb validation" message should <isValidationExists> displayed for question codes
       | question_codes |
       | Q20            |
       | Q21            |
@@ -54,12 +54,12 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
   Scenario Outline: RSI LU-6757 - Previous Period Value Blank Validation if no previous period exists for forms 5, 6 and 7
     Given I search for the survey "023" with <reference> for the current period <CPeriod>
     And has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
-    Then the <validation> message should <isValidationExists> displayed for question codes
+    Then the "ppvb validation" message should <isValidationExists> displayed for question codes
       | question_codes |
       | Q20            |
       | Q21            |
     Examples:
-      | CPeriod | reference   | cpInternetSales | cpTotalTurnover | validation                                  | isValidationExists |
-      | 201903  | 49900534932 | 1               | 1               | This value was blank in the previous period | be                 |
-      | 201903  | 49900613746 | 1               | 1               | This value was blank in the previous period | be                 |
-      | 201903  | 49900767172 | 1               | 1               | This value was blank in the previous period | be                 |
+      | CPeriod | reference   | cpInternetSales | cpTotalTurnover | isValidationExists |
+      | 201903  | 49900534932 | 1               | 1               | be                 |
+      | 201903  | 49900613746 | 1               | 1               | be                 |
+      | 201903  | 49900767172 | 1               | 1               | be                 |

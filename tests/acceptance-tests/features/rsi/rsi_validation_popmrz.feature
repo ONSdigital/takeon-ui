@@ -10,6 +10,7 @@ Feature: RSI Survey - Validation PoPMRZ
     When I search for the survey "023" with <reference> for the current period <currentPeriodValue>
     And I validate the current period details
     Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
+     And the "popmrz validation" message should <isValidationExists> displayed for question code "Q21"
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | cpInternetSales | ppInternetSales | ppTotalTurnover | result | operator     | thresholdValue |
@@ -26,6 +27,7 @@ Feature: RSI Survey - Validation PoPMRZ
     When I search for the survey "023" with <reference> for the current period <currentPeriodValue>
     And I validate the current period details
     Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
+     And the "popmrz validation" message should <isValidationExists> displayed for question code "Q21"
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | cpInternetSales | ppInternetSales | ppTotalTurnover | result | operator     | thresholdValue |
@@ -42,6 +44,7 @@ Feature: RSI Survey - Validation PoPMRZ
     When I search for the survey "023" with <reference> for the current period <currentPeriodValue>
     And I validate the current period details
     Then the validation should return <result> if the "turnover ratio is" <operator> threshold value <thresholdValue>
+     And the "popmrz validation" message should <isValidationExists> displayed for question code "Q21"
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | cpInternetSales | ppInternetSales | ppTotalTurnover | result | operator     | thresholdValue |

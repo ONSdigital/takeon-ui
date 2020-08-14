@@ -10,7 +10,7 @@ Feature: RSI Survey - Validation PoPRRM
     And  has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
     And I validate the current period details for <factor> factor type
     Then the validation should return <result> if the "period on period ratio of ratios movement is" <operator> threshold value <thresholdValue>
-    And the "The ratio of ratios between values has changed significantly since the last submission" message should <isValidationExists> displayed for question code "Q21"
+    And the "poprrm validation" message should <isValidationExists> displayed for question code "Q21"
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | factor         | result | operator     | thresholdValue | isValidationExists |
@@ -30,7 +30,7 @@ Feature: RSI Survey - Validation PoPRRM
     And  has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
     And I validate the current period details for <factor> factor type
     Then the validation should return <result> if the "period on period ratio of ratios movement is" <operator> threshold value <thresholdValue>
-    And the "The ratio of ratios between values has changed significantly since the last submission" message should <isValidationExists> displayed for question code "Q21"
+    And the "poprrm validation" message should <isValidationExists> displayed for question code "Q21"
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | factor         | result | operator     | thresholdValue | isValidationExists |
@@ -50,7 +50,7 @@ Feature: RSI Survey - Validation PoPRRM
     And  has the internet sales value <cpInternetSales> out of total turnover value <cpTotalTurnover>
     And I validate the current period details for <factor> factor type
     Then the validation should return <result> if the "period on period ratio of ratios movement is" <operator> threshold value <thresholdValue>
-    And the "The ratio of ratios between values has changed significantly since the last submission" message should <isValidationExists> displayed for question code "Q21"
+    And the "poprrm validation" message should <isValidationExists> displayed for question code "Q21"
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | factor         | result | operator     | thresholdValue | isValidationExists |

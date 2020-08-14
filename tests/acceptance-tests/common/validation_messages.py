@@ -6,14 +6,14 @@ class ValidationMessages:
     RSI_MESSAGES = {
         'popmrz validation': 'This value is 0. Previous period it was more than a certain percentage of the total.',
         'poprrm validation': 'The ratio of ratios between values has changed significantly since the last submission',
-        'ppvb validation': 'This value was blank in the previous period ',
+        'ppvb validation': 'This value was blank in the previous period',
         'qvq validation': 'This is greater than the question we compare it to',
         'qvqt validation': 'Total different to calculated total (allowing for margin)',
         'qvv validation': 'There is a comment from this contributor',
         'vb validation': 'This value is blank',
         'vz validation': 'This value is zero',
         'vb and vz validation': 'This value is zero,This value is blank',
-        'vpsic validation': 'Check the response to this question '
+        'vpsic validation': 'Check the response to this question'
 
     }
 
