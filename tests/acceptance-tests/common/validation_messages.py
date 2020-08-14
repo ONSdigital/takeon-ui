@@ -11,16 +11,17 @@ class ValidationMessages:
     }
 
     RSI_MESSAGES = {
-        'popmrz validation': 'This value is 0. Previous period it was more than a certain percentage of the total.',
-        'poprrm validation': 'The ratio of ratios between values has changed significantly since the last submission',
-        'ppvb validation': 'This value was blank in the previous period',
-        'qvq validation': 'This is greater than the question we compare it to',
-        'qvqt validation': 'Total different to calculated total (allowing for margin)',
-        'qvv validation': 'There is a comment from this contributor',
-        'vb validation': 'This value is blank',
-        'vz validation': 'This value is zero',
-        'vb and vz validation': 'This value is zero,This value is blank',
-        'vpsic validation': 'Check the response to this question'
+        'popmrz validation': 'Internet value(Q21) = 0 this period but > 0 last period and ratio of Internet(Q21) to total turnover(Q20) was > 10% last period',
+        'poprrm validation': 'Internet turnover to total turnover ratio - large month on month change',
+        'ppvb total turnover validation': 'Total turnover(Q20) was returned blank in the previous period',
+        'ppvb internet sales validation': 'Internet Sales(Q21) was returned blank in the previous period',
+        'qvq validation': 'Internet turnover(Q21) is greater than total turnover(Q20)',
+        'qvqt validation': 'Commodity total does not equal the total turnover (allowing for margin of 5)',
+        'qvv validation': 'Respondent entered a comment',
+        'vb validation': 'Total turnover(Q20) is blank',
+        'vz validation': 'Total turnover(Q20) is zero',
+        'vb and vz validation': 'Total turnover(Q20) is zero,Total turnover(Q20) is blank',
+        'vpsic validation': 'SIC is petrol and internet sales(Q21) value is greater than zero'
 
     }
 
