@@ -38,4 +38,4 @@ class ValidationMessages:
         if message.lower() in messages:
             return messages.get(message)
         else:
-            assert False, message + ' key does not exists in validation messages dictionary'
+            assert False, 'No, key with the name: "' + message + '" does not exists in dictionary'
