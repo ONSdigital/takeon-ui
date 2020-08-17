@@ -45,10 +45,6 @@
                             {% for datum in data['form_validation_outputs'] %}
                                 <tr class="table__row">
 
-
-
-                                    {# GW NOTE: CURRENTLY ONLY SHOWING Q'S #}
-
                                     {% if datum['validation_info']|length > 0 %}
             
 
@@ -77,7 +73,7 @@
                                                 
                                                 </td>
 
-                                                <td>
+                                                <td class="table__cell ">
                                                     <div class="panel {{ datum['panel'] }} panel--simple">
                                                         <div class="panel__body">
                                                             {% for output in datum['validation_info'] %}
@@ -105,10 +101,6 @@
                                                         </div>
                                                     </div>
                                                 </td>
-
-
-
-
 
                                     {% else %}
 
