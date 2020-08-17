@@ -51,8 +51,7 @@
 
                                     {% if datum['validation_info']|length > 0 %}
             
-                                    <div class="panel {{ datum['panel'] }} panel--simple">
-                                        <div class="panel__body">
+
 
                                                 <td class="table__cell ">
                                                     <p class="field">
@@ -79,35 +78,37 @@
                                                 </td>
 
                                                 <td>
-                                                {% for output in datum['validation_info'] %}
+                                                    <div class="panel {{ datum['panel'] }} panel--simple">
+                                                        <div class="panel__body">
+                                                            {% for output in datum['validation_info'] %}
 
-                                                    {% if output['overridden'] == True %}
+                                                                {% if output['overridden'] == True %}
 
-                                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
-                                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override '{{ output["validationmessage"] }}'</label>
-                                                    </span>
+                                                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
+                                                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override '{{ output["validationmessage"] }}'</label>
+                                                                    </span>
 
-                                                    {% else %}
+                                                                {% else %}
 
-                                                    <p class="panel__error u-mb-no">
-                                                        <strong> {{output['description']}}</strong>
-                                                    </p>
-                                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
-                                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
-                                                    </span>
+                                                                    <p class="panel__error u-mb-no">
+                                                                        <strong> {{output['description']}}</strong>
+                                                                    </p>
+                                                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
+                                                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
+                                                                    </span>
 
-                                                    {% endif %}
+                                                                {% endif %}
 
-                                                {% endfor %}
-                                            
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
                                                 </td>
 
 
 
-                                        </div>
-                                    </div>
+
 
                                     {% else %}
 
