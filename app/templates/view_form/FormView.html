@@ -37,8 +37,8 @@
                         <tr class="table__row">
                             <th scope="col" class="table__header ">Number</th>
                             <th scope="col" class="table__header ">Question</th>
-                            <th scope="col" class="table__header to-action-th table__header--numeric">Response</th>
-                            <th scope="col" class="table__header to-action-th table__header--numeric">Validations</th>
+                            <th scope="col" class="table__header ">Response</th>
+                            <th scope="col" class="table__header ">Question Status</th>
                         </tr>
                     </thead>
 
@@ -49,13 +49,13 @@
                                 {% if datum['validation_info']|length > 0 %}
                                     <td class="table__cell ">
                                         <p class="field">
-                                            <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
+                                            <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
                                         </p>
                                     </td>
 
                                     <td class="table__cell ">
                                         <p class="field">
-                                            <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
+                                            <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
                                         </p>
                                     </td>
                                     <td class="table__cell ">
