@@ -46,13 +46,20 @@
                                     {% else %}
 
                                     <p class="panel__error u-mb-no">
-                                        <strong> {{output['description']}}</strong>
-                                    </p>
-                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
-                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
-                                    </span>
-
+                                        {% if output['severity'] == 'W' %}
+                                            <strong>Warning - {{output['description']}}</strong>
+                                                </p>
+                                                <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                    <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
+                                                    <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
+                                                </span>
+                                        {% else %}
+                                            <strong>Error - {{output['description']}}</strong>
+                                                </p>
+                                                <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                    <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
+                                                </span>
+                                        {% endif %}
                                     {% endif %}
 
                                 {% endfor %}
