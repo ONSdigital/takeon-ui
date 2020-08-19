@@ -18,12 +18,16 @@ class ReportingHelper:
 
     @staticmethod
     def check_multiple_messages_matches(question, act_msgs, exp_msg):
-        is_validation = False
-        for act_msg in act_msgs:
-            if act_msg.text == exp_msg:
-                is_validation = True
-        if not is_validation:
-            assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msg.text + '" for question ' + question
+        if len(act_msgs) != 0:
+            is_validation = False
+            for act_msg in act_msgs:
+                if act_msg.text == exp_msg:
+                    is_validation = True
+            if not is_validation:
+                assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msg.text + '" for question ' + question
+        else:
+            assert False, 'Expected message is "' + exp_msg + '" but the Actual message elements returned "' + str(
+                len(act_msgs)) + '".Please check the element locator for question ' + question
 
     @staticmethod
     def check_multiple_messages_not_matches(question, act_msg, exp_msg):
