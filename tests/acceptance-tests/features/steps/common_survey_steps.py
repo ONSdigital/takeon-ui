@@ -85,6 +85,7 @@ def step_impl(context, derived_value, question_value=None):
 
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
+@then(u'the "{validation_message}" message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
 @then(
     u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')

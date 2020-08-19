@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
+from common.validation_messages import ValidationMessages
 from pages.common.base_page import BasePage
 import numpy as np
 
@@ -51,8 +52,16 @@ class ContributorDetailsPage(BasePage):
         self.driver.refresh()
         time.sleep(2)
 
+    def get_validation_message(self, survey, exp_msg):
+        if 'validation' in exp_msg:
+            msg = ValidationMessages().get_expected_validation_message(survey, exp_msg)
+        else:
+            msg = exp_msg
+        return msg
+
     def check_validation_message(self, survey, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
+        exp_msg = self.get_validation_message(survey, exp_msg)
         if type(question_type) == list and len(question_type) > 1:
             self.check_multiple_comment_text_messages(survey)
         else:
