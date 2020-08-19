@@ -1,4 +1,4 @@
-FROM python:3.8.1-alpine3.10 as base
+FROM python:3.8-slim as build
 
 
 # Download and resolve any dependencies
@@ -7,8 +7,8 @@ FROM base as builder
 RUN mkdir /install
 WORKDIR /install
 COPY requirements.txt /requirements.txt
-RUN apk add --virtual .build-deps gcc musl-dev && \
-    pip install --prefix=/install -r /requirements.txt --no-warn-script-location
+# RUN apk add --virtual .build-deps gcc musl-dev && \
+RUN pip install --prefix=/install -r /requirements.txt --no-warn-script-location
 
 
 # Build our final image using the resolved dependencies and the application
