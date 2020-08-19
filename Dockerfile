@@ -1,4 +1,4 @@
-FROM python:3.8-slim as build
+FROM python:3.8-slim as base
 
 
 # Download and resolve any dependencies
