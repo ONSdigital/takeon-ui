@@ -11,14 +11,35 @@ import numpy as np
 class ContributorDetailsPage(BasePage):
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
-    QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
-    QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
-    ERROR_MESSAGES_ELEMENT = By.XPATH, '//p[@class="panel__error u-mb-no"]'
+    ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
+    ERROR_MESSAGES_COLUMN = 'td[4]'
+    OVERRIDE_BUTTON = By.ID, 'override_button'
 
-    def get_validation_error_message(self, question_type):
-        element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + \
-                  question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
-        return SeleniumCore.find_elements_by_xpath(element)
+    def get_no_of_validation_error_messages_per_question(self, question):
+        self.is_override_checkbox_checked(question)
+        question_row = self.get_question_code_row_details(question)
+        elements = self.ERROR_MESSAGES_COLUMN + self.ERROR_MESSAGES_ELEMENT
+        return question_row.find_elements(By.XPATH, elements)
+
+    def is_override_checkbox_checked(self, question):
+        question_row = self.get_question_code_row_details(question)
+        check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        for check_box in check_boxes:
+            if check_box.get_attribute("checked") == "true":
+                check_box.click()
+                SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
+        self.save_the_application()
+
+    def get_question_code_row_details(self, question):
+        # self.submit_search_details(reference, period, survey)
+        table = self.driver.find_element_by_id("basic-table")
+        rows = table.find_elements_by_tag_name("tr")
+        # Ignore the first row
+        for i in range(1, len(rows)):
+            cols = rows[i].find_elements_by_tag_name("td")
+            # Check to see if the question code matches
+            if cols[0].text == question:
+                return rows[i]
 
     def submit_question_value(self, survey, value_type, value, question):
         SeleniumCore.switch_window()
@@ -65,7 +86,7 @@ class ContributorDetailsPage(BasePage):
         if type(question_type) == list and len(question_type) > 1:
             self.check_multiple_comment_text_messages(survey)
         else:
-            no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
+            no_of_msgs = ContributorDetailsPage().get_no_of_validation_error_messages_per_question(question_type)
             if len(no_of_msgs) == 1:
                 actual_msg = no_of_msgs[0].text
                 if is_validation_exists == 'be':
@@ -82,9 +103,13 @@ class ContributorDetailsPage(BasePage):
                     ReportingHelper.check_multiple_messages_not_matches(
                         question_type, no_of_msgs, exp_msg)
             elif len(no_of_msgs) == 0:
-                act_msg = ''
-                ReportingHelper.check_multiple_messages_not_matches(
-                    question_type, act_msg, exp_msg)
+                if is_validation_exists == 'be':
+                    ReportingHelper.check_multiple_messages_matches(
+                        question_type, no_of_msgs, exp_msg)
+                elif is_validation_exists == 'not be':
+                    act_msg = ''
+                    ReportingHelper.check_multiple_messages_not_matches(
+                        question_type, act_msg, exp_msg)
 
     def check_multiple_questions_validation_messages(self, survey, question_codes, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
@@ -157,7 +182,7 @@ class ContributorDetailsPage(BasePage):
                     question, result, str(is_validation_exists).lower())
 
     def get_no_of_validation_error_messages(self):
-        return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))
+        return len(SeleniumCore.find_elements_by(By.XPATH, self.ERROR_MESSAGES_ELEMENT))
 
     def get_validation_status(self):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
