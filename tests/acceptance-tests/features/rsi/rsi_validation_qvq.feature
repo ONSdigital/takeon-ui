@@ -12,10 +12,10 @@ Feature: RSI Survey - Question vs Question Validation rule
     When I trigger the validation process
     Then the "qvq validation" message should <isValidationExists> displayed for question code "Q21"
     Examples:
-      | period | reference   | validation                                         | values     | isValidationExists |
-      | 201903 | 49900551526 | This is greater than the question we compare it to | 99,100     | be                 |
-      | 201903 | 49900551526 | This is greater than the question we compare it to | 100,99     | not be             |
-      | 201903 | 49900551526 | This is greater than the question we compare it to | 100,999999 | be                 |
+      | period | reference   | values     | isValidationExists |
+      | 201903 | 49900551526 | 99,100     | be                 |
+      | 201903 | 49900551526 | 100,99     | not be             |
+      | 201903 | 49900551526 | 100,999999 | be                 |
 
 
   Scenario Outline: LU-6831 - Question vs Question Validation RSI survey on form 6
@@ -27,10 +27,10 @@ Feature: RSI Survey - Question vs Question Validation rule
     When I trigger the validation process
     Then the "qvq validation" message should <isValidationExists> displayed for question code "Q21"
     Examples:
-      | period | reference   | validation                                         | values     | isValidationExists |
-      | 201903 | 49900617217 | This is greater than the question we compare it to | 99,100     | be                 |
-      | 201903 | 49900617217 | This is greater than the question we compare it to | 100,99     | not be             |
-      | 201903 | 49900617217 | This is greater than the question we compare it to | 100,999999 | be                 |
+      | period | reference   | values     | isValidationExists |
+      | 201903 | 49900617217 | 99,100     | be                 |
+      | 201903 | 49900617217 | 100,99     | not be             |
+      | 201903 | 49900617217 | 100,999999 | be                 |
 
 
   Scenario Outline: LU-6831 - Question vs Question Validation RSI survey on form 7
