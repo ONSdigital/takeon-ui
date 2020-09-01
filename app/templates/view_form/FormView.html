@@ -89,7 +89,7 @@
 
                                                         <p class="panel__error u-mb-no">
                                                             {% if output['severity'] == 'W' %}
-                                                            <strong>Warning - {{output['description']}}</strong>
+                                                            <strong>Warning - </strong> {{output['description']}}
                                                         </p>
 
                                                         <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
@@ -99,7 +99,7 @@
 
                                                         {% else %}
                                                         <p class="panel__error u-mb-no">
-                                                            <strong>Error - {{output['description']}}</strong>
+                                                            <strong>Error - </strong> {{output['description']}}
                                                         </p>
                                                     
                                                         {% endif %}
