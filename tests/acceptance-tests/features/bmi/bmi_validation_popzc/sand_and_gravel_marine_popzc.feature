@@ -18,7 +18,7 @@ Feature: Sand and Gravel Marine Survey - Period on Period Zero Continuity(PoPZC)
     When I search for the survey "076" with <reference> for the current period <currentPeriod>
     And I run the validation process with <currentPeriodValue>
     Then the validation should return <result> if the "period vs previous frequency period movement to or from zero"
-    And the "This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank" message should <isValidationExists> displayed for question codes
+    And the "popzc validation" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | previousPeriod | currentPeriod | isValidationExists |
       | 49900004791 | 1                  | 0                   | true   | 201903         | 201906        | be                 |

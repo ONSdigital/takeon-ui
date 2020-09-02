@@ -7,7 +7,7 @@ Feature: Sand and Gravel Marine Survey - Comment Present(Question vs Value) Vali
     Given I search for the survey "076" with <reference> for the current period <period>
     When I submit the "comment" <comment> for question <question>
     And I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    Then the "qvv validation" message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment | question | validation                               | isValidationExists |
       | 201903 | 49900004791 | 12345   | Q146     | There is a comment from this contributor | not be             |

@@ -18,7 +18,7 @@ Feature: Sand and Gravel Marine Survey - Question vs Derived Question (QvQ) Vali
       | total_question | derived_question |
       | Q608           | Q9001            |
     Then the validation should return <result> if the "values are not equal"
-    And the <validation> message should <isValidationExists> displayed for question code "Q608"
+    And the "qvq validation" message should <isValidationExists> displayed for question code "Q608"
     Examples:
       | period | reference   | validation                                   | values                                    | isValidationExists | result | derivedTotal | SandAndGravelMarineStock |
       | 201903 | 49900004791 | This total is not equal to the derived total | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                       |

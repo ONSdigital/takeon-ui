@@ -7,7 +7,7 @@ Feature: Blocks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "073" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q101"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q101"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
@@ -24,7 +24,7 @@ Feature: Blocks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "073" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q111"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q111"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
@@ -41,7 +41,7 @@ Feature: Blocks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "073" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q121"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q121"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |

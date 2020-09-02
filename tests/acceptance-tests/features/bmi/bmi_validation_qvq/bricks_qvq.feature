@@ -14,7 +14,7 @@ Feature: Bricks Survey - Question vs Derived Question (QvQ) Validation rule
       | closing_stock_question | derived_question |
       | Q004                   | Q9204            |
     Then the validation should return <result> if the "values are not equal"
-    And the <validation> message should <isValidationExists> displayed for question code "Q004"
+    And the "qvq validation" message should <isValidationExists> displayed for question code "Q004"
     Examples:
       | period | reference   | validation                                   | values            | isValidationExists | result | derivedTotal | bricksClosingStock |
       | 201905 | 49900356828 | This total is not equal to the derived total | 1,1,1             | be                 | true   | 1            | 2                  |
@@ -35,7 +35,7 @@ Feature: Bricks Survey - Question vs Derived Question (QvQ) Validation rule
       | closing_stock_question | derived_question |
       | Q014                   | Q9214            |
     Then the validation should return <result> if the "values are not equal"
-    And the <validation> message should <isValidationExists> displayed for question code "Q014"
+    And the "qvq validation" message should <isValidationExists> displayed for question code "Q014"
     Examples:
       | period | reference   | validation                                   | values            | isValidationExists | result | derivedTotal | bricksClosingStock |
       | 201906 | 49900356828 | This total is not equal to the derived total | 1,1,1             | be                 | true   | 1            | 2                  |
@@ -55,7 +55,7 @@ Feature: Bricks Survey - Question vs Derived Question (QvQ) Validation rule
       | closing_stock_question | derived_question |
       | Q024                   | Q9224            |
     Then the validation should return <result> if the "values are not equal"
-    And the <validation> message should <isValidationExists> displayed for question code "Q024"
+    And the "qvq validation" message should <isValidationExists> displayed for question code "Q024"
     Examples:
       | period | reference   | validation                                   | values            | isValidationExists | result | derivedTotal | bricksClosingStock |
       | 201905 | 49900356828 | This total is not equal to the derived total | 1,1,1             | be                 | true   | 1            | 2                  |
