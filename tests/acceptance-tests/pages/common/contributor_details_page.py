@@ -192,9 +192,9 @@ class ContributorDetailsPage(BasePage):
         questions_list = questions_and_values[1]
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])
 
-        if len(commodity_values) > 1 and len(questions_list) > 1:
+        if len(commodity_values) > 1 and type(questions_list) == list:
             self.submit_values_as_a_list_for_multiple_questions(survey, questions_list, commodity_values)
-        elif len(questions_list) > 1 and len(commodity_values) == 1:
+        elif len(commodity_values) == 1 and type(questions_list) == list:
             self.submit_single_value_for_multiple_questions(survey, questions_list, commodity_values[0])
         else:
             self.submit_single_value_per_question(survey, questions_list, commodity_values[0])
