@@ -5,7 +5,6 @@ from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
 from common.validation_messages import ValidationMessages
 from pages.common.base_page import BasePage
-import numpy as np
 
 
 class ContributorDetailsPage(BasePage):
@@ -87,22 +86,7 @@ class ContributorDetailsPage(BasePage):
             self.check_multiple_comment_text_messages(survey)
         else:
             no_of_msgs = ContributorDetailsPage().get_no_of_validation_error_messages_per_question(question_type)
-            if len(no_of_msgs) == 1:
-                actual_msg = no_of_msgs[0].text
-                if is_validation_exists == 'be':
-                    ReportingHelper.check_single_message_matches(
-                        question_type, actual_msg, exp_msg)
-                elif is_validation_exists == 'not be':
-                    ReportingHelper.check_single_message_not_matches(
-                        actual_msg, exp_msg, question_type)
-            elif len(no_of_msgs) == 2:
-                if is_validation_exists == 'be':
-                    ReportingHelper.check_multiple_messages_matches(
-                        question_type, no_of_msgs, exp_msg)
-                elif is_validation_exists == 'not be':
-                    ReportingHelper.check_multiple_messages_not_matches(
-                        question_type, no_of_msgs, exp_msg)
-            elif len(no_of_msgs) == 0:
+            if len(no_of_msgs) == 0:
                 if is_validation_exists == 'be':
                     ReportingHelper.check_multiple_messages_matches(
                         question_type, no_of_msgs, exp_msg)
@@ -110,6 +94,13 @@ class ContributorDetailsPage(BasePage):
                     act_msg = ''
                     ReportingHelper.check_multiple_messages_not_matches(
                         question_type, act_msg, exp_msg)
+            elif len(no_of_msgs) > 0:
+                if is_validation_exists == 'be':
+                    ReportingHelper.check_multiple_messages_matches(
+                        question_type, no_of_msgs, exp_msg)
+                elif is_validation_exists == 'not be':
+                    ReportingHelper.check_multiple_messages_not_matches(
+                        question_type, no_of_msgs, exp_msg)
 
     def check_multiple_questions_validation_messages(self, survey, question_codes, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
@@ -199,19 +190,17 @@ class ContributorDetailsPage(BasePage):
         SeleniumCore.switch_window()
         survey = questions_and_values[0]
         questions_list = questions_and_values[1]
-        new_questions_list = np.asarray(questions_list)
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])
 
-        if len(commodity_values) > 1 and new_questions_list.size > 1:
+        if len(commodity_values) > 1 and type(questions_list) == list:
             self.submit_values_as_a_list_for_multiple_questions(survey, questions_list, commodity_values)
-        elif new_questions_list.size > 1 and len(commodity_values) == 1:
+        elif len(commodity_values) == 1 and type(questions_list) == list:
             self.submit_single_value_for_multiple_questions(survey, questions_list, commodity_values[0])
         else:
             self.submit_single_value_per_question(survey, questions_list, commodity_values[0])
 
     def submit_values_as_a_list_for_multiple_questions(self, survey, questions_list, commodity_values):
-        new_questions_list = np.asarray(questions_list)
-        if new_questions_list.size > 1:
+        if len(questions_list) > 1:
             count = 0
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
@@ -246,8 +235,7 @@ class ContributorDetailsPage(BasePage):
         global question_codes
         questions_list = question_codes[1]
         commodity_values = Utilities.get_values_as_a_list(question_codes[2])
-        new_questions_list = np.asarray(questions_list)
-        if new_questions_list.size > 1:
+        if len(questions_list) > 1:
             count = 0
             for question in questions_list:
                 question_element = Utilities.get_question_code_element(survey, question)
