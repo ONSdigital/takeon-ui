@@ -7,12 +7,12 @@ Feature: Sand and Gravel Land Survey - Comment Present(Question vs Value) Valida
     Given I search for the survey "066" with <reference> for the current period <period>
     When I submit the "comment" <comment> for question <question>
     And I trigger the validation process
-    Then the <validation> message should <isValidationExists> displayed
+    Then the "qvv validation" message should <isValidationExists> displayed
     Examples:
-      | period | reference   | comment | question | validation                               | isValidationExists |
-      | 201903 | 49900000796 | 12345   | Q146     | There is a comment from this contributor | not be             |
-      | 201903 | 49900000796 | blank   | Q146     | There is a comment from this contributor | not be             |
-      | 201903 | 49900000796 | 2       | Q146     | There is a comment from this contributor | be                 |
-      | 201903 | 49900000796 | blank   | Q147     | There is a comment from this contributor | not be             |
-      | 201903 | 49900000796 | 1       | Q147     | There is a comment from this contributor | not be             |
-      | 201903 | 49900000796 | 2       | Q147     | There is a comment from this contributor | be                 |
+      | period | reference   | comment | question | isValidationExists |
+      | 201903 | 49900000796 | 12345   | Q146     | not be             |
+      | 201903 | 49900000796 | blank   | Q146     | not be             |
+      | 201903 | 49900000796 | 2       | Q146     | be                 |
+      | 201903 | 49900000796 | blank   | Q147     | not be             |
+      | 201903 | 49900000796 | 1       | Q147     | not be             |
+      | 201903 | 49900000796 | 2       | Q147     | be                 |

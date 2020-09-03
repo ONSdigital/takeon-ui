@@ -18,11 +18,11 @@ Feature: Sand and Gravel Marine Survey - Question vs Derived Question (QvQ) Vali
       | total_question | derived_question |
       | Q608           | Q9001            |
     Then the validation should return <result> if the "values are not equal"
-    And the <validation> message should <isValidationExists> displayed for question code "Q608"
+    And the "qvq validation" message should <isValidationExists> displayed for question code "Q608"
     Examples:
-      | period | reference   | validation                                   | values                                    | isValidationExists | result | derivedTotal | SandAndGravelMarineStock |
-      | 201903 | 49900004791 | This total is not equal to the derived total | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                       |
-      | 201903 | 49900004791 | This total is not equal to the derived total | 1,1,0,-1,-3,-5,0                          | be                 | true   | -7           | 7                        |
-      | 201903 | 49900004791 | This total is not equal to the derived total | 2,1,1,2,3,1,1                             | not be             | false  | 11           | 11                       |
-      | 201903 | 49900004791 | This total is not equal to the derived total | 0,0,0,0,0,0,0                             | not be             | false  | 0            | 0                        |
-      | 201903 | 49900004791 | This total is not equal to the derived total | blank,blank,blank,blank,blank,blank,blank | not be             | false  | blank        | blank                    |
+      | period | reference   | values                                    | isValidationExists | result | derivedTotal | SandAndGravelMarineStock |
+      | 201903 | 49900004791 | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                       |
+      | 201903 | 49900004791 | 1,1,0,-1,-3,-5,0                          | be                 | true   | -7           | 7                        |
+      | 201903 | 49900004791 | 2,1,1,2,3,1,1                             | not be             | false  | 11           | 11                       |
+      | 201903 | 49900004791 | 0,0,0,0,0,0,0                             | not be             | false  | 0            | 0                        |
+      | 201903 | 49900004791 | blank,blank,blank,blank,blank,blank,blank | not be             | false  | blank        | blank                    |

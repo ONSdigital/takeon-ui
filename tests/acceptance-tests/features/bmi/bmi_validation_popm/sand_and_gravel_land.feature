@@ -18,7 +18,7 @@ Feature: Sand And Gravel Land Survey - Period on Period Movement(PoPM) Validatio
     When I search for the survey "066" with <reference> for the current period <currentPeriod>
     And I run the validation process with <currentPeriodValue>
     Then the validation should return <result> if the "absolute difference between the values are" <operator> threshold value <thresholdValue>
-    And the "This has changed significantly since the last submission" message should <isValidationExists> displayed for question codes
+    And the "popm validation" message should <isValidationExists> displayed for question codes
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | thresholdValue | operator     | previousPeriod | currentPeriod | isValidationExists |
