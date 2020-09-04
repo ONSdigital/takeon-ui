@@ -84,7 +84,6 @@ def step_impl(context, derived_value, question_value=None):
                                                             context.survey)
 
 
-@given(u'the "{validation_message}" message {is_validation_exists} displayed for the validation been triggered')
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
@@ -144,6 +143,8 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
 
 @when(u'I override the validation for the question {question}')
 def step_impl(context, question):
+    if not question:
+        question = context.question_codes
     page = ContributorDetailsPage()
     page.override_the_validation(question)
 

@@ -7,7 +7,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
   Scenario Outline:  LU-7170 - Check Override functionality for Fixed Value Validation
     Given I search for the <survey> with <reference> for the current period <period>
     And I submit the "bmi survey stock material" <value> for question <question>
-    And the "fv validation" message is displayed for the validation been triggered
+    And I trigger the validation process
     When I override the validation for the question <question>
     Then the validation message should change to <overrideMessage>
     Examples:

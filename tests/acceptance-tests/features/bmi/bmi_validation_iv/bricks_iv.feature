@@ -8,7 +8,7 @@ Feature: Bricks Survey - Invalid Value(IV) Validation rule
     And I trigger the validation process
     Then the "iv validation" message should <isValidationExists> displayed
     Examples:
-      | reference   | period | brickTypeValue | question | isValidationExists |
+      | reference   | period | = | question | isValidationExists |
       | 49900229065 | 201905 | 2              | Q8000    | not be             |
       | 49900229065 | 201905 | 3              | Q8000    | not be             |
       | 49900229065 | 201905 | 4              | Q8000    | not be             |

@@ -82,9 +82,6 @@ class ContributorDetailsPage(BasePage):
 
     def check_validation_message(self, survey, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
-        if is_validation_exists == 'is':
-            is_validation_exists = 'be'
-            self.save_the_application()
         exp_msg = self.get_validation_message(survey, exp_msg)
         if type(question_type) == list and len(question_type) > 1:
             self.check_multiple_comment_text_messages(survey)
@@ -273,9 +270,11 @@ class ContributorDetailsPage(BasePage):
         self.save_the_application()
 
     def check_the_override_message(self, question_code, exp_msg):
-        question_row = self.get_question_code_row_details(question_code)
-        messages = question_row.text.split('\n')
         actual_msgs = []
-        for message in messages:
-            actual_msgs.append(message)
+        if len(question_code) == 1:
+            question_code = ''.join(question_code)
+            question_row = self.get_question_code_row_details(question_code)
+            messages = question_row.text.split('\n')
+            for message in messages:
+                actual_msgs.append(message)
         ReportingHelper.check_messages_matches(question_code, actual_msgs, exp_msg)
