@@ -13,6 +13,7 @@ class ContributorDetailsPage(BasePage):
     ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
     ERROR_MESSAGES_COLUMN = 'td[4]'
     OVERRIDE_BUTTON = By.ID, 'override_button'
+    OVERRIDE_MESSAGE_ELEMENT = By.CLASS_NAME, 'checkbox__label to-u-bg'
 
     def get_no_of_validation_error_messages_per_question(self, question):
         self.is_override_checkbox_checked(question)
@@ -26,7 +27,7 @@ class ContributorDetailsPage(BasePage):
         for check_box in check_boxes:
             if check_box.get_attribute("checked") == "true":
                 check_box.click()
-                SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
+        SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
         self.save_the_application()
 
     def get_question_code_row_details(self, question):
@@ -81,6 +82,8 @@ class ContributorDetailsPage(BasePage):
 
     def check_validation_message(self, survey, question_type, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
+        if is_validation_exists == 'is':
+            is_validation_exists = 'be'
         exp_msg = self.get_validation_message(survey, exp_msg)
         if type(question_type) == list and len(question_type) > 1:
             self.check_multiple_comment_text_messages(survey)
@@ -88,7 +91,7 @@ class ContributorDetailsPage(BasePage):
             no_of_msgs = ContributorDetailsPage().get_no_of_validation_error_messages_per_question(question_type)
             if len(no_of_msgs) == 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_multiple_messages_matches(
+                    ReportingHelper.check_element_multiple_messages_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     act_msg = ''
@@ -96,7 +99,7 @@ class ContributorDetailsPage(BasePage):
                         question_type, act_msg, exp_msg)
             elif len(no_of_msgs) > 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_multiple_messages_matches(
+                    ReportingHelper.check_element_multiple_messages_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     ReportingHelper.check_multiple_messages_not_matches(
@@ -258,3 +261,20 @@ class ContributorDetailsPage(BasePage):
         if derived_question_value == '':
             derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
+
+    def override_the_validation(self, question):
+        question_row = self.get_question_code_row_details(question)
+        check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        for check_box in check_boxes:
+            if check_box.get_attribute("checked") != "true":
+                check_box.click()
+        SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
+        self.save_the_application()
+
+    def check_the_override_message(self, question_code, exp_msg):
+        question_row = self.get_question_code_row_details(question_code)
+        messages = question_row.text.split('\n')
+        actual_msgs = []
+        for message in messages:
+            actual_msgs.append(message)
+        ReportingHelper.check_messages_matches(question_code, actual_msgs, exp_msg)

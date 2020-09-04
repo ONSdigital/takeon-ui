@@ -84,6 +84,7 @@ def step_impl(context, derived_value, question_value=None):
                                                             context.survey)
 
 
+@given(u'the "{validation_message}" message {is_validation_exists} displayed for the validation been triggered')
 @then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
@@ -139,3 +140,15 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
     elif validation_check == 'period on period ratio of ratios movement is':
         RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
                                                                          threshold_value, result)
+
+
+@when(u'I override the validation for the question {question}')
+def step_impl(context, question):
+    page = ContributorDetailsPage()
+    page.override_the_validation(question)
+
+
+@then(u'the validation message should change to {override_message}')
+def step_impl(context, override_message):
+    page = ContributorDetailsPage()
+    page.check_the_override_message(context.question_codes, override_message)
