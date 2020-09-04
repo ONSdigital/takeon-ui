@@ -84,6 +84,7 @@ class ContributorDetailsPage(BasePage):
         self.check_if_overall_validation_triggered()
         if is_validation_exists == 'is':
             is_validation_exists = 'be'
+            self.save_the_application()
         exp_msg = self.get_validation_message(survey, exp_msg)
         if type(question_type) == list and len(question_type) > 1:
             self.check_multiple_comment_text_messages(survey)
@@ -91,7 +92,7 @@ class ContributorDetailsPage(BasePage):
             no_of_msgs = ContributorDetailsPage().get_no_of_validation_error_messages_per_question(question_type)
             if len(no_of_msgs) == 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_element_multiple_messages_matches(
+                    ReportingHelper.check_elements_message_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     act_msg = ''
@@ -99,7 +100,7 @@ class ContributorDetailsPage(BasePage):
                         question_type, act_msg, exp_msg)
             elif len(no_of_msgs) > 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_element_multiple_messages_matches(
+                    ReportingHelper.check_elements_message_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     ReportingHelper.check_multiple_messages_not_matches(

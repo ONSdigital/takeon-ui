@@ -17,7 +17,7 @@ class ReportingHelper:
             assert False, 'This message "' + act_msg + '" is not expected for question ' + question
 
     @staticmethod
-    def check_element_multiple_messages_matches(question, elements, exp_msg):
+    def check_elements_message_matches(question, elements, exp_msg):
         if len(elements) != 0:
             is_validation = False
             msgs = []
