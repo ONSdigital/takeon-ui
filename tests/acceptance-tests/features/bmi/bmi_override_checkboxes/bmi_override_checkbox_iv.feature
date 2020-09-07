@@ -13,4 +13,3 @@ Feature: BMI Surveys(Bricks) - Override checkbox - Invalid Value(IV) Validation 
     Examples:
       | survey | reference   | period | value | question | overrideMessage                                                                                |
       | 074    | 49900229065 | 201905 | 1     | Q8000    | Override 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)' |
-

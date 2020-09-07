@@ -57,6 +57,7 @@ def step_impl(context, value_type, comment_value, question):
         ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
 
 
+@given(u'I trigger the validation process')
 @when(u'I trigger the validation process')
 def step_impl(context):
     ContributorDetailsPage().save_the_application()
