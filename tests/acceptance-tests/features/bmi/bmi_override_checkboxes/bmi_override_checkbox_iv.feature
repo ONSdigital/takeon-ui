@@ -9,7 +9,7 @@ Feature: BMI Surveys(Bricks) - Override checkbox - Invalid Value(IV) Validation 
     And I submit the "brick type material" <value> for question <question>
     And I trigger the validation process
     When I override the validation for the question <question>
-    Then the validation message should change to <overrideMessage>
+    Then the validation message should change to "iv override message"
     Examples:
-      | survey | reference   | period | value | question | overrideMessage                                                                                |
-      | 074    | 49900229065 | 201905 | 1     | Q8000    | Override 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)' |
+      | survey | reference   | period | value | question |
+      | 074    | 49900229065 | 201905 | 1     | Q8000    |
