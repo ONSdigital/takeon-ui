@@ -63,6 +63,7 @@ def step_impl(context):
     ContributorDetailsPage().save_the_application()
 
 
+@given(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process against the {derived_value}')
 def step_impl(context, derived_value, question_value=None):
@@ -146,11 +147,13 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
 def step_impl(context, question):
     if not question:
         question = context.question_codes
+    else:
+        context.question_codes = question
     page = ContributorDetailsPage()
     page.override_the_validation(question)
 
 
-@then(u'the validation message should change to {override_message}')
+@then(u'the validation message should change to "{override_message}"')
 def step_impl(context, override_message):
     page = ContributorDetailsPage()
-    page.check_the_override_message(context.question_codes, override_message)
+    page.check_the_override_message(context.survey, context.question_codes, override_message)

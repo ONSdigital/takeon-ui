@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
+from common.override_messages import OverrideMessages
 from common.validation_messages import ValidationMessages
 from pages.common.base_page import BasePage
 
@@ -17,12 +18,12 @@ class ContributorDetailsPage(BasePage):
 
     def get_no_of_validation_error_messages_per_question(self, question):
         self.is_override_checkbox_checked(question)
-        question_row = self.get_question_code_row_details(question)
+        question_row = self.get_question_status_column_details(question)
         elements = self.ERROR_MESSAGES_COLUMN + self.ERROR_MESSAGES_ELEMENT
         return question_row.find_elements(By.XPATH, elements)
 
     def is_override_checkbox_checked(self, question):
-        question_row = self.get_question_code_row_details(question)
+        question_row = self.get_question_status_column_details(question)
         check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
         for check_box in check_boxes:
             if check_box.get_attribute("checked") == "true":
@@ -30,7 +31,7 @@ class ContributorDetailsPage(BasePage):
         SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
         self.save_the_application()
 
-    def get_question_code_row_details(self, question):
+    def get_question_status_column_details(self, question):
         # self.submit_search_details(reference, period, survey)
         table = self.driver.find_element_by_id("basic-table")
         rows = table.find_elements_by_tag_name("tr")
@@ -39,7 +40,7 @@ class ContributorDetailsPage(BasePage):
             cols = rows[i].find_elements_by_tag_name("td")
             # Check to see if the question code matches
             if cols[0].text == question:
-                return rows[i]
+                return cols[3]
 
     def submit_question_value(self, survey, value_type, value, question):
         SeleniumCore.switch_window()
@@ -76,6 +77,8 @@ class ContributorDetailsPage(BasePage):
     def get_validation_message(self, survey, exp_msg):
         if 'validation' in exp_msg:
             msg = ValidationMessages().get_expected_validation_message(survey, exp_msg)
+        elif 'override message' in exp_msg:
+            msg = OverrideMessages().get_expected_override_message(survey, exp_msg)
         else:
             msg = exp_msg
         return msg
@@ -261,7 +264,8 @@ class ContributorDetailsPage(BasePage):
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
 
     def override_the_validation(self, question):
-        question_row = self.get_question_code_row_details(question)
+        self.is_override_checkbox_checked(question)
+        question_row = self.get_question_status_column_details(question)
         check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
         for check_box in check_boxes:
             if check_box.get_attribute("checked") != "true":
@@ -269,12 +273,12 @@ class ContributorDetailsPage(BasePage):
         SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
         self.save_the_application()
 
-    def check_the_override_message(self, question_code, exp_msg):
+    def check_the_override_message(self, survey, question_code, exp_msg):
         actual_msgs = []
-        if len(question_code) == 1:
-            question_code = ''.join(question_code)
-            question_row = self.get_question_code_row_details(question_code)
-            messages = question_row.text.split('\n')
-            for message in messages:
-                actual_msgs.append(message)
+        exp_msg = self.get_validation_message(survey, exp_msg)
+        question_column = self.get_question_status_column_details(question_code)
+        messages = question_column.text.split('\n')
+        for message in messages:
+            actual_msgs.append(message)
+
         ReportingHelper.check_messages_matches(question_code, actual_msgs, exp_msg)
