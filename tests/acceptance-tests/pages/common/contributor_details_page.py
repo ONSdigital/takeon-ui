@@ -282,3 +282,8 @@ class ContributorDetailsPage(BasePage):
             actual_msgs.append(message)
 
         ReportingHelper.check_messages_matches(question_code, actual_msgs, exp_msg)
+
+    def check_the_override_checkbox_displayed(self, question):
+        question_row = self.get_question_status_column_details(question)
+        check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        ReportingHelper.compare_values(len(check_boxes), 1)

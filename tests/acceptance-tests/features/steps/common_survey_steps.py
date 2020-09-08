@@ -153,7 +153,14 @@ def step_impl(context, question):
     page.override_the_validation(question)
 
 
+@then(u'the validation message should change to {override_message}')
 @then(u'the validation message should change to "{override_message}"')
 def step_impl(context, override_message):
     page = ContributorDetailsPage()
     page.check_the_override_message(context.survey, context.question_codes, override_message)
+
+
+@then(u'the override checkbox should not be displayed for {question}')
+def step_impl(context, question):
+    page = ContributorDetailsPage()
+    page.check_the_override_checkbox_displayed(question)

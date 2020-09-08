@@ -17,7 +17,6 @@ class OverrideMessages:
         'qvv override message': "Override 'Respondent entered a comment'",
         'vb override message': "Override 'Total turnover(Q20) is blank'",
         'vz override message': "Override 'Total turnover(Q20) is zero'",
-        'vb and vz override message': "Override 'Total turnover(Q20) is zero,Warning - Total turnover(Q20) is blank'",
         'vpsic override message': "Override 'SIC is petrol and internet sales(Q21) value is greater than zero'"
     }
 
