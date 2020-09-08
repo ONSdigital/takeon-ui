@@ -3,7 +3,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
   Background:
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-7034 - Question vs Question Validation BMI - Blocks survey
+  Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation BMI - Blocks survey
     Given I search for the survey "073" with <reference> for the current period <period>
     And I submit the "blocks opening stock dense aggregate" <values> for questions
       | question_codes |
@@ -20,7 +20,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
       | 201905 | 49900138556 | 1,1,1  | 1            | 2                  | Q104     |
 
 
-  Scenario Outline: LU-7034 - Question vs Question Validation - Bricks survey
+  Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation - Bricks survey
     Given I search for the survey "074" with <reference> for the current period <period>
     And I submit the "blocks opening stock dense aggregate" <values> for questions
       | question_codes |
@@ -37,7 +37,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
       | 201905 | 49900356828 | 1,1,1  | 1            | 2                  | Q004     |
 
 
-  Scenario Outline: LU-7034 - Question vs Question Validation BMI - Sand Gravel Land Survey
+  Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation BMI - Sand Gravel Land Survey
     Given I search for the survey "066" with <reference> for the current period <period>
     And I submit the "sand and gravel land material stock" <values> for questions
       | question_codes |
@@ -58,7 +58,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
       | 201906 | 49900000796 | 1,1,1,1,1,1,1 | Q608     | 7            | 10                     |
 
 
-  Scenario Outline: LU-7034 - Question vs Question Validation BMI - Sand Gravel Marine Survey
+  Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation BMI - Sand Gravel Marine Survey
     Given I search for the survey "076" with <reference> for the current period <period>
     And I submit the "sand and gravel marine material stock" <values> for questions
       | question_codes |

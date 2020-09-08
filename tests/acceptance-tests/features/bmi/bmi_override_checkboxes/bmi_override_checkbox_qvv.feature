@@ -4,7 +4,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
   Background:
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
 
-  Scenario Outline: LU-6531 - Check Override functionality for Comment Present Validation
+  Scenario Outline: LU-7170 - Check Override functionality for Comment Present Validation
     Given I search for the <survey> with <reference> for the current period <period>
     And I submit the "comment" <comment> for question <question>
     And I trigger the validation process

@@ -5,7 +5,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
 
 
-  Scenario Outline: LU-7033 - Period on Period Movement Validation
+  Scenario Outline: LU-7170 - Check Override functionality for Period on Period Movement Validation
     Given I search for the <survey> with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
     And I search for the <survey> with <reference> for the current period <currentPeriod>
