@@ -21,7 +21,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
 
 
   Scenario Outline: LU-7034 - Question vs Question Validation - Bricks survey
-    Given I search for the survey "073" with <reference> for the current period <period>
+    Given I search for the survey "074" with <reference> for the current period <period>
     And I submit the "blocks opening stock dense aggregate" <values> for questions
       | question_codes |
       | Q001           |

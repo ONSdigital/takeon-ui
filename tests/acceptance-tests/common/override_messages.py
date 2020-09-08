@@ -2,7 +2,7 @@ class OverrideMessages:
     BMI_MESSAGES = {
         'fv override message': "Override 'Value set to default, please check'",
         'iv override message': "Override 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)'",
-        'popm override message': "Override This has changed significantly since the last submission'",
+        'popm override message': "Override 'This has changed significantly since the last submission'",
         'popqvq override message': "Override 'This has changed since last submission'",
         'popzc override message': "Override 'This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank'",
         'qvq override message': "Override 'This total is not equal to the derived total'",

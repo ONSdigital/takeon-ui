@@ -8,7 +8,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
   Scenario Outline: LU-7033 - Period on Period Movement Validation
     Given I search for the <survey> with <reference> for the previous period <previousPeriod>
     And I run the validation process on <questionCode> with <previousPeriodValue>
-    And I search for the survey "073" with <reference> for the current period <currentPeriod>
+    And I search for the <survey> with <reference> for the current period <currentPeriod>
     When I run the validation process on <questionCode> with <currentPeriodValue>
     And I override the validation for the question <questionCode>
     Then the validation message should change to "popm override message"
