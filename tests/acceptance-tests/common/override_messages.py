@@ -13,7 +13,6 @@ class OverrideMessages:
         'poprrm override message': "Override 'Internet turnover to total turnover ratio - large month on month change'",
         'ppvb total turnover override message': "Override 'Total turnover(Q20) was returned blank in the previous period'",
         'ppvb internet sales override message': "Override 'Internet Sales(Q21) was returned blank in the previous period'",
-        'qvq override message': 'Error - Internet turnover(Q21) is greater than total turnover(Q20)',
         'qvv override message': "Override 'Respondent entered a comment'",
         'vb override message': "Override 'Total turnover(Q20) is blank'",
         'vz override message': "Override 'Total turnover(Q20) is zero'",
