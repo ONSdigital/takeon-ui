@@ -29,7 +29,7 @@ class ContributorDetailsPage(BasePage):
         count = 0
         for check_box in check_boxes:
             if type_of_check == 'validation' and check_box.get_attribute("checked") == "true" or \
-                    type_of_check == 'override' and check_box.get_attribute("checked") == "false":
+                    type_of_check == 'override' and check_box.get_attribute("checked") != "true":
                 check_box.click()
                 count += 1
         if count >= 1:
