@@ -19,3 +19,7 @@ class Utilities:
         else:
             question_code = question_code.replace("Q", "").zfill(4)
         return question_code
+
+    @staticmethod
+    def remove_multiple_spaces_in_a_string(value):
+        return " ".join(value.split())

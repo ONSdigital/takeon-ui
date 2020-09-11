@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
+from common.override_messages import OverrideMessages
 from common.validation_messages import ValidationMessages
 from pages.common.base_page import BasePage
 
@@ -11,26 +12,31 @@ class ContributorDetailsPage(BasePage):
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
     ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
+    OVERRIDE_MESSAGE_LABEL = '//label'
     ERROR_MESSAGES_COLUMN = 'td[4]'
     OVERRIDE_BUTTON = By.ID, 'override_button'
+    OVERRIDE_MESSAGE_ELEMENT = By.CLASS_NAME, 'checkbox__label to-u-bg'
 
     def get_no_of_validation_error_messages_per_question(self, question):
-        self.is_override_checkbox_checked(question)
+        self.override_the_validation(question, 'validation')
         question_row = self.get_question_code_row_details(question)
         elements = self.ERROR_MESSAGES_COLUMN + self.ERROR_MESSAGES_ELEMENT
         return question_row.find_elements(By.XPATH, elements)
 
-    def is_override_checkbox_checked(self, question):
+    def override_the_validation(self, question, type_of_check):
         question_row = self.get_question_code_row_details(question)
         check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        count = 0
         for check_box in check_boxes:
-            if check_box.get_attribute("checked") == "true":
+            if type_of_check == 'validation' and check_box.get_attribute("checked") == "true" or \
+                    type_of_check == 'override' and check_box.get_attribute("checked") != "true":
                 check_box.click()
-                SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
-        self.save_the_application()
+                count += 1
+        if count >= 1:
+            SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
+            self.save_the_application()
 
     def get_question_code_row_details(self, question):
-        # self.submit_search_details(reference, period, survey)
         table = self.driver.find_element_by_id("basic-table")
         rows = table.find_elements_by_tag_name("tr")
         # Ignore the first row
@@ -75,6 +81,8 @@ class ContributorDetailsPage(BasePage):
     def get_validation_message(self, survey, exp_msg):
         if 'validation' in exp_msg:
             msg = ValidationMessages().get_expected_validation_message(survey, exp_msg)
+        elif 'override message' in exp_msg:
+            msg = OverrideMessages().get_expected_override_message(survey, exp_msg)
         else:
             msg = exp_msg
         return msg
@@ -88,7 +96,7 @@ class ContributorDetailsPage(BasePage):
             no_of_msgs = ContributorDetailsPage().get_no_of_validation_error_messages_per_question(question_type)
             if len(no_of_msgs) == 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_multiple_messages_matches(
+                    ReportingHelper.check_elements_message_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     act_msg = ''
@@ -96,7 +104,7 @@ class ContributorDetailsPage(BasePage):
                         question_type, act_msg, exp_msg)
             elif len(no_of_msgs) > 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_multiple_messages_matches(
+                    ReportingHelper.check_elements_message_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     ReportingHelper.check_multiple_messages_not_matches(
@@ -258,3 +266,15 @@ class ContributorDetailsPage(BasePage):
         if derived_question_value == '':
             derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
+
+    def check_the_override_message(self, survey, question_code, exp_msg):
+        exp_msg = self.get_validation_message(survey, exp_msg)
+        question_row = self.get_question_code_row_details(question_code)
+        elements = self.ERROR_MESSAGES_COLUMN + self.OVERRIDE_MESSAGE_LABEL
+        override_messages_elements = question_row.find_elements(By.XPATH, elements)
+        ReportingHelper.check_elements_message_matches(question_code, override_messages_elements, exp_msg)
+
+    def check_the_override_checkbox_displayed(self, question):
+        question_row = self.get_question_code_row_details(question)
+        check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        ReportingHelper.compare_values(len(check_boxes), 1)
