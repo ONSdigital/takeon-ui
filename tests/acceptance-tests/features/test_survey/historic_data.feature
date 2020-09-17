@@ -10,4 +10,3 @@ Feature: Test Survey - Historic Data
     Given I search for the survey "999A" with <reference> for the current period <period>
     When I switch to the "historic data" tab on the contributor details page
     Then I can able to view the questions and current period values
-    
