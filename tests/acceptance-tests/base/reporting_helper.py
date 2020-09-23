@@ -17,15 +17,32 @@ class ReportingHelper:
             assert False, 'This message "' + act_msg + '" is not expected for question ' + question
 
     @staticmethod
-    def check_multiple_messages_matches(question, act_msgs, exp_msg):
+    def check_elements_message_matches(question, elements, exp_msg):
+        if len(elements) != 0:
+            is_validation = False
+            msgs = []
+            for element in elements:
+                if element.text == exp_msg:
+                    is_validation = True
+                else:
+                    msgs.append(element.text)
+            if not is_validation:
+                assert False, 'Expected message is "' + exp_msg + '" did not exists in messages list"\n' + '\n'.join(
+                    msgs) + '" for question ' + question
+        else:
+            assert False, 'Expected message is "' + exp_msg + '" but the Actual message elements returned "' + str(
+                len(elements)) + '".Please check the element locator for question ' + question
+
+    @staticmethod
+    def check_messages_matches(question, act_msgs, exp_msg):
         if len(act_msgs) != 0:
             is_validation = False
             msgs = []
             for act_msg in act_msgs:
-                if act_msg.text == exp_msg:
+                if act_msg == exp_msg:
                     is_validation = True
                 else:
-                    msgs.append(act_msg.text)
+                    msgs.append(act_msg)
             if not is_validation:
                 assert False, 'Expected message is "' + exp_msg + '" did not exists in messages list"\n' + '\n'.join(
                     msgs) + '" for question ' + question
