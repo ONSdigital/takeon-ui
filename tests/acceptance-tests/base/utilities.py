@@ -14,7 +14,7 @@ class Utilities:
 
     @staticmethod
     def get_question_code_element(survey, question_code):
-        if survey == '023' or survey == '999A':
+        if survey == '023':
             question_code = question_code.replace("Q", "")
         else:
             question_code = question_code.replace("Q", "").zfill(4)

@@ -2,14 +2,13 @@ from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
-from base.utilities import Utilities
 from pages.common.base_page import BasePage
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class TestSurveyContributorDetailsPage(BasePage):
-    QUESTION_ONE_ELEMENT = '1000'
-    QUESTION_TWO_ELEMENT = '1001'
+    QUESTION_ONE_ELEMENT = '0023'
+    QUESTION_TWO_ELEMENT = '0024'
     QUESTION_DERIVED_ELEMENT = '4001'
     COMMENT_QUESTION_NOT_BLANK = '5000'
     COMMENT_QUESTION_VALUE = '5001'
@@ -17,15 +16,12 @@ class TestSurveyContributorDetailsPage(BasePage):
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
     QUESTION_LABEL_PART_TWO = "')]"
-    TAB_ELEMENTS = By.XPATH, "//li[@class='tab__list-item tab__list-item--row']"
-    CURRENT_PERIOD_COULMN = 'td[2]'
+    TAB_ELEMENTS = By.XPATH, '//button[contains(@class,"w3-bar-item w3-button tablink")]'
 
     question_codes = {
         'Q1': '1000',
         'Q2': '1001'
     }
-
-    questions_list = ['Q20', 'Q7034', 'Q21', 'Q22', 'Q23', 'Q24', 'Q25', 'Q26', 'Q27']
 
     def set_internet_sales_value(self, value):
         SeleniumCore.set_element_text(self.QUESTION_TWO_ELEMENT, value)
@@ -70,10 +66,7 @@ class TestSurveyContributorDetailsPage(BasePage):
 
     def submit_question_value(self, value_type, value, question):
         SeleniumCore.switch_window()
-        if value_type == 'value':
-            pass
-        elif value_type == 'comment':
-            self.submit_comment_value(value, question)
+        self.submit_comment_value(value, question)
 
     def submit_comment_value(self, comment, question):
         if comment.lower() == 'empty' or comment.lower() == 'blank':
@@ -105,14 +98,14 @@ class TestSurveyContributorDetailsPage(BasePage):
         return commodity_values
 
     def switch_to_the_tab(self, tab_name):
+        SeleniumCore.switch_window()
         elements = SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)
         for ele in elements:
             if ele.text.lower() == tab_name.lower():
                 ele.click()
                 break
 
-    def check_current_period_data_exists(self):
-        for question in self.questions_list:
-            current_period_text_element = Utilities.get_question_code_element('999A', question)
-            current_period_text_elements = SeleniumCore.find_elements_by(By.ID, current_period_text_element)
-            ReportingHelper.compare_values(len(current_period_text_elements), 0)
+    def check_historic__data_exists(self):
+        table = self.driver.find_element_by_id("HistoricData")
+        rows = table.find_elements_by_tag_name("tr")
+        ReportingHelper.compare_values(len(rows), 0)
