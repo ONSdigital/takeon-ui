@@ -34,7 +34,7 @@
 
             <div class="w3-container">
                 <div class="w3-bar w3-light-grey">
-                    <button class="w3-bar-item w3-button tablink w3-green" onclick="openTab(event, 'CurrentData')">Current Data</button>
+                    <button class="w3-bar-item w3-button tablink tabColour" onclick="openTab(event, 'CurrentData')">Current Data</button>
                     <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'HistoricData')">Historic Data</button>
                 </div>
             </div>
@@ -306,10 +306,10 @@ function openTab(evt, tabName) {
   }
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+    tablinks[i].className = tablinks[i].className.replace(" tabColour", "");
   }
   document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " w3-green";
+  evt.currentTarget.className += " tabColour";
 }
 </script>
 ​
