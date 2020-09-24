@@ -14,8 +14,6 @@ class TestSurveyContributorDetailsPage(BasePage):
     COMMENT_QUESTION_VALUE = '5001'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
-    QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
-    QUESTION_LABEL_PART_TWO = "')]"
     TAB_ELEMENTS = By.XPATH, '//button[contains(@class,"w3-bar-item w3-button tablink")]'
 
     question_codes = {
@@ -105,7 +103,7 @@ class TestSurveyContributorDetailsPage(BasePage):
                 ele.click()
                 break
 
-    def check_historic__data_exists(self):
+    def check_historic_data_exists(self):
         table = self.driver.find_element_by_id("HistoricData")
         rows = table.find_elements_by_tag_name("tr")
         ReportingHelper.compare_values(len(rows), 0)

@@ -10,4 +10,4 @@ def step_impl(context, tab_name):
 
 @then(u'I should be able to view the historic data')
 def step_impl(context):
-    TestSurveyContributorDetailsPage().check_historic__data_exists()
+    TestSurveyContributorDetailsPage().check_historic_data_exists()
