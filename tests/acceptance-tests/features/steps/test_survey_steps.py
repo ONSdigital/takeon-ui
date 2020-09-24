@@ -8,6 +8,6 @@ def step_impl(context, tab_name):
     TestSurveyContributorDetailsPage().switch_to_the_tab(tab_name)
 
 
-@then(u'I can able to view the historic data')
+@then(u'I should be able to view the historic data')
 def step_impl(context):
     TestSurveyContributorDetailsPage().check_historic__data_exists()
