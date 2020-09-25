@@ -1,6 +1,6 @@
 class ValidationMessages:
     BMI_MESSAGES = {
-        'fv validation': 'Warning - Value set to default, please check',
+        'fv validation': 'Warning - Invalid Value, please check',
         'iv validation': 'Warning - This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)',
         'popm validation': 'Warning - This has changed significantly since the last submission',
         'popqvq validation': 'Warning - This has changed since last submission',
