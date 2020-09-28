@@ -1,26 +1,26 @@
 class OverrideMessages:
     BMI_MESSAGES = {
-        'fv override message': "Override 'Invalid Value, please check'",
-        'iv override message': "Override 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)'",
-        'popm override message': "Override 'This has changed significantly since the last submission'",
-        'popqvq override message': "Override 'This has changed since last submission'",
-        'popzc override message': "Override 'This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank'",
-        'qvq override message': "Override 'This total is not equal to the derived total'",
-        'qvv override message': "Override 'There is a comment from this contributor'"
+        'fv override message': "Overridden - 'Value set to default, please check'",
+        'iv override message': "Overridden - 'This is not a valid brick type. It should be 2 (clay), 3 (concrete) or 4 (sandlime)'",
+        'popm override message': "Overridden - 'This has changed significantly since the last submission'",
+        'popqvq override message': "Overridden - 'This has changed since last submission'",
+        'popzc override message': "Overridden - 'This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank'",
+        'qvq override message': "Overridden - 'This total is not equal to the derived total'",
+        'qvv override message': "Overridden - 'There is a comment from this contributor'"
     }
 
     RSI_MESSAGES = {
-        'poprrm override message': "Override 'Internet turnover to total turnover ratio - large month on month change'",
-        'ppvb total turnover override message': "Override 'Total turnover(Q20) was returned blank in the previous period'",
-        'ppvb internet sales override message': "Override 'Internet Sales(Q21) was returned blank in the previous period'",
-        'qvv override message': "Override 'Respondent entered a comment'",
-        'vb override message': "Override 'Total turnover(Q20) is blank'",
-        'vz override message': "Override 'Total turnover(Q20) is zero'",
-        'vpsic override message': "Override 'SIC is petrol and internet sales(Q21) value is greater than zero'"
+        'poprrm override message': "Overridden - 'Internet turnover to total turnover ratio - large month on month change'",
+        'ppvb total turnover override message': "Overridden - 'Total turnover(Q20) was returned blank in the previous period'",
+        'ppvb internet sales override message': "Overridden - 'Internet Sales(Q21) was returned blank in the previous period'",
+        'qvv override message': "Overridden - 'Respondent entered a comment'",
+        'vb override message': "Overridden - 'Total turnover(Q20) is blank'",
+        'vz override message': "Overridden - 'Total turnover(Q20) is zero'",
+        'vpsic override message': "Overridden - 'SIC is petrol and internet sales(Q21) value is greater than zero'"
     }
 
     TEST_SURVEY_MESSAGES = {
-        'qvv override message': "Override 'There is a comment from this contributor'"
+        'qvv override message': "Overridden - 'There is a comment from this contributor'"
     }
 
     @staticmethod
