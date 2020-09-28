@@ -51,10 +51,7 @@ def step_impl(context, value_type, values):
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def step_impl(context, value_type, comment_value, question):
     context.question_codes = question.upper()
-    if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_question_value(value_type, comment_value, question)
-    else:
-        ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
+    ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
 
 
 @given(u'I trigger the validation process')
