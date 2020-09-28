@@ -37,7 +37,7 @@ class ContributorDetailsPage(BasePage):
             self.save_the_application()
 
     def get_question_code_row_details(self, question):
-        table = self.driver.find_element_by_id("basic-table")
+        table = self.driver.find_element_by_id("CurrentData")
         rows = table.find_elements_by_tag_name("tr")
         # Ignore the first row
         for i in range(1, len(rows)):
@@ -53,7 +53,8 @@ class ContributorDetailsPage(BasePage):
 
     def submit_sales_value(self, survey, value, question):
         value = Utilities.convert_blank_data_value(value)
-        SeleniumCore.set_element_text(Utilities.get_question_code_element(survey, question), value)
+        question_element = Utilities.get_question_code_element(survey, question)
+        SeleniumCore.set_current_data_text(question_element, value)
 
     def save_the_application(self):
         self.driver.find_element(
@@ -212,7 +213,7 @@ class ContributorDetailsPage(BasePage):
             count = 0
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
-            SeleniumCore.set_element_text(
+            SeleniumCore.set_current_data_text(
                 question_element, Utilities.convert_blank_data_value(commodity_values[count]))
             if len(commodity_values) > 1:
                 count += 1
@@ -221,11 +222,11 @@ class ContributorDetailsPage(BasePage):
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
             commodity_value = Utilities.convert_blank_data_value(commodity_value)
-            SeleniumCore.set_element_text(question_element, commodity_value)
+            SeleniumCore.set_current_data_text(question_element, commodity_value)
 
     def submit_single_value_per_question(self, survey, questions_list, commodity_value):
         question_element = Utilities.get_question_code_element(survey, questions_list)
-        SeleniumCore.set_element_text(
+        SeleniumCore.set_current_data_text(
             question_element, commodity_value)
 
     def validate_the_current_period_details(self, *questions_and_values):
@@ -260,7 +261,7 @@ class ContributorDetailsPage(BasePage):
 
         comparing_question_element = Utilities.get_question_code_element(survey, questions_list[0])
         derived_question_element = Utilities.get_question_code_element(survey, questions_list[1])
-        SeleniumCore.set_element_text(comparing_question_element, comparing_question_value)
+        SeleniumCore.set_current_data_text(comparing_question_element, comparing_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
         if derived_question_value == '':

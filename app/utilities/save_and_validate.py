@@ -51,7 +51,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         status_message = 'Timeout error ' + timeout_error
         log.info('Timeout Error %s', timeout_error)
     except RequestException as requests_error:
-        status_message = 'There was a problem with your request ' + requests_error + 'Please contact Take-On Support Team'
+        status_message = 'There was a problem with your request ' + requests_error + 'Please contact Data Clearing Support Team'
         log.info('Requests Error: %s', requests_error)
 
 def validate(inqcode, period, ruref, response_and_validations, override_button, contributor_data, validations, status_colour):
