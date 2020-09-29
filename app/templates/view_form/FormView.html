@@ -198,7 +198,7 @@
 
                         <thead class="table__head">
                             <tr class="table__row">
-                                <th scope="col" class="table__header col-1@m">Question Number</th>
+                                <th scope="col" class="table__header col-1@m">Question</th>
                                 <th scope="col" class="table__header col-2@m">{{ contributor_details['period'] }}</th>
                             </tr>
                         </thead>
@@ -216,8 +216,7 @@
 
                                         <td class="table__cell ">
                                             <p class="field">
-                                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10" readonly>
-                                                {# <label name="{{ datum['questioncode'] }}" id="{{ datum['questioncode'] }}"> {{ datum['response'] }} </label> #}
+                                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-6" readonly>
                                             </p>
                                         </td>
                                     </tr>
