@@ -104,6 +104,7 @@
                                                                 {% if output['severity'] == 'W' %}
                                                                 <strong>Warning - </strong> {{output['description']}} 
                                                             </p>
+                                                            <br>
 
                                                             <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
                                                                 <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
@@ -215,7 +216,7 @@
 
                                         <td class="table__cell ">
                                             <p class="field">
-                                                <label name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}"> </label>
+                                                <label name="{{ datum['questioncode'] }}" id="{{ datum['questioncode'] }}"> {{ datum['response'] }} </label>
                                             </p>
                                         </td>
                                     </tr>
