@@ -24,7 +24,8 @@ class ValidationMessages:
     }
 
     TEST_SURVEY_MESSAGES = {
-        'qvv validation': 'There is a comment from this contributor',
+        'qvv validation': 'Warning - There is a comment from this contributor',
+        'qvv text validation': 'Warning - Respondent entered a comment',
         'fv validation': 'Warning - Value set to default, please check',
         'popmrz validation': ' Error - Internet value(Q21) = 0 this period but > 0 last period and ratio of Internet(Q21) to total turnover(Q20) was > 10% last period'
     }
