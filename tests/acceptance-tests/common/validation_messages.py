@@ -27,6 +27,11 @@ class ValidationMessages:
         'qvv validation': 'Warning - There is a comment from this contributor',
         'qvv text validation': 'Warning - Respondent entered a comment',
         'fv validation': 'Warning - Value set to default, please check',
+        'vz validation': 'Warning - This value is Zero',
+        'vb validation': 'Warning - This value is blank',
+        'vn validation': 'Warning - This is a negative value',
+        'vp validation': 'Warning - Respondent entered a value',
+        'vi validation': 'Warning - Brick type is invalid',
         'popmrz validation': ' Error - Internet value(Q21) = 0 this period but > 0 last period and ratio of Internet(Q21) to total turnover(Q20) was > 10% last period'
     }
 
