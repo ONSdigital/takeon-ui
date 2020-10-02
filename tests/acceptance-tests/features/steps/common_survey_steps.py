@@ -40,11 +40,7 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.question_codes.append(cell)
-    if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.survey, context.question_codes,
-                                                                              values)
-    else:
-        ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
+    ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
 
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -64,12 +60,11 @@ def step_impl(context):
 @when(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process against the {derived_value}')
 def step_impl(context, derived_value, question_value=None):
+    context.total_turnover_value = question_value
     if context.survey == '023':
-        context.total_turnover_value = question_value
         RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
     elif context.survey == '999A':
-        context.total_turnover_value = 0
-        TestSurveyContributorDetailsPage().run_the_validation_process(derived_value)
+        TestSurveyContributorDetailsPage().run_the_validation_process(question_value, derived_value)
     else:
         context.comparison_value_one = question_value
         context.comparison_value_two = derived_value

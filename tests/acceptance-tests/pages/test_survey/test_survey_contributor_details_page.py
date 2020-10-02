@@ -12,6 +12,8 @@ class TestSurveyContributorDetailsPage(BasePage):
     QUESTION_DERIVED_ELEMENT = '4001'
     COMMENT_QUESTION_NOT_BLANK = '5000'
     COMMENT_QUESTION_VALUE = '5001'
+    THRESHOLD_PRIMARY_QUESTION_ELEMENT = '0011'
+    THRESHOLD_DERIVED_QUESTION_ELEMENT = '0012'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
     TAB_ELEMENTS = By.XPATH, '//button[contains(@class,"w3-bar-item w3-button tablink")]'
@@ -41,14 +43,15 @@ class TestSurveyContributorDetailsPage(BasePage):
         self.set_internet_sales_value(internet_sales)
         ContributorDetailsPage().save_the_application()
 
-    def run_the_validation_process(self, exp_derived_value):
+    def run_the_validation_process(self, threshold_primary_value, exp_derived_value):
+        SeleniumCore.set_current_data_text(self.THRESHOLD_PRIMARY_QUESTION_ELEMENT,
+                                           threshold_primary_value)
         ContributorDetailsPage().save_the_application()
-        actual_derived_val = SeleniumCore.get_attribute_element_text(
-            *TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
-        ReportingHelper.check_single_message_matches('Q6', actual_derived_val, exp_derived_value)
+        actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, self.THRESHOLD_DERIVED_QUESTION_ELEMENT)
+        ReportingHelper.check_single_message_matches('Q12', actual_derived_val, exp_derived_value)
 
     def get_derived_question_value(self):
-        return int(SeleniumCore.get_attribute_element_text(*TestSurveyContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
+        return int(SeleniumCore.get_attribute_element_text(By.ID, self.THRESHOLD_DERIVED_QUESTION_ELEMENT))
 
     def check_threshold_value(self):
         if int(self.pp_internet_sales) > 0.1 * int(self.pp_total_sales):
