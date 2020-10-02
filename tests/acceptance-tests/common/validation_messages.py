@@ -32,6 +32,7 @@ class ValidationMessages:
         'vn validation': 'Warning - This is a negative value',
         'vp validation': 'Warning - Respondent entered a value',
         'vi validation': 'Warning - Brick type is invalid',
+        'vpsic validation': 'Warning - SIC is petrol and value is greater than zero',
         'popmrz validation': ' Error - Internet value(Q21) = 0 this period but > 0 last period and ratio of Internet(Q21) to total turnover(Q20) was > 10% last period'
     }
 
