@@ -66,7 +66,7 @@ def view_form(inqcode, period, ruref):
     log.info("Filtered Validations output: %s",
              filter_validations(validations))
     log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
-    log.info("History Data: %s", history_data_json)
+    log.info("History Data: %s", historic_data_json)
 
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
