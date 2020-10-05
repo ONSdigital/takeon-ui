@@ -45,7 +45,7 @@ def view_form(inqcode, period, ruref):
     validation_outputs = api_caller.validation_outputs(parameters=parameters)
     view_forms = api_caller.view_form_responses(parameters=parameters)
 
-    history_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters)
+    history_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
     history_data_json = json.loads(history_data)
 
     contributor_data = json.loads(contributor_details)
