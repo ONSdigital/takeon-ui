@@ -64,7 +64,8 @@ def step_impl(context, derived_value, question_value=None):
     if context.survey == '023':
         RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
     elif context.survey == '999A':
-        TestSurveyContributorDetailsPage().run_the_validation_process(question_value, derived_value)
+        TestSurveyContributorDetailsPage().run_the_validation_process(question_value,
+                                                                      derived_value)
     else:
         context.comparison_value_one = question_value
         context.comparison_value_two = derived_value
