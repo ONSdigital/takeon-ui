@@ -45,6 +45,9 @@ def view_form(inqcode, period, ruref):
     validation_outputs = api_caller.validation_outputs(parameters=parameters)
     view_forms = api_caller.view_form_responses(parameters=parameters)
 
+    history_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters)
+    history_data_json = json.loads(history_data)
+
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
     status = contributor_data['data'][0]['status']
@@ -63,6 +66,7 @@ def view_form(inqcode, period, ruref):
     log.info("Filtered Validations output: %s",
              filter_validations(validations))
     log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
+    log.info("History Data: %s", history_data_json)
 
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
