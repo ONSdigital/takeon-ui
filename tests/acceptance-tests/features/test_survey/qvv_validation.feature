@@ -25,4 +25,3 @@ Feature: Test Survey - Question versus Value(QvV) Validation rule
       | 201712 | 12345678036 | test-123 | Q30      | be                 |
       | 201712 | 12345678036 | test     | Q30      | be                 |
       | 201712 | 12345678036 | blank    | Q30      | not be             |
-    

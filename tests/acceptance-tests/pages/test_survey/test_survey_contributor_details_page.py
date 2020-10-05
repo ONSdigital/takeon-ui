@@ -24,10 +24,10 @@ class TestSurveyContributorDetailsPage(BasePage):
     }
 
     def set_internet_sales_value(self, value):
-        SeleniumCore.set_element_text(self.QUESTION_TWO_ELEMENT, value)
+        SeleniumCore.set_current_data_text(self.QUESTION_TWO_ELEMENT, value)
 
     def set_total_turnover_sales_value(self, value):
-        SeleniumCore.set_element_text(self.QUESTION_ONE_ELEMENT, value)
+        SeleniumCore.set_current_data_text(self.QUESTION_ONE_ELEMENT, value)
 
     def submit_pp_sales_values(self, internet_sales, total_sales):
         SeleniumCore.switch_window()

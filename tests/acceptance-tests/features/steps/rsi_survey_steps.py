@@ -3,7 +3,7 @@ from pages.test_survey.test_survey_contributor_details_page import TestSurveyCon
 from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 
 
-@given(u'the current period sales value is {current_internet_sales_val}')
+@given(u'the current period sales value is "{current_internet_sales_val}"')
 def step_impl(context, current_internet_sales_val):
     context.current_internet_sales = current_internet_sales_val
 
