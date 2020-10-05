@@ -29,20 +29,16 @@
                 <span title="Status " class="{{ status_colour }}">{{ contributor_details['status'] }}</span>
             </p>
 
-            {# Css for tab view  #}
-            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-            <div class="w3-container">
-                <div class="w3-bar w3-white">
-                    <button class="w3-bar-item w3-button tablink w3-light-grey w3-dark-grey" onclick="openTab(event, 'CurrentData')">Current Data</button>
-                    <button class="w3-bar-item w3-button tablink w3-light-grey" onclick="openTab(event, 'HistoricData')">Historic Data</button>
-                </div>
-            </div>
-
+            <ul class="tabs__list tabs__list--row">
+                <li id="tabId1Item" class="tab__list-item tab__list-item--row">
+                    <a href="#tabIdCurrent" class="tab tab--row" data-ga="click" data-ga-category="tabs" data-ga-action="Show: Current Data" data-ga-label="Show: Current Data" aria-selected="true">Current Data</a></li>
+                <li id="tabId2Item" class="tab__list-item tab__list-item--row">
+                    <a href="#tabIdHistoric" class="tab tab--row" data-ga="click" data-ga-category="tabs" data-ga-action="Show: Historic Data" data-ga-label="Show: Historic Data" aria-selected="false">Historic Data</a></li>
+            </ul>
 
             <form method="post" id="responseForm">
 
-                <div id="CurrentData" class="w3-container tab">
+                <section id="tabIdCurrent" class="tabs__panel">
 
                     <table id="basic-table" class="table ">
 
@@ -188,10 +184,10 @@
                     <button class="btn btn--small" type="submit" value='override' name='action' id='override_button'>
                         <span class="btn__inner">Override</span>
                     </button>
-                </div>
+                </section>
 
 
-                <div id="HistoricData" class="w3-container tab" style="display:none">
+                <section id="tabId2" class="tabs__panel">
                     <h3>Historic Data</h3>
 
                     <table id="basic-table" class="table ">
@@ -227,7 +223,7 @@
                         </tbody>
                     </table>
 
-                </div>
+                </section>
 
             </form>
 
