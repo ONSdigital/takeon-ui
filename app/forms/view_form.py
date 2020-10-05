@@ -45,8 +45,8 @@ def view_form(inqcode, period, ruref):
     validation_outputs = api_caller.validation_outputs(parameters=parameters)
     view_forms = api_caller.view_form_responses(parameters=parameters)
 
-    history_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
-    history_data_json = json.loads(history_data)
+    historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
+    historic_data_json = json.loads(historic_data)
 
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
@@ -83,7 +83,8 @@ def view_form(inqcode, period, ruref):
         contributor_details=contributor_data['data'][0],
         validation=filter_validations(validations),
         user=get_user(),
-        status_colour=status_colour)
+        status_colour=status_colour,
+        historic_data=historic_data_json)
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])
