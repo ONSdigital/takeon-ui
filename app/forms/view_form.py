@@ -69,6 +69,7 @@ def view_form(inqcode, period, ruref):
              filter_validations(validations))
     log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
     log.info("History Data: %s", historic_data_json)
+    log.info("Grouped Historic Data by question : %s", grouped_historic_data)
 
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
@@ -86,7 +87,6 @@ def view_form(inqcode, period, ruref):
         validation=filter_validations(validations),
         user=get_user(),
         status_colour=status_colour,
-        # historic_data=historic_data_json['history_data'])
         historic_data=historic_data_json,
         grouped_historic_data=grouped_historic_data)
 
