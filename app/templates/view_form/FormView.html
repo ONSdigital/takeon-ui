@@ -252,7 +252,7 @@
                             {% for datum in row['view_form_responses'] %}
                                 {% if datum['type'] == 'NUMERIC' %}
                                     <tr class="table__row">
-                                        <td class="table__cell " data-th="{{ historic_data['period'] }}">
+                                        <td class="table__cell " data-th="{{ row['period'] }}">
                                             {{ datum['response'] }}
                                         </td>
                                     </tr>
