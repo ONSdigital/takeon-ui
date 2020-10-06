@@ -51,7 +51,8 @@ def view_form(inqcode, period, ruref):
 
     historic_questions_list = []
     for row in historic_questions:
-        historic_questions_list.append(row['questioncode'])
+        if row['type'] == 'NUMERIC':
+            historic_questions_list.append(row['questioncode'])
 
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
