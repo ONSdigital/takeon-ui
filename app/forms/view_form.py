@@ -47,7 +47,7 @@ def view_form(inqcode, period, ruref):
 
     historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
     historic_data_json = json.loads(historic_data)
-    historic_questions = historic_data['history_data'][0]['view_form_responses']
+    historic_questions = historic_data_json['history_data'][0]['view_form_responses']
 
     historic_questions_list = []
     for row in historic_questions:
