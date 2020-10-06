@@ -241,11 +241,12 @@
                           </tr>
                         </thead>
                         <tbody class="table__body">
-                        {% for question_no in historic_question_numbers %}
-                            {% if question_no['type'] == 'NUMERIC' %}
+                        {# {% for question_no in historic_question_numbers %} #}
+                        {% for datum in data['form_validation_outputs'] %}
+                            {% if datum['type'] == 'NUMERIC' %}
                                 <tr class="table__row">
                                     <td class="table__cell " data-th="Question">
-                                        {{ question_no }}
+                                        {{ datum["displayquestionnumber"] }}
                                     </td>
                                 </tr>
                             {% endif %}
