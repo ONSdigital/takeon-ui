@@ -3,6 +3,7 @@ import os
 from flask import render_template, Blueprint, request, redirect, url_for
 from app.utilities.helpers import build_uri, get_user, question_order
 from app.utilities.filter_validations import filter_validations
+from app.utilities.parse_historic_data import group_historic_data
 from app.utilities.combine_data import combine_responses_and_validations
 from app.utilities.check_status import check_status
 from app.setup import log, api_caller
@@ -47,12 +48,7 @@ def view_form(inqcode, period, ruref):
 
     historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
     historic_data_json = json.loads(historic_data)
-    historic_questions = historic_data_json['history_data'][0]['view_form_responses']
-
-    historic_questions_list = []
-    for row in historic_questions:
-        if row['type'] == 'NUMERIC':
-            historic_questions_list.append(row['questioncode'])
+    grouped_historic_data = group_historic_data(historic_data_json)
 
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
@@ -92,7 +88,7 @@ def view_form(inqcode, period, ruref):
         status_colour=status_colour,
         # historic_data=historic_data_json['history_data'])
         historic_data=historic_data_json,
-        historic_question_numbers=historic_questions_list)
+        grouped_historic_data=grouped_historic_data)
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])
