@@ -242,11 +242,13 @@
                         </thead>
                         <tbody class="table__body">
                         {% for question_no in historic_question_numbers %}
-                            <tr class="table__row">
-                                <td class="table__cell " data-th="Question">
-                                    {{ question_no }}
-                                </td>
-                            </tr>
+                            {% if question_no['type'] == 'NUMERIC' %}
+                                <tr class="table__row">
+                                    <td class="table__cell " data-th="Question">
+                                        {{ question_no }}
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                         {% for row in historic_data['history_data'] %}
                             {% for datum in row['view_form_responses'] %}
