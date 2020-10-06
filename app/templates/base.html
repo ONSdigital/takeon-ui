@@ -4,22 +4,22 @@
 <head>
     {% block head %}
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>{% block title %}{% endblock title %}</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta name="msapplication-config"
-              content="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/browserconfig.json">
-        <link rel="icon" type="image/x-icon" href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/favicon.ico">
-        <link rel="icon" type="image/png"
-              href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png"
-              href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/favicon-16x16.png" sizes="16x16">
-        <link rel="mask-icon" color="#5bbad5"
-              href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/safari-pinned-tab.svg">
-        <link rel="apple-touch-icon" type="image/png"
-              href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/apple-touch-icon.png" sizes="180x180">
-        <link rel="manifest" href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/favicons/manifest.json">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/css/main.css">
+    <meta name="msapplication-config"
+        content="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/browserconfig.json">
+    <link rel="icon" type="image/x-icon" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.1/favicons/favicon.ico">
+    <link rel="icon" type="image/png"
+        href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png"
+        href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="mask-icon" color="#5BBAD5"
+        href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/safari-pinned-tab.svg">
+    <link rel="apple-touch-icon" type="image/png"
+        href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/manifest.json">
 
         {% block css %}
             <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/css/main.css" media="all"
@@ -28,9 +28,8 @@
         {% endblock css %}
 
         {% block head_js %}
-            <script type="text/javascript"
-                    src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <script type="text/javascript" src="{{ url_for('static', filename='js/industry-range.js') }}"></script>
+            <script>var ONS_assets_base_URL='https://cdn.ons.gov.uk/sdc/design-system/24.0.3/';</script>
+            <script src="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/scripts/main.js"></script>
         {% endblock head_js %}
 
     {% endblock head %}
@@ -74,8 +73,7 @@
 
 {% block content %}
 
-    <script>var ONS_assets_base_URL='https://cdn.ons.gov.uk/sdc/design-system/24.0.3/';</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 
 {% endblock content %}
 
