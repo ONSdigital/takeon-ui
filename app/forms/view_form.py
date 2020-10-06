@@ -47,6 +47,11 @@ def view_form(inqcode, period, ruref):
 
     historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
     historic_data_json = json.loads(historic_data)
+    historic_questions = historic_data['history_data'][0]['view_form_responses']
+
+    historic_questions_list = []
+    for row in historic_questions:
+        historic_questions_list.append(row['questioncode'])
 
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
@@ -85,7 +90,8 @@ def view_form(inqcode, period, ruref):
         user=get_user(),
         status_colour=status_colour,
         # historic_data=historic_data_json['history_data'])
-        historic_data=historic_data_json)
+        historic_data=historic_data_json,
+        historic_question_numbers=historic_questions_list)
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])
