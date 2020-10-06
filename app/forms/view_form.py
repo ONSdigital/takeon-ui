@@ -85,7 +85,7 @@ def view_form(inqcode, period, ruref):
         user=get_user(),
         status_colour=status_colour,
         # historic_data=historic_data_json['history_data'])
-        historic_data=historic_data_json['history_data'][0])
+        historic_data=historic_data_json)
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])

@@ -198,14 +198,14 @@
                         <thead class="table__head">
                             <tr class="table__row">
                                 <th scope="col" class="table__header col-1@m">Question</th>
-                                {# {% for row in historic_data} #}
+                                {# {% for row in historic_data['history_data']} #}
                                 <th scope="col" class="table__header col-2@m">{{ historic_data['period'] }}</th>
                             </tr>
                         </thead>
 
                         <tbody class="table__body">
 
-                            {% for datum in data['view_form_responses'] %}
+                            {% for datum in row['view_form_responses'] %}
                                 {% if datum['type'] == 'NUMERIC' %}
                                     <tr class="table__row">
                                         <td class="table__cell ">
