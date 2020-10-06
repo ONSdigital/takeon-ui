@@ -36,6 +36,7 @@ class ValidationMessages:
         'qvqt validation': 'Error - Derived total does not equal the total (allowing for margin of 5)',
         'qvq validation': 'Error - This is greater than the comparison question',
         'qvdq validation': 'Warning - This total is not equal to the derived total',
+        'ppvb validation': 'Warning - This value was blank in the previous period',
         'popmrz validation': 'Error - This value is 0. Previous period it was more than a certain percentage of the total'
     }
 
