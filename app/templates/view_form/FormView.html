@@ -198,7 +198,7 @@
                         <thead class="table__head">
                             <tr class="table__row">
                                 <th scope="col" class="table__header col-1@m">Question</th>
-                                {# {% for row in historic_data['history_data']} #}
+                        { {% for row in historic_data['history_data']} }
                                 <th scope="col" class="table__header col-2@m">{{ historic_data['period'] }}</th>
                             </tr>
                         </thead>
@@ -222,6 +222,7 @@
                                     </tr>
                                 {% endif %}
                             {% endfor %}
+                        {% endfor %}
 
                         </tbody>
                     </table>
