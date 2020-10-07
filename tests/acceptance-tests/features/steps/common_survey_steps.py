@@ -120,10 +120,6 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
             rsi_page = RsiContributorDetailsPage()
             context.value_one = context.total_turnover_value
             context.value_two = rsi_page.get_derived_question_value()
-        elif context.survey == '999A':
-            test_survey_page = TestSurveyContributorDetailsPage()
-            context.value_one = context.total_turnover_value
-            context.value_two = test_survey_page.get_derived_question_value()
         else:
             context.value_one = context.comparison_value_one
             context.value_two = context.comparison_value_two

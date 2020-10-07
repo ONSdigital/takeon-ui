@@ -36,6 +36,8 @@ class ValidationMessages:
         'qvqt validation': 'Error - Derived total does not equal the total (allowing for margin of 5)',
         'qvq validation': 'Error - This is greater than the comparison question',
         'qvdq validation': 'Warning - This total is not equal to the derived total',
+        'popm validation': 'Warning - This has changed significantly since the last submission',
+        'popqvq validation': 'Warning - This has changed since last submission',
         'ppvb validation': 'Warning - This value was blank in the previous period',
         'poprrm validation': 'Warning - Internet turnover to total turnover ratio - large month on month change',
         'popzc validation': 'Warning - This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank',
