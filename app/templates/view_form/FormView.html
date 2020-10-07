@@ -39,228 +39,183 @@
                         <a href="#tabId2" class="tab tab--row" data-ga="click" data-ga-category="tabs" data-ga-action="Show: Historic Data" data-ga-label="Show: Historic Data" aria-selected="false">Historic Data</a></li>
                 </ul>
 
-            <form method="post" id="responseForm">
+                <form method="post" id="responseForm">
 
-                <section id="tabId1" class="tabs__panel">
+                    <section id="tabId1" class="tabs__panel">
 
-                    <table id="basic-table" class="table ">
+                        <table id="basic-table" class="table ">
 
-                        <thead class="table__head">
-                            <tr class="table__row">
-                                <th scope="col" class="table__header col-1@m">Number</th>
-                                <th scope="col" class="table__header col-4@m">Question</th>
-                                <th scope="col" class="table__header col-2@m">Response</th>
-                                <th scope="col" class="table__header ">Question Status</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="table__body">
-
-                            {% for datum in data['form_validation_outputs'] %}
+                            <thead class="table__head">
                                 <tr class="table__row">
-                                    {% if datum['validation_info']|length > 0 %}
-                                        <td class="table__cell ">
-                                            <p class="field">
-                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
-                                            </p>
-                                        </td>
+                                    <th scope="col" class="table__header col-1@m">Number</th>
+                                    <th scope="col" class="table__header col-4@m">Question</th>
+                                    <th scope="col" class="table__header col-2@m">Response</th>
+                                    <th scope="col" class="table__header ">Question Status</th>
+                                </tr>
+                            </thead>
 
-                                        <td class="table__cell ">
-                                            <p class="field">
-                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
-                                            </p>
-                                        </td>
-                                        <td class="table__cell ">
+                            <tbody class="table__body">
 
-                                            {% if datum['type'] == 'NUMERIC' %}
+                                {% for datum in data['form_validation_outputs'] %}
+                                    <tr class="table__row">
+                                        {% if datum['validation_info']|length > 0 %}
+                                            <td class="table__cell ">
                                                 <p class="field">
-                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
                                                 </p>
-                                            {% else %}
+                                            </td>
+
+                                            <td class="table__cell ">
                                                 <p class="field">
-                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
                                                 </p>
-                                            {% endif %}
-                                        
-                                        </td>
+                                            </td>
 
-                                        <td class="table__cell ">
-                                            <div class="panel {{ datum['panel'] }} panel--simple">
-                                                <div class="panel__body">
+                                            <td class="table__cell ">
+                                                {% if datum['type'] == 'NUMERIC' %}
+                                                    <p class="field">
+                                                        <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    </p>
+                                                {% else %}
+                                                    <p class="field">
+                                                        <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    </p>
+                                                {% endif %}
+                                            </td>
 
-                                                    {% for output in datum['validation_info'] %}
+                                            <td class="table__cell ">
+                                                <div class="panel {{ datum['panel'] }} panel--simple">
+                                                    <div class="panel__body">
 
-                                                        {% if output['overridden'] == True %}
+                                                        {% for output in datum['validation_info'] %}
 
-                                                            <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                                                <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
-                                                                <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}"><strong>Overridden - </strong>'{{ output["description"] }}'</label>
-                                                            </span>
-
-                                                        {% else %}
-
-                                                            <p class="panel__error u-mb-no">
-                                                                {% if output['severity'] == 'W' %}
-                                                                <strong>Warning - </strong> {{output['description']}} 
-                                                            </p>
-                                                            <br>
-
-                                                            <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                                                <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
-                                                                <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg" for="{{output['validationoutputid']}}"><strong>Override </strong> <span class="u-vh">{{ output["description"] | lower }} </span></label>
-                                                            </span>
-                                                            <br>
-
+                                                            {% if output['overridden'] == True %}
+                                                                <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                                    <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
+                                                                    <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}"><strong>Overridden - </strong>'{{ output["description"] }}'</label>
+                                                                </span>
                                                             {% else %}
-                                                            <p class="panel__error u-mb-no">
-                                                                <strong>Error - </strong> {{output['description']}}
-                                                            </p>
-                                                            <br>
-                                                        
+
+                                                                <p class="panel__error u-mb-no">
+                                                                    {% if output['severity'] == 'W' %}
+                                                                    <strong>Warning - </strong> {{output['description']}} 
+                                                                </p>
+                                                                <br>
+
+                                                                <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                                    <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
+                                                                    <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg" for="{{output['validationoutputid']}}"><strong>Override </strong> <span class="u-vh">{{ output["description"] | lower }} </span></label>
+                                                                </span>
+                                                                <br>
+
+                                                                {% else %}
+                                                                <p class="panel__error u-mb-no">
+                                                                    <strong>Error - </strong> {{output['description']}}
+                                                                </p>
+                                                                <br>
+                                                                {% endif %}
+                                            
                                                             {% endif %}
 
-                                        
-                                                        {% endif %}
-
-                                                    {% endfor %}
+                                                        {% endfor %}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
 
-                                    {% else %}
-
-                                        <td class="table__cell ">
-                                            <p class="field">
-                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
-                                            </p>
-                                        </td>
-
-                                        <td class="table__cell ">
-                                            <p class="field">
-                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
-                                            </p>
-                                        </td>
-
-                                        <td class="table__cell ">
-                                            {% if datum['type'] == 'NUMERIC' %}
+                                        {% else %}
+                                            <td class="table__cell ">
                                                 <p class="field">
-                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
                                                 </p>
-                                            {% else %}
+                                            </td>
+
+                                            <td class="table__cell ">
                                                 <p class="field">
-                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
                                                 </p>
-                                            {% endif %}
-                                        </td>
+                                            </td>
 
-                                        <td class="table__cell ">
-                                        </td>
-                                    {% endif %}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
-                    {% if override_button %}
-                        <hr>
-                        <fieldset class="fieldset">
-                            <legend class="fieldset__legend u-vh">Override all</legend>
-                            <p class="checkboxes__label"></p>
-                            <span class="checkboxes__items ">
-                                <p class="checkboxes__item">
-                                    <span class="checkbox input--w-10 ">
-                                        <input type="checkbox" id="select-all" class="checkbox__input js-checkbox " value="Select All" name="select-all-checkbox" onclick="select_all(this)">
-                                        <label id="label-select-all" class="checkbox__label " for="select-all">Override all</label>
-                                    </span>
-                                </p>
-                            </span>
-                        </fieldset>
-                    {% endif %}
-
-                    <br>
-                    <br>
-
-                    <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
-                        <span class="btn__inner">Save and validate</span>
-                    </button>
-
-                    <button class="btn btn--small" type="submit" value='override' name='action' id='override_button'>
-                        <span class="btn__inner">Override</span>
-                    </button>
-                </section>
-
-
-                <section id="tabId2" class="tabs__panel">
-                    <h3>Historic Data</h3>
-
-                    <!-- <table id="basic-table" class="table table--responsive">
-
-                        <thead class="table__head">
-                            <tr class="table__row">
-                                <th scope="col" class="table__header col-1@m">Question</th>
-                        {% for row in historic_data['history_data'] %}
-                                <th scope="col" class="table__header col-2@m">{{ historic_data['period'] }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="table__body">
-
-                            {% for datum in row['view_form_responses'] %}
-                                {% if datum['type'] == 'NUMERIC' %}
-                                    <tr class="table__row">
-                                        <td class="table__cell ">
-                                            <p class="field">
-                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
-                                            </p>
-                                        </td>
-
-                                        <td class="table__cell ">
-                                            <p class="field">
-                                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-6" readonly>
-                                            </p>
-                                        </td>
+                                            <td class="table__cell ">
+                                                {% if datum['type'] == 'NUMERIC' %}
+                                                    <p class="field">
+                                                        <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    </p>
+                                                {% else %}
+                                                    <p class="field">
+                                                        <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                    </p>
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
                                     </tr>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-
-                        </tbody>
-                    </table> -->
-
-                    <table class="table table--responsive">
-                        <thead class="table__head">
-                          <tr class="table__row">
-                            <th scope="col" class="table__header ">
-                              <span>Question</span>
-                            </th>
-                        {% for row in historic_data['history_data'] %}
-                            <th scope="col" class="table__header ">
-                              <span>{{ row['period'] }}</span>
-                            </th>
-                        {% endfor %}
-                          </tr>
-                        </thead>
-                        <tbody class="table__body">
-                        {% for row in grouped_historic_data.items() %}
-                            <tr class="table__row">
-                                <td class="table__cell " data-th="Question">
-                                    {{ row[0] }}
-                                </td>
-                                {% for response in row[1] %}
-                                <td class="table__cell ">
-                                    {{ response }}
-                                </td>
                                 {% endfor %}
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                      </table>
+                            </tbody>
+                        </table>
 
-                </section>
-                
+                        {% if override_button %}
+                            <hr>
+                            <fieldset class="fieldset">
+                                <legend class="fieldset__legend u-vh">Override all</legend>
+                                <p class="checkboxes__label"></p>
+                                <span class="checkboxes__items ">
+                                    <p class="checkboxes__item">
+                                        <span class="checkbox input--w-10 ">
+                                            <input type="checkbox" id="select-all" class="checkbox__input js-checkbox " value="Select All" name="select-all-checkbox" onclick="select_all(this)">
+                                            <label id="label-select-all" class="checkbox__label " for="select-all">Override all</label>
+                                        </span>
+                                    </p>
+                                </span>
+                            </fieldset>
+                        {% endif %}
+
+                        <br>
+                        <br>
+
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                            <span class="btn__inner">Save and validate</span>
+                        </button>
+
+                        <button class="btn btn--small" type="submit" value='override' name='action' id='override_button'>
+                            <span class="btn__inner">Override</span>
+                        </button>
+                    </section>
+
+
+                    <section id="tabId2" class="tabs__panel">
+                        <h3>Historic Data</h3>
+
+                        <table class="table table--responsive">
+                            <thead class="table__head">
+                                <tr class="table__row">
+                                    <th scope="col" class="table__header ">
+                                        <span>Question</span>
+                                    </th>
+                                    {% for row in historic_data['history_data'] %}
+                                        <th scope="col" class="table__header ">
+                                            <span>{{ row['period'] }}</span>
+                                        </th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+
+                            <tbody class="table__body">
+                                {% for row in grouped_historic_data.items() %}
+                                    <tr class="table__row">
+                                        <td class="table__cell " data-th="Question">
+                                            {{ row[0] }}
+                                        </td>
+                                        {% for response in row[1] %}
+                                        <td class="table__cell ">
+                                            {{ response }}
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>
+                </form>
             </section>
-
-            </form>
 
             <br>
             <br>
@@ -269,6 +224,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script>
@@ -330,20 +286,5 @@
     }
 </script>
 
-<script>
-function openTab(evt, tabName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("tab");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
-  }
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " w3-dark-grey";
-}
-</script>
-​
+
 {% endblock content %}
