@@ -73,7 +73,7 @@ def view_form(inqcode, period, ruref):
 
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
-        validate(inqcode, period, ruref, ordered_response_and_validations, override_button, contributor_data, validations, status_colour, historic_data_json, grouped_historic_data)
+        validate(inqcode, period, ruref)
 
     return render_template(
         template_name_or_list=form_view_template_HTML,
