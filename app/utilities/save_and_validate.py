@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from flask import render_template, Blueprint, redirect, url_for
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 from app.utilities.filter_validations import filter_validations
@@ -92,4 +93,5 @@ def validate(inqcode, period, ruref):
     #     historic_data=historic_data_json,
     #     grouped_historic_data=grouped_historic_data)
     #return redirect(url_for('view_form.view_form'))
+    time.sleep(3)
     return redirect(url_for("view_form.view_form", inqcode=inqcode, period=period, ruref=ruref))
