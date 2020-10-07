@@ -54,7 +54,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         status_message = 'There was a problem with your request ' + requests_error + 'Please contact Data Clearing Support Team'
         log.info('Requests Error: %s', requests_error)
 
-def validate(inqcode, period, ruref, response_and_validations, override_button, contributor_data, validations, status_colour):
+def validate(inqcode, period, ruref, response_and_validations, override_button, contributor_data, validations, status_colour, historic_data_json, grouped_historic_data):
     log.info('save validation button pressed')
     json_data = {"survey": inqcode, "period": period,
                  "reference": ruref, "BPMvalidationCallId": "0"}
@@ -87,4 +87,6 @@ def validate(inqcode, period, ruref, response_and_validations, override_button, 
         status_message=json.dumps(status_message),
         contributor_details=contributor_data['data'][0],
         validation=filter_validations(validations),
-        status_colour=status_colour)
+        status_colour=status_colour,
+        historic_data=historic_data_json,
+        grouped_historic_data=grouped_historic_data)
