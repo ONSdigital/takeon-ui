@@ -74,7 +74,7 @@ def view_form(inqcode, period, ruref):
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
-        return redirect(url_for('view_form', inqcode=inqcode, period=period, ruref=ruref))
+        return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(
         template_name_or_list=form_view_template_HTML,
@@ -104,7 +104,7 @@ def override_validations(inqcode, period, ruref):
     log.info("Overriding Validations...")
 
     # This doesn't actually work - Unexpected exception caught: 'function' object is not subscriptable
-    return redirect(url_for('view_form', inqcode=inqcode, period=period, ruref=ruref))
+    return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
 def extract_responses(data) -> dict:
     output = []
