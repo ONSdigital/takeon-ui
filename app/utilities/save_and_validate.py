@@ -7,7 +7,7 @@ from app.utilities.filter_validations import filter_validations
 from app.utilities.notify_baw import send_notification_to_queue
 from app.setup import log, api_caller
 from app.utilities.helpers import get_user
-from app.forms import view_form
+# from app.forms import view_form
 
 view_form_blueprint = Blueprint(
     name='view_form', import_name=__name__, url_prefix='/contributor_search')
@@ -93,6 +93,6 @@ def validate(inqcode, period, ruref):
     #     historic_data=historic_data_json,
     #     grouped_historic_data=grouped_historic_data)
     #return redirect(url_for('view_form.view_form'))
-    time.sleep(3)
+    time.sleep(2)
     log.info("Got here after sleep")
     return redirect(url_for("view_form.view_form", inqcode=inqcode, period=period, ruref=ruref))
