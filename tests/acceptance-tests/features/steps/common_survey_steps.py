@@ -63,7 +63,7 @@ def step_impl(context, derived_value, question_value=None):
     context.total_turnover_value = question_value
     if context.survey == '023':
         RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
-    elif context.survey == '999A':
+    elif context.survey == '999A' and context.table is None:
         TestSurveyContributorDetailsPage().run_the_validation_process(question_value,
                                                                       derived_value)
     else:

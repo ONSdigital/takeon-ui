@@ -13,13 +13,12 @@ Feature:Test Survey - Period on Period Ratio of Ratios Movement(PoPRRM) Validati
     And the "poprrm validation" message should <isValidationExists> displayed for question code "Q28"
 
     Examples:
-      | previousPeriodValue | currentPeriodValue | reference   | ppPrimaryValue | ppComparisonValue | cpPrimaryValue | cpComparisonValue | factor   | result | operator | thresholdValue | isValidationExists |
-      | 201712              | 201801             | 12345678036 | 10             | 400               | 10             | 100               | increase | true   | equal to | 4              | be                 |
-      | 201712              | 201801             | 12345678036 | 10             | 100               | 10             | 400               | decrease | true   | equal to | 4              | be                 |
-#
-#      | 201903              | 201904             | 49900589234 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
-#      | 201903              | 201904             | 49900589234 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
-#      | 201903              | 201904             | 49900589234 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
-#      | 201903              | 201904             | 49900589234 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
-#      | 201903              | 201904             | 49900589234 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
-#      | 201903              | 201904             | 49900589234 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
+      | previousPeriodValue | currentPeriodValue | reference   | ppPrimaryValue | ppComparisonValue | cpPrimaryValue | cpComparisonValue | factor         | result | operator     | thresholdValue | isValidationExists |
+      | 201712              | 201801             | 12345678036 | 10             | 400               | 10             | 100               | increase       | true   | equal to     | 4              | be                 |
+      | 201712              | 201801             | 12345678036 | 10             | 100               | 10             | 400               | decrease       | true   | equal to     | 4              | be                 |
+      | 201712              | 201801             | 12345678036 | 10             | 400               | 11             | 100               | increase       | true   | greater than | 4              | be                 |
+      | 201712              | 201801             | 12345678036 | 10             | 100               | 11             | 400               | decrease       | false  | less than    | 4              | not be             |
+      | 201712              | 201801             | 12345678036 | 10             | 400               | 9              | 100               | increase       | false  | less than    | 4              | not be             |
+      | 201712              | 201801             | 12345678036 | 10             | 100               | 9              | 400               | decrease       | true   | greater than | 4              | be                 |
+      | 201712              | 201801             | 12345678036 | 0              | 0                 | 0              | 0                 | not-applicable | false  | all zeros    | 4              | not be             |
+      | 201712              | 201801             | 12345678036 | blank          | blank             | blank          | blank             | not-applicable | false  | all blanks   | 4              | not be             |

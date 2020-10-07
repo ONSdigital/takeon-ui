@@ -38,6 +38,7 @@ class ValidationMessages:
         'qvdq validation': 'Warning - This total is not equal to the derived total',
         'ppvb validation': 'Warning - This value was blank in the previous period',
         'poprrm validation': 'Warning - Internet turnover to total turnover ratio - large month on month change',
+        'popzc validation': 'Warning - This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank',
         'popmrz validation': 'Error - This value is 0. Previous period it was more than a certain percentage of the total'
     }
 
