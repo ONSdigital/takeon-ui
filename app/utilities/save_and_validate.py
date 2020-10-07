@@ -94,4 +94,5 @@ def validate(inqcode, period, ruref):
     #     grouped_historic_data=grouped_historic_data)
     #return redirect(url_for('view_form.view_form'))
     time.sleep(3)
+    log.info("Got here after sleep")
     return redirect(url_for("view_form.view_form", inqcode=inqcode, period=period, ruref=ruref))
