@@ -190,7 +190,7 @@
                         <table class="table table--responsive">
                             <thead class="table__head">
                                 <tr class="table__row">
-                                    <th scope="col" class="table__header table__header--numeric">
+                                    <th scope="col" class="table__header">
                                         <span>Question</span>
                                     </th>
                                     {% for row in historic_data['history_data'] %}
@@ -204,7 +204,7 @@
                             <tbody class="table__body">
                                 {% for row in grouped_historic_data.items() %}
                                     <tr class="table__row">
-                                        <td class="table__cell table__cell--numeric" data-th="Question">
+                                        <td class="table__cell" data-th="Question">
                                             {{ row[0] }}
                                         </td>
                                         {% for response in row[1] %}
