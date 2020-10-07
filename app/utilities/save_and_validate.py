@@ -91,4 +91,5 @@ def validate(inqcode, period, ruref):
     #     status_colour=status_colour,
     #     historic_data=historic_data_json,
     #     grouped_historic_data=grouped_historic_data)
-    return redirect(url_for('view_form.view_form'))
+    #return redirect(url_for('view_form.view_form'))
+    return redirect(url_for(view_form.view_form, inqcode=inqcode, period=period, ruref=ruref))
