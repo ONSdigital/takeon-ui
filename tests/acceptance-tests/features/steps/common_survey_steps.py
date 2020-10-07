@@ -132,8 +132,12 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
                                                   context.value_two, threshold_value, result)
 
     elif validation_check == 'period on period ratio of ratios movement is':
-        RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
-                                                                         threshold_value, result)
+        if context.survey == '023':
+            RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
+                                                                             threshold_value, result)
+        elif context.survey == '999A':
+            TestSurveyContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
+                                                                                    threshold_value, result)
 
 
 @when(u'I override the validation for the question {question}')

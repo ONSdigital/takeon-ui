@@ -17,19 +17,21 @@ def step_impl(context, internet_sales, total_sales):
         RsiContributorDetailsPage().submit_sales_values(context.period_type, context.internet_sales,
                                                         context.total_sales)
     else:
-        TestSurveyContributorDetailsPage().submit_pp_sales_values(context.internet_sales, context.total_sales)
+        TestSurveyContributorDetailsPage().submit_sales_values(context.period_type, context.internet_sales,
+                                                               context.total_sales)
 
 
-@when(u'I validate the current period details')
-def step_impl(context):
+@when(u'I validate {validation_type} current period details')
+def step_impl(context, validation_type):
     if context.survey == '023':
         RsiContributorDetailsPage().validate_the_current_period_details(context.current_internet_sales,
-                                                                        context.total_sales)
+                                                                        context.total_sales,validation_type=None)
     else:
-        TestSurveyContributorDetailsPage().validate_the_current_period_details(context.current_internet_sales)
+        TestSurveyContributorDetailsPage().validate_the_current_period_details(validation_type,
+                                                                               context.current_internet_sales)
 
 
 @when(u'I validate the current period details for {factor} factor type')
 def step_impl(context, factor):
-    if context.survey == '023':
+    if context.survey == '023' or context.survey == '999A':
         context.factor_type = factor

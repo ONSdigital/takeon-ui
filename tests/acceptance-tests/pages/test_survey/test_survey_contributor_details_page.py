@@ -2,13 +2,15 @@ from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
-from pages.common.base_page import BasePage
+from base.utilities import Utilities
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
-class TestSurveyContributorDetailsPage(BasePage):
-    QUESTION_ONE_ELEMENT = '0023'
-    QUESTION_TWO_ELEMENT = '0024'
+class TestSurveyContributorDetailsPage(ContributorDetailsPage):
+    POPMRZ_QUESTION_PRIMARY_ELEMENT = '0023'
+    POPMRZ_QUESTION_SECONDARY_ELEMENT = '0024'
+    POPRRM_QUESTION_PRIMARY_ELEMENT = '0028'
+    POPRRM_QUESTION_SECONDARY_ELEMENT = '0029'
     QUESTION_DERIVED_ELEMENT = '4001'
     COMMENT_QUESTION_NOT_BLANK = '5000'
     COMMENT_QUESTION_VALUE = '5001'
@@ -23,24 +25,48 @@ class TestSurveyContributorDetailsPage(BasePage):
         'Q2': '1001'
     }
 
-    def set_internet_sales_value(self, value):
-        SeleniumCore.set_current_data_text(self.QUESTION_TWO_ELEMENT, value)
+    def set_internet_sales_value(self, validation_type, value):
+        if validation_type.lower() == 'poprrm':
+            SeleniumCore.set_current_data_text(self.POPRRM_QUESTION_PRIMARY_ELEMENT, value)
+        elif validation_type.lower() == 'popmrz':
+            SeleniumCore.set_current_data_text(self.POPMRZ_QUESTION_PRIMARY_ELEMENT, value)
 
-    def set_total_turnover_sales_value(self, value):
-        SeleniumCore.set_current_data_text(self.QUESTION_ONE_ELEMENT, value)
+    def set_total_turnover_sales_value(self, validation_type, value):
+        if validation_type.lower() == 'poprrm':
+            SeleniumCore.set_current_data_text(self.POPRRM_QUESTION_SECONDARY_ELEMENT, value)
+        elif validation_type.lower() == 'popmrz':
+            SeleniumCore.set_current_data_text(self.POPMRZ_QUESTION_SECONDARY_ELEMENT, value)
 
-    def submit_pp_sales_values(self, internet_sales, total_sales):
+    def submit_sales_values(self, validation_type, period_type, internet_sales, total_sales):
         SeleniumCore.switch_window()
-        self.pp_internet_sales = internet_sales
-        self.pp_total_sales = total_sales
-        self.set_internet_sales_value(internet_sales)
-        self.set_total_turnover_sales_value(total_sales)
+        if period_type == 'previous':
+            self.submit_pp_sales_values(validation_type, internet_sales, total_sales)
+        if period_type == 'current':
+            self.submit_cp_sales_values(validation_type, internet_sales, total_sales)
+
+    def submit_pp_sales_values(self, validation_type, internet_sales, total_sales):
+        global pp_internet_sales, pp_total_sales
+        pp_internet_sales = self.check_blank_data_value(internet_sales)
+        pp_total_sales = self.check_blank_data_value(total_sales)
+        self.set_internet_sales_value(validation_type, pp_internet_sales)
+        self.set_total_turnover_sales_value(validation_type, pp_total_sales)
         ContributorDetailsPage().save_the_application()
         SeleniumCore.close_the_current_window()
 
-    def validate_the_current_period_details(self, internet_sales):
+    def submit_cp_sales_values(self, validation_type, internet_sales, total_sales):
+        global cp_internet_sales, cp_total_sales
+        cp_internet_sales = self.check_blank_data_value(internet_sales)
+        cp_total_sales = self.check_blank_data_value(total_sales)
+        self.set_internet_sales_value(validation_type, cp_internet_sales)
+        self.set_total_turnover_sales_value(validation_type, cp_total_sales)
+        ContributorDetailsPage().save_the_application()
+
+    def check_blank_data_value(self, value):
+        return Utilities.convert_blank_data_value(value)
+
+    def validate_the_current_period_details(self, validation_type, internet_sales):
         SeleniumCore.switch_window()
-        self.set_internet_sales_value(internet_sales)
+        self.set_internet_sales_value(validation_type, internet_sales)
         ContributorDetailsPage().save_the_application()
 
     def run_the_validation_process(self, threshold_primary_value, exp_derived_value):
@@ -65,10 +91,6 @@ class TestSurveyContributorDetailsPage(BasePage):
         else:
             return False
 
-    def submit_question_value(self, value_type, value, question):
-        SeleniumCore.switch_window()
-        self.submit_comment_value(value, question)
-
     def submit_comment_value(self, comment, question):
         if comment.lower() == 'empty' or comment.lower() == 'blank':
             comment = ''
@@ -79,7 +101,7 @@ class TestSurveyContributorDetailsPage(BasePage):
 
     def submit_the_sales_values_for_survey(self, *questions):
         questions_list = questions[0]
-        commodity_values = self.get_values_as_a_list(questions[1])
+        commodity_values = Utilities.get_values_as_a_list(questions[1])
         SeleniumCore.switch_window()
         self.submit_the_commodity_values(questions_list, commodity_values)
 
@@ -90,13 +112,6 @@ class TestSurveyContributorDetailsPage(BasePage):
             question_element = self.question_codes.get(questions_list[count - 1])
             self.driver.find_element_by_id(question_element).clear()
             self.driver.find_element_by_id(question_element).send_keys(value)
-
-    def get_values_as_a_list(self, values):
-        new_values = values.split(',')
-        commodity_values = []
-        for new_val in new_values:
-            commodity_values.append(new_val)
-        return commodity_values
 
     def switch_to_the_tab(self, tab_name):
         SeleniumCore.switch_window()
@@ -110,3 +125,22 @@ class TestSurveyContributorDetailsPage(BasePage):
         table = self.driver.find_element_by_id("HistoricData")
         rows = table.find_elements_by_tag_name("tr")
         ReportingHelper.compare_values(len(rows), 0)
+
+    def check_pop_ratio_of_ratios_validation(self, factor_type,
+                                             operator_type, threshold_value, result):
+        self.check_if_overall_validation_triggered()
+        is_validation_triggered = False
+        if factor_type == 'increase':
+            value_one = int(cp_internet_sales) * int(pp_total_sales)
+            value_two = int(cp_total_sales) * int(pp_internet_sales)
+            is_validation_triggered = ReportingHelper.compare_the_values_with_operator(operator_type, value_one,
+                                                                                       int(threshold_value) * value_two)
+        elif factor_type == 'decrease':
+            value_one = int(cp_total_sales) * int(pp_internet_sales)
+            value_two = int(cp_internet_sales) * int(pp_total_sales)
+            is_validation_triggered = ReportingHelper.compare_the_values_with_operator(operator_type, value_one,
+                                                                                       int(threshold_value) * value_two)
+        elif factor_type == 'not-applicable':
+            is_validation_triggered = 'false'
+
+        ReportingHelper.check_single_message_matches('Q28', result, str(is_validation_triggered).lower())
