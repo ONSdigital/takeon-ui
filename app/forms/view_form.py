@@ -102,8 +102,6 @@ def override_validations(inqcode, period, ruref):
 
     api_caller.validation_overrides(parameters='', data=json.dumps(json_data))
     log.info("Overriding Validations...")
-
-    # This doesn't actually work - Unexpected exception caught: 'function' object is not subscriptable
     return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
 def extract_responses(data) -> dict:

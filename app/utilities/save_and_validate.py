@@ -79,22 +79,6 @@ def validate(inqcode, period, ruref):
             template_name_or_list="./error_templates/validate_error.html",
             error=e
         )
-    # return render_template(
-    #     template_name_or_list=form_view_template_HTML,
-    #     survey=inqcode,
-    #     period=period,
-    #     ruref=ruref,
-    #     data=response_and_validations,
-    #     override_button=override_button,
-    #     status_message=json.dumps(status_message),
-    #     contributor_details=contributor_data['data'][0],
-    #     validation=filter_validations(validations),
-    #     status_colour=status_colour,
-    #     historic_data=historic_data_json,
-    #     grouped_historic_data=grouped_historic_data)
-    #return redirect(url_for('view_form.view_form'))
-    # time.sleep(1)
-    log.info("Got here after sleep")
     # Doesn't need to do this
     # return redirect(url_for("view_form", inqcode=inqcode, period=period, ruref=ruref))
     return status_message
