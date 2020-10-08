@@ -79,6 +79,4 @@ def validate(inqcode, period, ruref):
             template_name_or_list="./error_templates/validate_error.html",
             error=e
         )
-    # Doesn't need to do this
-    # return redirect(url_for("view_form", inqcode=inqcode, period=period, ruref=ruref))
     return status_message

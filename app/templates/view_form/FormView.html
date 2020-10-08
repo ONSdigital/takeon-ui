@@ -18,11 +18,11 @@
 
             <dl class="metadata metadata__list grid grid--gutterless u-cf u-mb-s" title="Form details" aria-label="Form details">
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Reference:</dt>
-                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['reference'] }}</dd>
+                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ ruref }}</dd>
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Survey:</dt>
-                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['surveyBySurvey']['description'] }} {{ contributor_details['survey'] }}</dd>
+                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ survey }}</dd>
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Period:</dt>
-                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['period'] }}</dd>
+                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ period }}</dd>
             </dl>
 
             <p class="u-bb u-pb-s">
@@ -277,15 +277,6 @@
         for(var i=0; i < checkboxes.length; i++){
             checkboxes[i].checked = source.checked;
         }
-    }
-</script>
-
-<script>
-    var statusMessage = "{{ status_message }}"
-    console.log(statusMessage)
-    if (statusMessage == "&#34;&#34;") {
-    } else {
-        alert(statusMessage);
     }
 </script>
 
