@@ -60,12 +60,15 @@ def step_impl(context):
 @when(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process against the {derived_value}')
 def step_impl(context, derived_value, question_value=None):
-    context.total_turnover_value = question_value
     if context.survey == '023':
+        context.total_turnover_value = question_value
         RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
+
     elif context.survey == '999A' and context.table is None:
-        TestSurveyContributorDetailsPage().run_the_validation_process(question_value,
-                                                                      derived_value)
+        context.comparison_value_one = question_value
+        context.comparison_value_two = derived_value
+        TestSurveyContributorDetailsPage().run_the_validation_process(context.comparison_value_one,
+                                                                      context.comparison_value_two)
     else:
         context.comparison_value_one = question_value
         context.comparison_value_two = derived_value

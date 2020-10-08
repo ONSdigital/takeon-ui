@@ -5,7 +5,7 @@ Feature: Test Survey - Question vs Question Threshold(QvQT) validation rule
 
   Scenario Outline: SP-100 - Question vs Question Threshold(QvQT) Validation on test survey
     Given I search for the survey "999A" with <reference> for the current period <period>
-    And I submit the "commodity" <values> for questions
+    And I submit the "values" <values> for questions
       | question_codes |
       | Q13            |
       | Q14            |

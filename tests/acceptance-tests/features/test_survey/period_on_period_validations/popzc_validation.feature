@@ -12,7 +12,6 @@ Feature:Test Survey - Period on Period Zero Continuity(PoPZC) Validation rule
     Then the validation should return <result> if the "period vs previous frequency period movement to or from zero"
     And the "popzc validation" message should <isValidationExists> displayed for question code "Q25"
 
-
     Examples:
       | previousPeriod | currentPeriod | reference   | question | previousPeriodValue | currentPeriodValue | isValidationExists | result |
       | 201712         | 201801        | 12345678036 | Q25      | 1                   | 0                  | be                 | true   |

@@ -22,5 +22,3 @@ Feature: Test Survey - Question vs Derived Question (QvDQ) Validation rule
       | 201712 | 12345678036 | 2,1,1             | not be             | false  | 4            | 4                    |
       | 201712 | 12345678036 | 0,0,0             | not be             | false  | 0            | 0                    |
       | 201712 | 12345678036 | blank,blank,blank | not be             | false  | blank        | blank                |
-
-
