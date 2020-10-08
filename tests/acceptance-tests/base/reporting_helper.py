@@ -77,7 +77,8 @@ class ReportingHelper:
         if int(value_one) != int(value_two):
             return True
         else:
-            return False
+            assert False, 'Expected value "' + str(value_one) + '" should not be equal to actual value"' + str(
+                value_two) + '"'
 
     @staticmethod
     def compare_the_zero_movement_values(value_one, value_two):
