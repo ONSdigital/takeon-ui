@@ -10,3 +10,16 @@ Feature: Test Survey - Historic Data
     Examples:
       | reference   | period |
       | 12345678002 | 201801 |
+
+  Scenario Outline: SPP-95 - View Historic Data Back Periods
+    Given I search for the survey "999A" with <reference> for the current period <period>
+    And I submit the "current data" <values> for questions
+      | question_codes |
+      | Q1             |
+      | Q2             |
+    And I trigger the validation process
+    Then I should be able to view the <values> on historic data
+    Examples:
+      | reference   | period |values|
+      | 12345678002 | 201801 |1,2   |
+    
