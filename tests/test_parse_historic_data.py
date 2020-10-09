@@ -72,3 +72,8 @@ def test_parse_historic_data_returns_grouped_output():
 def test_gather_historic_questions_returns_expected_questions():
     expected_output = ['1000', '1001']
     assert gather_historic_questions(historic_questions) == expected_output
+
+def test_empty_array_returns_empty_dictionary():
+    empty_historic_data = {'history_data': []}
+    expected_output = {}
+    assert group_historic_data(empty_historic_data) == expected_output
