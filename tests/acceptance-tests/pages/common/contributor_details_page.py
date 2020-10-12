@@ -160,8 +160,8 @@ class ContributorDetailsPage(BasePage):
                                                                    comparison_val_two)
 
         else:
-            is_validation_exists = ReportingHelper.compare_values(comparison_val_one,
-                                                                  comparison_val_two)
+            is_validation_exists = ReportingHelper.compare_values_are_not_equal(comparison_val_one,
+                                                                                comparison_val_two)
         ReportingHelper.check_single_message_matches(
             question, result, str(is_validation_exists).lower())
 

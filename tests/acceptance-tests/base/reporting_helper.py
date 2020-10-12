@@ -81,6 +81,13 @@ class ReportingHelper:
                 value_two) + '"'
 
     @staticmethod
+    def compare_values_are_not_equal(value_one, value_two):
+        if int(value_one) != int(value_two):
+            return True
+        else:
+            return False
+
+    @staticmethod
     def compare_the_zero_movement_values(value_one, value_two):
         if int(value_one) == 0 and int(value_two) > 0:
             return True
