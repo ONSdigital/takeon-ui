@@ -40,11 +40,7 @@ def step_impl(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.question_codes.append(cell)
-    if context.survey == '999A':
-        TestSurveyContributorDetailsPage().submit_the_sales_values_for_survey(context.survey, context.question_codes,
-                                                                              values)
-    else:
-        ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
+    ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
 
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -67,9 +63,12 @@ def step_impl(context, derived_value, question_value=None):
     if context.survey == '023':
         context.total_turnover_value = question_value
         RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
-    elif context.survey == '999A':
-        context.total_turnover_value = 0
-        TestSurveyContributorDetailsPage().run_the_validation_process(derived_value)
+
+    elif context.survey == '999A' and context.table is None:
+        context.comparison_value_one = question_value
+        context.comparison_value_two = derived_value
+        TestSurveyContributorDetailsPage().run_the_validation_process(context.comparison_value_one,
+                                                                      context.comparison_value_two)
     else:
         context.comparison_value_one = question_value
         context.comparison_value_two = derived_value
@@ -124,10 +123,6 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
             rsi_page = RsiContributorDetailsPage()
             context.value_one = context.total_turnover_value
             context.value_two = rsi_page.get_derived_question_value()
-        elif context.survey == '999A':
-            test_survey_page = TestSurveyContributorDetailsPage()
-            context.value_one = context.total_turnover_value
-            context.value_two = test_survey_page.get_derived_question_value()
         else:
             context.value_one = context.comparison_value_one
             context.value_two = context.comparison_value_two
@@ -136,8 +131,12 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
                                                   context.value_two, threshold_value, result)
 
     elif validation_check == 'period on period ratio of ratios movement is':
-        RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
-                                                                         threshold_value, result)
+        if context.survey == '023':
+            RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
+                                                                             threshold_value, result)
+        elif context.survey == '999A':
+            TestSurveyContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
+                                                                                    threshold_value, result)
 
 
 @when(u'I override the validation for the question {question}')
