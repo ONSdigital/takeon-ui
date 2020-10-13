@@ -87,14 +87,14 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
   Scenario Outline: LU-7171 - Check Override functionality for PoPMRZ Validation RSI survey on form 5
     Given I search for the survey "023" with <reference> for the previous period <PPeriod>
-    And  the current period sales value is <cpInternetSales>
+    And the current period sales value is "0"
     And has the internet sales value <ppInternetSales> out of total turnover value <ppTotalTurnover>
     When I search for the survey "023" with <reference> for the current period <CPeriod>
-    And I validate the current period details
+    And I validate popmrz current period details
     Then the override checkbox should not be displayed for <question>
 
     Examples:
-      | PPeriod | CPeriod | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | question |
-      | 201903  | 201904  | 49900551526 | 101             | 1000            | 0               | Q21      |
-      | 201903  | 201904  | 49900672013 | 101             | 1000            | 0               | Q21      |
-      | 201903  | 201904  | 49900767172 | 101             | 1000            | 0               | Q21      |
+      | PPeriod | CPeriod | reference   | ppInternetSales | ppTotalTurnover | question |
+      | 201903  | 201904  | 49900551526 | 101             | 1000            | Q21      |
+      | 201903  | 201904  | 49900672013 | 101             | 1000            | Q21      |
+      | 201903  | 201904  | 49900767172 | 101             | 1000            | Q21      |
