@@ -35,6 +35,12 @@ class SeleniumCore:
             return elements[0]
 
     @staticmethod
+    def click_element(*element):
+        ele = WebDriverWait(DriverContext.driver, 5).until(
+            EC.element_to_be_clickable(element))
+        ele.click()
+
+    @staticmethod
     def get_element_text(*element):
         ele = DriverContext.driver.find_element(element[0], element[1])
         return ele.text

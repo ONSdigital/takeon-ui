@@ -77,6 +77,14 @@ class ReportingHelper:
         if int(value_one) != int(value_two):
             return True
         else:
+            assert False, 'Expected value "' + str(value_one) + '" should not be equal to actual value"' + str(
+                value_two) + '"'
+
+    @staticmethod
+    def compare_values_are_not_equal(value_one, value_two):
+        if int(value_one) != int(value_two):
+            return True
+        else:
             return False
 
     @staticmethod

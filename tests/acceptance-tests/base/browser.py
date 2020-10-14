@@ -29,6 +29,10 @@ class Browser:
         elif browser.lower() == 'headless':
             chrome_options = Options()
             chrome_options.headless = True
+            chrome_options.add_argument("--window-size=1920,1080")
+            chrome_options.add_argument("--start-maximized")
+            chrome_options.add_argument("disable-infobars")
+            chrome_options.add_argument("--disable-extensions")
             DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION,
                                                     options=chrome_options)
         else:

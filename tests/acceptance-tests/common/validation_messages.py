@@ -24,7 +24,24 @@ class ValidationMessages:
     }
 
     TEST_SURVEY_MESSAGES = {
-        'qvv validation': 'There is a comment from this contributor'
+        'qvv validation': 'Warning - There is a comment from this contributor',
+        'qvv text validation': 'Warning - Respondent entered a comment',
+        'fv validation': 'Warning - Value set to default, please check',
+        'vz validation': 'Warning - This value is Zero',
+        'vb validation': 'Warning - This value is blank',
+        'vn validation': 'Warning - This is a negative value',
+        'vp validation': 'Warning - Respondent entered a value',
+        'vi validation': 'Warning - Brick type is invalid',
+        'vpsic validation': 'Warning - SIC is petrol and value is greater than zero',
+        'qvqt validation': 'Error - Derived total does not equal the total (allowing for margin of 5)',
+        'qvq validation': 'Error - This is greater than the comparison question',
+        'qvdq validation': 'Warning - This total is not equal to the derived total',
+        'popm validation': 'Warning - This has changed significantly since the last submission',
+        'popqvq validation': 'Warning - This has changed since last submission',
+        'ppvb validation': 'Warning - This value was blank in the previous period',
+        'poprrm validation': 'Warning - Internet turnover to total turnover ratio - large month on month change',
+        'popzc validation': 'Warning - This is different to the previous submission. If this is 0 or blank, the previous was greater. If this has a value, the previous was 0 or blank',
+        'popmrz validation': 'Error - This value is 0. Previous period it was more than a certain percentage of the total'
     }
 
     @staticmethod
