@@ -1,11 +1,13 @@
 import json
 import os
-from flask import render_template, Blueprint
+import time
+from flask import render_template, Blueprint, redirect, url_for
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 from app.utilities.filter_validations import filter_validations
 from app.utilities.notify_baw import send_notification_to_queue
 from app.setup import log, api_caller
 from app.utilities.helpers import get_user
+# from app.forms import view_form
 
 view_form_blueprint = Blueprint(
     name='view_form', import_name=__name__, url_prefix='/contributor_search')
@@ -54,7 +56,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         status_message = 'There was a problem with your request ' + requests_error + 'Please contact Data Clearing Support Team'
         log.info('Requests Error: %s', requests_error)
 
-def validate(inqcode, period, ruref, response_and_validations, override_button, contributor_data, validations, status_colour):
+def validate(inqcode, period, ruref):
     log.info('save validation button pressed')
     json_data = {"survey": inqcode, "period": period,
                  "reference": ruref, "BPMvalidationCallId": "0"}
@@ -77,14 +79,4 @@ def validate(inqcode, period, ruref, response_and_validations, override_button, 
             template_name_or_list="./error_templates/validate_error.html",
             error=e
         )
-    return render_template(
-        template_name_or_list=form_view_template_HTML,
-        survey=inqcode,
-        period=period,
-        ruref=ruref,
-        data=response_and_validations,
-        override_button=override_button,
-        status_message=json.dumps(status_message),
-        contributor_details=contributor_data['data'][0],
-        validation=filter_validations(validations),
-        status_colour=status_colour)
+    return status_message
