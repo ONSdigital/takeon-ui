@@ -27,10 +27,10 @@ class ContributorDetailsPage(BasePage):
         question_row = self.get_question_code_row_details(question)
         check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
         count = 0
-        for check_box in check_boxes:
-            if type_of_check == 'validation' and check_box.get_attribute("checked") == "true" or \
-                    type_of_check == 'override' and check_box.get_attribute("checked") != "true":
-                check_box.click()
+        for i in range(0, len(check_boxes)):
+            if type_of_check == 'validation' and check_boxes[i].get_attribute("checked") == "true" or \
+                    type_of_check == 'override' and check_boxes[i].get_attribute("checked") != "true":
+                SeleniumCore.click_element(By.XPATH, '//td[4]//span[' + str(i + 1) + ']/input')
                 count += 1
         if count >= 1:
             SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()

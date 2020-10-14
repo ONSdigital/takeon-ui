@@ -22,10 +22,10 @@ def step_impl(context, internet_sales, total_sales):
 
 
 @when(u'I validate {validation_type} current period details')
-def step_impl(context, validation_type):
+def step_impl(context, validation_type=None):
     if context.survey == '023':
         RsiContributorDetailsPage().validate_the_current_period_details(context.current_internet_sales,
-                                                                        context.total_sales,validation_type=None)
+                                                                        context.total_sales)
     else:
         TestSurveyContributorDetailsPage().validate_the_current_period_details(validation_type,
                                                                                context.current_internet_sales)

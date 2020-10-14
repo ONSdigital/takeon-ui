@@ -3,6 +3,7 @@ import os
 from flask import render_template, Blueprint, request, redirect, url_for
 from app.utilities.helpers import build_uri, get_user, question_order
 from app.utilities.filter_validations import filter_validations
+from app.utilities.parse_historic_data import group_historic_data
 from app.utilities.combine_data import combine_responses_and_validations
 from app.utilities.check_status import check_status
 from app.setup import log, api_caller
@@ -45,6 +46,10 @@ def view_form(inqcode, period, ruref):
     validation_outputs = api_caller.validation_outputs(parameters=parameters)
     view_forms = api_caller.view_form_responses(parameters=parameters)
 
+    historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
+    historic_data_json = json.loads(historic_data)
+    grouped_historic_data = group_historic_data(historic_data_json)
+
     contributor_data = json.loads(contributor_details)
     validations = json.loads(validation_outputs)
     status = contributor_data['data'][0]['status']
@@ -63,10 +68,13 @@ def view_form(inqcode, period, ruref):
     log.info("Filtered Validations output: %s",
              filter_validations(validations))
     log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
+    log.info("History Data: %s", historic_data_json)
+    log.info("Grouped Historic Data by question : %s", grouped_historic_data)
 
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
-        validate(inqcode, period, ruref, ordered_response_and_validations, override_button, contributor_data, validations, status_colour)
+        validate(inqcode, period, ruref)
+        return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(
         template_name_or_list=form_view_template_HTML,
@@ -79,7 +87,9 @@ def view_form(inqcode, period, ruref):
         contributor_details=contributor_data['data'][0],
         validation=filter_validations(validations),
         user=get_user(),
-        status_colour=status_colour)
+        status_colour=status_colour,
+        historic_data=historic_data_json,
+        grouped_historic_data=grouped_historic_data)
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])
@@ -92,8 +102,7 @@ def override_validations(inqcode, period, ruref):
 
     api_caller.validation_overrides(parameters='', data=json.dumps(json_data))
     log.info("Overriding Validations...")
-
-    return redirect(url_for(view_form, inqcode=inqcode, period=period, ruref=ruref))
+    return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
 def extract_responses(data) -> dict:
     output = []
