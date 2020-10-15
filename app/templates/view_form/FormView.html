@@ -26,11 +26,11 @@
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Cell:</dt>
                 <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['cellnumber'] }}</dd>
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Frozen Employment:</dt>
-                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['frozenemployment'] }}</dd>
+                <dd class="metadata__value grid__col col-10@m u-mt-no numberSpacing">{{ contributor_details['frozenemployment'] }}</dd>
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Frozen SIC 2003:</dt>
-                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['frozensicoutdated'] }}</dd>
+                <dd class="metadata__value grid__col col-10@m u-mt-no numberSpacing">{{ contributor_details['frozensicoutdated'] }}</dd>
                 <dt class="metadata__term grid__col col-2@m u-mt-no">Frozen SIC 2007:</dt>
-                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['frozensic'] }}</dd>
+                <dd class="metadata__value grid__col col-10@m u-mt-no numberSpacing">{{ contributor_details['frozensic'] }}</dd>
             </dl>
 
             <p class="u-bb u-pb-s">
@@ -215,7 +215,7 @@
                                             {{ row[0] }}
                                         </td>
                                         {% for response in row[1] %}
-                                        <td class="table__cell table__cell--numeric">
+                                        <td class="table__cell table__cell--numeric numberSpacing">
                                             {{ response }}
                                         </td>
                                         {% endfor %}
