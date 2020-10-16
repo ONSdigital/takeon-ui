@@ -26,7 +26,7 @@ def step_impl(context, tab_name):
 
 @then(u'I should be able to view all the periods in historic data')
 def step_impl(context):
-    TestSurveyContributorDetailsPage().check_historic_data_exists(context.periods)
+    TestSurveyContributorDetailsPage().check_historic_data_back_periods(context.periods)
 
 
 @then(u'the values {values} should be matching to the corresponding questions on {tab_name}')

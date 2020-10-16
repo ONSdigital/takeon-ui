@@ -15,12 +15,11 @@ Feature: Test Survey - Historic Data
       | reference   | period | values |
       | 12345678037 | 201801 | 1,2    |
 
-  Scenario Outline: SPP-95 - Check Historic Data number of back periods
+  Scenario Outline: SPP-95 - Check Historic data back periods
     Given I search for the <survey> with reference <reference>
     And I have all the back period details including the current period <period>
     When I switch to the "historic data" tab on the contributor details page
-    Then I should be able to view all the periods in historic data
+    Then I should be able to view all the back periods in historic data
     Examples:
       | survey | reference   | period |
       | 999A   | 12345678037 | 201801 |
-    

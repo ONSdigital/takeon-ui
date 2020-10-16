@@ -13,6 +13,7 @@ class ContributorDetailsPage(BasePage):
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
     ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
     OVERRIDE_MESSAGE_LABEL = '//label'
+    CURRENT_PERIOD_COLUMN = 'td[2]'
     ERROR_MESSAGES_COLUMN = 'td[4]'
     OVERRIDE_BUTTON = By.ID, 'override_button'
     OVERRIDE_MESSAGE_ELEMENT = By.CLASS_NAME, 'checkbox__label to-u-bg'
@@ -36,8 +37,8 @@ class ContributorDetailsPage(BasePage):
             SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
             self.save_the_application()
 
-    def get_question_code_row_details(self, question):
-        table = self.driver.find_element_by_id("CurrentData")
+    def get_question_code_row_details(self, table_name, question):
+        table = self.driver.find_element_by_id(table_name)
         rows = table.find_elements_by_tag_name("tr")
         # Ignore the first row
         for i in range(1, len(rows)):

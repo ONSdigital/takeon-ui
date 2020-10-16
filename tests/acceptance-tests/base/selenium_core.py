@@ -20,7 +20,7 @@ class SeleniumCore:
 
     @staticmethod
     def set_current_data_text(element, value):
-        table_element = DriverContext.driver.find_element_by_id('CurrentData')
+        table_element = DriverContext.driver.find_element_by_id('tabId1')
         if len(table_element.find_elements_by_id(element)) == 1:
             ele = table_element.find_elements_by_id(element)[0]
         elif len(table_element.find_elements_by_name(element)) == 1:
@@ -33,6 +33,15 @@ class SeleniumCore:
         elements = DriverContext.driver.find_elements_by_name(element)
         if len(elements) == 1:
             return elements[0]
+
+    @staticmethod
+    def wait_for_element_to_be_displayed(*element):
+        try:
+            ele = WebDriverWait(DriverContext.driver, 10).until(
+                EC.presence_of_element_located(element))
+        except TimeoutException:
+            print("Waiting for element took more than 5 seconds!")
+        return ele
 
     @staticmethod
     def click_element(*element):
