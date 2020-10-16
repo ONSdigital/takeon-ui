@@ -155,14 +155,14 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
 
         ReportingHelper.check_single_message_matches('Q28', result, str(is_validation_triggered).lower())
 
-    def check_historic_data_matches_with_current_period_data(self, question_codes, values, tab_name):
+    def check_historic_data_matches_with_current_period_data(self, survey, question_codes, values, tab_name):
 
         self.switch_to_the_tab(tab_name)
         if len(question_codes) > 1:
             values = Utilities.get_values_as_a_list(values)
             count = 0
             for value in values:
-                question_row = self.get_question_code_row_details('tabId2', Utilities.get_question_code_element('999A',
+                question_row = self.get_question_code_row_details('tabId2', Utilities.get_question_code_element(survey,
                                                                                                                 question_codes[
                                                                                                                     count]))
                 elements = self.CURRENT_PERIOD_COLUMN

@@ -33,30 +33,23 @@ class ContributorSearchPage(BasePage):
                 break
 
     def get_all_the_periods(self, reference, period, sic_code):
-        self.no_of_periods = []
-        period_details = self.get_the_no_of_periods(self.no_of_periods)
-        self.no_of_periods = period_details[1]
-        # elements = SeleniumCore.find_elements_by(*ContributorSearchPage.NEXT_BUTTON)
+        self.periods = []
+        self.periods = self.get_no_of_periods(self.periods)
+        # Check if next button displayed then go to next page to get remaining periods
         while SeleniumCore.find_elements_by(*ContributorSearchPage.NEXT_BUTTON)[0].is_displayed():
             SeleniumCore.find_elements_by(*ContributorSearchPage.NEXT_BUTTON)[0].click()
             time.sleep(2)
-            period_details = self.get_the_no_of_periods(self.no_of_periods)
-            self.no_of_periods = period_details[1]
+            self.periods = self.get_no_of_periods(self.periods)
         self.select_the_form_row(reference, period, sic_code)
-        return self.no_of_periods
+        return self.periods
 
-    def get_the_no_of_periods(self, periods):
+    def get_no_of_periods(self, periods):
         table = SeleniumCore.wait_for_element_to_be_displayed(By.ID, "ResultsTable")
-        # table = self.driver.find_element_by_id("ResultsTable")
         rows = table.find_elements_by_tag_name("tr")
-        count = len(rows)
-        # self.periods = []
         for i in range(1, len(rows)):
             cols = rows[i].find_elements_by_tag_name("td")
-            # Check to see if any references appear that shouldn't be there
             periods.append(cols[2].text)
-            count -= 1
-        return count, periods
+        return periods
 
     def submit_search_details(self, *search_types):
         reference = search_types[0]

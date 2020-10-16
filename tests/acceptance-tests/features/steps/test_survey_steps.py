@@ -24,12 +24,13 @@ def step_impl(context, tab_name):
     TestSurveyContributorDetailsPage().switch_to_the_tab(tab_name)
 
 
-@then(u'I should be able to view all the periods in historic data')
+@then(u'I should be able to view all the back periods in historic data tab')
 def step_impl(context):
     TestSurveyContributorDetailsPage().check_historic_data_back_periods(context.periods)
 
 
-@then(u'the values {values} should be matching to the corresponding questions on {tab_name}')
+@then(u'the values {values} should be matching to the corresponding questions in {tab_name} tab')
 def step_impl(context, values, tab_name):
-    TestSurveyContributorDetailsPage().check_historic_data_matches_with_current_period_data(context.question_codes,
+    TestSurveyContributorDetailsPage().check_historic_data_matches_with_current_period_data(context.survey,
+                                                                                            context.question_codes,
                                                                                             values, tab_name)

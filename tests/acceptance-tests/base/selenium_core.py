@@ -36,11 +36,12 @@ class SeleniumCore:
 
     @staticmethod
     def wait_for_element_to_be_displayed(*element):
+        delay = 5
         try:
-            ele = WebDriverWait(DriverContext.driver, 10).until(
+            ele = WebDriverWait(DriverContext.driver, delay).until(
                 EC.presence_of_element_located(element))
         except TimeoutException:
-            print("Waiting for element took more than 5 seconds!")
+            print("Waiting for element took more than " + delay + " seconds!")
         return ele
 
     @staticmethod

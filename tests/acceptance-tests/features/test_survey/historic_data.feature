@@ -10,7 +10,7 @@ Feature: Test Survey - Historic Data
       | Q1             |
       | Q2             |
     And I trigger the validation process
-    Then the values <values> should be matching to the corresponding questions on historic data
+    Then the values <values> should be matching to the corresponding questions in historic data tab
     Examples:
       | reference   | period | values |
       | 12345678037 | 201801 | 1,2    |
@@ -19,7 +19,7 @@ Feature: Test Survey - Historic Data
     Given I search for the <survey> with reference <reference>
     And I have all the back period details including the current period <period>
     When I switch to the "historic data" tab on the contributor details page
-    Then I should be able to view all the back periods in historic data
+    Then I should be able to view all the back periods in historic data tab
     Examples:
       | survey | reference   | period |
       | 999A   | 12345678037 | 201801 |
