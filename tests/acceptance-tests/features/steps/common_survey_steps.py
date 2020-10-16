@@ -14,6 +14,8 @@ def step_impl(context, survey):
 
 @given(u'I search for the {survey_value} with reference {reference}')
 def step_impl(context, reference, survey_value=None, period=None):
+    context.survey = survey_value
+    context.reference = reference
     context.contributor_page = ContributorSearchPage()
     if survey_value == 'survey' and not period:
         context.contributor_page.submit_search_details(reference, 'empty', 'empty')
