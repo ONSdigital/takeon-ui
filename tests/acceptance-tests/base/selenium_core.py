@@ -1,5 +1,6 @@
 import time
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -20,7 +21,7 @@ class SeleniumCore:
 
     @staticmethod
     def set_current_data_text(element, value):
-        table_element = DriverContext.driver.find_element_by_id('tabId1')
+        table_element = SeleniumCore.wait_for_element_to_be_displayed(By.ID, 'tabId1')
         if len(table_element.find_elements_by_id(element)) == 1:
             ele = table_element.find_elements_by_id(element)[0]
         elif len(table_element.find_elements_by_name(element)) == 1:
@@ -41,7 +42,7 @@ class SeleniumCore:
             ele = WebDriverWait(DriverContext.driver, delay).until(
                 EC.presence_of_element_located(element))
         except TimeoutException:
-            print("Waiting for element took more than " + delay + " seconds!")
+            print("Waiting for element took more than " + str(delay) + " seconds!")
         return ele
 
     @staticmethod
@@ -66,6 +67,7 @@ class SeleniumCore:
 
     @staticmethod
     def find_elements_by(*element):
+        SeleniumCore.wait_for_element_to_be_displayed(element)
         return DriverContext.driver.find_elements(element[0], element[1])
 
     @staticmethod

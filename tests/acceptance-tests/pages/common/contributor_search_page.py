@@ -30,6 +30,8 @@ class ContributorSearchPage(BasePage):
             # Check to see if any references appear that shouldn't be there
             if (cols[1].text == reference and cols[2].text == period):
                 cols[0].click()
+                if len(SeleniumCore.find_elements_by(By.ID, 'tabId1')) == 0:
+                    cols[0].click()
                 break
 
     def get_all_the_periods(self, reference, period, sic_code):
