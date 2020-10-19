@@ -67,7 +67,6 @@ class SeleniumCore:
 
     @staticmethod
     def find_elements_by(*element):
-        SeleniumCore.wait_for_element_to_be_displayed(element)
         return DriverContext.driver.find_elements(element[0], element[1])
 
     @staticmethod
