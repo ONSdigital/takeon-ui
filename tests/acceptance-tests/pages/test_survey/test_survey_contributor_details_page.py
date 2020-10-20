@@ -18,7 +18,7 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
     THRESHOLD_DERIVED_QUESTION_ELEMENT = '0012'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
-    TAB_ELEMENTS = By.XPATH, '//button[contains(@class,"w3-bar-item w3-button tablink")]'
+    TAB_ELEMENTS = By.XPATH, '//li[contains(@class,"tab__list-item tab__list-item--row")]'
 
     question_codes = {
         'Q1': '1000',
@@ -114,17 +114,27 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             self.driver.find_element_by_id(question_element).send_keys(value)
 
     def switch_to_the_tab(self, tab_name):
-        SeleniumCore.switch_window()
+        if len(SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)) == 0:
+            SeleniumCore.switch_window()
         elements = SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)
         for ele in elements:
             if ele.text.lower() == tab_name.lower():
                 ele.click()
                 break
 
-    def check_historic_data_exists(self):
-        table = self.driver.find_element_by_id("HistoricData")
+    def check_historic_data_back_periods(self, periods):
+        table = self.driver.find_element_by_id("tabId2")
         rows = table.find_elements_by_tag_name("tr")
-        ReportingHelper.compare_values(len(rows), 0)
+        periods = self.sort_periods_order(periods)
+        for i in range(0, 1):
+            cols = rows[i].find_elements_by_tag_name("th")
+            count = 1
+            for period in periods:
+                ReportingHelper.check_single_message_matches('Question', cols[count].text, period)
+                count += 1
+
+    def sort_periods_order(self, periods):
+        return sorted(periods, reverse=True)
 
     def check_pop_ratio_of_ratios_validation(self, factor_type,
                                              operator_type, threshold_value, result):
@@ -144,3 +154,18 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             is_validation_triggered = 'false'
 
         ReportingHelper.check_single_message_matches('Q28', result, str(is_validation_triggered).lower())
+
+    def check_historic_data_matches_with_current_period_data(self, survey, question_codes, values, tab_name):
+
+        self.switch_to_the_tab(tab_name)
+        if len(question_codes) > 1:
+            values = Utilities.get_values_as_a_list(values)
+            count = 0
+            for value in values:
+                question_row = self.get_question_code_row_details('tabId2', Utilities.get_question_code_element(survey,
+                                                                                                                question_codes[
+                                                                                                                    count]))
+                elements = self.CURRENT_PERIOD_COLUMN
+                current_period_value = question_row.find_elements(By.XPATH, elements)
+                ReportingHelper.check_elements_message_matches(question_codes[count], current_period_value, value)
+                count += 1
