@@ -84,6 +84,15 @@ class SeleniumCore:
             print("No Alert")
 
     @staticmethod
+    def check_multiple_windows_exists(element):
+        count = 0
+        while len(DriverContext.driver.window_handles) == 1:
+            count += 1
+            element.click()
+            if count == 3:
+                break
+
+    @staticmethod
     def switch_window():
         driver = DriverContext.driver
         handles = driver.window_handles

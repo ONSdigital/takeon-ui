@@ -1,7 +1,6 @@
 import time
 
 from selenium.webdriver.common.by import By
-
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from pages.common.base_page import BasePage
@@ -29,9 +28,7 @@ class ContributorSearchPage(BasePage):
                 ReportingHelper.check_single_message_matches(reference, cols[i + 6].text, sic_code)
             # Check to see if any references appear that shouldn't be there
             if (cols[1].text == reference and cols[2].text == period):
-                cols[0].click()
-                if len(SeleniumCore.find_elements_by(By.ID, 'tabId1')) == 0:
-                    cols[0].click()
+                SeleniumCore.check_multiple_windows_exists(cols[0])
                 break
 
     def get_all_the_periods(self, reference, period, sic_code):
