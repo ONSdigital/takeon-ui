@@ -3,22 +3,48 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
+from common.override_messages import OverrideMessages
 from common.validation_messages import ValidationMessages
 from pages.common.base_page import BasePage
-import numpy as np
 
 
 class ContributorDetailsPage(BasePage):
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
-    QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE = '//*[@id="responseForm"]/div/div/p/label[contains(text(),"'
-    QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO = '")]/../../p[@class="panel__error u-mb-no"]'
-    ERROR_MESSAGES_ELEMENT = By.XPATH, '//p[@class="panel__error u-mb-no"]'
+    ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
+    OVERRIDE_MESSAGE_LABEL = '//label'
+    ERROR_MESSAGES_COLUMN = 'td[4]'
+    OVERRIDE_BUTTON = By.ID, 'override_button'
+    OVERRIDE_MESSAGE_ELEMENT = By.CLASS_NAME, 'checkbox__label to-u-bg'
 
-    def get_validation_error_message(self, question_type):
-        element = self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_ONE + \
-                  question_type + self.QUESTION_PANEL_ERROR_MESSAGE_ELEMENT_TWO
-        return SeleniumCore.find_elements_by_xpath(element)
+    def get_no_of_validation_error_messages_per_question(self, question):
+        self.override_the_validation(question, 'validation')
+        question_row = self.get_question_code_row_details(question)
+        elements = self.ERROR_MESSAGES_COLUMN + self.ERROR_MESSAGES_ELEMENT
+        return question_row.find_elements(By.XPATH, elements)
+
+    def override_the_validation(self, question, type_of_check):
+        question_row = self.get_question_code_row_details(question)
+        check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        count = 0
+        for check_box in check_boxes:
+            if type_of_check == 'validation' and check_box.get_attribute("checked") == "true" or \
+                    type_of_check == 'override' and check_box.get_attribute("checked") != "true":
+                check_box.click()
+                count += 1
+        if count >= 1:
+            SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
+            self.save_the_application()
+
+    def get_question_code_row_details(self, question):
+        table = self.driver.find_element_by_id("CurrentData")
+        rows = table.find_elements_by_tag_name("tr")
+        # Ignore the first row
+        for i in range(1, len(rows)):
+            cols = rows[i].find_elements_by_tag_name("td")
+            # Check to see if the question code matches
+            if cols[0].text == question:
+                return rows[i]
 
     def submit_question_value(self, survey, value_type, value, question):
         SeleniumCore.switch_window()
@@ -27,7 +53,8 @@ class ContributorDetailsPage(BasePage):
 
     def submit_sales_value(self, survey, value, question):
         value = Utilities.convert_blank_data_value(value)
-        SeleniumCore.set_element_text(Utilities.get_question_code_element(survey, question), value)
+        question_element = Utilities.get_question_code_element(survey, question)
+        SeleniumCore.set_current_data_text(question_element, value)
 
     def save_the_application(self):
         self.driver.find_element(
@@ -55,6 +82,8 @@ class ContributorDetailsPage(BasePage):
     def get_validation_message(self, survey, exp_msg):
         if 'validation' in exp_msg:
             msg = ValidationMessages().get_expected_validation_message(survey, exp_msg)
+        elif 'override message' in exp_msg:
+            msg = OverrideMessages().get_expected_override_message(survey, exp_msg)
         else:
             msg = exp_msg
         return msg
@@ -65,26 +94,22 @@ class ContributorDetailsPage(BasePage):
         if type(question_type) == list and len(question_type) > 1:
             self.check_multiple_comment_text_messages(survey)
         else:
-            no_of_msgs = ContributorDetailsPage().get_validation_error_message(question_type)
-            if len(no_of_msgs) == 1:
-                actual_msg = no_of_msgs[0].text
+            no_of_msgs = ContributorDetailsPage().get_no_of_validation_error_messages_per_question(question_type)
+            if len(no_of_msgs) == 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_single_message_matches(
-                        question_type, actual_msg, exp_msg)
+                    ReportingHelper.check_elements_message_matches(
+                        question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
-                    ReportingHelper.check_single_message_not_matches(
-                        actual_msg, exp_msg, question_type)
-            elif len(no_of_msgs) == 2:
+                    act_msg = ''
+                    ReportingHelper.check_multiple_messages_not_matches(
+                        question_type, act_msg, exp_msg)
+            elif len(no_of_msgs) > 0:
                 if is_validation_exists == 'be':
-                    ReportingHelper.check_multiple_messages_matches(
+                    ReportingHelper.check_elements_message_matches(
                         question_type, no_of_msgs, exp_msg)
                 elif is_validation_exists == 'not be':
                     ReportingHelper.check_multiple_messages_not_matches(
                         question_type, no_of_msgs, exp_msg)
-            elif len(no_of_msgs) == 0:
-                act_msg = ''
-                ReportingHelper.check_multiple_messages_not_matches(
-                    question_type, act_msg, exp_msg)
 
     def check_multiple_questions_validation_messages(self, survey, question_codes, exp_msg, is_validation_exists):
         self.check_if_overall_validation_triggered()
@@ -157,7 +182,7 @@ class ContributorDetailsPage(BasePage):
                     question, result, str(is_validation_exists).lower())
 
     def get_no_of_validation_error_messages(self):
-        return len(SeleniumCore.find_elements_by(*ContributorDetailsPage.ERROR_MESSAGES_ELEMENT))
+        return len(SeleniumCore.find_elements_by(By.XPATH, self.ERROR_MESSAGES_ELEMENT))
 
     def get_validation_status(self):
         return SeleniumCore.get_element_text(*ContributorDetailsPage.STATUS)
@@ -174,23 +199,21 @@ class ContributorDetailsPage(BasePage):
         SeleniumCore.switch_window()
         survey = questions_and_values[0]
         questions_list = questions_and_values[1]
-        new_questions_list = np.asarray(questions_list)
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])
 
-        if len(commodity_values) > 1 and new_questions_list.size > 1:
+        if len(commodity_values) > 1 and type(questions_list) == list:
             self.submit_values_as_a_list_for_multiple_questions(survey, questions_list, commodity_values)
-        elif new_questions_list.size > 1 and len(commodity_values) == 1:
+        elif len(commodity_values) == 1 and type(questions_list) == list:
             self.submit_single_value_for_multiple_questions(survey, questions_list, commodity_values[0])
         else:
             self.submit_single_value_per_question(survey, questions_list, commodity_values[0])
 
     def submit_values_as_a_list_for_multiple_questions(self, survey, questions_list, commodity_values):
-        new_questions_list = np.asarray(questions_list)
-        if new_questions_list.size > 1:
+        if len(questions_list) > 1:
             count = 0
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
-            SeleniumCore.set_element_text(
+            SeleniumCore.set_current_data_text(
                 question_element, Utilities.convert_blank_data_value(commodity_values[count]))
             if len(commodity_values) > 1:
                 count += 1
@@ -199,11 +222,11 @@ class ContributorDetailsPage(BasePage):
         for question in questions_list:
             question_element = Utilities.get_question_code_element(survey, question)
             commodity_value = Utilities.convert_blank_data_value(commodity_value)
-            SeleniumCore.set_element_text(question_element, commodity_value)
+            SeleniumCore.set_current_data_text(question_element, commodity_value)
 
     def submit_single_value_per_question(self, survey, questions_list, commodity_value):
         question_element = Utilities.get_question_code_element(survey, questions_list)
-        SeleniumCore.set_element_text(
+        SeleniumCore.set_current_data_text(
             question_element, commodity_value)
 
     def validate_the_current_period_details(self, *questions_and_values):
@@ -221,8 +244,7 @@ class ContributorDetailsPage(BasePage):
         global question_codes
         questions_list = question_codes[1]
         commodity_values = Utilities.get_values_as_a_list(question_codes[2])
-        new_questions_list = np.asarray(questions_list)
-        if new_questions_list.size > 1:
+        if len(questions_list) > 1:
             count = 0
             for question in questions_list:
                 question_element = Utilities.get_question_code_element(survey, question)
@@ -239,9 +261,21 @@ class ContributorDetailsPage(BasePage):
 
         comparing_question_element = Utilities.get_question_code_element(survey, questions_list[0])
         derived_question_element = Utilities.get_question_code_element(survey, questions_list[1])
-        SeleniumCore.set_element_text(comparing_question_element, comparing_question_value)
+        SeleniumCore.set_current_data_text(comparing_question_element, comparing_question_value)
         ContributorDetailsPage().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, derived_question_element)
         if derived_question_value == '':
             derived_question_value = '0'
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
+
+    def check_the_override_message(self, survey, question_code, exp_msg):
+        exp_msg = self.get_validation_message(survey, exp_msg)
+        question_row = self.get_question_code_row_details(question_code)
+        elements = self.ERROR_MESSAGES_COLUMN + self.OVERRIDE_MESSAGE_LABEL
+        override_messages_elements = question_row.find_elements(By.XPATH, elements)
+        ReportingHelper.check_elements_message_matches(question_code, override_messages_elements, exp_msg)
+
+    def check_the_override_checkbox_displayed(self, question):
+        question_row = self.get_question_code_row_details(question)
+        check_boxes = question_row.find_elements(By.NAME, 'override-checkbox')
+        ReportingHelper.compare_values(len(check_boxes), 1)

@@ -7,15 +7,14 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 
 
 class TestSurveyContributorDetailsPage(BasePage):
-    QUESTION_ONE_ELEMENT = '1000'
-    QUESTION_TWO_ELEMENT = '1001'
+    QUESTION_ONE_ELEMENT = '0023'
+    QUESTION_TWO_ELEMENT = '0024'
     QUESTION_DERIVED_ELEMENT = '4001'
     COMMENT_QUESTION_NOT_BLANK = '5000'
     COMMENT_QUESTION_VALUE = '5001'
     ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
     ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
-    QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
-    QUESTION_LABEL_PART_TWO = "')]"
+    TAB_ELEMENTS = By.XPATH, '//button[contains(@class,"w3-bar-item w3-button tablink")]'
 
     question_codes = {
         'Q1': '1000',
@@ -65,10 +64,7 @@ class TestSurveyContributorDetailsPage(BasePage):
 
     def submit_question_value(self, value_type, value, question):
         SeleniumCore.switch_window()
-        if value_type == 'value':
-            pass
-        elif value_type == 'comment':
-            self.submit_comment_value(value, question)
+        self.submit_comment_value(value, question)
 
     def submit_comment_value(self, comment, question):
         if comment.lower() == 'empty' or comment.lower() == 'blank':
@@ -98,3 +94,16 @@ class TestSurveyContributorDetailsPage(BasePage):
         for new_val in new_values:
             commodity_values.append(new_val)
         return commodity_values
+
+    def switch_to_the_tab(self, tab_name):
+        SeleniumCore.switch_window()
+        elements = SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)
+        for ele in elements:
+            if ele.text.lower() == tab_name.lower():
+                ele.click()
+                break
+
+    def check_historic_data_exists(self):
+        table = self.driver.find_element_by_id("HistoricData")
+        rows = table.find_elements_by_tag_name("tr")
+        ReportingHelper.compare_values(len(rows), 0)

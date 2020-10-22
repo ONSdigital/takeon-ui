@@ -25,6 +25,7 @@ def extract_validation_data(extracted_form_data, validation_data):
             validation_failure['triggered'] = validation['triggered']
             validation_failure['validationmessage'] = validation['validationmessage']
             validation_failure['description'] = validation['description']
+            validation_failure['severity'] = validation['severity']
             if validation['overridden']:
                 overridden_count += 1
             validation_info_array.append(validation_failure)

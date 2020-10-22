@@ -4,105 +4,177 @@
 ​
 {% block page_header %}
 ​
-    Take-On
+    Data Clearing
 ​
 {% endblock page_header %}
 
 {% block content %}
 ​
-    ​<div class="mainContent">
-        <div class="grid">
-            <div class="grid__col col-8@m">
-                <h1>{{ contributor_details['referencename'] }}</h1>
-                <dl class="metadata metadata__list grid grid--gutterless u-cf u-mb-s" title="Form details" aria-label="Form details">
-                    <dt class="metadata__term grid__col col-2@m u-mt-no">Reference:</dt>
-                    <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['reference'] }}</dd>
-                    <dt class="metadata__term grid__col col-2@m u-mt-no">Survey:</dt>
-                    <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['surveyBySurvey']['description'] }} {{ contributor_details['survey'] }}</dd>
-                    <dt class="metadata__term grid__col col-2@m u-mt-no">Period:</dt>
-                    <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['period'] }}</dd>
-                </dl>
+​<div class="mainContent">
+    <div class="grid">
+        <div class="grid__col col-11@m">
 
-                <p class="u-bb u-pb-s">
-                    <span title="Status " class="{{ status_colour }}">{{ contributor_details['status'] }}</span>
-                </p>
+            <h1>{{ contributor_details['referencename'] }}</h1>
 
-                <form method="post" id="responseForm">
-                    {% for datum in data['form_validation_outputs'] %}
-                    
-                        {% if datum['validation_info']|length > 0 %}
+            <dl class="metadata metadata__list grid grid--gutterless u-cf u-mb-s" title="Form details" aria-label="Form details">
+                <dt class="metadata__term grid__col col-2@m u-mt-no">Reference:</dt>
+                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['reference'] }}</dd>
+                <dt class="metadata__term grid__col col-2@m u-mt-no">Survey:</dt>
+                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['surveyBySurvey']['description'] }} {{ contributor_details['survey'] }}</dd>
+                <dt class="metadata__term grid__col col-2@m u-mt-no">Period:</dt>
+                <dd class="metadata__value grid__col col-10@m u-mt-no">{{ contributor_details['period'] }}</dd>
+            </dl>
 
-                        <div class="panel {{ datum['panel'] }} panel--simple">
-                            <div class="panel__body">
-                                {% for output in datum['validation_info'] %}
+            <p class="u-bb u-pb-s">
+                <span title="Status " class="{{ status_colour }}">{{ contributor_details['status'] }}</span>
+            </p>
 
-                                    {% if output['overridden'] == True %}
+            {# Css for tab view  #}
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
-                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override '{{ output["validationmessage"] }}'</label>
-                                    </span>
+            <div class="w3-container">
+                <div class="w3-bar w3-white">
+                    <button class="w3-bar-item w3-button tablink w3-light-grey w3-dark-grey" onclick="openTab(event, 'CurrentData')">Current Data</button>
+                    <button class="w3-bar-item w3-button tablink w3-light-grey" onclick="openTab(event, 'HistoricData')">Historic Data</button>
+                </div>
+            </div>
+
+
+            <form method="post" id="responseForm">
+
+                <div id="CurrentData" class="w3-container tab">
+
+                    <table id="basic-table" class="table ">
+
+                        <thead class="table__head">
+                            <tr class="table__row">
+                                <th scope="col" class="table__header col-1@m">Number</th>
+                                <th scope="col" class="table__header col-4@m">Question</th>
+                                <th scope="col" class="table__header col-2@m">Response</th>
+                                <th scope="col" class="table__header ">Question Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="table__body">
+
+                            {% for datum in data['form_validation_outputs'] %}
+                                <tr class="table__row">
+                                    {% if datum['validation_info']|length > 0 %}
+                                        <td class="table__cell ">
+                                            <p class="field">
+                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
+                                            </p>
+                                        </td>
+
+                                        <td class="table__cell ">
+                                            <p class="field">
+                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
+                                            </p>
+                                        </td>
+                                        <td class="table__cell ">
+
+                                            {% if datum['type'] == 'NUMERIC' %}
+                                                <p class="field">
+                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                </p>
+                                            {% else %}
+                                                <p class="field">
+                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                </p>
+                                            {% endif %}
+                                        
+                                        </td>
+
+                                        <td class="table__cell ">
+                                            <div class="panel {{ datum['panel'] }} panel--simple">
+                                                <div class="panel__body">
+
+                                                    {% for output in datum['validation_info'] %}
+
+                                                        {% if output['overridden'] == True %}
+
+                                                            <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                                <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w" name="override-checkbox" checked>
+                                                                <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}"><strong>Overridden - </strong>'{{ output["description"] }}'</label>
+                                                            </span>
+
+                                                        {% else %}
+
+                                                            <p class="panel__error u-mb-no">
+                                                                {% if output['severity'] == 'W' %}
+                                                                <strong>Warning - </strong> {{output['description']}} 
+                                                            </p>
+
+                                                            <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
+                                                                <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
+                                                                <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg" for="{{output['validationoutputid']}}"><strong>Override </strong> <span class="u-vh">{{ output["description"] | lower }} </span></label>
+                                                            </span>
+                                                            <br>
+
+                                                            {% else %}
+                                                            <p class="panel__error u-mb-no">
+                                                                <strong>Error - </strong> {{output['description']}}
+                                                            </p>
+                                                            <br>
+                                                        
+                                                            {% endif %}
+
+                                        
+                                                        {% endif %}
+
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </td>
 
                                     {% else %}
 
-                                    <p class="panel__error u-mb-no">
-                                        <strong> {{output['description']}}</strong>
-                                    </p>
-                                    <span class="checkbox js-password-toggle-wrap checkbox--toggle u-mt-no u-mb-s">
-                                        <input type="checkbox" id="{{output['validationoutputid']}}" class="checkbox__input js-checkbox js-password-toggle to-u-bg-w " name="override-checkbox">
-                                        <label id="label-{{output['validationoutputid']}}" class="checkbox__label to-u-bg " for="{{output['validationoutputid']}}">Override <span class="u-vh"> {{ output["validationmessage"] | lower }} </span></label>
-                                    </span>
+                                        <td class="table__cell ">
+                                            <p class="field">
+                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
+                                            </p>
+                                        </td>
 
+                                        <td class="table__cell ">
+                                            <p class="field">
+                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displaytext"] }} </label>
+                                            </p>
+                                        </td>
+
+                                        <td class="table__cell ">
+                                            {% if datum['type'] == 'NUMERIC' %}
+                                                <p class="field">
+                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                </p>
+                                            {% else %}
+                                                <p class="field">
+                                                    <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                                </p>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="table__cell ">
+                                        </td>
                                     {% endif %}
-
-                                {% endfor %}
-
-                                <p class="field">
-                                    <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
-                                    
-                                    {% if datum['type'] == 'NUMERIC' %}
-                                        <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
-                                    {% else %}
-                                        <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
-                                    {% endif %}
-
-                                 </p>
-                            </div>
-                        </div>
-
-                        {% else %}
-
-                        <p class="field">
-                            <label class="label" for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} {{ datum["displaytext"] }}</label>
-                         
-                            {% if datum['type'] == 'NUMERIC' %}
-                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
-                            {% else %}
-                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
-                            {% endif %}
-                
-                         </p>
-                        
-                        {% endif %}
-
-                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
 
                     {% if override_button %}
-
                         <hr>
                         <fieldset class="fieldset">
                             <legend class="fieldset__legend u-vh">Override all</legend>
                             <p class="checkboxes__label"></p>
-                            <span class="checkboxes__items">
+                            <span class="checkboxes__items ">
                                 <p class="checkboxes__item">
-                                    <span class="checkbox input--w-10">
+                                    <span class="checkbox input--w-10 ">
                                         <input type="checkbox" id="select-all" class="checkbox__input js-checkbox " value="Select All" name="select-all-checkbox" onclick="select_all(this)">
                                         <label id="label-select-all" class="checkbox__label " for="select-all">Override all</label>
                                     </span>
                                 </p>
                             </span>
                         </fieldset>
-
                     {% endif %}
 
                     <br>
@@ -115,74 +187,130 @@
                     <button class="btn btn--small" type="submit" value='override' name='action' id='override_button'>
                         <span class="btn__inner">Override</span>
                     </button>
-                </form>
+                </div>
 
-                <br>
-                <br>
-                <br>
 
-            </div>
+                <div id="HistoricData" class="w3-container tab" style="display:none">
+                    <h3>Historic Data</h3>
+
+                    <table id="basic-table" class="table ">
+
+                        <thead class="table__head">
+                            <tr class="table__row">
+                                <th scope="col" class="table__header col-1@m">Question Number</th>
+                                <th scope="col" class="table__header col-2@m">{{ contributor_details['period'] }}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="table__body">
+
+                            {% for datum in data['form_validation_outputs'] %}
+                                {% if datum['type'] == 'NUMERIC' %}
+                                    <tr class="table__row">
+                                        <td class="table__cell ">
+                                            <p class="field">
+                                                <label for="{{ datum['questioncode'] }}"> {{ datum["displayquestionnumber"] }} </label>
+                                            </p>
+                                        </td>
+
+                                        <td class="table__cell ">
+                                            <p class="field">
+                                                <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="number" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
+                                            </p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </form>
+
+            <br>
+            <br>
+            <br>
+
         </div>
     </div>
+</div>
 
 
-    <script>
-        var override_button = document.getElementById("override_button")
-        override_button.addEventListener("click", function()
-        {var checkboxes = document.getElementsByName("override-checkbox");
-            var reference  = "{{ contributor_details['reference'] }}";
-            var period     = "{{ contributor_details['period'] }}";
-            var survey     = "{{ contributor_details['survey'] }}";
-            var user       = '{{ user }}';
-            var checkboxes_checked = []
-            var checkboxes_output  = {}
-            for(var i = 0; i < checkboxes.length; i++) {
-                if(checkboxes[i].checked) {
-                    var checkbox = {}
-                    checkbox["validationoutputid"] = checkboxes[i].id
-                    checkbox["override"]           = true
-                    checkbox["user"]               = user
-                    checkboxes_checked.push(checkbox)
-                } else {
-                    var checkbox = {}
-                    checkbox["validationoutputid"] = checkboxes[i].id
-                    checkbox["override"]           = false
-                    checkbox["user"]               = user
-                    checkboxes_checked.push(checkbox)
-                }
-            }
-            checkboxes_output['reference']          = reference
-            checkboxes_output['period']             = period
-            checkboxes_output['survey']             = survey
-            checkboxes_output['validation_outputs'] = checkboxes_checked
-            var js_data = JSON.stringify(checkboxes_output)
-            $.ajax({
-               url: 'override-validations',
-               type: 'post',
-               contentType: 'application/json',
-               dataType: 'json',
-               data: js_data,
-               async: false
-            })
-           window.location.reload()})
-    </script>
-
-    <script>
-        function select_all(source) {
-            checkboxes = document.getElementsByName("override-checkbox");
-            for(var i=0; i < checkboxes.length; i++){
-                checkboxes[i].checked = source.checked;
+<script>
+    var override_button = document.getElementById("override_button")
+    override_button.addEventListener("click", function()
+    {var checkboxes = document.getElementsByName("override-checkbox");
+        var reference  = "{{ contributor_details['reference'] }}";
+        var period     = "{{ contributor_details['period'] }}";
+        var survey     = "{{ contributor_details['survey'] }}";
+        var user       = '{{ user }}';
+        var checkboxes_checked = []
+        var checkboxes_output  = {}
+        for(var i = 0; i < checkboxes.length; i++) {
+            if(checkboxes[i].checked) {
+                var checkbox = {}
+                checkbox["validationoutputid"] = checkboxes[i].id
+                checkbox["override"]           = true
+                checkbox["user"]               = user
+                checkboxes_checked.push(checkbox)
+            } else {
+                var checkbox = {}
+                checkbox["validationoutputid"] = checkboxes[i].id
+                checkbox["override"]           = false
+                checkbox["user"]               = user
+                checkboxes_checked.push(checkbox)
             }
         }
-    </script>
+        checkboxes_output['reference']          = reference
+        checkboxes_output['period']             = period
+        checkboxes_output['survey']             = survey
+        checkboxes_output['validation_outputs'] = checkboxes_checked
+        var js_data = JSON.stringify(checkboxes_output)
+        $.ajax({
+            url: 'override-validations',
+            type: 'post',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: js_data,
+            async: false
+        })
+        window.location.reload()})
+</script>
 
-    <script>
-        var statusMessage = "{{ status_message }}"
-        console.log(statusMessage)
-        if (statusMessage == "&#34;&#34;") {
-        } else {
-            alert(statusMessage);
+<script>
+    function select_all(source) {
+        checkboxes = document.getElementsByName("override-checkbox");
+        for(var i=0; i < checkboxes.length; i++){
+            checkboxes[i].checked = source.checked;
         }
-    </script>
+    }
+</script>
+
+<script>
+    var statusMessage = "{{ status_message }}"
+    console.log(statusMessage)
+    if (statusMessage == "&#34;&#34;") {
+    } else {
+        alert(statusMessage);
+    }
+</script>
+
+<script>
+function openTab(evt, tabName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " w3-dark-grey";
+}
+</script>
 ​
 {% endblock content %}

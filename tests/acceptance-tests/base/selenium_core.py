@@ -14,12 +14,22 @@ class SeleniumCore:
         if len(elements) == 1:
             ele = elements[0]
         else:
-            ele = SeleniumCore.set_element_text_by_name(element, value)
+            ele = SeleniumCore.set_element_text_by_name(element)
         ele.clear()
         return ele.send_keys(value)
 
     @staticmethod
-    def set_element_text_by_name(element, value):
+    def set_current_data_text(element, value):
+        table_element = DriverContext.driver.find_element_by_id('CurrentData')
+        if len(table_element.find_elements_by_id(element)) == 1:
+            ele = table_element.find_elements_by_id(element)[0]
+        elif len(table_element.find_elements_by_name(element)) == 1:
+            ele = table_element.find_elements_by_name(element)[0]
+        ele.clear()
+        return ele.send_keys(value)
+
+    @staticmethod
+    def set_element_text_by_name(element):
         elements = DriverContext.driver.find_elements_by_name(element)
         if len(elements) == 1:
             return elements[0]

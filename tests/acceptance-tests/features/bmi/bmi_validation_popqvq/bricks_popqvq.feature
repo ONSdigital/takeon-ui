@@ -7,7 +7,7 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "074" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q001"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q001"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
@@ -24,7 +24,7 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "074" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q011"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q011"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
@@ -41,7 +41,7 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "074" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q021"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q021"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
@@ -58,7 +58,7 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
     When I search for the survey "074" with <reference> for the current period <currentPeriod>
     And I run the validation process on <currentQuestionCode> with <currentPeriodValue>
     Then the validation should return <result> if the "values are not equal"
-    And the "This has changed since last submission" message should <isValidationExists> displayed for question code "Q8000"
+    And the "popqvq validation" message should <isValidationExists> displayed for question code "Q8000"
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
