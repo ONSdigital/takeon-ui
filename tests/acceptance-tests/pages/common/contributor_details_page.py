@@ -1,5 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
+
+from base.driver_context import DriverContext
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
@@ -9,6 +11,12 @@ from pages.common.base_page import BasePage
 
 
 class ContributorDetailsPage(BasePage):
+
+    def __init__(self):
+        if Utilities.get_current_page_title() == 'Search':
+            SeleniumCore.switch_window()
+        super().__init__('Data Clearing')
+
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
     ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
@@ -22,6 +30,7 @@ class ContributorDetailsPage(BasePage):
     OVERRIDE_CHECKBOX_ELEMENT = 'override-checkbox'
 
     def get_no_of_validation_error_messages_per_question(self, question):
+        self.driver
         self.override_the_validation(question, 'validation')
         question_row = self.get_question_code_row_details(self.CURRENT_DATA_TAB_ELEMENT, question)
         elements = self.ERROR_MESSAGES_COLUMN + self.ERROR_MESSAGES_ELEMENT
@@ -51,7 +60,7 @@ class ContributorDetailsPage(BasePage):
                 return rows[i]
 
     def submit_question_value(self, survey, value_type, value, question):
-        SeleniumCore.switch_window()
+        # SeleniumCore.switch_window()
         if value_type:
             self.submit_sales_value(survey, value, question)
 
@@ -200,7 +209,7 @@ class ContributorDetailsPage(BasePage):
     def submit_values_for_survey_questions(self, *questions_and_values):
         global question_codes
         question_codes = questions_and_values
-        SeleniumCore.switch_window()
+        # SeleniumCore.switch_window()
         survey = questions_and_values[0]
         questions_list = questions_and_values[1]
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])

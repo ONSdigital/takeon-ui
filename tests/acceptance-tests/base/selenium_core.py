@@ -90,7 +90,7 @@ class SeleniumCore:
             count += 1
             element.click()
             if count == 3:
-                break
+                assert False, 'Failed to click on view form button -"' + str(element.text) + '"'
 
     @staticmethod
     def switch_window():

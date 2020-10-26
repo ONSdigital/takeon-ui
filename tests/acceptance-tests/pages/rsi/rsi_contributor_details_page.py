@@ -20,7 +20,6 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         SeleniumCore.set_current_data_text(self.QUESTION_TOTAL_TURNOVER_ELEMENT, value)
 
     def submit_sales_values(self, period_type, internet_sales, total_sales):
-        SeleniumCore.switch_window()
         if period_type == 'previous':
             self.submit_pp_sales_values(internet_sales, total_sales)
         if period_type == 'current':
@@ -32,7 +31,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         pp_total_sales = self.check_blank_data_value(total_sales)
         self.set_internet_sales_value(pp_internet_sales)
         self.set_total_turnover_sales_value(pp_total_sales)
-        ContributorDetailsPage().save_the_application()
+        self.save_the_application()
         SeleniumCore.close_the_current_window()
 
     def submit_cp_sales_values(self, internet_sales, total_sales):
@@ -41,21 +40,19 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         cp_total_sales = self.check_blank_data_value(total_sales)
         self.set_internet_sales_value(cp_internet_sales)
         self.set_total_turnover_sales_value(cp_total_sales)
-        ContributorDetailsPage().save_the_application()
+        self.save_the_application()
 
     def check_blank_data_value(self, value):
         return Utilities.convert_blank_data_value(value)
 
     def validate_the_current_period_internet_sales_details(self, internet_sales):
-        SeleniumCore.switch_window()
         self.set_internet_sales_value(internet_sales)
-        ContributorDetailsPage().save_the_application()
+        self.save_the_application()
 
     def validate_the_current_period_details(self, internet_sales, total_sales):
-        SeleniumCore.switch_window()
         self.set_internet_sales_value(internet_sales)
         self.set_total_turnover_sales_value(total_sales)
-        ContributorDetailsPage().save_the_application()
+        self.save_the_application()
 
     def get_derived_question_value(self):
         return int(SeleniumCore.get_attribute_element_text(*RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
@@ -63,7 +60,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def run_the_validation_process(self, total_turnover_value, exp_derived_value):
         SeleniumCore.set_current_data_text(self.QUESTION_TOTAL_TURNOVER_ELEMENT,
                                            total_turnover_value)
-        ContributorDetailsPage().save_the_application()
+        self.save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
         ReportingHelper.check_single_message_matches('Q7034', actual_derived_val, exp_derived_value)
