@@ -44,7 +44,7 @@ class Utilities:
 
     @staticmethod
     def create_screen_shots_folder():
-        scenario_error_dir = os.path.expanduser("~") + '/takeon-ui/tests/acceptance-tests/screen-shots'
+        scenario_error_dir = os.path.expanduser("~") + '/takeon-ui/tests/acceptance-tests/screen_shots'
         if not os.path.exists(scenario_error_dir):
             os.makedirs(scenario_error_dir)
         else:
@@ -63,6 +63,6 @@ class Utilities:
 
     @staticmethod
     def check_page_title(page_title):
-        title = Utilities.get_current_page_title()
-        if title.lower() != page_title.lower():
-            assert False, 'Expected page header title to be "' + page_title + '" But the current page header title is "' + element.text + '"'
+        current_title = Utilities.get_current_page_title()
+        if current_title.lower() != page_title.lower():
+            assert False, 'Expected page header title to be "' + page_title + '" But the current page header title is "' + current_title + '"'

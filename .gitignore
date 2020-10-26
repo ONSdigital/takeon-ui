@@ -21,3 +21,5 @@ venv1/
 # Vendored packages for application
 vendor/
 
+# BDD-acceptance-tests
+screen_shots/
