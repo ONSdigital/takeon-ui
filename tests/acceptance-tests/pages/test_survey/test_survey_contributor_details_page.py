@@ -38,7 +38,6 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             SeleniumCore.set_current_data_text(self.POPMRZ_QUESTION_SECONDARY_ELEMENT, value)
 
     def submit_sales_values(self, validation_type, period_type, internet_sales, total_sales):
-        SeleniumCore.switch_window()
         if period_type == 'previous':
             self.submit_pp_sales_values(validation_type, internet_sales, total_sales)
         if period_type == 'current':
@@ -65,7 +64,6 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
         return Utilities.convert_blank_data_value(value)
 
     def validate_the_current_period_details(self, validation_type, internet_sales):
-        SeleniumCore.switch_window()
         self.set_internet_sales_value(validation_type, internet_sales)
         ContributorDetailsPage().save_the_application()
 
@@ -86,7 +84,7 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
     def check_validation_message(self):
         element_text = "This value is 0. Previous period it was more than a certain percentage of the total."
         element = self.ERROR_MESSAGE_ELEMENT_STRING_PART_ONE + element_text + self.ERROR_MESSAGE_ELEMENT_STRING_PART_TWO
-        if len(self.driver.find_elements_by_xpath(element)) > 0:
+        if len(SeleniumCore.find_elements_by_type('XPATH', element)) > 0:
             return True
         else:
             return False
@@ -102,7 +100,6 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
     def submit_the_sales_values_for_survey(self, *questions):
         questions_list = questions[0]
         commodity_values = Utilities.get_values_as_a_list(questions[1])
-        SeleniumCore.switch_window()
         self.submit_the_commodity_values(questions_list, commodity_values)
 
     def submit_the_commodity_values(self, questions_list, values):
@@ -114,8 +111,6 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             self.driver.find_element_by_id(question_element).send_keys(value)
 
     def switch_to_the_tab(self, tab_name):
-        if len(SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)) == 0:
-            SeleniumCore.switch_window()
         elements = SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)
         for ele in elements:
             if ele.text.lower() == tab_name.lower():

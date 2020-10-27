@@ -34,7 +34,7 @@ class ContributorSearchPage(BasePage):
             # Check to see if any references appear that shouldn't be there
             if cols[1].text == reference and cols[2].text == period:
                 view_form = rows[i].find_elements_by_tag_name("button")
-                SeleniumCore.check_multiple_windows_exists(view_form[0])
+                SeleniumCore.select_view_form(view_form[0])
                 break
 
     def get_all_the_periods(self, reference, period, sic_code):

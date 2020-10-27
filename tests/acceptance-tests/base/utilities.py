@@ -59,10 +59,6 @@ class Utilities:
 
     @staticmethod
     def delete_all_the_previous_screenshots(folder_path):
-        # ctime = os.stat(folder_path).st_ctime
-
         for file in os.scandir(folder_path):
             if file.name.endswith(".png"):
                 os.unlink(file.path)
-
-
