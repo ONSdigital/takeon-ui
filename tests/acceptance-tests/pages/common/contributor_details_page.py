@@ -57,7 +57,6 @@ class ContributorDetailsPage(BasePage):
                 return rows[i]
 
     def submit_question_value(self, survey, value_type, value, question):
-        # SeleniumCore.switch_window()
         if value_type:
             self.submit_sales_value(survey, value, question)
 
@@ -206,7 +205,6 @@ class ContributorDetailsPage(BasePage):
     def submit_values_for_survey_questions(self, *questions_and_values):
         global question_codes
         question_codes = questions_and_values
-        # SeleniumCore.switch_window()
         survey = questions_and_values[0]
         questions_list = questions_and_values[1]
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])
