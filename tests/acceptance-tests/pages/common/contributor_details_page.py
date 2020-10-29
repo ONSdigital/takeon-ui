@@ -1,5 +1,6 @@
 import time
 from selenium.webdriver.common.by import By
+
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
@@ -9,6 +10,12 @@ from pages.common.base_page import BasePage
 
 
 class ContributorDetailsPage(BasePage):
+
+    def __init__(self):
+        if self.current_page_title() == 'Search':
+            SeleniumCore.switch_window()
+        super().__init__('Data Clearing')
+
     SAVE_AND_VALIDATE = By.ID, 'saveFormButton'
     STATUS = By.XPATH, '//span[contains(@title,"Status")]'
     ERROR_MESSAGES_ELEMENT = '//p[@class="panel__error u-mb-no"]'
@@ -29,16 +36,15 @@ class ContributorDetailsPage(BasePage):
 
     def override_the_validation(self, question, type_of_check):
         question_row = self.get_question_code_row_details(self.CURRENT_DATA_TAB_ELEMENT, question)
-        check_boxes = question_row.find_elements(By.NAME, self.OVERRIDE_CHECKBOX_ELEMENT)
+        check_boxes = question_row.find_elements_by_name(self.OVERRIDE_CHECKBOX_ELEMENT)
         count = 0
         for i in range(0, len(check_boxes)):
             if type_of_check == 'validation' and check_boxes[i].get_attribute("checked") == "true" or \
                     type_of_check == 'override' and check_boxes[i].get_attribute("checked") != "true":
-                SeleniumCore.click_element(By.XPATH, '//td[4]//span[' + str(i + 1) + ']/input')
+                check_boxes[i].click()
                 count += 1
         if count >= 1:
             SeleniumCore.find_elements_by(*ContributorDetailsPage.OVERRIDE_BUTTON)[0].click()
-            self.save_the_application()
 
     def get_question_code_row_details(self, table_name, question):
         table = SeleniumCore.wait_for_element_to_be_displayed(By.ID, table_name)
@@ -51,7 +57,6 @@ class ContributorDetailsPage(BasePage):
                 return rows[i]
 
     def submit_question_value(self, survey, value_type, value, question):
-        SeleniumCore.switch_window()
         if value_type:
             self.submit_sales_value(survey, value, question)
 
@@ -200,7 +205,6 @@ class ContributorDetailsPage(BasePage):
     def submit_values_for_survey_questions(self, *questions_and_values):
         global question_codes
         question_codes = questions_and_values
-        SeleniumCore.switch_window()
         survey = questions_and_values[0]
         questions_list = questions_and_values[1]
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])

@@ -1,3 +1,9 @@
+import os
+import time
+
+from base.driver_context import DriverContext
+
+
 class Utilities:
 
     @staticmethod
@@ -23,3 +29,36 @@ class Utilities:
     @staticmethod
     def remove_multiple_spaces_in_a_string(value):
         return " ".join(value.split())
+
+    @staticmethod
+    def take_screen_shot(*scenario):
+        scenario_error_dir = Utilities.create_screen_shots_folder()
+        if scenario[0].status.name == 'failed':
+            scenario_file_path = os.path.join(scenario_error_dir,
+                                              scenario[0].feature.scenarios[0].name + '_line_no_' +
+                                              str(scenario[0].line)
+                                              + '_' + time.strftime("%d_%m_%Y")
+                                              + '.png')
+            DriverContext.driver.save_screenshot(scenario_file_path)
+
+    @staticmethod
+    def create_screen_shots_folder():
+        scenario_error_dir = os.path.expanduser("~") + '/takeon-ui/tests/acceptance-tests/screen_shots'
+        if not os.path.exists(scenario_error_dir):
+            os.makedirs(scenario_error_dir)
+        else:
+            # specify the days from which the files to be deleted
+            days = 1
+            # converting days to seconds
+            seconds = time.time() - (days * 24 * 60 * 60)
+            ctime = os.stat(scenario_error_dir).st_ctime
+            # comparing the days
+            if seconds >= ctime:
+                Utilities.delete_all_the_previous_screenshots(scenario_error_dir)
+        return scenario_error_dir
+
+    @staticmethod
+    def delete_all_the_previous_screenshots(folder_path):
+        for file in os.scandir(folder_path):
+            if file.name.endswith(".png"):
+                os.unlink(file.path)

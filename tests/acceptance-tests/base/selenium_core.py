@@ -62,12 +62,18 @@ class SeleniumCore:
         return ele.get_attribute("value")
 
     @staticmethod
-    def find_elements_by_xpath(element):
-        return DriverContext.driver.find_elements_by_xpath(element)
-
-    @staticmethod
     def find_elements_by(*element):
         return DriverContext.driver.find_elements(element[0], element[1])
+
+    @staticmethod
+    def find_elements_by_type(*element):
+        if element[0].upper() == 'ID':
+            elements = DriverContext.driver.find_elements_by_id(element[1])
+        elif element[0].upper() == 'NAME':
+            elements = DriverContext.driver.find_elements_by_name(element[1])
+        elif element[0].upper() == 'XPATH':
+            elements = DriverContext.driver.find_elements_by_xpath(element[1])
+        return elements
 
     @staticmethod
     def switch_to_alert_box():
@@ -84,13 +90,13 @@ class SeleniumCore:
             print("No Alert")
 
     @staticmethod
-    def check_multiple_windows_exists(element):
+    def select_view_form(element):
         count = 0
         while len(DriverContext.driver.window_handles) == 1:
             count += 1
             element.click()
             if count == 3:
-                break
+                assert False, 'Failed to click on view form button -"' + str(element.text) + '"'
 
     @staticmethod
     def switch_window():

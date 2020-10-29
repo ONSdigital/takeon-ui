@@ -1,12 +1,17 @@
 import time
 
 from selenium.webdriver.common.by import By
+
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from pages.common.base_page import BasePage
 
 
 class ContributorSearchPage(BasePage):
+
+    def __init__(self):
+        super().__init__('Search')
+
     REFERENCE_TEXT_FIELD = 'reference'
     PERIOD_TEXT_FIELD = 'period'
     SURVEY_TEXT_FIELD = 'survey'
@@ -27,8 +32,9 @@ class ContributorSearchPage(BasePage):
             if sic_code:
                 ReportingHelper.check_single_message_matches(reference, cols[i + 6].text, sic_code)
             # Check to see if any references appear that shouldn't be there
-            if (cols[1].text == reference and cols[2].text == period):
-                SeleniumCore.check_multiple_windows_exists(cols[0])
+            if cols[1].text == reference and cols[2].text == period:
+                view_form = rows[i].find_elements_by_tag_name("button")
+                SeleniumCore.select_view_form(view_form[0])
                 break
 
     def get_all_the_periods(self, reference, period, sic_code):

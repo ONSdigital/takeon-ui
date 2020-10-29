@@ -4,6 +4,10 @@ from pages.common.base_page import BasePage
 
 
 class SearchByPage(BasePage):
+
+    def __init__(self):
+        super().__init__('Search')
+
     REFERENCE = By.NAME, 'reference'
     PERIOD = By.NAME, 'period'
     SURVEY = By.NAME, 'survey'
