@@ -3,29 +3,37 @@ import subprocess
 
 import psycopg2
 from pandas import read_sql_query
-from config_files import db_config, aws_config
-from config_files.config_test import ConfigTest
+from psycopg2._psycopg import OperationalError
+
+from config_files import db_config
 
 
 class DBConnect:
 
     def __init__(self):
-        # Obtain the configuration parameters
-        params = db_config.db_config()
-        # Connect to the PostgreSQL database
-        self._db_connection = psycopg2.connect(**params)
-        # Establish a connection to the database by creating a cursor object
-        self._db_cur = self._db_connection.cursor()
-
-    def db_create_pandas_table(self, sql_query):
-        # A function that takes in a PostgreSQL query and outputs a pandas data frame
-        table = read_sql_query(sql_query, self._db_connection)
-        return table
+        try:
+            # Obtain the configuration parameters
+            params = db_config.db_config()
+            # Connect to the PostgreSQL database
+            self._db_connection = psycopg2.connect(**params)
+            # Establish a connection to the database by creating a cursor object
+            self._db_cur = self._db_connection.cursor()
+        except OperationalError as error:
+            print(error)
 
     def db_select_query(self, query):
-        # Utilize the db_create_pandas_table function to create a Pandas data frame
-        # Store the data as a variable
-        self.db_create_pandas_table(query)
+        result_records = []
+        try:
+            self._db_cur.execute(query)
+            table_data = self._db_cur.fetchall()
+
+            # iterate the list of tuple rows
+            for row in table_data:
+                for cell in row:
+                    result_records.append(cell)
+            return result_records
+        except Exception as error:
+            print("Error while fetching data from PostgreSQL", error)
 
     def db_close(self):
         # Close the cursor and connection to so the server can allocate
