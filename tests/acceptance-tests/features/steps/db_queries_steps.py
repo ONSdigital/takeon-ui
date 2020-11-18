@@ -11,12 +11,12 @@ def query_the_db(context, query_type, survey):
     context.query = SelectQueries().survey_query(query_type, survey)
 
 
-@when(u'I query the database')
+@when(u'I query the database to get the reference,period details for that survey')
 def connect_to_db(context):
     context.survey_details = DBConnect().db_select_query(context.query)
 
 
-@then(u'I should able to get back the reference,period details for that survey')
+@then(u'I should be able to search for the form with those survey details')
 def check_the_db_results(context):
     reference = context.survey_details[0]
     period = context.survey_details[1]
