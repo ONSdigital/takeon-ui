@@ -1,16 +1,16 @@
 from configparser import ConfigParser
 
 from config_files.config_test import ConfigTest
-from config_files.database_credentials import DatabaseCredentials
+from config_files.db_credentials import DBCredentials
 
 
-def db_config(filename=ConfigTest.file_path('database.ini'), section='postgresql'):
+def db_config_parameters(filename=ConfigTest.file_path('database.ini'), section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
     parser.read(filename)
     # get aws rds credentials
-    secret = DatabaseCredentials().get_secret()
+    secret = DBCredentials().get_secret()
 
     # get section, default to postgresql
     db = {}
@@ -19,9 +19,9 @@ def db_config(filename=ConfigTest.file_path('database.ini'), section='postgresql
     if parser.has_section(section):
         params = parser.items(section)
         for param in params:
-            if param[1] == 'bdduser':
+            if param[1] == 'dummybdduser':
                 db[param[0]] = secret['user']
-            elif param[1] == 'bddpassword':
+            elif param[1] == 'dummybddpassword':
                 db[param[0]] = secret['password']
             else:
                 db[param[0]] = param[1]

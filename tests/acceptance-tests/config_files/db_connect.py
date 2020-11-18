@@ -6,13 +6,16 @@ from config_files import db_config
 class DBConnect:
 
     def __init__(self):
+        self._db_cur = self.db_connection()
+
+    def db_connection(self):
         try:
             # Obtain the configuration parameters
-            params = db_config.db_config()
+            params = db_config.db_config_parameters()
             # Connect to the PostgreSQL database
             self._db_connection = psycopg2.connect(**params)
             # Establish a connection to the database by creating a cursor object
-            self._db_cur = self._db_connection.cursor()
+            return self._db_connection.cursor()
         except Exception as error:
             print(error)
 
@@ -29,9 +32,10 @@ class DBConnect:
             return result_records
         except Exception as error:
             print("Error while fetching data from PostgreSQL", error)
+        finally:
+            # closing database connection
+            self.db_close()
 
     def db_close(self):
-        # Close the cursor and connection to so the server can allocate
-        # bandwidth to other requests
         self._db_cur.close()
         self._db_connection.close()

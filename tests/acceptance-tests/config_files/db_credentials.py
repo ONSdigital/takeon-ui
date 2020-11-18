@@ -3,7 +3,7 @@ import json
 import boto3
 
 
-class DatabaseCredentials:
+class DBCredentials:
     secret_name = "spp-es-takeon-bdd-rds"
     region_name = "eu-west-2"
     session = boto3.session.Session(profile_name='sandbox')
