@@ -1,9 +1,4 @@
-import os
-import subprocess
-
 import psycopg2
-from pandas import read_sql_query
-from psycopg2._psycopg import OperationalError
 
 from config_files import db_config
 
@@ -18,7 +13,7 @@ class DBConnect:
             self._db_connection = psycopg2.connect(**params)
             # Establish a connection to the database by creating a cursor object
             self._db_cur = self._db_connection.cursor()
-        except OperationalError as error:
+        except Exception as error:
             print(error)
 
     def db_select_query(self, query):

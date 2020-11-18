@@ -6,7 +6,7 @@ from pages.common.contributor_details_page import ContributorDetailsPage
 @when(u'I run the validation process on {question_codes} with {period_value}')
 @given(u'I run the validation process with {period_value}')
 @when(u'I run the validation process with {period_value}')
-def step_impl(context, period_value, question_codes=None):
+def run_the_validation_process(context, period_value, question_codes=None):
     if not question_codes:
         question_codes = context.question_codes
     page = ContributorDetailsPage()
@@ -21,7 +21,7 @@ def step_impl(context, period_value, question_codes=None):
 
 @then(
     u'the validation should return {result} if the "{validation_check}"')
-def step_impl(context, result, validation_check):
+def check_validation(context, result, validation_check):
     page = ContributorDetailsPage()
     if validation_check == 'values are not equal':
         page.check_values_are_not_equal(context.question_codes, context.comparison_value_one,

@@ -1,4 +1,3 @@
-import os
 from configparser import ConfigParser
 
 from config_files.config_test import ConfigTest
