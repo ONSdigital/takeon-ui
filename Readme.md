@@ -37,8 +37,8 @@
      
 -  To run the database related tests
       
-      Make sure your aws credentials have been updated and  
-      run rds_tunnel.sh script from takeon-core-infrastructure project 
+      Make sure aws credentials have been updated in aws config file first 
+      and then run rds_tunnel.sh script from takeon-core-infrastructure project 
       to manually ssh into ec2 instance in the terminal.
 
 To run bdd test:         
