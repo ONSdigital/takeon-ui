@@ -2,7 +2,7 @@
 ### Pre-Requisites
  - Browser: 
     - Chrome
-     - Version: 83.0.4103.61  
+    - Version: 83.0.4103.61  
    
  - Chromedriver:
     - Chromedriver version - 83.0.4103.39
@@ -35,15 +35,8 @@
         export TAKEON_URL="URL"
         Replace URL with the enviroment url you wish to test.
      
--  To run the database related tests
-      
-      Make sure aws credentials have been updated in aws config file first 
-      and then run rds_tunnel.sh script from takeon-core-infrastructure project 
-      to manually ssh into ec2 instance in the terminal.
-
-To run bdd test:         
- 
--  To run the tests you need to switch to the features folder first.
+       
+-  To run the BDD tests you need to switch to the features folder first.
         
    - To run one feature file eg: rsi_validation_qvv.feature
 
