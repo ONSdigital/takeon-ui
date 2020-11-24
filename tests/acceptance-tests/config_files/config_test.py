@@ -5,7 +5,13 @@
 
 import os.path
 
+
 class ConfigTest:
     HOMEDIR = os.path.expanduser("~")
     CHROME_DRIVER_LOCATION = HOMEDIR + '/chromedriver'
     UI_URL = os.environ['TAKEON_URL']
+
+    @staticmethod
+    def file_path(file_name):
+        dirpath = os.path.dirname(__file__)
+        return os.path.join(dirpath, file_name)

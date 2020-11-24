@@ -3,7 +3,7 @@ from base.driver_context import DriverContext
 
 
 @then(u'{ref} and {period} and {survey} will be displayed')
-def step_impl(context, ref, period, survey):
+def check_survey_period_details(context, ref, period, survey):
     table = DriverContext.driver.find_element_by_id("ResultsTable")
     rows = table.find_elements_by_tag_name("tr")
     failed = []
@@ -25,14 +25,14 @@ def step_impl(context, ref, period, survey):
 
 
 @then(u'no table should appear')
-def step_impl(context):
+def check_survey_data_table(context):
     table = DriverContext.driver.find_elements_by_id("ResultsTable")
     if (len(table) > 1):
         assert False, "Survey table should not be shown"
 
 
 @given(u'a {surveyId} has been entered into the survey search input')
-def step_impl(context, surveyId):
+def submit_survey_details(context, surveyId):
     elem = DriverContext.driver.find_element_by_name("survey")
     elem.clear()
     elem.send_keys(surveyId)

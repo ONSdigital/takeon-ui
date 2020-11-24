@@ -18,4 +18,5 @@ class BasePage:
     def check_page_title(self, page_title):
         current_title = self.current_page_title()
         if current_title.lower() != page_title.lower():
-            assert False, 'Expected page header title to be "' + page_title + '" But the current page header title is "' + current_title + '"'
+            assert False, 'Expected page header title to be "' \
+                          + page_title + '" But the current page header title is "' + current_title + '"'

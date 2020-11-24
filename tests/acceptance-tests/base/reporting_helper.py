@@ -5,7 +5,8 @@ class ReportingHelper:
         if act_msg == exp_msg:
             return True
         else:
-            assert False, 'Expected message is "' + exp_msg + '" but the Actual message was "' + act_msg + '" for question ' + question
+            assert False, 'Expected message is "' + \
+                          exp_msg + '" but the Actual message was "' + act_msg + '" for question ' + question
 
     @staticmethod
     def check_single_message_not_matches(act_msg, exp_msg, question=None, message=None):

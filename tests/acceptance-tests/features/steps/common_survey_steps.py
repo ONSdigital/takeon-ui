@@ -7,13 +7,13 @@ from pages.test_survey.test_survey_contributor_details_page import TestSurveyCon
 
 
 @given(u'As a {survey} user I set the search criteria options for the forms returned by the contributor')
-def step_impl(context, survey):
+def search_criteria(context, survey):
     context.survey = survey
     SearchByPage().set_search_criteria_options()
 
 
 @given(u'I search for the {survey_value} with reference {reference}')
-def step_impl(context, reference, survey_value=None, period=None):
+def submit_search_details(context, reference, survey_value=None, period=None):
     context.survey = survey_value
     context.reference = reference
     context.contributor_page = ContributorSearchPage()
@@ -26,10 +26,11 @@ def step_impl(context, reference, survey_value=None, period=None):
 @given(u'I search for the {survey} with {reference} for the {period_type} period {period}')
 @given(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
 @given(
-    u'I search for the survey "{survey}" with {reference} for the {period_type} period {period} with SIC code {sic_code}')
+    u'I search for the survey "{survey}" with {reference} for the {period_type} period {period} '
+    u'with SIC code {sic_code}')
 @when(u'I search for the survey "{survey}" with {reference} for the {period_type} period {period}')
 @when(u'I search for the {survey} with {reference} for the period {period}')
-def step_impl(context, reference, survey, period_type, period, sic_code=None):
+def select_the_reference_form(context, reference, survey, period_type, period, sic_code=None):
     context.survey = survey
     context.period_type = period_type
     context.contributor_page = ContributorSearchPage()
@@ -37,7 +38,7 @@ def step_impl(context, reference, survey, period_type, period, sic_code=None):
 
 
 @given(u'I submit the "{value_type}" {values} for questions')
-def step_impl(context, value_type, values):
+def submit_the_question_data_values(context, value_type, values):
     context.question_codes = []
     for row in context.table.rows:
         for cell in row.cells:
@@ -47,21 +48,21 @@ def step_impl(context, value_type, values):
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
-def step_impl(context, value_type, comment_value, question):
+def submit_the_question_type_values(context, value_type, comment_value, question):
     context.question_codes = question.upper()
     ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
 
 
 @given(u'I trigger the validation process')
 @when(u'I trigger the validation process')
-def step_impl(context):
+def trigger_the_validation(context):
     ContributorDetailsPage().save_the_application()
 
 
 @given(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process for {question_value} against the {derived_value}')
 @when(u'I run the validation process against the {derived_value}')
-def step_impl(context, derived_value, question_value=None):
+def run_the_validation_process(context, derived_value, question_value=None):
     if context.survey == '023':
         context.total_turnover_value = question_value
         RsiContributorDetailsPage().run_the_validation_process(question_value, derived_value)
@@ -89,7 +90,7 @@ def step_impl(context, derived_value, question_value=None):
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
 @then(
     u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')
-def step_impl(context, validation_message, is_validation_exists, question_codes=None):
+def check_validation_message(context, validation_message, is_validation_exists, question_codes=None):
     if not question_codes:
         question_codes = context.question_codes
     page = ContributorDetailsPage()
@@ -99,7 +100,7 @@ def step_impl(context, validation_message, is_validation_exists, question_codes=
 
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed for question codes')
-def step_impl(context, validation_message, is_validation_exists):
+def check_multiple_validation_messages(context, validation_message, is_validation_exists):
     if context.table is not None:
         context.question_codes = []
         for row in context.table.rows:
@@ -112,8 +113,9 @@ def step_impl(context, validation_message, is_validation_exists):
 
 
 @then(
-    u'the validation should return {result} if the "{validation_check}" {operator_type} threshold value {threshold_value}')
-def step_impl(context, result, validation_check, operator_type, threshold_value):
+    u'the validation should return {result} if the "{validation_check}" '
+    u'{operator_type} threshold value {threshold_value}')
+def check_validation_by_operator(context, result, validation_check, operator_type, threshold_value):
     page = ContributorDetailsPage()
     if validation_check == 'turnover ratio is':
         page.check_turnover_ratio(operator_type, context.internet_sales,
@@ -142,7 +144,7 @@ def step_impl(context, result, validation_check, operator_type, threshold_value)
 
 
 @when(u'I override the validation for the question {question}')
-def step_impl(context, question):
+def override_the_validation(context, question):
     if not question:
         question = context.question_codes
     else:
@@ -153,12 +155,12 @@ def step_impl(context, question):
 
 @then(u'the validation message should change to {override_message}')
 @then(u'the validation message should change to "{override_message}"')
-def step_impl(context, override_message):
+def check_override_validation_message(context, override_message):
     page = ContributorDetailsPage()
     page.check_the_override_message(context.survey, context.question_codes, override_message)
 
 
 @then(u'the override checkbox should not be displayed for {question}')
-def step_impl(context, question):
+def check_override_checkbox_displayed(context, question):
     page = ContributorDetailsPage()
     page.check_the_override_checkbox_displayed(question)
