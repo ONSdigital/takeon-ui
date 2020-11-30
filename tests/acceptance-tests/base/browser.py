@@ -2,10 +2,12 @@
 Class containing common functions used in several tests.
 Functions that are not test or feature specific.
 """
+import os
 import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 from base.driver_context import DriverContext
 from config_files.config_test import ConfigTest
@@ -24,6 +26,16 @@ class Browser:
         browser = context.config.userdata.get('browser')
 
         if not browser:
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--window-size=1920,1080")
+            chrome_prefs = {}
+            chrome_options.experimental_options["prefs"] = chrome_prefs
+            chrome_prefs["profile.default_content_settings"] = {"images": 2}
+            DriverContext.driver = webdriver.Chrome(options=chrome_options)
+        elif browser.lower() == 'chrome':
             # create instance of the Chrome driver
             DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
             DriverContext.driver.maximize_window()
@@ -33,8 +45,10 @@ class Browser:
             chrome_options.add_argument("--window-size=1920,1080")
             chrome_options.add_argument("disable-infobars")
             chrome_options.add_argument("--disable-extensions")
-            DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION,
-                                                    options=chrome_options)
+            # create instance of the Chrome driver
+            DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
+            DriverContext.driver.maximize_window()
+
         else:
             raise Exception("The browser type '{}' is not supported".format(browser))
 
