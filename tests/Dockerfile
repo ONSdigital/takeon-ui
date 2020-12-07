@@ -21,10 +21,8 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 RUN mkdir /code
 WORKDIR /code
-
 COPY .  /code/
 COPY /acceptance-tests/  /code/acceptance-tests/
-
 
 
 
@@ -32,16 +30,4 @@ RUN pip install --upgrade pip
 RUN pip install -r /code/requirements_local.txt
 
 
-#CMD ["python", "./app.py"]
-
-
-
-
-#ENTRYPOINT ["wrapper.sh"]
 CMD behave -f plain --no-capture
-#CMD /bin/sh wrapper.sh
-# for running for docker file run the command  docker run -ti -w /code/acceptance-tests/ bddsel1
-#run this command for up the yml file docker-compose up -d
-# for running in  docker compose docker run  --network="host" -ti -w /code/acceptance-tests/  bdd-selenium-python_test
-# docker run  --network="host" -v /Users/Mohamf/bdd-selenium-python/acceptance-tests/docker_results:/code/docker_results  -ti -w /code/acceptance-tests/  bdd-dkr-img
-#to enter inside docker image -  docker run -ti --entrypoint=/bin/sh bdd-docker-img1
