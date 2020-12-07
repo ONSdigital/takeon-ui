@@ -2,12 +2,10 @@
 Class containing common functions used in several tests.
 Functions that are not test or feature specific.
 """
-import os
 import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 from base.driver_context import DriverContext
 from config_files.config_test import ConfigTest
@@ -24,7 +22,6 @@ class Browser:
         :return: driver: browser instance
         """
         browser = context.config.userdata.get('browser')
-
         if not browser:
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -48,7 +45,6 @@ class Browser:
             # create instance of the Chrome driver
             DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
             DriverContext.driver.maximize_window()
-
         else:
             raise Exception("The browser type '{}' is not supported".format(browser))
 
@@ -63,6 +59,7 @@ class Browser:
                 try:
                     current_url = DriverContext.driver.current_url
                     if url != current_url:
+                        print('url is ' + url)
                         DriverContext.driver.get(url)
                         return DriverContext.driver
                 except TimeoutException:
