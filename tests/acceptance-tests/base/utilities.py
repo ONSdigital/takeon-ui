@@ -33,7 +33,7 @@ class Utilities:
     @staticmethod
     def take_screen_shot(*scenario):
         scenario_error_dir = Utilities.create_screen_shots_folder(scenario[1])
-        if scenario[0].status.name == 'failed':
+        if scenario[0].status.name == 'failed' or scenario[1] == '/code/docker_results':
             scenario_file_path = os.path.join(scenario_error_dir,
                                               scenario[0].feature.scenarios[0].name + '_line_no_' +
                                               str(scenario[0].line)
