@@ -15,6 +15,7 @@ url = os.getenv('API_URL')
 api_key = os.getenv('API_KEY')
 form_view_template_HTML = "./view_form/FormView.html"
 
+
 # Flask Endpoints
 @view_form_blueprint.errorhandler(404)
 def not_found(error):
@@ -29,6 +30,7 @@ def not_auth(error):
 @view_form_blueprint.errorhandler(500)
 def internal_server_error(error):
     return render_template('./error_templates/500.html', message_header=error), 500
+
 
 # Main entry-point
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/viewform', methods=['GET', 'POST'])
@@ -58,7 +60,7 @@ def view_form(inqcode, period, ruref):
     view_form_data = json.loads(view_forms)
 
     response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
-    ordered_response_and_validations = question_order(response_and_validations) 
+    ordered_response_and_validations = question_order(response_and_validations)
     override_button = override_all_button(ordered_response_and_validations)
 
     log.info("Contributor Details: %s", contributor_data)
@@ -104,12 +106,14 @@ def override_validations(inqcode, period, ruref):
     log.info("Overriding Validations...")
     return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
+
 def extract_responses(data) -> dict:
     output = []
     for key in data.keys():
         if key != "action" and key != "override-checkbox":
             output.append({'question': key, 'response': data[key], 'instance': 0})
     return output
+
 
 def override_all_button(data):
     validation_triggered_counter = 0
