@@ -31,12 +31,14 @@ class Utilities:
         return " ".join(value.split())
 
     @staticmethod
-    def take_screen_shot(*scenario):
-        scenario_error_dir = Utilities.create_screen_shots_folder(scenario[1])
-        if scenario[0].status.name == 'failed' or scenario[1] == '/code/docker_results':
+    def take_screen_shot(*scenario_details):
+        scenario = scenario_details[0]
+        screenshots_location = scenario_details[1]
+        scenario_error_dir = Utilities.create_screen_shots_folder(screenshots_location)
+        if scenario.status.name == 'failed' or screenshots_location == '/code/docker_results':
             scenario_file_path = os.path.join(scenario_error_dir,
-                                              scenario[0].feature.scenarios[0].name + '_line_no_' +
-                                              str(scenario[0].line)
+                                              scenario.feature.scenarios[0].name + '_line_no_' +
+                                              str(scenario.line)
                                               + '_' + time.strftime("%d_%m_%Y")
                                               + '.png')
             print("getting the screenshot!")
