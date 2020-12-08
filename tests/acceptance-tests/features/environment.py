@@ -14,7 +14,7 @@ def before_scenario(context, scenario):
 
 def after_scenario(context, scenario):
     # take screenshot if test failed
-    Utilities.take_screen_shot(scenario,context.screenshots_dir)
+    Utilities.take_screen_shot(scenario, context.screenshots_dir)
     SeleniumCore.close_the_current_window()
 
 
