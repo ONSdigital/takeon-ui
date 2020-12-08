@@ -1,5 +1,5 @@
 # Combine Response and Validation data for new UI Layout
-#from app.utilities.helpers import json_validator
+# from app.utilities.helpers import json_validator
 
 def combine_response_validations(view_form_data, validations):
     try:
@@ -10,8 +10,10 @@ def combine_response_validations(view_form_data, validations):
             validation_info_array = []
             qcode = contributor['questioncode']
             response = contributor['response']
+            adjusted_response = contributor['adjustedresponse']
             combined_output['questioncode'] = qcode
             combined_output['response'] = response
+            combined_output['adjustedresponse'] = adjusted_response
             combined_output['displayquestionnumber'] = contributor['displayquestionnumber']
             combined_output['displaytext'] = contributor['displaytext']
             combined_output['displayorder'] = contributor['displayorder']

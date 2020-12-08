@@ -58,7 +58,7 @@
                                     <th scope="col" class="table__header col-1@m">Number</th>
                                     <th scope="col" class="table__header col-4@m">Question</th>
                                     <th scope="col" class="table__header col-2@m">Response</th>
-                                    <th scope="col" class="table__header col-2@m">Date Adjusted</th>
+                                    <th scope="col" class="table__header col-2@m">Adjusted Response</th>
                                     <th scope="col" class="table__header ">Question Status</th>
                                 </tr>
                             </thead>
@@ -90,6 +90,12 @@
                                                         <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                                     </p>
                                                 {% endif %}
+                                            </td>
+
+                                            <td class="table__cell ">
+                                                <p class="field">
+                                                    <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                </p>
                                             </td>
 
                                             <td class="table__cell ">

@@ -4,13 +4,16 @@ def extract_question_data(form_data, index):
     question_data = {}
     qcode = form_data['view_form_responses'][index]['questioncode']
     response = form_data['view_form_responses'][index]['response']
+    adjusted_response = form_data['view_form_responses'][index]['adjustedrespose']
     question_data['questioncode'] = qcode
     question_data['response'] = response
+    question_data['adjustedresponse'] = adjusted_response
     question_data['displayquestionnumber'] = form_data['view_form_responses'][index]['displayquestionnumber']
     question_data['displaytext'] = form_data['view_form_responses'][index]['displaytext']
     question_data['displayorder'] = form_data['view_form_responses'][index]['displayorder']
     question_data['type'] = form_data['view_form_responses'][index]['type']
     return question_data
+
 
 def extract_validation_data(extracted_form_data, validation_data):
     validation_info_array = []
@@ -32,12 +35,14 @@ def extract_validation_data(extracted_form_data, validation_data):
         panel = decide_panel_colour(overridden_count, validation_info_array)
     return validation_info_array, panel
 
+
 def decide_panel_colour(overridden_count, validation_info_array):
     if overridden_count == len(validation_info_array):
         panel = 'panel--info'
     else:
         panel = 'panel--error'
     return panel
+
 
 def combine_responses_and_validations(form_data, validation_data):
     try:
