@@ -2,6 +2,7 @@
 Class containing common functions used in several tests.
 Functions that are not test or feature specific.
 """
+import os
 import time
 
 from selenium import webdriver
@@ -22,20 +23,13 @@ class Browser:
         :return: driver: browser instance
         """
         browser = context.config.userdata.get('browser')
+        screen_shots_loc = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
+
         if not browser:
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--disable-dev-shm-usage")
-            chrome_options.add_argument("--window-size=1920,1080")
-            chrome_prefs = {}
-            chrome_options.experimental_options["prefs"] = chrome_prefs
-            chrome_prefs["profile.default_content_settings"] = {"images": 2}
-            DriverContext.driver = webdriver.Chrome(options=chrome_options)
-        elif browser.lower() == 'chrome':
             # create instance of the Chrome driver
             DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
             DriverContext.driver.maximize_window()
+            context.screenshots_dir = screen_shots_loc
         elif browser.lower() == 'headless':
             chrome_options = Options()
             chrome_options.headless = True
@@ -45,8 +39,21 @@ class Browser:
             # create instance of the Chrome driver
             DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
             DriverContext.driver.maximize_window()
+            context.screenshots_dir = screen_shots_loc
+        elif browser.lower() == 'docker-browser':
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--window-size=1920,1080")
+            chrome_prefs = {}
+            chrome_options.experimental_options["prefs"] = chrome_prefs
+            chrome_prefs["profile.default_content_settings"] = {"images": 2}
+            DriverContext.driver = webdriver.Chrome(options=chrome_options)
+            context.screenshots_dir = os.path.join('/code/docker_results')
         else:
             raise Exception("The browser type '{}' is not supported".format(browser))
+        return context.screenshots_dir
 
     @staticmethod
     def navigate_to_the_url():

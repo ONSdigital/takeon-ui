@@ -30,4 +30,4 @@ RUN pip install --upgrade pip
 RUN pip install -r /code/requirements_local.txt
 
 
-CMD behave -f plain --no-capture
+CMD behave -f plain --no-capture -D browser='docker-browser'
