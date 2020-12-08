@@ -80,5 +80,6 @@
           
           make docker-run  
           
-      Finally to see if the tests been run successfully there will be a folder called docker_results gets created automatically after the tests run and will have the screenshots which are been taken after each scenario. 
+      Finally to see if the tests been run successfully there will be a folder called docker_results gets created automatically after the tests run 
+      and will have the screenshots which are been taken after each scenario. 
          
