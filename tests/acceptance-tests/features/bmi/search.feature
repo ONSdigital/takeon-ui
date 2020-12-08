@@ -25,7 +25,7 @@ Feature: Search function
       | 65900000103 |
       | 4998800105  |
 
-
+  @smoke
   Scenario Outline: Using an existing Survey id
     Given I search for the <survey> with <reference> for the current period <period>
     Then <reference> and <period> and <survey> will be displayed

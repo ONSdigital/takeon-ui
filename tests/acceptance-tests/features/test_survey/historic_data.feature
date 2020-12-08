@@ -3,6 +3,7 @@ Feature: Test Survey - Historic Data
   Background:
     Given As a Business Survey user I set the search criteria options for the forms returned by the contributor
 
+  @smoke
   Scenario Outline: SPP-95 - Check Historic Data matches with Current Period Data
     Given I search for the survey "999A" with <reference> for the current period <period>
     And I submit the "current data" <values> for questions
