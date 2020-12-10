@@ -29,4 +29,4 @@ COPY /acceptance-tests/  /code/acceptance-tests/
 RUN pip install --upgrade pip
 RUN pip install -r /code/requirements_local.txt
 
-CMD behave -t @smoke -D browser='docker-browser'
+CMD behave -k --tags=smoke -D browser='docker-browser'

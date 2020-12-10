@@ -5,7 +5,7 @@ from base.utilities import Utilities
 
 
 def before_feature(context, feature):
-    context.screenshots_dir = Browser.initialize_the_browser(context)
+    Browser.initialize_the_browser(context)
 
 
 def before_scenario(context, scenario):
@@ -14,7 +14,7 @@ def before_scenario(context, scenario):
 
 def after_scenario(context, scenario):
     # take screenshot if test failed
-    Utilities.take_screen_shot(scenario, context.screenshots_dir)
+    Utilities.take_screen_shot(scenario)
     SeleniumCore.close_the_current_window()
 
 

@@ -9,4 +9,4 @@ docker-compose:
 	docker-compose up -d
 
 docker-run: set-url docker-build
-	docker run  -e TAKEON_URL='$(TAKEON_URL)' -v $(CURDIR)/acceptance-tests/docker_results:/code/docker_results  -ti -w /code/acceptance-tests/ bdd-tests
+	docker run  -e TAKEON_URL='$(TAKEON_URL)' -ti -w /code/acceptance-tests/ bdd-tests

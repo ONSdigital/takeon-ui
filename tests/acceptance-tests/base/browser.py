@@ -23,23 +23,23 @@ class Browser:
         :return: driver: browser instance
         """
         browser = context.config.userdata.get('browser')
-        screen_shots_loc = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
 
         if not browser:
             # create instance of the Chrome driver
             DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
             DriverContext.driver.maximize_window()
-            context.screenshots_dir = screen_shots_loc
         elif browser.lower() == 'headless':
             chrome_options = Options()
-            chrome_options.headless = True
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage")
             chrome_options.add_argument("--window-size=1920,1080")
             chrome_options.add_argument("disable-infobars")
             chrome_options.add_argument("--disable-extensions")
             # create instance of the Chrome driver
-            DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION)
+            DriverContext.driver = webdriver.Chrome(executable_path=ConfigTest.CHROME_DRIVER_LOCATION,
+                                                    chrome_options=chrome_options)
             DriverContext.driver.maximize_window()
-            context.screenshots_dir = screen_shots_loc
         elif browser.lower() == 'docker-browser':
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -49,11 +49,9 @@ class Browser:
             chrome_prefs = {}
             chrome_options.experimental_options["prefs"] = chrome_prefs
             chrome_prefs["profile.default_content_settings"] = {"images": 2}
-            DriverContext.driver = webdriver.Chrome(options=chrome_options)
-            context.screenshots_dir = os.path.join('/code/docker_results')
+            DriverContext.driver = webdriver.Chrome(chrome_options=chrome_options)
         else:
             raise Exception("The browser type '{}' is not supported".format(browser))
-        return context.screenshots_dir
 
     @staticmethod
     def navigate_to_the_url():

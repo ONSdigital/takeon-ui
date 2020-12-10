@@ -2,6 +2,7 @@ import os
 import time
 
 from base.driver_context import DriverContext
+from config_files.config_test import ConfigTest
 
 
 class Utilities:
@@ -33,9 +34,10 @@ class Utilities:
     @staticmethod
     def take_screen_shot(*scenario_details):
         scenario = scenario_details[0]
-        screenshots_location = scenario_details[1]
+        screenshots_location = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
+
         scenario_error_dir = Utilities.create_screen_shots_folder(screenshots_location)
-        if scenario.status.name == 'failed' or screenshots_location == '/code/docker_results':
+        if scenario.status.name == 'failed':
             scenario_file_path = os.path.join(scenario_error_dir,
                                               scenario.feature.scenarios[0].name + '_line_no_' +
                                               str(scenario.line)
