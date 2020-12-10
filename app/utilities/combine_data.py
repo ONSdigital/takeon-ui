@@ -4,10 +4,9 @@ def extract_question_data(form_data, index):
     question_data = {}
     qcode = form_data['view_form_responses'][index]['questioncode']
     response = form_data['view_form_responses'][index]['response']
-    adjusted_response = form_data['view_form_responses'][index]['adjustedresponse']
     question_data['questioncode'] = qcode
     question_data['response'] = response
-    question_data['adjustedresponse'] = adjusted_response
+    question_data['adjustedresponse'] = form_data['view_form_responses'][index]['adjustedresponse']
     question_data['displayquestionnumber'] = form_data['view_form_responses'][index]['displayquestionnumber']
     question_data['displaytext'] = form_data['view_form_responses'][index]['displaytext']
     question_data['displayorder'] = form_data['view_form_responses'][index]['displayorder']
@@ -50,7 +49,8 @@ def combine_responses_and_validations(form_data, validation_data):
         combined_array = []
         while counter < len(form_data['view_form_responses']):
             temp_question_data = extract_question_data(form_data, counter)
-            output = extract_validation_data(temp_question_data, validation_data)
+            output = extract_validation_data(
+                temp_question_data, validation_data)
             temp_question_data['validation_info'] = output[0]
             temp_question_data['panel'] = output[1]
             combined_array.append(temp_question_data)
