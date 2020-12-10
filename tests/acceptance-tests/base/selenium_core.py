@@ -105,7 +105,7 @@ class SeleniumCore:
         current_handle = driver.current_window_handle
         for handle in handles:
             if handle != current_handle:
-                driver.switch_to.window(handle)
+                driver.switch_to_window(handle)
                 break
 
     @staticmethod
@@ -116,5 +116,5 @@ class SeleniumCore:
         for handle in handles:
             if handle != current_handle:
                 driver.close()
-                driver.switch_to.window(handle)
+                driver.switch_to_window(handle)
                 break
