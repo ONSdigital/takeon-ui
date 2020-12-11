@@ -6,7 +6,7 @@ import os
 import time
 
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, InvalidArgumentException, WebDriverException
 from selenium.webdriver.chrome.options import Options
 from base.driver_context import DriverContext
 from config_files.config_test import ConfigTest
@@ -65,11 +65,21 @@ class Browser:
                     current_url = DriverContext.driver.current_url
                     if url != current_url:
                         print('url is ' + url)
+                        if 'http' not in url:
+                            url = 'http://' + url
+                            print('url with http is ' + url)
                         DriverContext.driver.get(url)
                         return DriverContext.driver
+                except InvalidArgumentException:
+                    assert False, 'Check the url.It needs to contain the http protocol in it: ' + url
                 except TimeoutException:
                     DriverContext.driver.execute_script("window.stop();")
                     assert False, 'Time taken to load the url: ' + str(time.time() - t)
+                except WebDriverException as ex:
+                    print(ex)
+                    if "unknown error: net::ERR_NAME_NOT_RESOLVED" in str(ex):
+                        assert False, ('Unable to Navigate to URL:{} \n'
+                                       'possibly because of the url is not valid'.format(url))
             else:
                 raise ValueError(
                     'Test failed as there was no url been set.\n'
