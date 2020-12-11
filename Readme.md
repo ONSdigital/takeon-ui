@@ -32,8 +32,9 @@
 
 -  Setting up the environment URL:
 
-        export TAKEON_URL="URL"
+        export TAKEON_URL="http://{URL}"
         Replace URL with the enviroment url you wish to test.
+        Note: make sure while setting up the url it has 'http://' protocol otherwise tests will fail
      
        
 -  To run the BDD tests you need to switch to the features folder first.
