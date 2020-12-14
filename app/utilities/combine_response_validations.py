@@ -13,7 +13,7 @@ def combine_response_validations(view_form_data, validations):
             adjusted_response = contributor['adjustedresponse']
             combined_output['questioncode'] = qcode
             combined_output['response'] = response
-            combined_output['adjustedresponse'] = adjusted_response
+            # combined_output['adjustedresponse'] = adjusted_response
             combined_output['displayquestionnumber'] = contributor['displayquestionnumber']
             combined_output['displaytext'] = contributor['displaytext']
             combined_output['displayorder'] = contributor['displayorder']
