@@ -61,14 +61,16 @@ def view_form(inqcode, period, ruref):
         historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
         historic_data_json = json.loads(historic_data)
         log.info("History Data: %s", historic_data_json)
-        
+
         grouped_historic_data = group_historic_data(historic_data_json)
         log.info("Grouped Historic Data by question : %s", grouped_historic_data)
 
         status = contributor_data['data'][0]['status']
         status_colour = check_status(status)
+        log.info("status colour: %s", status_colour)
 
         response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
+        log.info("response_and_validations: %s", response_and_validations)
         ordered_response_and_validations = question_order(response_and_validations)
         log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
 
