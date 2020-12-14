@@ -94,10 +94,15 @@
 
                                             <td class="table__cell ">
                                                 {% if datum['type'] == 'NUMERIC' %}
-                                                    <p class="field">
-                                                        <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
-
-                                                    </p>
+                                                    {% if datum['adjustedresponse'] == NULL %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"></label>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                        </p>
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
 
@@ -166,9 +171,15 @@
 
                                             <td class="table__cell ">
                                                 {% if datum['type'] == 'NUMERIC' %}
-                                                    <p class="field">
-                                                        <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
-                                                    </p>
+                                                    {% if datum['adjustedresponse'] == NULL %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"></label>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                        </p>
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
 
