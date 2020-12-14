@@ -39,30 +39,32 @@ def view_form(inqcode, period, ruref):
 
     log.info("Request.form: %s", request.form)
 
-    status_message = ""
-    url_parameters = dict(
-        zip(["survey", "period", "reference"], [inqcode, period, ruref]))
-    parameters = build_uri(url_parameters)
+    try:
+        status_message = ""
+        url_parameters = dict(
+            zip(["survey", "period", "reference"], [inqcode, period, ruref]))
+        parameters = build_uri(url_parameters)
 
-    contributor_details = api_caller.contributor_search(parameters=parameters)
-    validation_outputs = api_caller.validation_outputs(parameters=parameters)
-    view_forms = api_caller.view_form_responses(parameters=parameters)
+        contributor_details = api_caller.contributor_search(parameters=parameters)
+        validation_outputs = api_caller.validation_outputs(parameters=parameters)
+        view_forms = api_caller.view_form_responses(parameters=parameters)
 
-    historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
-    historic_data_json = json.loads(historic_data)
-    grouped_historic_data = group_historic_data(historic_data_json)
+        historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
+        historic_data_json = json.loads(historic_data)
+        grouped_historic_data = group_historic_data(historic_data_json)
 
-    contributor_data = json.loads(contributor_details)
-    validations = json.loads(validation_outputs)
-    status = contributor_data['data'][0]['status']
-    status_colour = check_status(status)
+        contributor_data = json.loads(contributor_details)
+        validations = json.loads(validation_outputs)
+        status = contributor_data['data'][0]['status']
+        status_colour = check_status(status)
 
-    view_form_data = json.loads(view_forms)
+        view_form_data = json.loads(view_forms)
 
-    response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
-    ordered_response_and_validations = question_order(response_and_validations)
-    override_button = override_all_button(ordered_response_and_validations)
-
+        response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
+        ordered_response_and_validations = question_order(response_and_validations)
+        override_button = override_all_button(ordered_response_and_validations)
+    except Exception as error:
+        log.info("Error %s", error)
     log.info("Contributor Details: %s", contributor_data)
     log.info("Contributor Details[0]: %s", contributor_data['data'][0])
     log.info("View Form Data: %s", view_form_data)
