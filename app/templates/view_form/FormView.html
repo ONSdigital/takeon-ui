@@ -93,12 +93,12 @@
                                             </td>
 
                                             <td class="table__cell ">
-                                                <!-- {% if datum['type'] == 'NUMERIC' %} -->
+                                                {% if datum['type'] == 'NUMERIC' %}
                                                     <p class="field">
                                                         <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
 
                                                     </p>
-                                                <!-- {% endif %} -->
+                                                {% endif %}
                                             </td>
 
                                             <td class="table__cell ">
@@ -165,11 +165,11 @@
                                             </td>
 
                                             <td class="table__cell ">
-                                                <!-- {% if datum['type'] == 'NUMERIC' %} -->
+                                                {% if datum['type'] == 'NUMERIC' %}
                                                     <p class="field">
                                                         <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
                                                     </p>
-                                                <!-- {% endif %} -->
+                                                {% endif %}
                                             </td>
 
                                             <td class="table__cell ">

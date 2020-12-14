@@ -3,9 +3,8 @@
 def extract_question_data(form_data, index):
     question_data = {}
     qcode = form_data['view_form_responses'][index]['questioncode']
-    response = form_data['view_form_responses'][index]['response']
     question_data['questioncode'] = qcode
-    question_data['response'] = response
+    question_data['response'] = form_data['view_form_responses'][index]['response']
     question_data['adjustedresponse'] = form_data['view_form_responses'][index]['adjustedresponse']
     question_data['displayquestionnumber'] = form_data['view_form_responses'][index]['displayquestionnumber']
     question_data['displaytext'] = form_data['view_form_responses'][index]['displaytext']
