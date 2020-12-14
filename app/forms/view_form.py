@@ -74,8 +74,11 @@ def view_form(inqcode, period, ruref):
     log.info("Grouped Historic Data by question : %s", grouped_historic_data)
 
     if request.form and request.form['action'] == 'save-and-validate':
+        log.info("Before Save")
         save_form(parameters, request.form, inqcode, period, ruref)
+        log.info("After save, before validate")
         validate(inqcode, period, ruref)
+        log.info("After validate")
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(
