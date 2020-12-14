@@ -13,7 +13,8 @@ class BasePage:
     HEADER_TITLE = By.XPATH, "//div[contains(@class,'header__title')]"
 
     def current_page_title(self):
-        return SeleniumCore.find_elements_by(*BasePage.HEADER_TITLE)[0].text
+        element = SeleniumCore.wait_for_element_to_be_displayed(By.XPATH, "//div[contains(@class,'header__title')]")
+        return element.text
 
     def check_page_title(self, page_title):
         current_title = self.current_page_title()

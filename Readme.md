@@ -32,8 +32,9 @@
 
 -  Setting up the environment URL:
 
-        export TAKEON_URL="URL"
+        export TAKEON_URL="http://{URL}"
         Replace URL with the enviroment url you wish to test.
+        Note: make sure while setting up the url it has 'http://' protocol otherwise tests will fail
      
        
 -  To run the BDD tests you need to switch to the features folder first.
@@ -68,5 +69,18 @@
         To run in real chrome browser mode just use - behave {featurefile} without the browser option.
  
       
-   
+   - To run tests using a docker image
+      
+      switch to the tests folder cd takeon-ui/tests/ 
+      Run the export command in the terminal to set the url
+                    
+          export TAKEON_URL="URL"
+          
+      Replace URL with the environment url you wish to test.
+      Run the below make command 
+          
+          make docker-run  
+          
+      Finally to see if the tests been run successfully there will be a folder called docker_results gets created automatically after the tests run 
+      and will have the screenshots which are been taken after each scenario. 
          

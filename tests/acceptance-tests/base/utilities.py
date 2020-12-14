@@ -2,6 +2,7 @@ import os
 import time
 
 from base.driver_context import DriverContext
+from config_files.config_test import ConfigTest
 
 
 class Utilities:
@@ -31,31 +32,37 @@ class Utilities:
         return " ".join(value.split())
 
     @staticmethod
-    def take_screen_shot(*scenario):
-        scenario_error_dir = Utilities.create_screen_shots_folder()
-        if scenario[0].status.name == 'failed':
+    def take_screen_shot(*scenario_details):
+        scenario = scenario_details[0]
+        screenshots_location = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
+
+        scenario_error_dir = Utilities.create_screen_shots_folder(screenshots_location)
+        if scenario.status.name == 'failed':
             scenario_file_path = os.path.join(scenario_error_dir,
-                                              scenario[0].feature.scenarios[0].name + '_line_no_' +
-                                              str(scenario[0].line)
+                                              scenario.feature.scenarios[0].name + '_line_no_' +
+                                              str(scenario.line)
                                               + '_' + time.strftime("%d_%m_%Y")
                                               + '.png')
+            print("getting the screenshot!")
             DriverContext.driver.save_screenshot(scenario_file_path)
 
     @staticmethod
-    def create_screen_shots_folder():
-        scenario_error_dir = os.path.expanduser("~") + '/takeon-ui/tests/acceptance-tests/screen_shots'
-        if not os.path.exists(scenario_error_dir):
-            os.makedirs(scenario_error_dir)
+    def create_screen_shots_folder(screenshots_loc):
+
+        if not os.path.exists(screenshots_loc):
+            print('create new folder')
+            os.makedirs(screenshots_loc)
         else:
             # specify the days from which the files to be deleted
             days = 1
             # converting days to seconds
             seconds = time.time() - (days * 24 * 60 * 60)
-            ctime = os.stat(scenario_error_dir).st_ctime
+            ctime = os.stat(screenshots_loc).st_ctime
             # comparing the days
             if seconds >= ctime:
-                Utilities.delete_all_the_previous_screenshots(scenario_error_dir)
-        return scenario_error_dir
+                Utilities.delete_all_the_previous_screenshots(screenshots_loc)
+            print('No need to create new folder')
+        return screenshots_loc
 
     @staticmethod
     def delete_all_the_previous_screenshots(folder_path):
