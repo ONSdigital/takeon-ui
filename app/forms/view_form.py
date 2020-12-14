@@ -79,6 +79,9 @@ def view_form(inqcode, period, ruref):
         log.info("After save, before validate")
         validate(inqcode, period, ruref)
         log.info("After validate")
+        log.info("inqcode:  %s", inqcode)
+        log.info("period:  %s", period)
+        log.info("ruref: %s", ruref)
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(
