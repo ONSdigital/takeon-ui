@@ -151,13 +151,13 @@ def question_order(response_and_validations):
         questions = response_and_validations["form_validation_outputs"]
         sorted_questions = (sorted(questions, key = lambda i: i['displayorder']))
         sorted_response_and_validations = {'form_validation_outputs': sorted_questions}
+        return sorted_response_and_validations
 
     except KeyError as key_error:
         print("Data missing displayorder" + str(key_error))
-        raise KeyError
 
     except TypeError as type_error:
         print("Error with data type converting to JSON " + str(type_error))
-        raise TypeError
 
-    return sorted_response_and_validations
+    except Exception as error:
+        print("Error: " + error)
