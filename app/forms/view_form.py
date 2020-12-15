@@ -69,7 +69,9 @@ def view_form(inqcode, period, ruref):
         status_colour = check_status(status)
         log.info("status colour: %s", status_colour)
 
-        response_and_validations = combine_responses_and_validations(view_form_data, filter_validations(validations))
+        filtered_validations = filter_validations(validations)
+        log.info("filtered validations: %s", filtered_validations)
+        response_and_validations = combine_responses_and_validations(view_form_data, filtered_validations)
         log.info("response_and_validations: %s", response_and_validations)
         ordered_response_and_validations = question_order(response_and_validations)
         log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
