@@ -1,3 +1,4 @@
+from app.setup import log
 # Combine Form response and Validation data
 
 def extract_question_data(form_data, index):
@@ -42,6 +43,7 @@ def decide_panel_colour(overridden_count, validation_info_array):
 
 
 def combine_responses_and_validations(form_data, validation_data):
+    log.info("Combine response and validations function")
     try:
         counter = 0
         combined_array = []
