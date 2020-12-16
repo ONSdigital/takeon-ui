@@ -8,6 +8,7 @@ RUN mkdir /install
 WORKDIR /install
 COPY requirements.txt /requirements.txt
 # RUN apk add --virtual .build-deps gcc musl-dev && \
+RUN apk add git
 RUN pip install --prefix=/install -r /requirements.txt --no-warn-script-location
 
 
