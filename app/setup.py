@@ -27,6 +27,7 @@ def create_app(setting_overrides=None):
     application.config["SESSION_COOKIE_SECURE"] = os.getenv(
         "SESSION_COOKIE_SECURE", False
     )
+    application.secret_key = os.getenv("SECRET_KEY", "default_secret_key")
 
     if setting_overrides:
         application.config.update(setting_overrides)
