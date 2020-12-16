@@ -17,6 +17,8 @@ from app.utilities.graphql_data import GraphData
 from app.setup import log, api_caller
 from app.utilities.api_request import TakeonApiException
 
+from spp_cognito_auth import requires_auth, requires_role
+
 contributor_search_blueprint = Blueprint(name="contributor_search", import_name=__name__, url_prefix="/contributor_search")
 contributor_search_blueprint_post = Blueprint(name="contributor_search_post", import_name=__name__, url_prefix="/contributor_search")
 error_500 = "./error_templates/500.html"
@@ -67,6 +69,8 @@ def landing_page():
 @contributor_search_blueprint.route("/Contributor/searchSelection", methods=["GET", "POST"])
 # Selection options, just pull out the values that have been selected, join
 # them all together in a semi-colon delimited string
+@requires_auth
+@requires_role(["dev"])
 def general_search_screen_selection():
     log.info("general_search_screen_selection")
     if request.method == "POST":
@@ -78,6 +82,8 @@ def general_search_screen_selection():
 
 
 @contributor_search_blueprint.route("/Contributor/GeneralSearch", methods=["POST"])
+@requires_auth
+@requires_role(["dev"])
 def general_search_screen_post():
     log.info("general_search_screen_post")
     criteria = request.args["criteria"].split(";")
@@ -115,6 +121,8 @@ def general_search_screen_post():
 
 
 @contributor_search_blueprint.route("/Contributor/next", methods=["POST"])
+@requires_auth
+@requires_role(["dev"])
 def next_page():
     log.info("Next page")
     newpage = request.json["cursor"]
@@ -124,6 +132,8 @@ def next_page():
 
 
 @contributor_search_blueprint.route("/Contributor/previous", methods=["POST"])
+@requires_auth
+@requires_role(["dev"])
 def previous_page():
     log.info("Previous page")
     newpage = request.json["cursor"]
@@ -142,6 +152,8 @@ def change_page(parameters):
 
 @contributor_search_blueprint.route("/Contributor/GeneralSearch", methods=["GET"])
 # Main search screen
+@requires_auth
+@requires_role(["dev"])
 def general_search_screen():
 
     log.info("general_search_screen")

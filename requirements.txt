@@ -16,3 +16,4 @@ boto3==1.16.7
 botocore==1.19.7
 flake8==3.7.7
 flake8-polyfill==1.0.2
+spp-cognito-auth @ git+https://github.com/ONSdigital/spp-cognito-auth.git@6703c63717beebe52d2b08392a387786071303be

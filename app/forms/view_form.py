@@ -1,6 +1,6 @@
 import json
 import os
-from flask import render_template, Blueprint, request, redirect, url_for
+from flask import render_template, Blueprint, request, redirect, url_for, current_app, abort
 from app.utilities.helpers import build_uri, get_user, question_order
 from app.utilities.filter_validations import filter_validations
 from app.utilities.parse_historic_data import group_historic_data
@@ -8,6 +8,7 @@ from app.utilities.combine_data import combine_responses_and_validations
 from app.utilities.check_status import check_status
 from app.setup import log, api_caller
 from app.utilities.save_and_validate import save_form, validate
+from spp_cognito_auth import requires_auth, requires_role
 
 view_form_blueprint = Blueprint(
     name='view_form', import_name=__name__, url_prefix='/contributor_search')
@@ -34,6 +35,8 @@ def internal_server_error(error):
 
 # Main entry-point
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/viewform', methods=['GET', 'POST'])
+@requires_auth
+@requires_role(["dev", "survey.*.*"])
 def view_form(inqcode, period, ruref):
     log.info("View_Form -- START --")
 
@@ -84,6 +87,9 @@ def view_form(inqcode, period, ruref):
              filter_validations(validations))
 
     if request.form and request.form['action'] == 'save-and-validate':
+        required_roles = ["dev", "survey.*.write", "survey.*.manager"]
+        if not any(map(lambda role: current_app.auth.match_role(role), required_roles)):
+            abort(403)
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
@@ -105,6 +111,8 @@ def view_form(inqcode, period, ruref):
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])
+@requires_auth
+@requires_role(["dev", "survey.*.write", "survey.*.manager"])
 def override_validations(inqcode, period, ruref):
     json_data = request.json
     log.info("Checkbox checked data: %s", str(json_data))
