@@ -3,6 +3,7 @@ import os
 from flask import Flask, session
 from app import settings
 from app.utilities.api_request import ApiRequest
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from spp_cognito_auth import Auth, AuthConfig, AuthBlueprint, new_oauth_client
 
@@ -37,6 +38,10 @@ def create_app(setting_overrides=None):
     application.auth = Auth(auth_config, oauth_client, session)
 
     add_blueprints(application)
+
+    # Run with proxyfix when behind ELB as SSL is done at the load balancer
+    if application.config["SESSION_COOKIE_SECURE"]:
+        return ProxyFix(application, x_for=1, x_host=1)
     return application
 
 
