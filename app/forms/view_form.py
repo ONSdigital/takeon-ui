@@ -53,7 +53,7 @@ def view_form(inqcode, period, ruref):
         validation_outputs = api_caller.validation_outputs(parameters=parameters)
         validations = json.loads(validation_outputs)
         log.info("Validations output: %s", validations)
-        
+
         view_forms = api_caller.view_form_responses(parameters=parameters)
         view_form_data = json.loads(view_forms)
         log.info("View Form Data: %s", view_form_data)
@@ -84,14 +84,8 @@ def view_form(inqcode, period, ruref):
              filter_validations(validations))
 
     if request.form and request.form['action'] == 'save-and-validate':
-        log.info("Before Save")
         save_form(parameters, request.form, inqcode, period, ruref)
-        log.info("After save, before validate")
         validate(inqcode, period, ruref)
-        log.info("After validate")
-        log.info("inqcode:  %s", inqcode)
-        log.info("period:  %s", period)
-        log.info("ruref: %s", ruref)
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(
