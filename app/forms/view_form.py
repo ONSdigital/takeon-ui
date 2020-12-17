@@ -38,6 +38,12 @@ def internal_server_error(error):
 @requires_auth
 @requires_role(["dev", "survey.*.*"])
 def view_form(inqcode, period, ruref):
+    if (
+        request.form
+        and request.form['action'] == 'save-and-validate'
+        and not current_app.auth.has_permission(["dev", "survey.*.write", "survey.*.manager"])
+    ):
+        abort(403)
     log.info("View_Form -- START --")
 
     log.info("Request.form: %s", request.form)
@@ -87,9 +93,6 @@ def view_form(inqcode, period, ruref):
              filter_validations(validations))
 
     if request.form and request.form['action'] == 'save-and-validate':
-        required_roles = ["dev", "survey.*.write", "survey.*.manager"]
-        if not any(map(lambda role: current_app.auth.match_role(role), required_roles)):
-            abort(403)
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
