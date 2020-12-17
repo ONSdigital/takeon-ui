@@ -62,9 +62,11 @@
                 </a>
             </div>
             <div class="grid__col col-auto" style="flex: auto; display: flex; justify-content: flex-end">
-                <button class="btn btn--small" href="{{ url_for('auth.logout') }}">
-                    <span class="btn__inner">Logout</span>
-                </button>
+                <form action="{{ url_for('auth.logout') }}">
+                    <button class="btn btn--small" type="submit">
+                        <span class="btn__inner">Logout</span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
