@@ -1,16 +1,17 @@
+from app.setup import log
 # Combine Form response and Validation data
 
 def extract_question_data(form_data, index):
     question_data = {}
-    qcode = form_data['view_form_responses'][index]['questioncode']
-    response = form_data['view_form_responses'][index]['response']
-    question_data['questioncode'] = qcode
-    question_data['response'] = response
+    question_data['questioncode'] = form_data['view_form_responses'][index]['questioncode']
+    question_data['response'] = form_data['view_form_responses'][index]['response']
+    question_data['adjustedresponse'] = form_data['view_form_responses'][index]['adjustedresponse']
     question_data['displayquestionnumber'] = form_data['view_form_responses'][index]['displayquestionnumber']
     question_data['displaytext'] = form_data['view_form_responses'][index]['displaytext']
     question_data['displayorder'] = form_data['view_form_responses'][index]['displayorder']
     question_data['type'] = form_data['view_form_responses'][index]['type']
     return question_data
+
 
 def extract_validation_data(extracted_form_data, validation_data):
     validation_info_array = []
@@ -32,6 +33,7 @@ def extract_validation_data(extracted_form_data, validation_data):
         panel = decide_panel_colour(overridden_count, validation_info_array)
     return validation_info_array, panel
 
+
 def decide_panel_colour(overridden_count, validation_info_array):
     if overridden_count == len(validation_info_array):
         panel = 'panel--info'
@@ -39,13 +41,15 @@ def decide_panel_colour(overridden_count, validation_info_array):
         panel = 'panel--error'
     return panel
 
+
 def combine_responses_and_validations(form_data, validation_data):
     try:
         counter = 0
         combined_array = []
         while counter < len(form_data['view_form_responses']):
             temp_question_data = extract_question_data(form_data, counter)
-            output = extract_validation_data(temp_question_data, validation_data)
+            output = extract_validation_data(
+                temp_question_data, validation_data)
             temp_question_data['validation_info'] = output[0]
             temp_question_data['panel'] = output[1]
             combined_array.append(temp_question_data)
@@ -55,10 +59,11 @@ def combine_responses_and_validations(form_data, validation_data):
         return output_dictionary
     except ValueError as value_error:
         print("Error with JSON Structure: " + str(value_error))
-        raise ValueError
     except KeyError as key_error:
         print("Error with missing JSON Keys " + str(key_error))
-        raise KeyError
     except TypeError as type_error:
         print("Error with data type converting to JSON " + str(type_error))
-        raise TypeError
+    except Exception as error:
+        print("Error " + str(error))
+
+    return {}

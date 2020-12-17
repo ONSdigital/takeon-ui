@@ -1,5 +1,5 @@
 # Combine Response and Validation data for new UI Layout
-#from app.utilities.helpers import json_validator
+# from app.utilities.helpers import json_validator
 
 def combine_response_validations(view_form_data, validations):
     try:
@@ -8,17 +8,16 @@ def combine_response_validations(view_form_data, validations):
             overridden_count = 0
             combined_output = {}
             validation_info_array = []
-            qcode = contributor['questioncode']
-            response = contributor['response']
-            combined_output['questioncode'] = qcode
-            combined_output['response'] = response
+            combined_output['questioncode'] = contributor['questioncode']
+            combined_output['response'] = contributor['response']
+            combined_output['adjustedresponse'] = contributor['adjustedresponse']
             combined_output['displayquestionnumber'] = contributor['displayquestionnumber']
             combined_output['displaytext'] = contributor['displaytext']
             combined_output['displayorder'] = contributor['displayorder']
             combined_output['type'] = contributor['type']
             for validation in validations['validation_outputs']:
                 validation_failure = {}
-                if validation['primaryquestion'] == qcode:
+                if validation['primaryquestion'] == contributor['questioncode']:
                     validation_failure['name'] = validation['name']
                     validation_failure['overridden'] = validation['overridden']
                     validation_failure['validationoutputid'] = validation['validationoutputid']

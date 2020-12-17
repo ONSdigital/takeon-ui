@@ -58,6 +58,7 @@
                                     <th scope="col" class="table__header col-1@m">Number</th>
                                     <th scope="col" class="table__header col-4@m">Question</th>
                                     <th scope="col" class="table__header col-2@m">Response</th>
+                                    <th scope="col" class="table__header col-2@m">Adjusted Response</th>
                                     <th scope="col" class="table__header ">Question Status</th>
                                 </tr>
                             </thead>
@@ -88,6 +89,20 @@
                                                     <p class="field">
                                                         <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                                     </p>
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="table__cell ">
+                                                {% if datum['type'] == 'NUMERIC' %}
+                                                    {% if datum['adjustedresponse'] == NULL %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"></label>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                        </p>
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
 
@@ -151,6 +166,20 @@
                                                     <p class="field">
                                                         <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                                     </p>
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="table__cell ">
+                                                {% if datum['type'] == 'NUMERIC' %}
+                                                    {% if datum['adjustedresponse'] == NULL %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"></label>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                        </p>
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
 
