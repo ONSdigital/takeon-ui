@@ -17,22 +17,6 @@ api_key = os.getenv('API_KEY')
 form_view_template_HTML = "./view_form/FormView.html"
 
 
-# Flask Endpoints
-@view_form_blueprint.errorhandler(404)
-def not_found(error):
-    return render_template('./error_templates/404.html', message_header=error), 404
-
-
-@view_form_blueprint.errorhandler(403)
-def not_auth(error):
-    return render_template('./error_templates/403.html', message_header=error), 403
-
-
-@view_form_blueprint.errorhandler(500)
-def internal_server_error(error):
-    return render_template('./error_templates/500.html', message_header=error), 500
-
-
 # Main entry-point
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/viewform', methods=['GET', 'POST'])
 @requires_auth

@@ -1,6 +1,6 @@
 import logging
 import os
-from flask import Flask, session
+from flask import Flask, session, render_template
 from app import settings
 from app.utilities.api_request import ApiRequest
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -37,6 +37,7 @@ def create_app(setting_overrides=None):
     oauth_client = new_oauth_client(auth_config)
     application.auth = Auth(auth_config, oauth_client, session)
 
+    add_error_handlers(application)
     add_blueprints(application)
 
     # Run with proxyfix when behind ELB as SSL is done at the load balancer
@@ -62,3 +63,17 @@ def add_blueprints(application):
     search_screen_choice_blueprint.config = application.config.copy()
 
     application.register_blueprint(AuthBlueprint().blueprint())
+
+
+def add_error_handlers(application):
+    @application.errorhandler(404)
+    def not_found(error):
+        return render_template('./error_templates/404.html', message_header=error), 404
+
+    @application.errorhandler(403)
+    def not_auth(error):
+        return render_template('./error_templates/403.html', message_header=error), 403
+
+    @application.errorhandler(500)
+    def internal_server_error(error):
+        return render_template('./error_templates/500.html', message_header=error), 500

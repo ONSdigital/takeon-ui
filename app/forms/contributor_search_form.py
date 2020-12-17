@@ -30,20 +30,6 @@ headers = ["reference", "period", "survey", "status", "formId"]
 #################################################################################################
 # ######################################## FLASK ENDPOINTS ######################################
 #################################################################################################
-@contributor_search_blueprint.errorhandler(404)
-def not_found(error):
-    return render_template("./error_templates/404.html", message_header=error), 404
-
-
-@contributor_search_blueprint.errorhandler(403)
-def not_auth(error):
-    return render_template("./error_templates/403.html", message_header=error), 403
-
-
-@contributor_search_blueprint.errorhandler(500)
-def internal_server_error(error):
-    return render_template(error_500, message_header=error), 500
-
 
 @contributor_search_blueprint.errorhandler(TakeonApiException)
 def handle_invalid_usage(error):
