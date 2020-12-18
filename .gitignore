@@ -26,3 +26,5 @@ vendor/
 # BDD-acceptance-tests
 screen_shots/
 tests/acceptance-tests/docker_results/
+
+Pipfile

@@ -10,7 +10,7 @@ class Cognito:
 
     def user_pool(self):
         if not self._user_pool:
-            user_pool_name = os.getenv("COGNITO_USER_POOL")
+            user_pool_name = os.environ["COGNITO_USER_POOL"]
             user_pools = self._client.list_user_pools(MaxResults=60)
             for user_pool in user_pools["UserPools"]:
                 if user_pool["Name"] == user_pool_name:
