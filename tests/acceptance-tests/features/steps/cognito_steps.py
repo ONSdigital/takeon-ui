@@ -9,7 +9,7 @@ def user_modified(context, username, password, roles):
             context.created_users[username]["password"] == password
             and context.created_users[username]["roles"].sort() == roles.sort()
         )
-    return False
+    return True
 
 @given(u'"{username}" exists with the password "{password}" and roles {roles}')
 def create_user(context, username, password, roles):
