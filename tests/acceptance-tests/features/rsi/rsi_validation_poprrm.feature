@@ -1,7 +1,9 @@
 Feature: RSI Survey - Validation PoPRRM
 
   Background:
-    Given As a RSI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: RSI LU-6733 - PoPRRM Validation for RSI survey on form 5
     Given I search for the survey "023" with <reference> for the previous period <previousPeriodValue>

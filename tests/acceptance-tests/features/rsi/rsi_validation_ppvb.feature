@@ -1,7 +1,9 @@
 Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
 
   Background:
-    Given As a RSI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: RSI LU-6757 - Previous Period Value Blank Validation on forms 5,6 and 7
     Given I search for the survey "023" with <reference> for the previous period <PPeriod>

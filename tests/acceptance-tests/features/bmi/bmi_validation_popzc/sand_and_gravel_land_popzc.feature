@@ -1,7 +1,9 @@
 Feature: Sand and Gravel Land Survey - Period on Period Zero Continuity(PoPZC) Validation rule
 
   Background:
-    Given As a BMI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
     And I have the "sand and gravel land material stock" questions to check
       | question_codes |
       | Q601           |

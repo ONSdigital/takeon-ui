@@ -2,7 +2,9 @@ Feature: Sand and Gravel Marine Survey - Fixed Value(FV) Validation rule
 
 
   Background:
-    Given As a BMI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline:  LU-7208 - Check Fixed Value Validation - Sand and Gravel Marine Survey
     Given I search for the survey "076" with <reference> for the current period <period>

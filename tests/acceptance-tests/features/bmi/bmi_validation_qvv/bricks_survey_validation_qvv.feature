@@ -1,7 +1,9 @@
 Feature: Bricks Survey - Comment Present(Question vs Value) Validation rule
 
   Background:
-    Given As a BMI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6531 - Comment Present Validation Bricks survey on form 4
     Given I search for the survey "074" with <reference> for the current period <period>

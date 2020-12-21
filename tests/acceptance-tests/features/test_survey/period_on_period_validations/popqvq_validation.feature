@@ -1,8 +1,9 @@
 Feature: Test Survey - Period on Period Question vs Question(PoPQvQ) Validation rule
 
   Background:
-
-    Given As a Business Survey user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a Business Survey user I set the search criteria options for the forms returned by the contributor
 
 
   Scenario Outline: SP-100 - Period on Period Question vs Question(PoPQvQ) Validation on test survey

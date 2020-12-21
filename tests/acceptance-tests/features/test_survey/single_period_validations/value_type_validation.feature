@@ -1,7 +1,9 @@
 Feature: Test Survey - Value is (Blank,Zero,Negative,Positive,Invalid) Validation rules
 
   Background:
-    Given As a Business Survey user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a Business Survey user I set the search criteria options for the forms returned by the contributor
 
 
   Scenario Outline: SPP-100 - Value is Blank(VB) Validation on test survey
