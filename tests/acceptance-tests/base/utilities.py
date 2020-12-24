@@ -48,20 +48,9 @@ class Utilities:
 
     @staticmethod
     def create_screen_shots_folder(screenshots_loc):
-
         if not os.path.exists(screenshots_loc):
             print('create new folder')
             os.makedirs(screenshots_loc)
-        else:
-            # specify the days from which the files to be deleted
-            days = 1
-            # converting days to seconds
-            seconds = time.time() - (days * 24 * 60 * 60)
-            ctime = os.stat(screenshots_loc).st_ctime
-            # comparing the days
-            if seconds >= ctime:
-                Utilities.delete_all_the_previous_screenshots(screenshots_loc)
-            print('No need to create new folder')
         return screenshots_loc
 
     @staticmethod
