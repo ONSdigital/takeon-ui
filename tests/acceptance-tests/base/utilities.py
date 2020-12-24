@@ -38,13 +38,19 @@ class Utilities:
 
         scenario_error_dir = Utilities.create_screen_shots_folder(screenshots_location)
         if scenario.status.name == 'failed':
+            scenario_with_line_no = scenario.feature.scenarios[0].name + '_line_no_' + str(scenario.line)
+
             scenario_file_path = os.path.join(scenario_error_dir,
-                                              scenario.feature.scenarios[0].name + '_line_no_' +
-                                              str(scenario.line)
-                                              + '_' + time.strftime("%d_%m_%Y")
+                                              scenario_with_line_no
+                                              + '_' + time.strftime("%H%M%S_%d_%m_%Y")
                                               + '.png')
-            print("getting the screenshot!")
-            DriverContext.driver.save_screenshot(scenario_file_path)
+
+            for file in os.scandir(screenshots_location):
+                if scenario_with_line_no in file.name:
+                    os.unlink(file.path)
+                    print("remove the previous screenshot! " + file.name)
+        print("take the screenshot! " + scenario_file_path)
+        DriverContext.driver.save_screenshot(scenario_file_path)
 
     @staticmethod
     def create_screen_shots_folder(screenshots_loc):
@@ -52,9 +58,3 @@ class Utilities:
             print('create new folder')
             os.makedirs(screenshots_loc)
         return screenshots_loc
-
-    @staticmethod
-    def delete_all_the_previous_screenshots(folder_path):
-        for file in os.scandir(folder_path):
-            if file.name.endswith(".png"):
-                os.unlink(file.path)
