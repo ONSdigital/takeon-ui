@@ -4,6 +4,10 @@ from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
 
 
+def before_all(context):
+    Utilities.delete_screenshots_folder()
+
+
 def before_feature(context, feature):
     Browser.initialize_the_browser(context)
 

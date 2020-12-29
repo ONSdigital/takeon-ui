@@ -1,4 +1,5 @@
 import os
+import shutil
 import time
 
 from base.driver_context import DriverContext
@@ -6,6 +7,7 @@ from config_files.config_test import ConfigTest
 
 
 class Utilities:
+    SCREENSHOTS_LOC = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
 
     @staticmethod
     def convert_blank_data_value(data):
@@ -34,27 +36,26 @@ class Utilities:
     @staticmethod
     def take_screen_shot(*scenario_details):
         scenario = scenario_details[0]
-        screenshots_location = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
 
-        scenario_error_dir = Utilities.create_screen_shots_folder(screenshots_location)
         if scenario.status.name == 'failed':
+            Utilities.create_screen_shots_folder()
             scenario_with_line_no = scenario.feature.scenarios[0].name + '_line_no_' + str(scenario.line)
 
-            scenario_file_path = os.path.join(scenario_error_dir,
+            scenario_file_path = os.path.join(Utilities.SCREENSHOTS_LOC,
                                               scenario_with_line_no
                                               + '_' + time.strftime("%H%M%S_%d_%m_%Y")
                                               + '.png')
-
-            for file in os.scandir(screenshots_location):
-                if scenario_with_line_no in file.name:
-                    os.unlink(file.path)
-                    print("remove the previous screenshot! " + file.name)
-        print("take the screenshot! " + scenario_file_path)
-        DriverContext.driver.save_screenshot(scenario_file_path)
+            print("take the screenshot! " + scenario_file_path)
+            DriverContext.driver.save_screenshot(scenario_file_path)
 
     @staticmethod
-    def create_screen_shots_folder(screenshots_loc):
-        if not os.path.exists(screenshots_loc):
+    def delete_screenshots_folder():
+        if os.path.isdir(Utilities.SCREENSHOTS_LOC):
+            shutil.rmtree(Utilities.SCREENSHOTS_LOC)
+            print("removed the screenshots folder!")
+
+    @staticmethod
+    def create_screen_shots_folder():
+        if not os.path.exists(Utilities.SCREENSHOTS_LOC):
             print('create new folder')
-            os.makedirs(screenshots_loc)
-        return screenshots_loc
+            os.makedirs(Utilities.SCREENSHOTS_LOC)
