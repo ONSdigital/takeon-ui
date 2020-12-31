@@ -6,6 +6,7 @@ from base.utilities import Utilities
 
 def before_all(context):
     Utilities.delete_screenshots_folder()
+    Browser.url()
 
 
 def before_feature(context, feature):
