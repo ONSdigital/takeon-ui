@@ -3,11 +3,10 @@ import shutil
 import time
 
 from base.driver_context import DriverContext
-from config_files.config_test import ConfigTest
 
 
 class Utilities:
-    SCREENSHOTS_LOC = ConfigTest.HOMEDIR + '/takeon-ui/tests/acceptance-tests/screen_shots'
+    SCREENSHOTS_LOC = os.getcwd() + '/screen_shots'
 
     @staticmethod
     def convert_blank_data_value(data):
