@@ -1,7 +1,9 @@
 Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for text type
 
   Background:
-    Given As a RSI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 5
     Given I search for the survey "023" with <reference> for the current period <period>

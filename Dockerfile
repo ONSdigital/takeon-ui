@@ -7,7 +7,7 @@ FROM base as builder
 RUN mkdir /install
 WORKDIR /install
 COPY requirements.txt /requirements.txt
-# RUN apk add --virtual .build-deps gcc musl-dev && \
+RUN apt-get update && apt-get install -y git
 RUN pip install --prefix=/install -r /requirements.txt --no-warn-script-location
 
 

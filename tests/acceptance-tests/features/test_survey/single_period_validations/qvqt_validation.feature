@@ -1,7 +1,9 @@
 Feature: Test Survey - Question vs Question Threshold(QvQT) validation rule
 
   Background:
-    Given As a Business Survey user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a Business Survey user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: SP-100 - Question vs Question Threshold(QvQT) Validation on test survey
     Given I search for the survey "999A" with <reference> for the current period <period>

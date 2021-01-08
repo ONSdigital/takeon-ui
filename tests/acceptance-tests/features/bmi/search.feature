@@ -1,7 +1,9 @@
 Feature: Search function
 
   Background: Setting the correct url
-    Given reference column is 1
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And reference column is 1
     And period column is 2
     And survey column is 3
     And As a BMI user I set the search criteria options for the forms returned by the contributor

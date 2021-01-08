@@ -2,7 +2,9 @@ Feature: BMI Surveys(Blocks,Bricks) - Override checkbox - Period On Period Quest
 
 
   Background:
-    Given As a BMI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline:  LU-7170 - Check Override functionality for PoPQvQ Validation
     Given I search for the <survey> with <reference> for the previous period <previousPeriod>

@@ -1,10 +1,10 @@
-Flask==1.1.1
+Flask==1.1.2
 Flask-JWT-Extended==3.24.1
 Flask-Script==2.0.6
 kubernetes==10.0.1
 pytest==5.3.4
 pytest-cov==2.7.1
-requests==2.22.0
+requests==2.25.0
 requests-mock==1.6.0
 selenium==3.141.0
 WTForms==2.2.1
@@ -16,3 +16,4 @@ boto3==1.16.7
 botocore==1.19.7
 flake8==3.7.7
 flake8-polyfill==1.0.2
+spp-cognito-auth @ git+https://github.com/ONSdigital/spp-cognito-auth.git@a428c0af471710e885cad1056074ffb9db3456b9

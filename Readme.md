@@ -30,9 +30,10 @@
     
 ### Running Tests
 
--  Setting up the environment URL:
+-  Setting up the environment:
 
         export TAKEON_URL="http://{URL}"
+        export COGNITO_USER_POOL="{COGNITO_USER_POOL}"
         Replace URL with the enviroment url you wish to test.
         Note: make sure while setting up the url it has 'http://' protocol otherwise tests will fail
      

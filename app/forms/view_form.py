@@ -1,6 +1,6 @@
 import json
 import os
-from flask import render_template, Blueprint, request, redirect, url_for
+from flask import render_template, Blueprint, request, redirect, url_for, current_app, abort
 from app.utilities.helpers import build_uri, get_user, question_order
 from app.utilities.filter_validations import filter_validations
 from app.utilities.parse_historic_data import group_historic_data
@@ -8,6 +8,7 @@ from app.utilities.combine_data import combine_responses_and_validations
 from app.utilities.check_status import check_status
 from app.setup import log, api_caller
 from app.utilities.save_and_validate import save_form, validate
+from spp_cognito_auth import requires_auth, requires_role
 
 view_form_blueprint = Blueprint(
     name='view_form', import_name=__name__, url_prefix='/contributor_search')
@@ -16,25 +17,17 @@ api_key = os.getenv('API_KEY')
 form_view_template_HTML = "./view_form/FormView.html"
 
 
-# Flask Endpoints
-@view_form_blueprint.errorhandler(404)
-def not_found(error):
-    return render_template('./error_templates/404.html', message_header=error), 404
-
-
-@view_form_blueprint.errorhandler(403)
-def not_auth(error):
-    return render_template('./error_templates/403.html', message_header=error), 403
-
-
-@view_form_blueprint.errorhandler(500)
-def internal_server_error(error):
-    return render_template('./error_templates/500.html', message_header=error), 500
-
-
 # Main entry-point
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/viewform', methods=['GET', 'POST'])
+@requires_auth
+@requires_role(["dev", "survey.*.*"])
 def view_form(inqcode, period, ruref):
+    if (
+        request.form
+        and request.form['action'] == 'save-and-validate'
+        and not current_app.auth.has_permission(["dev", "survey.*.write", "survey.*.manager"])
+    ):
+        abort(403)
     log.info("View_Form -- START --")
 
     log.info("Request.form: %s", request.form)
@@ -105,6 +98,8 @@ def view_form(inqcode, period, ruref):
 
 
 @view_form_blueprint.route('/Contributor/<inqcode>/<period>/<ruref>/override-validations', methods=['POST'])
+@requires_auth
+@requires_role(["dev", "survey.*.write", "survey.*.manager"])
 def override_validations(inqcode, period, ruref):
     json_data = request.json
     log.info("Checkbox checked data: %s", str(json_data))
