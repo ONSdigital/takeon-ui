@@ -107,8 +107,8 @@ def general_search_screen_post():
 
 
 @contributor_search_blueprint.route("/Contributor/next", methods=["POST"])
-@requires_auth
-@requires_role(["dev"])
+# @requires_auth
+# @requires_role(["dev"])
 def next_page():
     log.info("Next page")
     newpage = request.json["cursor"]
@@ -118,8 +118,8 @@ def next_page():
 
 
 @contributor_search_blueprint.route("/Contributor/previous", methods=["POST"])
-@requires_auth
-@requires_role(["dev"])
+# @requires_auth
+# @requires_role(["dev"])
 def previous_page():
     log.info("Previous page")
     newpage = request.json["cursor"]
