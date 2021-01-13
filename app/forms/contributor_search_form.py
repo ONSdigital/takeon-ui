@@ -55,8 +55,8 @@ def landing_page():
 @contributor_search_blueprint.route("/Contributor/searchSelection", methods=["GET", "POST"])
 # Selection options, just pull out the values that have been selected, join
 # them all together in a semi-colon delimited string
-@requires_auth
-@requires_role(["dev"])
+# @requires_auth
+# @requires_role(["dev"])
 def general_search_screen_selection():
     log.info("general_search_screen_selection")
     if request.method == "POST":
@@ -68,8 +68,8 @@ def general_search_screen_selection():
 
 
 @contributor_search_blueprint.route("/Contributor/GeneralSearch", methods=["POST"])
-# @requires_auth
-# @requires_role(["dev"])
+@requires_auth
+@requires_role(["dev"])
 def general_search_screen_post():
     log.info("general_search_screen_post")
     criteria = request.args["criteria"].split(";")
@@ -107,8 +107,8 @@ def general_search_screen_post():
 
 
 @contributor_search_blueprint.route("/Contributor/next", methods=["POST"])
-# @requires_auth
-# @requires_role(["dev"])
+@requires_auth
+@requires_role(["dev"])
 def next_page():
     log.info("Next page")
     newpage = request.json["cursor"]
@@ -118,8 +118,8 @@ def next_page():
 
 
 @contributor_search_blueprint.route("/Contributor/previous", methods=["POST"])
-# @requires_auth
-# @requires_role(["dev"])
+@requires_auth
+@requires_role(["dev"])
 def previous_page():
     log.info("Previous page")
     newpage = request.json["cursor"]
