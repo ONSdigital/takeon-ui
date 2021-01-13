@@ -68,8 +68,8 @@ def general_search_screen_selection():
 
 
 @contributor_search_blueprint.route("/Contributor/GeneralSearch", methods=["POST"])
-@requires_auth
-@requires_role(["dev"])
+# @requires_auth
+# @requires_role(["dev"])
 def general_search_screen_post():
     log.info("general_search_screen_post")
     criteria = request.args["criteria"].split(";")
