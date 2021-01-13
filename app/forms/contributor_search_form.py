@@ -55,8 +55,8 @@ def landing_page():
 @contributor_search_blueprint.route("/Contributor/searchSelection", methods=["GET", "POST"])
 # Selection options, just pull out the values that have been selected, join
 # them all together in a semi-colon delimited string
-# @requires_auth
-# @requires_role(["dev"])
+@requires_auth
+@requires_role(["dev"])
 def general_search_screen_selection():
     log.info("general_search_screen_selection")
     if request.method == "POST":
