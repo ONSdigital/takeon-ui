@@ -15,10 +15,10 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
-      | 49900229065 | 3                  | 4                   | true   | be                 | Q004                 | Q001                | 201905         | 201906        |
-      | 49900229065 | 4                  | 3                   | true   | be                 | Q004                 | Q001                | 201905         | 201906        |
-      | 49900229065 | 3                  | 3                   | false  | not be             | Q004                 | Q001                | 201905         | 201906        |
-      | 49900229065 | blank              | blank               | false  | not be             | Q004                 | Q001                | 201905         | 201906        |
+      | 12000229065 | 3                  | 4                   | true   | be                 | Q004                 | Q001                | 201905         | 201906        |
+      | 12000229065 | 4                  | 3                   | true   | be                 | Q004                 | Q001                | 201905         | 201906        |
+      | 12000229065 | 3                  | 3                   | false  | not be             | Q004                 | Q001                | 201905         | 201906        |
+      | 12000229065 | blank              | blank               | false  | not be             | Q004                 | Q001                | 201905         | 201906        |
 
 
   Scenario Outline:  LU-7032 - Period on Period Question vs Question Validation - Closing Stock vs Opening Stock(Facings)
@@ -32,10 +32,10 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
-      | 49900229065 | 3                  | 4                   | true   | be                 | Q014                 | Q011                | 201905         | 201906        |
-      | 49900229065 | 4                  | 3                   | true   | be                 | Q014                 | Q011                | 201905         | 201906        |
-      | 49900229065 | 3                  | 3                   | false  | not be             | Q014                 | Q011                | 201905         | 201906        |
-      | 49900229065 | blank              | blank               | false  | not be             | Q014                 | Q011                | 201905         | 201906        |
+      | 12000229065 | 3                  | 4                   | true   | be                 | Q014                 | Q011                | 201905         | 201906        |
+      | 12000229065 | 4                  | 3                   | true   | be                 | Q014                 | Q011                | 201905         | 201906        |
+      | 12000229065 | 3                  | 3                   | false  | not be             | Q014                 | Q011                | 201905         | 201906        |
+      | 12000229065 | blank              | blank               | false  | not be             | Q014                 | Q011                | 201905         | 201906        |
 
 
   Scenario Outline:  LU-7032 - Period on Period Question vs Question Validation - Closing Stock vs Opening Stock(Engineering)
@@ -49,10 +49,10 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
-      | 49900229065 | 3                  | 4                   | true   | be                 | Q024                 | Q021                | 201905         | 201906        |
-      | 49900229065 | 4                  | 3                   | true   | be                 | Q024                 | Q021                | 201905         | 201906        |
-      | 49900229065 | 3                  | 3                   | false  | not be             | Q024                 | Q021                | 201905         | 201906        |
-      | 49900229065 | blank              | blank               | false  | not be             | Q024                 | Q021                | 201905         | 201906        |
+      | 12000229065 | 3                  | 4                   | true   | be                 | Q024                 | Q021                | 201905         | 201906        |
+      | 12000229065 | 4                  | 3                   | true   | be                 | Q024                 | Q021                | 201905         | 201906        |
+      | 12000229065 | 3                  | 3                   | false  | not be             | Q024                 | Q021                | 201905         | 201906        |
+      | 12000229065 | blank              | blank               | false  | not be             | Q024                 | Q021                | 201905         | 201906        |
 
 
   Scenario Outline:  LU-7032 - Period on Period Question vs Question Validation - Brick type
@@ -66,7 +66,7 @@ Feature: Bricks Survey - Period on Period Question vs Question (PoPQvQ) Validati
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | isValidationExists | previousQuestionCode | currentQuestionCode | previousPeriod | currentPeriod |
-      | 49900229065 | 3                  | 4                   | true   | be                 | Q8000                | Q8000               | 201905         | 201906        |
-      | 49900229065 | 4                  | 3                   | true   | be                 | Q8000                | Q8000               | 201905         | 201906        |
-      | 49900229065 | 3                  | 3                   | false  | not be             | Q8000                | Q8000               | 201905         | 201906        |
-      | 49900229065 | blank              | blank               | false  | not be             | Q8000                | Q8000               | 201905         | 201906        |
+      | 12000229065 | 3                  | 4                   | true   | be                 | Q8000                | Q8000               | 201905         | 201906        |
+      | 12000229065 | 4                  | 3                   | true   | be                 | Q8000                | Q8000               | 201905         | 201906        |
+      | 12000229065 | 3                  | 3                   | false  | not be             | Q8000                | Q8000               | 201905         | 201906        |
+      | 12000229065 | blank              | blank               | false  | not be             | Q8000                | Q8000               | 201905         | 201906        |

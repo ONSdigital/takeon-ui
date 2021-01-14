@@ -14,7 +14,7 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
     Examples:
       | period | reference   | SIC   | SICValue | question |
-      | 201903 | 49900818161 | 47300 | 1        | Q21      |
+      | 201903 | 12000818161 | 47300 | 1        | Q21      |
 
 
   Scenario Outline: LU-7171 - Check Override functionality for Value is Blank (VB) Validation for Total Turnover
@@ -26,9 +26,9 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
     Examples:
       | period | reference   | value | question |
-      | 201903 | 49900534932 | blank | Q20      |
-      | 201903 | 49900694171 | blank | Q20      |
-      | 201904 | 49900756292 | blank | Q20      |
+      | 201903 | 12000534932 | blank | Q20      |
+      | 201903 | 12000694171 | blank | Q20      |
+      | 201904 | 12000756292 | blank | Q20      |
 
 
   Scenario Outline: LU-7171 - Check Override functionality for Value is Zero (VZ) Validation for Total Turnover
@@ -40,9 +40,9 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
     Examples:
       | period | reference   | value | question |
-      | 201903 | 49900534932 | 0     | Q20      |
-      | 201903 | 49900694171 | 0     | Q20      |
-      | 201904 | 49900756292 | 0     | Q20      |
+      | 201903 | 12000534932 | 0     | Q20      |
+      | 201903 | 12000694171 | 0     | Q20      |
+      | 201904 | 12000756292 | 0     | Q20      |
 
 
   Scenario Outline: LU-7171 - Check Override functionality for Comment Present Validation RSI survey on form 5,6 and 7
@@ -53,9 +53,9 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
     Then the validation message should change to "qvv override message"
     Examples:
       | period | reference   | comment | question |
-      | 201903 | 49900534932 | 12345   | Q146     |
-      | 201903 | 49900694171 | 12345   | Q146     |
-      | 201904 | 49900756292 | 12345   | Q146     |
+      | 201903 | 12000534932 | 12345   | Q146     |
+      | 201903 | 12000694171 | 12345   | Q146     |
+      | 201904 | 12000756292 | 12345   | Q146     |
 
 
   Scenario Outline: LU-7171 - Check Override functionality for Previous Period Value Blank Validation on forms 5,6 and 7
@@ -68,8 +68,8 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
     Examples:
       | PPeriod | CPeriod | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | question | overrideMessage                      |
-      | 201903  | 201904  | 49900534932 | blank           | blank           | 1               | 2               | Q20      | ppvb total turnover override message |
-      | 201903  | 201904  | 49900534932 | blank           | blank           | 1               | 2               | Q21      | ppvb internet sales override message |
+      | 201903  | 201904  | 12000534932 | blank           | blank           | 1               | 2               | Q20      | ppvb total turnover override message |
+      | 201903  | 201904  | 12000534932 | blank           | blank           | 1               | 2               | Q21      | ppvb internet sales override message |
 
 
   Scenario Outline: LU-7171 - Check Override functionality for PoPRRM Validation for RSI survey on form 5,6 and 7
@@ -82,9 +82,9 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
     Examples:
       | PPeriodValue | CPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | question |
-      | 201903       | 201904       | 49900589234 | 10              | 400             | 10              | 100             | Q21      |
-      | 201903       | 201904       | 49900672013 | 10              | 400             | 10              | 100             | Q21      |
-      | 201903       | 201904       | 49900748571 | 10              | 400             | 10              | 100             | Q21      |
+      | 201903       | 201904       | 12000589234 | 10              | 400             | 10              | 100             | Q21      |
+      | 201903       | 201904       | 12000672013 | 10              | 400             | 10              | 100             | Q21      |
+      | 201903       | 201904       | 12000748571 | 10              | 400             | 10              | 100             | Q21      |
 
 
   Scenario Outline: LU-7171 - Check Override functionality for PoPMRZ Validation RSI survey on form 5
@@ -97,6 +97,6 @@ Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
 
     Examples:
       | PPeriod | CPeriod | reference   | ppInternetSales | ppTotalTurnover | question |
-      | 201903  | 201904  | 49900551526 | 101             | 1000            | Q21      |
-      | 201903  | 201904  | 49900672013 | 101             | 1000            | Q21      |
-      | 201903  | 201904  | 49900767172 | 101             | 1000            | Q21      |
+      | 201903  | 201904  | 12000551526 | 101             | 1000            | Q21      |
+      | 201903  | 201904  | 12000672013 | 101             | 1000            | Q21      |
+      | 201903  | 201904  | 12000767172 | 101             | 1000            | Q21      |

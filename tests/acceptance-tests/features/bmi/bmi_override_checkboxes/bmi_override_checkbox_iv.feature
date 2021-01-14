@@ -14,4 +14,4 @@ Feature: BMI Surveys(Bricks) - Override checkbox - Invalid Value(IV) Validation 
     Then the validation message should change to "iv override message"
     Examples:
       | survey | reference   | period | value | question |
-      | 074    | 49900229065 | 201905 | 1     | Q8000    |
+      | 074    | 12000229065 | 201905 | 1     | Q8000    |

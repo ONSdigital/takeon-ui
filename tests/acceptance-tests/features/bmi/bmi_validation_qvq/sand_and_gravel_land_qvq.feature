@@ -23,8 +23,8 @@ Feature: Sand and Gravel Land Survey - Question vs Derived Question (QvQ) Valida
     And the "qvq validation" message should <isValidationExists> displayed for question code "Q608"
     Examples:
       | period | reference   | values                                    | isValidationExists | result | derivedTotal | SandAndGravelLandStock |
-      | 201906 | 49900000796 | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                     |
-      | 201906 | 49900000796 | 1,1,0,-1,-3,-5,0                          | be                 | true   | -7           | 7                      |
-      | 201906 | 49900000796 | 2,1,1,2,3,1,1                             | not be             | false  | 11           | 11                     |
-      | 201906 | 49900000796 | 0,0,0,0,0,0,0                             | not be             | false  | 0            | 0                      |
-      | 201906 | 49900000796 | blank,blank,blank,blank,blank,blank,blank | not be             | false  | blank        | blank                  |
+      | 201906 | 12000000796 | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                     |
+      | 201906 | 12000000796 | 1,1,0,-1,-3,-5,0                          | be                 | true   | -7           | 7                      |
+      | 201906 | 12000000796 | 2,1,1,2,3,1,1                             | not be             | false  | 11           | 11                     |
+      | 201906 | 12000000796 | 0,0,0,0,0,0,0                             | not be             | false  | 0            | 0                      |
+      | 201906 | 12000000796 | blank,blank,blank,blank,blank,blank,blank | not be             | false  | blank        | blank                  |

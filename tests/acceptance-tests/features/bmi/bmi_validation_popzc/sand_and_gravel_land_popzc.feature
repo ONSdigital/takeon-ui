@@ -23,8 +23,8 @@ Feature: Sand and Gravel Land Survey - Period on Period Zero Continuity(PoPZC) V
     And the "popzc validation" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | previousPeriod | currentPeriod | isValidationExists |
-      | 49900000796 | 1                  | 0                   | true   | 201903         | 201906        | be                 |
-      | 49900000796 | 0                  | 1                   | true   | 201903         | 201906        | be                 |
-      | 49900000796 | 2                  | 3                   | false  | 201903         | 201906        | not be             |
-      | 49900000796 | 0                  | 0                   | false  | 201903         | 201906        | not be             |
-      | 49900000796 | blank              | blank               | false  | 201903         | 201906        | not be             |
+      | 12000000796 | 1                  | 0                   | true   | 201903         | 201906        | be                 |
+      | 12000000796 | 0                  | 1                   | true   | 201903         | 201906        | be                 |
+      | 12000000796 | 2                  | 3                   | false  | 201903         | 201906        | not be             |
+      | 12000000796 | 0                  | 0                   | false  | 201903         | 201906        | not be             |
+      | 12000000796 | blank              | blank               | false  | 201903         | 201906        | not be             |

@@ -12,9 +12,9 @@ Feature: Blocks Survey - Comment Present(Question vs Value) Validation rule
     Then the "qvv validation" message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment | question | isValidationExists |
-      | 201905 | 49900228645 | 12345   | Q145     | not be             |
-      | 201905 | 49900228645 | blank   | Q145     | not be             |
-      | 201905 | 49900228645 | 2       | Q145     | be                 |
-      | 201905 | 49900228645 | blank   | Q146     | not be             |
-      | 201905 | 49900228645 | 1       | Q146     | not be             |
-      | 201905 | 49900228645 | 2       | Q146     | be                 |
+      | 201905 | 12000228645 | 12345   | Q145     | not be             |
+      | 201905 | 12000228645 | blank   | Q145     | not be             |
+      | 201905 | 12000228645 | 2       | Q145     | be                 |
+      | 201905 | 12000228645 | blank   | Q146     | not be             |
+      | 201905 | 12000228645 | 1       | Q146     | not be             |
+      | 201905 | 12000228645 | 2       | Q146     | be                 |

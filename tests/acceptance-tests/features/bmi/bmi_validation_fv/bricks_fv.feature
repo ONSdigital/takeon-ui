@@ -30,11 +30,11 @@ Feature: Bricks Survey - Fixed Value(FV) Validation rule
     Then the "fv validation" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | period | values       | isValidationExists |
-      | 49900229065 | 201905 | 99999999999  | be                 |
-      | 49900229065 | 201905 | 9999999999   | not be             |
-      | 49900229065 | 201905 | 999999999999 | not be             |
-      | 49900229065 | 201905 | 0            | not be             |
-      | 49900229065 | 201905 | blank        | not be             |
+      | 12000229065 | 201905 | 99999999999  | be                 |
+      | 12000229065 | 201905 | 9999999999   | not be             |
+      | 12000229065 | 201905 | 999999999999 | not be             |
+      | 12000229065 | 201905 | 0            | not be             |
+      | 12000229065 | 201905 | blank        | not be             |
 
 
   Scenario Outline:  LU-7208 - Fixed Value Validation - Bricks Survey comment field questions
@@ -48,6 +48,6 @@ Feature: Bricks Survey - Fixed Value(FV) Validation rule
     Then the "fv validation" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | period | values      | isValidationExists |
-      | 49900229065 | 201905 | 99999999999 | not be             |
-      | 49900229065 | 201905 | 0           | not be             |
-      | 49900229065 | 201905 | blank       | not be             |
+      | 12000229065 | 201905 | 99999999999 | not be             |
+      | 12000229065 | 201905 | 0           | not be             |
+      | 12000229065 | 201905 | blank       | not be             |

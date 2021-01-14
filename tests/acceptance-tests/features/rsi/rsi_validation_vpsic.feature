@@ -13,8 +13,8 @@ Feature: RSI Survey - Validation Value Present SIC (VPSIC)
 
     Examples:
       | period | reference   | SIC   | SICValue | question | isValidationExists |
-      | 201903 | 49900818161 | 47300 | 1        | Q21      | be                 |
-      | 201903 | 49900818161 | 47300 | blank    | Q21      | not be             |
-      | 201904 | 49900818161 | 47300 | 0        | Q21      | not be             |
-      | 201903 | 49900818161 | 47300 | -2       | Q21      | not be             |
-      | 201903 | 49900748571 | 41100 | 1        | Q21      | not be             |
+      | 201903 | 12000818161 | 47300 | 1        | Q21      | be                 |
+      | 201903 | 12000818161 | 47300 | blank    | Q21      | not be             |
+      | 201904 | 12000818161 | 47300 | 0        | Q21      | not be             |
+      | 201903 | 12000818161 | 47300 | -2       | Q21      | not be             |
+      | 201903 | 12000748571 | 41100 | 1        | Q21      | not be             |

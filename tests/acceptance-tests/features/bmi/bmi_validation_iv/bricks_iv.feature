@@ -11,10 +11,10 @@ Feature: Bricks Survey - Invalid Value(IV) Validation rule
     Then the "iv validation" message should <isValidationExists> displayed
     Examples:
       | reference   | period | brickTypeValue | question | isValidationExists |
-      | 49900229065 | 201905 | 2              | Q8000    | not be             |
-      | 49900229065 | 201905 | 3              | Q8000    | not be             |
-      | 49900229065 | 201905 | 4              | Q8000    | not be             |
-      | 49900229065 | 201905 | 0              | Q8000    | be                 |
-      | 49900229065 | 201905 | 1              | Q8000    | be                 |
-      | 49900229065 | 201905 | blank          | Q8000    | be                 |
+      | 12000229065 | 201905 | 2              | Q8000    | not be             |
+      | 12000229065 | 201905 | 3              | Q8000    | not be             |
+      | 12000229065 | 201905 | 4              | Q8000    | not be             |
+      | 12000229065 | 201905 | 0              | Q8000    | be                 |
+      | 12000229065 | 201905 | 1              | Q8000    | be                 |
+      | 12000229065 | 201905 | blank          | Q8000    | be                 |
 

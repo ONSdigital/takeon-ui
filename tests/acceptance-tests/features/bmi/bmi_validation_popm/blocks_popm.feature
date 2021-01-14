@@ -23,11 +23,11 @@ Feature: Blocks Survey - Period on Period Movement(PoPM) Validation rule
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | thresholdValue | operator     | previousPeriod | currentPeriod | isValidationExists |
-      | 49900189484 | 20000              | 9999                | true   | 10000          | greater than | 201905         | 201906        | be                 |
-      | 49900189484 | 9999               | 20000               | true   | 10000          | greater than | 201905         | 201906        | be                 |
-      | 49900189484 | 20000              | 10000               | false  | 10000          | equal to     | 201905         | 201906        | not be             |
-      | 49900189484 | 10000              | 20000               | false  | 10000          | equal to     | 201905         | 201906        | not be             |
-      | 49900189484 | 20000              | 10001               | false  | 10000          | less than    | 201905         | 201906        | not be             |
-      | 49900189484 | 10001              | 20000               | false  | 10000          | less than    | 201905         | 201906        | not be             |
-      | 49900189484 | 0                  | 0                   | false  | 10000          | equal to     | 201905         | 201906        | not be             |
-      | 49900189484 | blank              | blank               | false  | 10000          | equal to     | 201905         | 201906        | not be             |
+      | 12000189484 | 20000              | 9999                | true   | 10000          | greater than | 201905         | 201906        | be                 |
+      | 12000189484 | 9999               | 20000               | true   | 10000          | greater than | 201905         | 201906        | be                 |
+      | 12000189484 | 20000              | 10000               | false  | 10000          | equal to     | 201905         | 201906        | not be             |
+      | 12000189484 | 10000              | 20000               | false  | 10000          | equal to     | 201905         | 201906        | not be             |
+      | 12000189484 | 20000              | 10001               | false  | 10000          | less than    | 201905         | 201906        | not be             |
+      | 12000189484 | 10001              | 20000               | false  | 10000          | less than    | 201905         | 201906        | not be             |
+      | 12000189484 | 0                  | 0                   | false  | 10000          | equal to     | 201905         | 201906        | not be             |
+      | 12000189484 | blank              | blank               | false  | 10000          | equal to     | 201905         | 201906        | not be             |

@@ -16,14 +16,14 @@ Feature: RSI Survey - Validation PoPRRM
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | factor         | result | operator     | thresholdValue | isValidationExists |
-      | 201903              | 201904             | 49900589234 | 10              | 400             | 10              | 100             | increase       | true   | equal to     | 4              | be                 |
-      | 201903              | 201904             | 49900589234 | 10              | 100             | 10              | 400             | decrease       | true   | equal to     | 4              | be                 |
-      | 201903              | 201904             | 49900589234 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
-      | 201903              | 201904             | 49900589234 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
-      | 201903              | 201904             | 49900589234 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
-      | 201903              | 201904             | 49900589234 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
-      | 201903              | 201904             | 49900589234 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
-      | 201903              | 201904             | 49900589234 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
+      | 201903              | 201904             | 12000589234 | 10              | 400             | 10              | 100             | increase       | true   | equal to     | 4              | be                 |
+      | 201903              | 201904             | 12000589234 | 10              | 100             | 10              | 400             | decrease       | true   | equal to     | 4              | be                 |
+      | 201903              | 201904             | 12000589234 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
+      | 201903              | 201904             | 12000589234 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
+      | 201903              | 201904             | 12000589234 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
+      | 201903              | 201904             | 12000589234 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
+      | 201903              | 201904             | 12000589234 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
+      | 201903              | 201904             | 12000589234 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
 
   Scenario Outline: RSI LU-6733 - PoPRRM Validation for RSI survey on form 6
     Given I search for the survey "023" with <reference> for the previous period <previousPeriodValue>
@@ -36,14 +36,14 @@ Feature: RSI Survey - Validation PoPRRM
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | factor         | result | operator     | thresholdValue | isValidationExists |
-      | 201903              | 201904             | 49900672013 | 10              | 400             | 10              | 100             | increase       | true   | equal to     | 4              | be                 |
-      | 201903              | 201904             | 49900672013 | 10              | 100             | 10              | 400             | decrease       | true   | equal to     | 4              | be                 |
-      | 201903              | 201904             | 49900672013 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
-      | 201903              | 201904             | 49900672013 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
-      | 201903              | 201904             | 49900672013 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
-      | 201903              | 201904             | 49900672013 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
-      | 201903              | 201904             | 49900672013 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
-      | 201903              | 201904             | 49900672013 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
+      | 201903              | 201904             | 12000672013 | 10              | 400             | 10              | 100             | increase       | true   | equal to     | 4              | be                 |
+      | 201903              | 201904             | 12000672013 | 10              | 100             | 10              | 400             | decrease       | true   | equal to     | 4              | be                 |
+      | 201903              | 201904             | 12000672013 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
+      | 201903              | 201904             | 12000672013 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
+      | 201903              | 201904             | 12000672013 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
+      | 201903              | 201904             | 12000672013 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
+      | 201903              | 201904             | 12000672013 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
+      | 201903              | 201904             | 12000672013 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
 
   Scenario Outline: RSI LU-6733 - PoPRRM Validation for RSI survey on form 7
     Given I search for the survey "023" with <reference> for the previous period <previousPeriodValue>
@@ -56,11 +56,11 @@ Feature: RSI Survey - Validation PoPRRM
 
     Examples:
       | previousPeriodValue | currentPeriodValue | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | factor         | result | operator     | thresholdValue | isValidationExists |
-      | 201903              | 201904             | 49900748571 | 10              | 400             | 10              | 100             | increase       | true   | equal to     | 4              | be                 |
-      | 201903              | 201904             | 49900748571 | 10              | 100             | 10              | 400             | decrease       | true   | equal to     | 4              | be                 |
-      | 201903              | 201904             | 49900748571 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
-      | 201903              | 201904             | 49900748571 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
-      | 201903              | 201904             | 49900748571 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
-      | 201903              | 201904             | 49900748571 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
-      | 201903              | 201904             | 49900748571 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
-      | 201903              | 201904             | 49900748571 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
+      | 201903              | 201904             | 12000748571 | 10              | 400             | 10              | 100             | increase       | true   | equal to     | 4              | be                 |
+      | 201903              | 201904             | 12000748571 | 10              | 100             | 10              | 400             | decrease       | true   | equal to     | 4              | be                 |
+      | 201903              | 201904             | 12000748571 | 10              | 400             | 11              | 100             | increase       | true   | greater than | 4              | be                 |
+      | 201903              | 201904             | 12000748571 | 10              | 100             | 11              | 400             | decrease       | false  | less than    | 4              | not be             |
+      | 201903              | 201904             | 12000748571 | 10              | 400             | 9               | 100             | increase       | false  | less than    | 4              | not be             |
+      | 201903              | 201904             | 12000748571 | 10              | 100             | 9               | 400             | decrease       | true   | greater than | 4              | be                 |
+      | 201903              | 201904             | 12000748571 | 0               | 0               | 0               | 0               | not-applicable | false  | all zeros    | 4              | not be             |
+      | 201903              | 201904             | 12000748571 | blank           | blank           | blank           | blank           | not-applicable | false  | all blanks   | 4              | not be             |
