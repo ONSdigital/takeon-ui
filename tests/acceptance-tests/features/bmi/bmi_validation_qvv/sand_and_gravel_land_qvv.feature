@@ -1,7 +1,9 @@
 Feature: Sand and Gravel Land Survey - Comment Present(Question vs Value) Validation rule
 
   Background:
-    Given As a BMI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6531 - Comment Present Validation Sand Gravel land survey on form 1
     Given I search for the survey "066" with <reference> for the current period <period>

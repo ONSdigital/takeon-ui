@@ -1,7 +1,9 @@
 Feature: RSI Survey - QvQT validation rule
 
   Background:
-    Given As a RSI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a RSI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-6402 - current period total turnover value vs derived value greater than threshold value on form 6
     Given I search for the survey "023" with <reference> for the current period <period>

@@ -1,7 +1,9 @@
 Feature: Test Survey - Value Present SIC (VPSIC) Validation rule
 
   Background:
-    Given As a Business Survey user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a Business Survey user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: SP-100 - Value Present SIC (VPSIC) Validation on test survey
     Given I search for the survey "999A" with <reference> for the current period <period> with SIC code <SIC>

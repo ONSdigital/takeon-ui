@@ -30,9 +30,10 @@
     
 ### Running Tests
 
--  Setting up the environment URL:
+-  Setting up the environment:
 
         export TAKEON_URL="http://{URL}"
+        export COGNITO_USER_POOL="{COGNITO_USER_POOL}"
         Replace URL with the enviroment url you wish to test.
         Note: make sure while setting up the url it has 'http://' protocol otherwise tests will fail
      
@@ -67,7 +68,30 @@
         You can run any one or all tests in headless mode with an additional flag called browser.
         Use - behave {featurefile} -D browser=headless will run in headless mode.
         To run in real chrome browser mode just use - behave {featurefile} without the browser option.
- 
+        
+    
+   - To run tests in order to capture screenshots     
+      
+      The screenshots gets captured whenever a test fails. In order to test screenshots capability we need to force fail the tests.
+     
+      First we need to change directory location to acceptance-tests folder 
+      
+      Example test to run: search feature with smoke tag 
+      change the reference number in this feature file manually for Scenario Outline: Using an existing Survey id 
+      in the example table to an invalid reference number like '1234'
+         
+      Once the tests run completes there will be a new screen_shots folder gets created under the acceptance-tests folder with in that folder 
+      the screen_shots of the failed feature files are saved with the current date and time stamp.      
+           
+      
+      Change the reference 49900000796 manually to 1234 
+      | 066 | 49900000796 | 201903 | to 
+      | 066 | 1234        | 201903 |
+      
+      Then run the below command in the terminal.
+      behave -k --tags=@smoke -D browser=headless will run smoke tests in headless mode.
+       
+   
       
    - To run tests using a docker image
       

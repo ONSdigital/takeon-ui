@@ -64,7 +64,6 @@ class Browser:
                 try:
                     current_url = DriverContext.driver.current_url
                     if url != current_url:
-                        print('url is ' + url)
                         if 'http' not in url:
                             url = 'http://' + url
                             print('url with http is ' + url)
@@ -88,3 +87,7 @@ class Browser:
 
         except ValueError as e:
             print(e)
+
+    @staticmethod
+    def url():
+        print('url is ' + ConfigTest.UI_URL)

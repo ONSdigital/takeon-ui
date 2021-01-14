@@ -1,4 +1,5 @@
 from flask import redirect, url_for, render_template, Blueprint, request
+from spp_cognito_auth import requires_auth, requires_role
 
 search_screen_choice_blueprint = Blueprint(name='search_selection', import_name=__name__)
 
@@ -6,22 +7,10 @@ search_screen_choice_blueprint = Blueprint(name='search_selection', import_name=
 #################################################################################################
 # ######################################## FLASK ENDPOINTS ######################################
 #################################################################################################
-@search_screen_choice_blueprint.errorhandler(404)
-def not_found(error):
-    return render_template('./error_templates/404.html', message_header=error), 404
-
-
-@search_screen_choice_blueprint.errorhandler(403)
-def not_auth(error):
-    return render_template('./error_templates/403.html', message_header=error), 403
-
-
-@search_screen_choice_blueprint.errorhandler(500)
-def internal_server_error(error):
-    return render_template('./error_templates/500.html', message_header=error), 500
-
 
 @search_screen_choice_blueprint.route('/', methods=['GET', 'POST'])
+@requires_auth
+@requires_role(["dev"])
 def general_search_screen_selection():
     if request.method == "POST":
         print(request.form)

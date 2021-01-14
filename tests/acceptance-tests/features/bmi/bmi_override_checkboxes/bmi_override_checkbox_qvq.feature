@@ -1,7 +1,9 @@
 Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Override checkboxes - Question vs Derived Question (QvQ) Validation rule
 
   Background:
-    Given As a BMI user I set the search criteria options for the forms returned by the contributor
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+    And As a BMI user I set the search criteria options for the forms returned by the contributor
 
   Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation BMI - Blocks survey
     Given I search for the survey "073" with <reference> for the current period <period>

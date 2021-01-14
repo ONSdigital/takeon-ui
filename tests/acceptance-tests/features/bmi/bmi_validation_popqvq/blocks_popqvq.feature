@@ -1,5 +1,9 @@
 Feature: Blocks Survey - Period on Period Question vs Question (PoPQvQ) Validation rule
 
+  Background:
+    Given "test-user" exists with the password "test-Password123" and roles ["dev"]
+    And "test-user" is logged in
+
   Scenario Outline:  LU-7032 - Period on Period Question vs Question Validation - Aggregate blocks Closing Stock vs Opening Stock(Dense Aggregate)
     Given As a BMI user I set the search criteria options for the forms returned by the contributor
     And I search for the survey "073" with <reference> for the previous period <previousPeriod>
