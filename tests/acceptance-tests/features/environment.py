@@ -6,11 +6,6 @@ from base.cognito import Cognito
 from pages.common.login_page import LoginPage
 
 
-def before_all(context):
-    Utilities.delete_screenshots_folder()
-    Browser.url()
-
-
 def before_feature(context, feature):
     Browser.initialize_the_browser(context)
 
@@ -26,15 +21,18 @@ def after_scenario(context, scenario):
     LoginPage().logout()
 
 
-
 # After all the tests we need to close the browser
 def after_feature(context, feature):
     DriverContext.driver.quit()
 
+
 # Setup cognito so we can create users in step defs
 def before_all(context):
+    Utilities.delete_screenshots_folder()
+    Browser.url()
     context.created_users = {}
     context.cognito = Cognito()
+
 
 # Ensure all created users have been cleaned up
 def after_all(context):
