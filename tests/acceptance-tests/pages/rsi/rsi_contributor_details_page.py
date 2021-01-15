@@ -3,10 +3,11 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
-from pages.common.contributor_details_page import ContributorDetailsPage
+from pages.common.contributor_details.check_contributor_details import CheckContributorDetails
+from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
 
 
-class RsiContributorDetailsPage(ContributorDetailsPage):
+class RsiContributorDetailsPage(SubmitContributorDetails):
     QUESTION_TOTAL_TURNOVER_ELEMENT = '20'
     QUESTION_INTERNET_SALES_ELEMENT = '21'
     QUESTION_LABEL_PART_ONE = "//label[contains(text(),'"
@@ -31,7 +32,7 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         pp_total_sales = Utilities.convert_blank_data_value(total_sales)
         self.set_internet_sales_value(pp_internet_sales)
         self.set_total_turnover_sales_value(pp_total_sales)
-        self.save_the_application()
+        CheckContributorDetails().save_the_application()
         SeleniumCore.close_the_current_window()
 
     def submit_cp_sales_values(self, internet_sales, total_sales):
@@ -40,16 +41,16 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         cp_total_sales = Utilities.convert_blank_data_value(total_sales)
         self.set_internet_sales_value(cp_internet_sales)
         self.set_total_turnover_sales_value(cp_total_sales)
-        self.save_the_application()
+        CheckContributorDetails().save_the_application()
 
     def validate_the_current_period_internet_sales_details(self, internet_sales):
         self.set_internet_sales_value(internet_sales)
-        self.save_the_application()
+        CheckContributorDetails().save_the_application()
 
     def validate_the_current_period_details(self, internet_sales, total_sales):
         self.set_internet_sales_value(internet_sales)
         self.set_total_turnover_sales_value(total_sales)
-        self.save_the_application()
+        CheckContributorDetails().save_the_application()
 
     def get_derived_question_value(self):
         return int(SeleniumCore.get_attribute_element_text(*RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT))
@@ -57,14 +58,14 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def run_the_validation_process(self, total_turnover_value, exp_derived_value):
         SeleniumCore.set_current_data_text(self.QUESTION_TOTAL_TURNOVER_ELEMENT,
                                            total_turnover_value)
-        self.save_the_application()
+        CheckContributorDetails().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(
             *RsiContributorDetailsPage.QUESTION_DERIVED_ELEMENT)
         ReportingHelper.check_single_message_matches('Q7034', actual_derived_val, exp_derived_value)
 
     def check_pop_ratio_of_ratios_validation(self, factor_type,
                                              operator_type, threshold_value, result):
-        self.check_if_overall_validation_triggered()
+        CheckContributorDetails().check_if_overall_validation_triggered()
         is_validation_triggered = False
         if factor_type == 'increase':
             value_one = int(cp_internet_sales) * int(pp_total_sales)

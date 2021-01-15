@@ -13,6 +13,7 @@ def current_period_sales(context, current_internet_sales_val):
 def submit_sales_values(context, internet_sales, total_sales):
     context.internet_sales = internet_sales
     context.total_sales = total_sales
+    context.values = None
     if context.survey == '023':
         RsiContributorDetailsPage().submit_sales_values(context.period_type, context.internet_sales,
                                                         context.total_sales)

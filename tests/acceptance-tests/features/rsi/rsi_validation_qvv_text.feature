@@ -19,7 +19,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | Q146g          |
       | Q146h          |
     When I trigger the validation process
-    Then the <comment> message should <isValidationExists> displayed
+    Then the "comment" <comment> message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment            | isValidationExists |
       | 201903 | 49900551526 | TEST               | be                 |
@@ -43,7 +43,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | Q146g          |
       | Q146h          |
     When I trigger the validation process
-    Then the <comment> message should <isValidationExists> displayed
+    Then the "comment" <comment> message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment            | isValidationExists |
       | 201903 | 49900613746 | TEST               | be                 |
@@ -68,7 +68,7 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | Q146g          |
       | Q146h          |
     When I trigger the validation process
-    Then the <comment> message should <isValidationExists> displayed
+    Then the "comment" <comment> message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment            | isValidationExists |
       | 201903 | 49900791240 | TEST               | be                 |
