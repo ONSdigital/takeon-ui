@@ -1,14 +1,8 @@
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
-from pages.common.base_page import BasePage
 
 
-class SubmitContributorDetails(BasePage):
-
-    def __init__(self):
-        if self.current_page_title() == 'Search':
-            SeleniumCore.switch_window()
-        super().__init__('Data Clearing')
+class SubmitContributorDetails:
 
     def submit_question_value(self, survey, value_type, value, question):
         if value_type:
@@ -19,7 +13,7 @@ class SubmitContributorDetails(BasePage):
         question_element = Utilities.get_question_code_element(survey, question)
         SeleniumCore.set_current_data_text(question_element, value)
 
-    def submit_values_for_survey_questions(self, *questions_and_values):
+    def submit_values_for_survey_questions(self, questions_and_values):
         survey = questions_and_values[0]
         questions_list = questions_and_values[1]
         commodity_values = Utilities.get_values_as_a_list(questions_and_values[2])

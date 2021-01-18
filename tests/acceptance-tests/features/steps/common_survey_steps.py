@@ -1,11 +1,8 @@
 from behave import given, when, then
 
-from pages.common.contributor_details.check_contributor_details import CheckContributorDetails
+from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.common.contributor_search_page import ContributorSearchPage
-from pages.common.contributor_details.get_contributor_details import GetContributorDetails
 from pages.common.search_by_page import SearchByPage
-from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
-from pages.common.contributor_details.validate_contributor_details import ValidateContributorDetails
 from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 from pages.test_survey.test_survey_contributor_details_page import TestSurveyContributorDetailsPage
 
@@ -48,7 +45,7 @@ def submit_the_question_data_values(context, value_type, values):
         for cell in row.cells:
             context.question_codes.append(cell)
     context.values = values
-    SubmitContributorDetails().submit_values_for_survey_questions(context.survey, context.question_codes, values)
+    ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
 
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -56,13 +53,13 @@ def submit_the_question_data_values(context, value_type, values):
 def submit_the_question_type_values(context, value_type, comment_value, question):
     context.question_codes = question.upper()
     context.values = comment_value
-    SubmitContributorDetails().submit_question_value(context.survey, value_type, comment_value, question)
+    ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
 
 
 @given(u'I trigger the validation process')
 @when(u'I trigger the validation process')
 def trigger_the_validation(context):
-    CheckContributorDetails().save_the_application()
+    ContributorDetailsPage().save_the_application()
 
 
 @given(u'I run the validation process for {question_value} against the {derived_value}')
@@ -87,7 +84,7 @@ def run_the_validation_process(context, derived_value, question_value=None):
             for cell in row.cells:
                 context.codes.append(cell)
         context.question_code = context.codes
-        ValidateContributorDetails().run_the_validation_process(context.question_code, question_value, derived_value,
+        ContributorDetailsPage().run_the_validation_process(context.question_code, question_value, derived_value,
                                                                 context.survey)
 
 
@@ -96,7 +93,7 @@ def run_the_validation_process(context, derived_value, question_value=None):
 def check_validation_message(context, validation_message, is_validation_exists, question_codes=None):
     if not question_codes:
         question_codes = context.question_codes
-    page = CheckContributorDetails()
+    page = ContributorDetailsPage()
     page.check_validation_message(context.survey, question_codes, validation_message,
                                   is_validation_exists)
 
@@ -110,14 +107,14 @@ def check_multiple_validation_messages(context, validation_message, is_validatio
                                        comment=None):
     if not question_codes and comment:
         question_codes = context.question_codes
-        CheckContributorDetails().check_multiple_comment_text_messages(context.survey, question_codes, context.values)
+        ContributorDetailsPage().check_multiple_comment_text_messages(context.survey, question_codes, context.values)
     elif not question_codes:
         question_codes = context.question_codes
-        CheckContributorDetails().check_multiple_questions_validation_messages(context.survey, question_codes,
+        ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
                                                                                validation_message,
                                                                                is_validation_exists)
     else:
-        CheckContributorDetails().check_multiple_questions_validation_messages(context.survey, question_codes,
+        ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
                                                                                validation_message,
                                                                                is_validation_exists)
 
@@ -126,7 +123,7 @@ def check_multiple_validation_messages(context, validation_message, is_validatio
     u'the validation should return {result} if the "{validation_check}" '
     u'{operator_type} threshold value {threshold_value}')
 def check_validation_by_operator(context, result, validation_check, operator_type, threshold_value):
-    page = CheckContributorDetails()
+    page = ContributorDetailsPage()
     if validation_check == 'turnover ratio is':
         page.check_turnover_ratio(operator_type, context.internet_sales,
                                   context.total_sales, threshold_value, result)
@@ -159,18 +156,18 @@ def override_the_validation(context, question):
         question = context.question_codes
     else:
         context.question_codes = question
-    page = GetContributorDetails()
+    page = ContributorDetailsPage()
     page.override_the_validation(question, 'override')
 
 
 @then(u'the validation message should change to {override_message}')
 @then(u'the validation message should change to "{override_message}"')
 def check_override_validation_message(context, override_message):
-    page = CheckContributorDetails()
+    page = ContributorDetailsPage()
     page.check_the_override_message(context.survey, context.question_codes, override_message)
 
 
 @then(u'the override checkbox should not be displayed for {question}')
 def check_override_checkbox_displayed(context, question):
-    page = CheckContributorDetails()
+    page = ContributorDetailsPage()
     page.check_the_override_checkbox_displayed(question)

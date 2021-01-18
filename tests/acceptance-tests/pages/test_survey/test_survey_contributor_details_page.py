@@ -3,13 +3,14 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
-from pages.common.contributor_details.check_contributor_details import CheckContributorDetails
+from pages.common.contributor_details.check_messages_contributor_details import CheckMessagesContributorDetails
+from pages.common.contributor_details.check_values_contributor_details import CheckValuesContributorDetails
 from pages.common.contributor_details.get_contributor_details import GetContributorDetails
-from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
+from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.locators import contributor_details
 
 
-class TestSurveyContributorDetailsPage(SubmitContributorDetails):
+class TestSurveyContributorDetailsPage(ContributorDetailsPage):
     POPMRZ_QUESTION_PRIMARY_ELEMENT = '0023'
     POPMRZ_QUESTION_SECONDARY_ELEMENT = '0024'
     POPRRM_QUESTION_PRIMARY_ELEMENT = '0028'
@@ -52,7 +53,7 @@ class TestSurveyContributorDetailsPage(SubmitContributorDetails):
         pp_total_sales = Utilities.convert_blank_data_value(total_sales)
         self.set_internet_sales_value(validation_type, pp_internet_sales)
         self.set_total_turnover_sales_value(validation_type, pp_total_sales)
-        CheckContributorDetails().save_the_application()
+        CheckValuesContributorDetails().save_the_application()
         SeleniumCore.close_the_current_window()
 
     def submit_cp_sales_values(self, validation_type, internet_sales, total_sales):
@@ -61,16 +62,16 @@ class TestSurveyContributorDetailsPage(SubmitContributorDetails):
         cp_total_sales = Utilities.convert_blank_data_value(total_sales)
         self.set_internet_sales_value(validation_type, cp_internet_sales)
         self.set_total_turnover_sales_value(validation_type, cp_total_sales)
-        CheckContributorDetails().save_the_application()
+        CheckValuesContributorDetails().save_the_application()
 
     def validate_the_current_period_details(self, validation_type, internet_sales):
         self.set_internet_sales_value(validation_type, internet_sales)
-        CheckContributorDetails().save_the_application()
+        CheckValuesContributorDetails().save_the_application()
 
     def run_the_validation_process(self, threshold_primary_value, exp_derived_value):
         SeleniumCore.set_current_data_text(self.THRESHOLD_PRIMARY_QUESTION_ELEMENT,
                                            threshold_primary_value)
-        CheckContributorDetails().save_the_application()
+        CheckValuesContributorDetails().save_the_application()
         actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, self.THRESHOLD_DERIVED_QUESTION_ELEMENT)
         ReportingHelper.check_single_message_matches('Q12', actual_derived_val, exp_derived_value)
 
@@ -97,7 +98,7 @@ class TestSurveyContributorDetailsPage(SubmitContributorDetails):
 
     def check_pop_ratio_of_ratios_validation(self, factor_type,
                                              operator_type, threshold_value, result):
-        CheckContributorDetails().check_if_overall_validation_triggered()
+        CheckMessagesContributorDetails().check_if_overall_validation_triggered()
         is_validation_triggered = False
         if factor_type == 'increase':
             value_one = int(cp_internet_sales) * int(pp_total_sales)
