@@ -11,10 +11,10 @@ from uuid import uuid4
 from spp_cognito_auth import Auth, AuthConfig, AuthBlueprint, new_oauth_client
 from spp_logger import SPPLogger, SPPLoggerConfig
 
+# get log level from ENV VAR and convert to upper case
+log_level = os.getenv("LOG_LEVEL", default="INFO").upper()
+
 def set_logger(lambda_name, context, survey, period):
-    # get log level from ENV VAR and convert to upper case
-    log_level = os.getenv("LOG_LEVEL", default="INFO").upper()
-    log.debug(f'log level: {log_level}')
     # set logger configs
     config = SPPLoggerConfig(
         service="Data Clearing UI",
@@ -41,6 +41,7 @@ def set_logger(lambda_name, context, survey, period):
 # log = logging.getLogger(__name__)
 # logging.basicConfig(level=logging.INFO)
 log = set_logger("lambda_name", "context", "survey", "period")
+log.debug(f'log level: {log_level}')
 
 api_caller = ApiRequest(service="business-layer", mocking=settings.MOCKING)
 api_caller_pl = ApiRequest(service="persistence-layer", mocking=settings.MOCKING)
