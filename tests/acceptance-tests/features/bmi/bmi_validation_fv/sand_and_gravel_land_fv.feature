@@ -22,11 +22,11 @@ Feature: Sand and Gravel Land Survey - Fixed Value(FV) Validation rule
     Then the "fv validation" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | period | values       | isValidationExists |
-      | 49900012765 | 201903 | 99999999999  | be                 |
-      | 49900012765 | 201903 | 9999999999   | not be             |
-      | 49900012765 | 201903 | 999999999999 | not be             |
-      | 49900012765 | 201903 | 0            | not be             |
-      | 49900012765 | 201903 | blank        | not be             |
+      | 12000012765 | 201903 | 99999999999  | be                 |
+      | 12000012765 | 201903 | 9999999999   | not be             |
+      | 12000012765 | 201903 | 999999999999 | not be             |
+      | 12000012765 | 201903 | 0            | not be             |
+      | 12000012765 | 201903 | blank        | not be             |
 
 
   Scenario Outline:  LU-7208 - Check Fixed Value Validation - Sand and Gravel Land Survey comment field questions
@@ -39,6 +39,6 @@ Feature: Sand and Gravel Land Survey - Fixed Value(FV) Validation rule
     Then the "fv validation" message should <isValidationExists> displayed for question codes
     Examples:
       | reference   | period | values      | isValidationExists |
-      | 49900012765 | 201903 | 99999999999 | not be             |
-      | 49900012765 | 201903 | 0           | not be             |
-      | 49900012765 | 201903 | blank       | not be             |
+      | 12000012765 | 201903 | 99999999999 | not be             |
+      | 12000012765 | 201903 | 0           | not be             |
+      | 12000012765 | 201903 | blank       | not be             |

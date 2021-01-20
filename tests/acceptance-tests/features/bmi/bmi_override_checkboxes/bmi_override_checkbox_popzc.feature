@@ -15,6 +15,6 @@ Feature: BMI Surveys(Blocks,Sand Gravel Land and Sand Gravel Marine) - Override 
 
     Examples:
       | survey | reference   | currentPeriodValue | previousPeriodValue | previousPeriod | currentPeriod | questionCode |
-      | 073    | 49900189484 | 1                  | 0                   | 201905         | 201906        | Q104         |
-      | 066    | 49900000796 | 1                  | 0                   | 201903         | 201906        | Q601         |
-      | 076    | 49900004791 | 1                  | 0                   | 201903         | 201906        | Q601         |
+      | 073    | 12000189484 | 1                  | 0                   | 201905         | 201906        | Q104         |
+      | 066    | 12000000796 | 1                  | 0                   | 201903         | 201906        | Q601         |
+      | 076    | 12000004791 | 1                  | 0                   | 201903         | 201906        | Q601         |

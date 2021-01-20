@@ -13,9 +13,9 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
 
     Examples:
       | period | reference   | value | question | isValidationExists |
-      | 201903 | 49900534932 | blank | Q20      | be                 |
-      | 201903 | 49900694171 | blank | Q20      | be                 |
-      | 201904 | 49900756292 | blank | Q20      | be                 |
+      | 201903 | 12000534932 | blank | Q20      | be                 |
+      | 201903 | 12000694171 | blank | Q20      | be                 |
+      | 201904 | 12000756292 | blank | Q20      | be                 |
 
 
   Scenario Outline: RSI LU-6579 - Value is Zero(VZ) Validation on forms 5,6 and 7
@@ -26,9 +26,9 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
 
     Examples:
       | period | reference   | value | question | isValidationExists |
-      | 201903 | 49900534932 | 0     | Q20      | be                 |
-      | 201903 | 49900694171 | 0     | Q20      | be                 |
-      | 201904 | 49900756292 | 0     | Q20      | be                 |
+      | 201903 | 12000534932 | 0     | Q20      | be                 |
+      | 201903 | 12000694171 | 0     | Q20      | be                 |
+      | 201904 | 12000756292 | 0     | Q20      | be                 |
 
 
   Scenario Outline: RSI LU-6579 - Value is Blank(VB) and Value is Zero(VZ) Validation on forms 5,6 and 7
@@ -39,9 +39,9 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
 
     Examples:
       | period | reference   | value | question | isValidationExists |
-      | 201903 | 49900534932 | 2     | Q20      | not be             |
-      | 201903 | 49900694171 | 2     | Q20      | not be             |
-      | 201904 | 49900534932 | 2     | Q20      | not be             |
+      | 201903 | 12000534932 | 2     | Q20      | not be             |
+      | 201903 | 12000694171 | 2     | Q20      | not be             |
+      | 201904 | 12000534932 | 2     | Q20      | not be             |
 
   Scenario Outline: RSI LU-6579 - Value is Blank(VB) and Value is Zero(VZ) Validation for negative values on forms 5,6 and 7
     Given I search for the survey "023" with <reference> for the current period <period>
@@ -51,6 +51,6 @@ Feature: RSI Survey - Validation Value is Blank and Value is Zero
 
     Examples:
       | period | reference   | value | question | isValidationExists |
-      | 201903 | 49900534932 | -2    | Q20      | not be             |
-      | 201903 | 49900694171 | -2    | Q20      | not be             |
-      | 201904 | 49900534932 | -2    | Q20      | not be             |
+      | 201903 | 12000534932 | -2    | Q20      | not be             |
+      | 201903 | 12000694171 | -2    | Q20      | not be             |
+      | 201904 | 12000534932 | -2    | Q20      | not be             |

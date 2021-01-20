@@ -12,9 +12,9 @@ Feature: Bricks Survey - Comment Present(Question vs Value) Validation rule
     Then the "qvv validation" message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment | question | isValidationExists |
-      | 201905 | 49900229065 | 12345   | Q145     | not be             |
-      | 201905 | 49900229065 | blank   | Q145     | not be             |
-      | 201905 | 49900229065 | 2       | Q145     | be                 |
-      | 201905 | 49900229065 | blank   | Q146     | not be             |
-      | 201905 | 49900229065 | 1       | Q146     | not be             |
-      | 201905 | 49900229065 | 2       | Q146     | be                 |
+      | 201905 | 12000229065 | 12345   | Q145     | not be             |
+      | 201905 | 12000229065 | blank   | Q145     | not be             |
+      | 201905 | 12000229065 | 2       | Q145     | be                 |
+      | 201905 | 12000229065 | blank   | Q146     | not be             |
+      | 201905 | 12000229065 | 1       | Q146     | not be             |
+      | 201905 | 12000229065 | 2       | Q146     | be                 |

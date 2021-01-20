@@ -23,11 +23,11 @@ Feature: Bricks Survey - Period on Period Movement(PoPM) Validation rule
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | thresholdValue | operator     | previousPeriod | currentPeriod | isValidationExists |
-      | 49900423293 | 2000000            | 999999              | true   | 1000000        | greater than | 201905         | 201906        | be                 |
-      | 49900423293 | 999999             | 2000000             | true   | 1000000        | greater than | 201905         | 201906        | be                 |
-      | 49900423293 | 2000000            | 1000000             | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
-      | 49900423293 | 1000000            | 2000000             | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
-      | 49900423293 | 2000000            | 1000001             | false  | 1000000        | less than    | 201905         | 201906        | not be             |
-      | 49900423293 | 1000001            | 2000000             | false  | 1000000        | less than    | 201905         | 201906        | not be             |
-      | 49900423293 | 0                  | 0                   | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
-      | 49900423293 | blank              | blank               | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
+      | 12000423293 | 2000000            | 999999              | true   | 1000000        | greater than | 201905         | 201906        | be                 |
+      | 12000423293 | 999999             | 2000000             | true   | 1000000        | greater than | 201905         | 201906        | be                 |
+      | 12000423293 | 2000000            | 1000000             | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
+      | 12000423293 | 1000000            | 2000000             | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
+      | 12000423293 | 2000000            | 1000001             | false  | 1000000        | less than    | 201905         | 201906        | not be             |
+      | 12000423293 | 1000001            | 2000000             | false  | 1000000        | less than    | 201905         | 201906        | not be             |
+      | 12000423293 | 0                  | 0                   | false  | 1000000        | equal to     | 201905         | 201906        | not be             |
+      | 12000423293 | blank              | blank               | false  | 1000000        | equal to     | 201905         | 201906        | not be             |

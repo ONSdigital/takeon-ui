@@ -14,7 +14,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
     Then the validation message should change to "qvv override message"
     Examples:
       | survey | period | reference   | comment | question |
-      | 073    | 201905 | 49900228645 | 2       | Q145     |
-      | 074    | 201905 | 49900229065 | 2       | Q145     |
-      | 066    | 201903 | 49900000796 | 2       | Q146     |
-      | 076    | 201903 | 49900004791 | 2       | Q146     |
+      | 073    | 201905 | 12000228645 | 2       | Q145     |
+      | 074    | 201905 | 12000229065 | 2       | Q145     |
+      | 066    | 201903 | 12000000796 | 2       | Q146     |
+      | 076    | 201903 | 12000004791 | 2       | Q146     |
