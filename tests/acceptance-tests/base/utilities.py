@@ -6,7 +6,8 @@ from base.driver_context import DriverContext
 
 
 class Utilities:
-    SCREENSHOTS_LOC = os.getcwd() + '/screen_shots'
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    SCREENSHOTS_LOC = path + '/screen_shots'
 
     @staticmethod
     def convert_blank_data_value(data):

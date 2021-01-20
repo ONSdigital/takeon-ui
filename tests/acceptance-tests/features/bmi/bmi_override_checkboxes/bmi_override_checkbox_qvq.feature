@@ -19,7 +19,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
     Then the validation message should change to "qvq override message"
     Examples:
       | period | reference   | values | derivedTotal | blocksClosingStock | question |
-      | 201905 | 49900138556 | 1,1,1  | 1            | 2                  | Q104     |
+      | 201905 | 12000138556 | 1,1,1  | 1            | 2                  | Q104     |
 
 
   Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation - Bricks survey
@@ -36,7 +36,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
     Then the validation message should change to "qvq override message"
     Examples:
       | period | reference   | values | derivedTotal | blocksClosingStock | question |
-      | 201905 | 49900356828 | 1,1,1  | 1            | 2                  | Q004     |
+      | 201905 | 12000356828 | 1,1,1  | 1            | 2                  | Q004     |
 
 
   Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation BMI - Sand Gravel Land Survey
@@ -57,7 +57,7 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
     Then the validation message should change to "qvq override message"
     Examples:
       | period | reference   | values        | question | derivedTotal | SandAndGravelLandStock |
-      | 201906 | 49900000796 | 1,1,1,1,1,1,1 | Q608     | 7            | 10                     |
+      | 201906 | 12000000796 | 1,1,1,1,1,1,1 | Q608     | 7            | 10                     |
 
 
   Scenario Outline: LU-7170 - Check Override functionality for Question vs Question Validation BMI - Sand Gravel Marine Survey
@@ -78,4 +78,4 @@ Feature: BMI Surveys(Blocks,Bricks,Sand Gravel Land and Sand Gravel Marine) - Ov
     Then the validation message should change to "qvq override message"
     Examples:
       | period | reference   | values        | question | derivedTotal | SandAndGravelMarineStock |
-      | 201903 | 49900004791 | 1,1,1,1,1,1,1 | Q608     | 7            | 10                       |
+      | 201903 | 12000004791 | 1,1,1,1,1,1,1 | Q608     | 7            | 10                       |

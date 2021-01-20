@@ -12,9 +12,9 @@ Feature: Sand and Gravel Land Survey - Comment Present(Question vs Value) Valida
     Then the "qvv validation" message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment | question | isValidationExists |
-      | 201903 | 49900000796 | 12345   | Q146     | not be             |
-      | 201903 | 49900000796 | blank   | Q146     | not be             |
-      | 201903 | 49900000796 | 2       | Q146     | be                 |
-      | 201903 | 49900000796 | blank   | Q147     | not be             |
-      | 201903 | 49900000796 | 1       | Q147     | not be             |
-      | 201903 | 49900000796 | 2       | Q147     | be                 |
+      | 201903 | 12000000796 | 12345   | Q146     | not be             |
+      | 201903 | 12000000796 | blank   | Q146     | not be             |
+      | 201903 | 12000000796 | 2       | Q146     | be                 |
+      | 201903 | 12000000796 | blank   | Q147     | not be             |
+      | 201903 | 12000000796 | 1       | Q147     | not be             |
+      | 201903 | 12000000796 | 2       | Q147     | be                 |

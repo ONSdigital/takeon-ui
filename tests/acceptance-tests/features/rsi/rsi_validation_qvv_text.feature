@@ -19,15 +19,15 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | Q146g          |
       | Q146h          |
     When I trigger the validation process
-    Then the <comment> message should <isValidationExists> displayed
+    Then the "comment" <comment> message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment            | isValidationExists |
-      | 201903 | 49900551526 | TEST               | be                 |
-      | 201903 | 49900551526 | TEST<Blank>TEST    | be                 |
-      | 201903 | 49900551526 | <Blank>TEST<Blank> | be                 |
-      | 201903 | 49900551526 | <Blank>TEST        | be                 |
-      | 201903 | 49900551526 | TEST<Blank>        | be                 |
-      | 201903 | 49900551526 | <Blank>            | be                 |
+      | 201903 | 12000551526 | TEST               | be                 |
+      | 201903 | 12000551526 | TEST<Blank>TEST    | be                 |
+      | 201903 | 12000551526 | <Blank>TEST<Blank> | be                 |
+      | 201903 | 12000551526 | <Blank>TEST        | be                 |
+      | 201903 | 12000551526 | TEST<Blank>        | be                 |
+      | 201903 | 12000551526 | <Blank>            | be                 |
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 6
     Given I search for the survey "023" with <reference> for the current period <period>
@@ -43,15 +43,15 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | Q146g          |
       | Q146h          |
     When I trigger the validation process
-    Then the <comment> message should <isValidationExists> displayed
+    Then the "comment" <comment> message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment            | isValidationExists |
-      | 201903 | 49900613746 | TEST               | be                 |
-      | 201903 | 49900613746 | TEST<Blank>TEST    | be                 |
-      | 201903 | 49900613746 | <Blank>TEST<Blank> | be                 |
-      | 201903 | 49900613746 | <Blank>TEST        | be                 |
-      | 201903 | 49900613746 | TEST<Blank>        | be                 |
-      | 201903 | 49900613746 | <Blank>            | be                 |
+      | 201903 | 12000613746 | TEST               | be                 |
+      | 201903 | 12000613746 | TEST<Blank>TEST    | be                 |
+      | 201903 | 12000613746 | <Blank>TEST<Blank> | be                 |
+      | 201903 | 12000613746 | <Blank>TEST        | be                 |
+      | 201903 | 12000613746 | TEST<Blank>        | be                 |
+      | 201903 | 12000613746 | <Blank>            | be                 |
 
 
   Scenario Outline: LU-6640 - Comment Present Validation RSI survey on form 7
@@ -68,13 +68,13 @@ Feature: RSI Survey - Comment Present(Question vs Value) Validation rule for tex
       | Q146g          |
       | Q146h          |
     When I trigger the validation process
-    Then the <comment> message should <isValidationExists> displayed
+    Then the "comment" <comment> message should <isValidationExists> displayed
     Examples:
       | period | reference   | comment            | isValidationExists |
-      | 201903 | 49900791240 | TEST               | be                 |
-      | 201903 | 49900791240 | TEST<Blank>TEST    | be                 |
-      | 201903 | 49900791240 | <Blank>TEST<Blank> | be                 |
-      | 201903 | 49900791240 | <Blank>TEST        | be                 |
-      | 201903 | 49900791240 | TEST<Blank>        | be                 |
-      | 201903 | 49900791240 | <Blank>            | be                 |
+      | 201903 | 12000791240 | TEST               | be                 |
+      | 201903 | 12000791240 | TEST<Blank>TEST    | be                 |
+      | 201903 | 12000791240 | <Blank>TEST<Blank> | be                 |
+      | 201903 | 12000791240 | <Blank>TEST        | be                 |
+      | 201903 | 12000791240 | TEST<Blank>        | be                 |
+      | 201903 | 12000791240 | <Blank>            | be                 |
 

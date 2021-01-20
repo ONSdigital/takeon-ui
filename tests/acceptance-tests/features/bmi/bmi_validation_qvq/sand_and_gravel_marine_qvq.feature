@@ -23,8 +23,8 @@ Feature: Sand and Gravel Marine Survey - Question vs Derived Question (QvQ) Vali
     And the "qvq validation" message should <isValidationExists> displayed for question code "Q608"
     Examples:
       | period | reference   | values                                    | isValidationExists | result | derivedTotal | SandAndGravelMarineStock |
-      | 201903 | 49900004791 | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                       |
-      | 201903 | 49900004791 | 1,1,0,-1,-3,-5,0                          | be                 | true   | -7           | 7                        |
-      | 201903 | 49900004791 | 2,1,1,2,3,1,1                             | not be             | false  | 11           | 11                       |
-      | 201903 | 49900004791 | 0,0,0,0,0,0,0                             | not be             | false  | 0            | 0                        |
-      | 201903 | 49900004791 | blank,blank,blank,blank,blank,blank,blank | not be             | false  | blank        | blank                    |
+      | 201903 | 12000004791 | 1,1,1,1,1,1,1                             | be                 | true   | 7            | 10                       |
+      | 201903 | 12000004791 | 1,1,0,-1,-3,-5,0                          | be                 | true   | -7           | 7                        |
+      | 201903 | 12000004791 | 2,1,1,2,3,1,1                             | not be             | false  | 11           | 11                       |
+      | 201903 | 12000004791 | 0,0,0,0,0,0,0                             | not be             | false  | 0            | 0                        |
+      | 201903 | 12000004791 | blank,blank,blank,blank,blank,blank,blank | not be             | false  | blank        | blank                    |

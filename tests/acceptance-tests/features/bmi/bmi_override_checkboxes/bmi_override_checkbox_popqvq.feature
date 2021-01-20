@@ -16,5 +16,5 @@ Feature: BMI Surveys(Blocks,Bricks) - Override checkbox - Period On Period Quest
 
     Examples:
       | survey | reference   | currentPValue | previousPValue | previousQuestion | currentQuestion | previousPeriod | currentPeriod |
-      | 073    | 49900228645 | 3             | 4              | Q104             | Q101            | 201905         | 201906        |
-      | 074    | 49900229065 | 3             | 4              | Q004             | Q001            | 201905         | 201906        |
+      | 073    | 12000228645 | 3             | 4              | Q104             | Q101            | 201905         | 201906        |
+      | 074    | 12000229065 | 3             | 4              | Q004             | Q001            | 201905         | 201906        |

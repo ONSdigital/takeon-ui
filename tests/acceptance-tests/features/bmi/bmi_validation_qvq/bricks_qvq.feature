@@ -19,11 +19,11 @@ Feature: Bricks Survey - Question vs Derived Question (QvQ) Validation rule
     And the "qvq validation" message should <isValidationExists> displayed for question code "Q004"
     Examples:
       | period | reference   | values            | isValidationExists | result | derivedTotal | bricksClosingStock |
-      | 201905 | 49900356828 | 1,1,1             | be                 | true   | 1            | 2                  |
-      | 201905 | 49900356828 | 1,1,3             | be                 | true   | -1           | 2                  |
-      | 201905 | 49900356828 | 2,1,1             | not be             | false  | 2            | 2                  |
-      | 201905 | 49900356828 | 0,0,0             | not be             | false  | 0            | 0                  |
-      | 201905 | 49900356828 | blank,blank,blank | not be             | false  | blank        | blank              |
+      | 201905 | 12000356828 | 1,1,1             | be                 | true   | 1            | 2                  |
+      | 201905 | 12000356828 | 1,1,3             | be                 | true   | -1           | 2                  |
+      | 201905 | 12000356828 | 2,1,1             | not be             | false  | 2            | 2                  |
+      | 201905 | 12000356828 | 0,0,0             | not be             | false  | 0            | 0                  |
+      | 201905 | 12000356828 | blank,blank,blank | not be             | false  | blank        | blank              |
 
 
   Scenario Outline: LU-7034 - Question vs Question Validation BMI survey on form 4
@@ -40,11 +40,11 @@ Feature: Bricks Survey - Question vs Derived Question (QvQ) Validation rule
     And the "qvq validation" message should <isValidationExists> displayed for question code "Q014"
     Examples:
       | period | reference   | values            | isValidationExists | result | derivedTotal | bricksClosingStock |
-      | 201906 | 49900356828 | 1,1,1             | be                 | true   | 1            | 2                  |
-      | 201906 | 49900356828 | 1,1,3             | be                 | true   | -1           | 2                  |
-      | 201906 | 49900356828 | 2,1,1             | not be             | false  | 2            | 2                  |
-      | 201906 | 49900356828 | 0,0,0             | not be             | false  | 0            | 0                  |
-      | 201906 | 49900356828 | blank,blank,blank | not be             | false  | blank        | blank              |
+      | 201906 | 12000356828 | 1,1,1             | be                 | true   | 1            | 2                  |
+      | 201906 | 12000356828 | 1,1,3             | be                 | true   | -1           | 2                  |
+      | 201906 | 12000356828 | 2,1,1             | not be             | false  | 2            | 2                  |
+      | 201906 | 12000356828 | 0,0,0             | not be             | false  | 0            | 0                  |
+      | 201906 | 12000356828 | blank,blank,blank | not be             | false  | blank        | blank              |
 
   Scenario Outline: LU-7034 - Question vs Question Validation BMI survey on form 4
     Given I search for the survey "074" with <reference> for the current period <period>
@@ -60,8 +60,8 @@ Feature: Bricks Survey - Question vs Derived Question (QvQ) Validation rule
     And the "qvq validation" message should <isValidationExists> displayed for question code "Q024"
     Examples:
       | period | reference   | values            | isValidationExists | result | derivedTotal | bricksClosingStock |
-      | 201905 | 49900356828 | 1,1,1             | be                 | true   | 1            | 2                  |
-      | 201905 | 49900356828 | 1,1,3             | be                 | true   | -1           | 2                  |
-      | 201905 | 49900356828 | 2,1,1             | not be             | false  | 2            | 2                  |
-      | 201905 | 49900356828 | 0,0,0             | not be             | false  | 0            | 0                  |
-      | 201905 | 49900356828 | blank,blank,blank | not be             | false  | blank        | blank              |
+      | 201905 | 12000356828 | 1,1,1             | be                 | true   | 1            | 2                  |
+      | 201905 | 12000356828 | 1,1,3             | be                 | true   | -1           | 2                  |
+      | 201905 | 12000356828 | 2,1,1             | not be             | false  | 2            | 2                  |
+      | 201905 | 12000356828 | 0,0,0             | not be             | false  | 0            | 0                  |
+      | 201905 | 12000356828 | blank,blank,blank | not be             | false  | blank        | blank              |

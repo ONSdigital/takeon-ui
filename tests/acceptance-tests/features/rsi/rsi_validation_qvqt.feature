@@ -20,12 +20,12 @@ Feature: RSI Survey - QvQT validation rule
 
     Examples:
       | reference   | period | values    | totalTurnoverValue | derivedValue | result | operator     | thresholdValue | isValidationExists |
-      | 49900694171 | 201903 | 1,1,1,0,1 | 10                 | 4            | true   | greater than | 5              | be                 |
-      | 49900694171 | 201903 | 1,2,3,2,2 | 4                  | 10           | true   | greater than | 5              | be                 |
-      | 49900694171 | 201903 | 1,1,1,1,1 | 10                 | 5            | false  | equal to     | 5              | not be             |
-      | 49900694171 | 201903 | 1,2,3,2,2 | 5                  | 10           | false  | equal to     | 5              | not be             |
-      | 49900694171 | 201903 | 1,1,1,1,2 | 10                 | 6            | false  | less than    | 5              | not be             |
-      | 49900694171 | 201903 | 1,2,3,2,2 | 6                  | 10           | false  | less than    | 5              | not be             |
+      | 12000694171 | 201903 | 1,1,1,0,1 | 10                 | 4            | true   | greater than | 5              | be                 |
+      | 12000694171 | 201903 | 1,2,3,2,2 | 4                  | 10           | true   | greater than | 5              | be                 |
+      | 12000694171 | 201903 | 1,1,1,1,1 | 10                 | 5            | false  | equal to     | 5              | not be             |
+      | 12000694171 | 201903 | 1,2,3,2,2 | 5                  | 10           | false  | equal to     | 5              | not be             |
+      | 12000694171 | 201903 | 1,1,1,1,2 | 10                 | 6            | false  | less than    | 5              | not be             |
+      | 12000694171 | 201903 | 1,2,3,2,2 | 6                  | 10           | false  | less than    | 5              | not be             |
 
 
   Scenario Outline: LU-6402 - current period total turnover value vs derived value greater than threshold value on form 7
@@ -43,9 +43,9 @@ Feature: RSI Survey - QvQT validation rule
 
     Examples:
       | reference   | period | values    | totalTurnoverValue | deriveValue | result | operator     | thresholdValue | isValidationExists |
-      | 49900791240 | 201903 | 1,1,1,1,0 | 10                 | 4           | true   | greater than | 5              | be                 |
-      | 49900791240 | 201903 | 1,2,3,2,1 | 3                  | 9           | true   | greater than | 5              | be                 |
-      | 49900791240 | 201903 | 1,1,1,1,1 | 10                 | 5           | false  | equal to     | 5              | not be             |
-      | 49900791240 | 201903 | 1,2,3,2,1 | 4                  | 9           | false  | equal to     | 5              | not be             |
-      | 49900791240 | 201903 | 1,1,1,1,1 | 9                  | 5           | false  | less than    | 5              | not be             |
-      | 49900791240 | 201903 | 1,2,3,2,1 | 6                  | 9           | false  | less than    | 5              | not be             |
+      | 12000791240 | 201903 | 1,1,1,1,0 | 10                 | 4           | true   | greater than | 5              | be                 |
+      | 12000791240 | 201903 | 1,2,3,2,1 | 3                  | 9           | true   | greater than | 5              | be                 |
+      | 12000791240 | 201903 | 1,1,1,1,1 | 10                 | 5           | false  | equal to     | 5              | not be             |
+      | 12000791240 | 201903 | 1,2,3,2,1 | 4                  | 9           | false  | equal to     | 5              | not be             |
+      | 12000791240 | 201903 | 1,1,1,1,1 | 9                  | 5           | false  | less than    | 5              | not be             |
+      | 12000791240 | 201903 | 1,2,3,2,1 | 6                  | 9           | false  | less than    | 5              | not be             |

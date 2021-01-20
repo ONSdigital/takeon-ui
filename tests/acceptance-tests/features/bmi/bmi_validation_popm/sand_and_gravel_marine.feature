@@ -24,11 +24,11 @@ Feature: Sand And Gravel Marine Survey - Period on Period Movement(PoPM) Validat
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | thresholdValue | operator     | previousPeriod | currentPeriod | isValidationExists |
-      | 49900064408 | 30000              | 9999                | true   | 20000          | greater than | 201903         | 201906        | be                 |
-      | 49900064408 | 9999               | 30000               | true   | 20000          | greater than | 201903         | 201906        | be                 |
-      | 49900064408 | 30000              | 10000               | false  | 20000          | equal to     | 201903         | 201906        | not be             |
-      | 49900064408 | 10000              | 30000               | false  | 20000          | equal to     | 201903         | 201906        | not be             |
-      | 49900064408 | 30000              | 10001               | false  | 20000          | less than    | 201903         | 201906        | not be             |
-      | 49900064408 | 10001              | 30000               | false  | 20000          | less than    | 201903         | 201906        | not be             |
-      | 49900064408 | 0                  | 0                   | false  | 20000          | equal to     | 201903         | 201906        | not be             |
-      | 49900064408 | blank              | blank               | false  | 20000          | equal to     | 201903         | 201906        | not be             |
+      | 12000064408 | 30000              | 9999                | true   | 20000          | greater than | 201903         | 201906        | be                 |
+      | 12000064408 | 9999               | 30000               | true   | 20000          | greater than | 201903         | 201906        | be                 |
+      | 12000064408 | 30000              | 10000               | false  | 20000          | equal to     | 201903         | 201906        | not be             |
+      | 12000064408 | 10000              | 30000               | false  | 20000          | equal to     | 201903         | 201906        | not be             |
+      | 12000064408 | 30000              | 10001               | false  | 20000          | less than    | 201903         | 201906        | not be             |
+      | 12000064408 | 10001              | 30000               | false  | 20000          | less than    | 201903         | 201906        | not be             |
+      | 12000064408 | 0                  | 0                   | false  | 20000          | equal to     | 201903         | 201906        | not be             |
+      | 12000064408 | blank              | blank               | false  | 20000          | equal to     | 201903         | 201906        | not be             |

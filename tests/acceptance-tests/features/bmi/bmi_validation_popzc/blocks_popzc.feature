@@ -21,8 +21,8 @@ Feature: Blocks Survey - Period on Period Zero Continuity(PoPZC) Validation rule
 
     Examples:
       | reference   | currentPeriodValue | previousPeriodValue | result | previousPeriod | currentPeriod | isValidationExists |
-      | 49900189484 | 1                  | 0                   | true   | 201905         | 201906        | be                 |
-      | 49900189484 | 0                  | 1                   | true   | 201905         | 201906        | be                 |
-      | 49900189484 | 2                  | 3                   | false  | 201905         | 201906        | not be             |
-      | 49900189484 | 0                  | 0                   | false  | 201905         | 201906        | not be             |
-      | 49900189484 | blank              | blank               | false  | 201905         | 201906        | not be             |
+      | 12000189484 | 1                  | 0                   | true   | 201905         | 201906        | be                 |
+      | 12000189484 | 0                  | 1                   | true   | 201905         | 201906        | be                 |
+      | 12000189484 | 2                  | 3                   | false  | 201905         | 201906        | not be             |
+      | 12000189484 | 0                  | 0                   | false  | 201905         | 201906        | not be             |
+      | 12000189484 | blank              | blank               | false  | 201905         | 201906        | not be             |

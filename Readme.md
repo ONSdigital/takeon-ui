@@ -84,8 +84,8 @@
       the screen_shots of the failed feature files are saved with the current date and time stamp.      
            
       
-      Change the reference 49900000796 manually to 1234 
-      | 066 | 49900000796 | 201903 | to 
+      Change the reference 12000000796 manually to 1234 
+      | 066 | 12000000796 | 201903 | to 
       | 066 | 1234        | 201903 |
       
       Then run the below command in the terminal.

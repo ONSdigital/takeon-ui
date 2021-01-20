@@ -1,4 +1,5 @@
 from behave import given, when, then
+
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.common.contributor_search_page import ContributorSearchPage
 from pages.common.search_by_page import SearchByPage
@@ -43,6 +44,7 @@ def submit_the_question_data_values(context, value_type, values):
     for row in context.table.rows:
         for cell in row.cells:
             context.question_codes.append(cell)
+    context.values = values
     ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
 
 
@@ -50,6 +52,7 @@ def submit_the_question_data_values(context, value_type, values):
 @when(u'I submit the "{value_type}" {comment_value} for question {question}')
 def submit_the_question_type_values(context, value_type, comment_value, question):
     context.question_codes = question.upper()
+    context.values = comment_value
     ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
 
 
@@ -82,14 +85,11 @@ def run_the_validation_process(context, derived_value, question_value=None):
                 context.codes.append(cell)
         context.question_code = context.codes
         ContributorDetailsPage().run_the_validation_process(context.question_code, question_value, derived_value,
-                                                            context.survey)
+                                                                context.survey)
 
 
-@then(u'the {validation_message} message should {is_validation_exists} displayed')
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed')
-@then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
-@then(
-    u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')
+# @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
 def check_validation_message(context, validation_message, is_validation_exists, question_codes=None):
     if not question_codes:
         question_codes = context.question_codes
@@ -98,18 +98,25 @@ def check_validation_message(context, validation_message, is_validation_exists, 
                                   is_validation_exists)
 
 
+@then(u'the "{comment}" {validation_message} message should {is_validation_exists} displayed')
 @then(u'the {validation_message} message should {is_validation_exists} displayed for question codes')
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed for question codes')
-def check_multiple_validation_messages(context, validation_message, is_validation_exists):
-    if context.table is not None:
-        context.question_codes = []
-        for row in context.table.rows:
-            for cell in row.cells:
-                context.question_codes.append(cell)
-
-    ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, context.question_codes,
-                                                                          validation_message,
-                                                                          is_validation_exists)
+@then(
+    u'the "{validation_message}" message should {is_validation_exists} displayed for question code "{question_codes}"')
+def check_multiple_validation_messages(context, validation_message, is_validation_exists, question_codes=None,
+                                       comment=None):
+    if not question_codes and comment:
+        question_codes = context.question_codes
+        ContributorDetailsPage().check_multiple_comment_text_messages(context.survey, question_codes, context.values)
+    elif not question_codes:
+        question_codes = context.question_codes
+        ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
+                                                                               validation_message,
+                                                                               is_validation_exists)
+    else:
+        ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
+                                                                               validation_message,
+                                                                               is_validation_exists)
 
 
 @then(

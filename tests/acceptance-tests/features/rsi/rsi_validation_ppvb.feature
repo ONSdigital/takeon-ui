@@ -14,15 +14,15 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
 
     Examples:
       | PPeriod | CPeriod | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | isValidationExists |
-      | 201903  | 201904  | 49900534932 | blank           | blank           | 1               | 2               | be                 |
-      | 201903  | 201904  | 49900613746 | blank           | blank           | 1               | 2               | be                 |
-      | 201903  | 201904  | 49900767172 | blank           | blank           | 1               | 2               | be                 |
-      | 201903  | 201904  | 49900534932 | 0               | 0               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900534932 | 1               | 1               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900613746 | 0               | 0               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900613746 | 1               | 1               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900767172 | 0               | 0               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900767172 | 1               | 1               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000534932 | blank           | blank           | 1               | 2               | be                 |
+      | 201903  | 201904  | 12000613746 | blank           | blank           | 1               | 2               | be                 |
+      | 201903  | 201904  | 12000767172 | blank           | blank           | 1               | 2               | be                 |
+      | 201903  | 201904  | 12000534932 | 0               | 0               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000534932 | 1               | 1               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000613746 | 0               | 0               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000613746 | 1               | 1               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000767172 | 0               | 0               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000767172 | 1               | 1               | 1               | 2               | not be             |
 
 
   Scenario Outline: RSI LU-6757 - Previous Period Value Blank Validation on forms 5,6 and 7
@@ -34,15 +34,15 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
 
     Examples:
       | PPeriod | CPeriod | reference   | ppInternetSales | ppTotalTurnover | cpInternetSales | cpTotalTurnover | isValidationExists |
-      | 201903  | 201904  | 49900534932 | blank           | blank           | 1               | 2               | be                 |
-      | 201903  | 201904  | 49900613746 | blank           | blank           | 1               | 2               | be                 |
-      | 201903  | 201904  | 49900767172 | blank           | blank           | 1               | 2               | be                 |
-      | 201903  | 201904  | 49900534932 | 0               | 0               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900534932 | 1               | 1               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900613746 | 0               | 0               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900613746 | 1               | 1               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900767172 | 0               | 0               | 1               | 2               | not be             |
-      | 201903  | 201904  | 49900767172 | 1               | 1               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000534932 | blank           | blank           | 1               | 2               | be                 |
+      | 201903  | 201904  | 12000613746 | blank           | blank           | 1               | 2               | be                 |
+      | 201903  | 201904  | 12000767172 | blank           | blank           | 1               | 2               | be                 |
+      | 201903  | 201904  | 12000534932 | 0               | 0               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000534932 | 1               | 1               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000613746 | 0               | 0               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000613746 | 1               | 1               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000767172 | 0               | 0               | 1               | 2               | not be             |
+      | 201903  | 201904  | 12000767172 | 1               | 1               | 1               | 2               | not be             |
 
 
   Scenario Outline: RSI LU-6757 - Previous Period Value Blank Validation if no previous period exists for forms 5, 6 and 7
@@ -52,9 +52,9 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
 
     Examples:
       | CPeriod | reference   | cpInternetSales | cpTotalTurnover | isValidationExists |
-      | 201903  | 49900534932 | 1               | 1               | be                 |
-      | 201903  | 49900613746 | 1               | 1               | be                 |
-      | 201903  | 49900767172 | 1               | 1               | be                 |
+      | 201903  | 12000534932 | 1               | 1               | be                 |
+      | 201903  | 12000613746 | 1               | 1               | be                 |
+      | 201903  | 12000767172 | 1               | 1               | be                 |
 
 
   Scenario Outline: RSI LU-6757 - Previous Period Value Blank Validation if no previous period exists for forms 5, 6 and 7
@@ -64,6 +64,6 @@ Feature: RSI Survey - Validation Previous Period Value Blank (PPVB)
 
     Examples:
       | CPeriod | reference   | cpInternetSales | cpTotalTurnover | isValidationExists |
-      | 201903  | 49900534932 | 1               | 1               | be                 |
-      | 201903  | 49900613746 | 1               | 1               | be                 |
-      | 201903  | 49900767172 | 1               | 1               | be                 |
+      | 201903  | 12000534932 | 1               | 1               | be                 |
+      | 201903  | 12000613746 | 1               | 1               | be                 |
+      | 201903  | 12000767172 | 1               | 1               | be                 |
