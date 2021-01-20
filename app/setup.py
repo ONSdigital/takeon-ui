@@ -14,6 +14,7 @@ from spp_logger import SPPLogger, SPPLoggerConfig
 def set_logger(lambda_name, context, survey, period):
     # get log level from ENV VAR and convert to upper case
     log_level = os.getenv("LOG_LEVEL", default="INFO").upper()
+    log.debug(f'log level: {log_level}')
     # set logger configs
     config = SPPLoggerConfig(
         service="Data Clearing UI",
