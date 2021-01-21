@@ -93,7 +93,7 @@ def general_search_screen_post():
     contributor_data = api_caller.contributor_search(parameters=url_connect)
     data = GraphData(contributor_data)
     output_data = data.nodes
-    log.info("Data from GraphQL for search: %s", output_data)
+    log.debug("Data from GraphQL for search: %s", output_data)
 
     return render_template(
         "./contributor_search/GeneralSearchScreenGQL.html",
