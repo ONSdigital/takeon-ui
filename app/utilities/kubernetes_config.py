@@ -9,7 +9,7 @@ class KubernetesConfig:
         config.load_incluster_config()  # This throws an exception on failure?
         self.client = client.CoreV1Api()
         self.namespace = open("/var/run/secrets/kubernetes.io/serviceaccount/namespace").read()
-        log.error('Namespace: {}'.format(self.namespace))
+        log.info('Namespace: {}'.format(self.namespace))
 
     def get_ip(self):
         service = self.client.read_namespaced_service(namespace=self.namespace, name=self.service_name)
