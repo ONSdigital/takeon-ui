@@ -58,12 +58,12 @@ def combine_responses_and_validations(form_data, validation_data):
         output_dictionary['form_validation_outputs'] = combined_array
         return output_dictionary
     except ValueError as value_error:
-        print("Error with JSON Structure: " + str(value_error))
+        log.error("Error with JSON Structure: " + str(value_error))
     except KeyError as key_error:
-        print("Error with missing JSON Keys " + str(key_error))
+        log.error("Error with missing JSON Keys " + str(key_error))
     except TypeError as type_error:
-        print("Error with data type converting to JSON " + str(type_error))
+        log.error("Error with data type converting to JSON " + str(type_error))
     except Exception as error:
-        print("Error " + str(error))
+        log.error("Error " + str(error))
 
     return {}
