@@ -45,9 +45,7 @@ def set_logger():
 
 log = set_logger()
 
-api_caller = ApiRequest(service="business-layer", mocking=settings.MOCKING)
-api_caller_pl = ApiRequest(service="persistence-layer", mocking=settings.MOCKING)
-
+api_caller = ApiRequest(log, service="business-layer", mocking=settings.MOCKING)
 
 def create_app(setting_overrides=None):
     # Define the WSGI application object
