@@ -9,7 +9,7 @@ from app.setup import log
 def create_form_class(iterable):
     var_dict = {}
     for variable_name in iterable:
-        log.info("adding {} to dict".format(variable_name))
+        print("adding {} to dict".format(variable_name))
         var_dict[variable_name] = StringField("{}".format(variable_name))
     class_output = type("SearchSelect", (Form,), var_dict)
     # At this point we have a class that analogous to SearchForm
@@ -93,14 +93,14 @@ def decompose_data(data: dict) -> dict:
 
         data_atoms.append({key: data[key]})
 
-    log.info("Output data: " + str(data_atoms))
+    print("Output data: " + str(data_atoms))
     return {"Updated Responses": data_atoms}
 
 
 def build_json(data):
     data_atoms = []
     data = OrderedDict(data)
-    log.debug("build_json data: {}".format(data))
+    # print("build_json data: {}".format(data))
     for key in data.keys():
         data_atoms.append(
             {form_key: data[key].get(form_key) for form_key in data[key].keys()}
@@ -142,7 +142,7 @@ def json_validator(data):
         json.loads(data)
         return True
     except ValueError as error:
-        log.error("invalid json: %s" % error)
+        print("invalid json: %s" % error)
         return False
 
 
@@ -155,10 +155,10 @@ def question_order(response_and_validations):
         return sorted_response_and_validations
 
     except KeyError as key_error:
-        log.error("Data missing displayorder" + str(key_error))
+        print("Data missing displayorder" + str(key_error))
 
     except TypeError as type_error:
-        log.error("Error with data type converting to JSON " + str(type_error))
+        print("Error with data type converting to JSON " + str(type_error))
 
     except Exception as error:
-        log.error("Error: " + error)
+        print("Error: " + error)
