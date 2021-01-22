@@ -15,13 +15,8 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
     POPMRZ_QUESTION_SECONDARY_ELEMENT = '0024'
     POPRRM_QUESTION_PRIMARY_ELEMENT = '0028'
     POPRRM_QUESTION_SECONDARY_ELEMENT = '0029'
-    QUESTION_DERIVED_ELEMENT = '4001'
-    COMMENT_QUESTION_NOT_BLANK = '5000'
-    COMMENT_QUESTION_VALUE = '5001'
     THRESHOLD_PRIMARY_QUESTION_ELEMENT = '0011'
     THRESHOLD_DERIVED_QUESTION_ELEMENT = '0012'
-    ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
-    ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
     TAB_ELEMENTS = By.XPATH, '//li[contains(@class,"tab__list-item tab__list-item--row")]'
 
     question_codes = {
@@ -123,9 +118,10 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             count = 0
             for value in values:
                 question_row = GetContributorDetails().get_question_code_row_details('tabId2',
-                                                                  Utilities.get_question_code_element(survey,
-                                                                                                      question_codes[
-                                                                                                          count]))
+                                                                                     Utilities.get_question_code_element(
+                                                                                         survey,
+                                                                                         question_codes[
+                                                                                             count]))
                 elements = contributor_details.CURRENT_PERIOD_COLUMN
                 current_period_value = question_row.find_elements(By.XPATH, elements)
                 ReportingHelper.check_elements_message_matches(question_codes[count], current_period_value, value)
