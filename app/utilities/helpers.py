@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from wtforms import StringField, Form
 import json
-from app.setup import log
+# from app.setup import log
 
 
 # ###################################### UTILITY FUNCTIONS ###########################################
