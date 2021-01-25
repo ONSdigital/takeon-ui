@@ -78,7 +78,7 @@ def general_search_screen_post():
     # create form object
 
     # Build class for the forms that are passed in, this must be done dynamically
-    selection_form = create_form_class(criteria)
+    selection_form = create_form_class(criteria, log)
 
     # create form object
     form = selection_form(request.form)
@@ -146,7 +146,7 @@ def general_search_screen():
     criteria = request.args["criteria"].split(";")
 
     # Build class for the forms that are passed in, this must be done dynamically
-    selection_form = create_form_class(criteria)
+    selection_form = create_form_class(criteria, log)
     form = selection_form(request.form)
 
     # On search, and if form object passes validation enter block

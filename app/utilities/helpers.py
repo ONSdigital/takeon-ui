@@ -6,10 +6,10 @@ import json
 
 # ###################################### UTILITY FUNCTIONS ###########################################
 # Create class for forms dynamically
-def create_form_class(iterable):
+def create_form_class(iterable, log):
     var_dict = {}
     for variable_name in iterable:
-        print("adding {} to dict".format(variable_name))
+        log.info("adding {} to dict".format(variable_name))
         var_dict[variable_name] = StringField("{}".format(variable_name))
     class_output = type("SearchSelect", (Form,), var_dict)
     # At this point we have a class that analogous to SearchForm
@@ -78,9 +78,10 @@ def str_to_bool(string_to_convert):
     raise ValueError
 
 
-def decompose_data(data: dict) -> dict:
+def decompose_data(data: dict, log) -> dict:
     """
     :param data: Dictionary of the form {"qCode:Number|inst:Number":"Response"}
+    :param log: spp logger sent as a param
     :return: Dictionary of the form {Updated Responses: {qCode: {instance: Responce}}}
     """
 
@@ -93,14 +94,14 @@ def decompose_data(data: dict) -> dict:
 
         data_atoms.append({key: data[key]})
 
-    print("Output data: " + str(data_atoms))
+    log.info("Output data: " + str(data_atoms))
     return {"Updated Responses": data_atoms}
 
 
-def build_json(data):
+def build_json(data, log):
     data_atoms = []
     data = OrderedDict(data)
-    # print("build_json data: {}".format(data))
+    log.info("build_json data: {}".format(data))
     for key in data.keys():
         data_atoms.append(
             {form_key: data[key].get(form_key) for form_key in data[key].keys()}
@@ -137,12 +138,13 @@ def find_nodes(data: dict, node_to_find: str) -> (dict, list, str):
                 return item
     raise KeyError(f'No node with name "{node_to_find}" found')
 
+
 def json_validator(data, log):
     try:
         json.loads(data)
         return True
     except ValueError as error:
-        log.info("invalid json: %s" % error)
+        log.error("invalid json: %s" % error)
         return False
 
 
