@@ -137,17 +137,17 @@ def find_nodes(data: dict, node_to_find: str) -> (dict, list, str):
                 return item
     raise KeyError(f'No node with name "{node_to_find}" found')
 
-def json_validator(data):
+def json_validator(data, log):
     try:
         json.loads(data)
         return True
     except ValueError as error:
-        print("invalid json: %s" % error)
+        log.info("invalid json: %s" % error)
         return False
 
 
 # This function reordes the questions based off the displayorder value 
-def question_order(response_and_validations):
+def question_order(response_and_validations, log):
     try:
         questions = response_and_validations["form_validation_outputs"]
         sorted_questions = (sorted(questions, key = lambda i: i['displayorder']))
@@ -155,10 +155,10 @@ def question_order(response_and_validations):
         return sorted_response_and_validations
 
     except KeyError as key_error:
-        print("Data missing displayorder" + str(key_error))
+        log.error("Data missing displayorder" + str(key_error))
 
     except TypeError as type_error:
-        print("Error with data type converting to JSON " + str(type_error))
+        log.error("Error with data type converting to JSON " + str(type_error))
 
     except Exception as error:
-        print("Error: " + error)
+        log.error("Error: " + error)
