@@ -84,12 +84,11 @@ def run_the_validation_process(context, derived_value, question_value=None):
             for cell in row.cells:
                 context.codes.append(cell)
         context.question_code = context.codes
-        ContributorDetailsPage().run_the_validation_process(context.question_code, question_value, derived_value,
-                                                                context.survey)
+        ContributorDetailsPage().run_the_validation_process(context.question_code, question_value,
+                                                            derived_value, context.survey)
 
 
 @then(u'the "{validation_message}" message should {is_validation_exists} displayed')
-# @then(u'the {validation_message} message should {is_validation_exists} displayed for question code "{question_codes}"')
 def check_validation_message(context, validation_message, is_validation_exists, question_codes=None):
     if not question_codes:
         question_codes = context.question_codes
@@ -111,12 +110,12 @@ def check_multiple_validation_messages(context, validation_message, is_validatio
     elif not question_codes:
         question_codes = context.question_codes
         ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
-                                                                               validation_message,
-                                                                               is_validation_exists)
+                                                                              validation_message,
+                                                                              is_validation_exists)
     else:
         ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
-                                                                               validation_message,
-                                                                               is_validation_exists)
+                                                                              validation_message,
+                                                                              is_validation_exists)
 
 
 @then(

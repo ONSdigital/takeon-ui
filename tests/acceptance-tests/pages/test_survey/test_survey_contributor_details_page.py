@@ -106,11 +106,10 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             values = Utilities.get_values_as_a_list(values)
             count = 0
             for value in values:
-                question_row = GetContributorDetails().get_question_code_row_details('tabId2',
-                                                                                     Utilities.get_question_code_element(
-                                                                                         survey,
-                                                                                         question_codes[
-                                                                                             count]))
+                question_row = GetContributorDetails(). \
+                    get_question_code_row_details('tabId2',
+                                                  Utilities.get_question_code_element(
+                                                      survey, question_codes[count]))
                 elements = contributor_details.CURRENT_PERIOD_COLUMN
                 current_period_value = question_row.find_elements(By.XPATH, elements)
                 ReportingHelper.check_elements_message_matches(question_codes[count], current_period_value, value)

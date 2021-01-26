@@ -34,8 +34,6 @@ class CheckValuesContributorDetails:
         SeleniumCore.switch_to_alert_box()
         self.check_if_validation_status_changed()
 
-
-
     def check_values_are_not_equal(self, question, comparison_val_one, comparison_val_two, result):
         CheckMessagesContributorDetails().check_if_overall_validation_triggered()
         if comparison_val_one == 'blank' and comparison_val_two == 'blank':

@@ -2,6 +2,7 @@ from botocore.config import Config
 import boto3
 import os
 
+
 class Cognito:
     def __init__(self):
         aws_region = os.getenv("AWS_REGION", "eu-west-2")
