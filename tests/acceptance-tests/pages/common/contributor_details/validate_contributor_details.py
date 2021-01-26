@@ -25,12 +25,10 @@ class ValidateContributorDetails:
         ReportingHelper.check_single_message_matches(questions_list[1], actual_derived_val, derived_question_value)
 
     def validate_the_previous_period_details(self, questions_and_values):
-        SubmitContributorDetails().submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1],
-                                                                      questions_and_values[2])
+        SubmitContributorDetails().submit_values_for_survey_questions(questions_and_values)
         CheckValuesContributorDetails().save_the_application()
         SeleniumCore.close_the_current_window()
 
     def validate_the_current_period_details(self, questions_and_values):
-        SubmitContributorDetails().submit_values_for_survey_questions(questions_and_values[0], questions_and_values[1],
-                                                                      questions_and_values[2])
+        SubmitContributorDetails().submit_values_for_survey_questions(questions_and_values)
         CheckValuesContributorDetails().save_the_application()
