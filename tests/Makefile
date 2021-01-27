@@ -3,10 +3,12 @@ docker-build:
 
 set-url:
 	export TAKEON_URL
+	export COGNITO_USER_POOL
 	echo $(TAKEON_URL)
+	echo $(COGNITO_USER_POOL)
 
 docker-compose:
 	docker-compose up -d
 
 docker-run: set-url docker-build
-	docker run  -e TAKEON_URL='$(TAKEON_URL)' -ti -w /code/acceptance-tests/ bdd-tests
+	docker run -e TAKEON_URL='$(TAKEON_URL)' -e COGNITO_USER_POOL='$(COGNITO_USER_POOL)' -ti -w /code/acceptance-tests/ bdd-tests
