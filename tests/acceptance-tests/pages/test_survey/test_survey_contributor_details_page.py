@@ -8,38 +8,22 @@ from pages.common.contributor_details.check_values_contributor_details import Ch
 from pages.common.contributor_details.get_contributor_details import GetContributorDetails
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.locators import contributor_details
+from pages.locators import test_contributor_details as details
 
 
 class TestSurveyContributorDetailsPage(ContributorDetailsPage):
-    POPMRZ_QUESTION_PRIMARY_ELEMENT = '0023'
-    POPMRZ_QUESTION_SECONDARY_ELEMENT = '0024'
-    POPRRM_QUESTION_PRIMARY_ELEMENT = '0028'
-    POPRRM_QUESTION_SECONDARY_ELEMENT = '0029'
-    QUESTION_DERIVED_ELEMENT = '4001'
-    COMMENT_QUESTION_NOT_BLANK = '5000'
-    COMMENT_QUESTION_VALUE = '5001'
-    THRESHOLD_PRIMARY_QUESTION_ELEMENT = '0011'
-    THRESHOLD_DERIVED_QUESTION_ELEMENT = '0012'
-    ERROR_MESSAGE_ELEMENT_STRING_PART_ONE = '//strong[contains(text(),"'
-    ERROR_MESSAGE_ELEMENT_STRING_PART_TWO = '")]'
-    TAB_ELEMENTS = By.XPATH, '//li[contains(@class,"tab__list-item tab__list-item--row")]'
-
-    question_codes = {
-        'Q1': '1000',
-        'Q2': '1001'
-    }
 
     def set_internet_sales_value(self, validation_type, value):
         if validation_type.lower() == 'poprrm':
-            SeleniumCore.set_current_data_text(self.POPRRM_QUESTION_PRIMARY_ELEMENT, value)
+            SeleniumCore.set_current_data_text(details.POPRRM_QUESTION_PRIMARY_ELEMENT, value)
         elif validation_type.lower() == 'popmrz':
-            SeleniumCore.set_current_data_text(self.POPMRZ_QUESTION_PRIMARY_ELEMENT, value)
+            SeleniumCore.set_current_data_text(details.POPMRZ_QUESTION_PRIMARY_ELEMENT, value)
 
     def set_total_turnover_sales_value(self, validation_type, value):
         if validation_type.lower() == 'poprrm':
-            SeleniumCore.set_current_data_text(self.POPRRM_QUESTION_SECONDARY_ELEMENT, value)
+            SeleniumCore.set_current_data_text(details.POPRRM_QUESTION_SECONDARY_ELEMENT, value)
         elif validation_type.lower() == 'popmrz':
-            SeleniumCore.set_current_data_text(self.POPMRZ_QUESTION_SECONDARY_ELEMENT, value)
+            SeleniumCore.set_current_data_text(details.POPMRZ_QUESTION_SECONDARY_ELEMENT, value)
 
     def submit_sales_values(self, validation_type, period_type, internet_sales, total_sales):
         if period_type == 'previous':
@@ -69,14 +53,14 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
         CheckValuesContributorDetails().save_the_application()
 
     def run_the_validation_process(self, threshold_primary_value, exp_derived_value):
-        SeleniumCore.set_current_data_text(self.THRESHOLD_PRIMARY_QUESTION_ELEMENT,
+        SeleniumCore.set_current_data_text(details.THRESHOLD_PRIMARY_QUESTION_ELEMENT,
                                            threshold_primary_value)
         CheckValuesContributorDetails().save_the_application()
-        actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, self.THRESHOLD_DERIVED_QUESTION_ELEMENT)
+        actual_derived_val = SeleniumCore.get_attribute_element_text(By.ID, details.THRESHOLD_DERIVED_QUESTION_ELEMENT)
         ReportingHelper.check_single_message_matches('Q12', actual_derived_val, exp_derived_value)
 
     def switch_to_the_tab(self, tab_name):
-        elements = SeleniumCore.find_elements_by(*TestSurveyContributorDetailsPage.TAB_ELEMENTS)
+        elements = SeleniumCore.find_elements_by(*details.TAB_ELEMENTS)
         for ele in elements:
             if ele.text.lower() == tab_name.lower():
                 ele.click()
@@ -122,10 +106,10 @@ class TestSurveyContributorDetailsPage(ContributorDetailsPage):
             values = Utilities.get_values_as_a_list(values)
             count = 0
             for value in values:
-                question_row = GetContributorDetails().get_question_code_row_details('tabId2',
-                                                                  Utilities.get_question_code_element(survey,
-                                                                                                      question_codes[
-                                                                                                          count]))
+                question_row = GetContributorDetails(). \
+                    get_question_code_row_details('tabId2',
+                                                  Utilities.get_question_code_element(
+                                                      survey, question_codes[count]))
                 elements = contributor_details.CURRENT_PERIOD_COLUMN
                 current_period_value = question_row.find_elements(By.XPATH, elements)
                 ReportingHelper.check_elements_message_matches(question_codes[count], current_period_value, value)

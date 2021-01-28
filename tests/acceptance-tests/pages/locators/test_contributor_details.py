@@ -1,0 +1,14 @@
+from selenium.webdriver.common.by import By
+
+POPMRZ_QUESTION_PRIMARY_ELEMENT = '0023'
+POPMRZ_QUESTION_SECONDARY_ELEMENT = '0024'
+POPRRM_QUESTION_PRIMARY_ELEMENT = '0028'
+POPRRM_QUESTION_SECONDARY_ELEMENT = '0029'
+THRESHOLD_PRIMARY_QUESTION_ELEMENT = '0011'
+THRESHOLD_DERIVED_QUESTION_ELEMENT = '0012'
+TAB_ELEMENTS = By.XPATH, '//li[contains(@class,"tab__list-item tab__list-item--row")]'
+
+question_codes = {
+    'Q1': '1000',
+    'Q2': '1001'
+}

@@ -2,7 +2,6 @@
 Class containing common functions used in several tests.
 Functions that are not test or feature specific.
 """
-import os
 import time
 
 from selenium import webdriver
