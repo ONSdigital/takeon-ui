@@ -4,15 +4,48 @@ from flask import Flask, session, render_template
 from app import settings
 from app.utilities.api_request import ApiRequest
 from werkzeug.middleware.proxy_fix import ProxyFix
+import immutables
+import sys
+from uuid import uuid4
 
 from spp_cognito_auth import Auth, AuthConfig, AuthBlueprint, new_oauth_client
+from spp_logger import SPPLogger, SPPLoggerConfig
 
-log = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
-api_caller = ApiRequest(service="business-layer", mocking=settings.MOCKING)
-api_caller_pl = ApiRequest(service="persistence-layer", mocking=settings.MOCKING)
+def set_logger():
+    # get log level from ENV VAR and convert to upper case
+    log_level = os.getenv("LOG_LEVEL", default="INFO").upper()
+    # environment from ENV VAR
+    env_name = os.getenv("ENVIRONMENT_NAME")
+    # deployment from ENV VAR
+    deployment = os.getenv("DEPLOYMENT")
 
+    # set logger configs
+    config = SPPLoggerConfig(
+        service="Data Clearing UI",
+        component="Data Clearing UI",
+        environment=env_name,
+        deployment=deployment
+    )
+    try:
+        logger = SPPLogger(
+            name="dc_ui_logger",
+            config=config,
+            context=immutables.Map(
+                log_level=log_level,
+                log_correlation_id=str(uuid4())
+            ),
+            stream=sys.stdout,
+        )
+    except Exception as error:
+        logger = logging.getLogger()
+        logger.error("Failed to instantiate SPPLogger", exc_info=error)
+    return logger
+
+
+log = set_logger()
+
+api_caller = ApiRequest(log, service="business-layer", mocking=settings.MOCKING)
 
 def create_app(setting_overrides=None):
     # Define the WSGI application object
@@ -77,3 +110,4 @@ def add_error_handlers(application):
     @application.errorhandler(500)
     def internal_server_error(error):
         return render_template('./error_templates/500.html', message_header=error), 500
+

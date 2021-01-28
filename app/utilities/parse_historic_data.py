@@ -1,3 +1,4 @@
+from app.setup import log
 # Function to group data by question code across periods in order for it to print on to HTML layout properly
 # and to only pick up questions from current period's form
 
@@ -14,7 +15,7 @@ def group_historic_data(historic_data):
                         question_responses.append(response['response'])
             questions_dictionary[question] = question_responses
     except IndexError as Error:
-        print(Error)
+        log.error(Error)
         return questions_dictionary
 
     return questions_dictionary

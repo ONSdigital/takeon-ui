@@ -12,11 +12,12 @@ json_application = "Application/Json"
 
 
 class ApiRequest:
-    def __init__(self, service="business-layer", mocking=True):
+    def __init__(self, log, service="business-layer", mocking=True):
+        self.log = log
         self.mock = mocking
         # print('Mocking status: {}'.format(self.mock))
         if not self.mock:
-            self.kube = KubernetesConfig(service)
+            self.kube = KubernetesConfig(log, service)
 
     def build_endpoint(self, endpoint, parameters):
         return "http://" + self.kube.get_ip() + ":" + self.kube.get_port() + endpoint + "/{}".format(parameters)

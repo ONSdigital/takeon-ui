@@ -1,3 +1,4 @@
+from app.setup import log
 # Combine Response and Validation data for new UI Layout
 # from app.utilities.helpers import json_validator
 
@@ -37,13 +38,13 @@ def combine_response_validations(view_form_data, validations):
         combined_dictionary_output['form_validation_outputs'] = combined_array
 
     except ValueError as value_error:
-        print("Error with JSON Structure: " + str(value_error))
+        log.error("Error with JSON Structure: " + str(value_error))
         raise ValueError
     except KeyError as key_error:
-        print("Error with missing JSON Keys " + str(key_error))
+        log.error("Error with missing JSON Keys " + str(key_error))
         raise KeyError
     except TypeError as type_error:
-        print("Error with data type converting to JSON " + str(type_error))
+        log.error("Error with data type converting to JSON " + str(type_error))
         raise TypeError
 
     return combined_dictionary_output
