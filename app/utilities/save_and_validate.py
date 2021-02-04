@@ -40,7 +40,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         log.info("Response from save request: %s", response)
         if not response == "{\"continue\":\"No question responses to save\"}":
             log.info("Data edited. Sending notification to BAW...")
-            send_notification_to_queue(ruref, period, inqcode)
+            (ruref, period, inqcode)
         status_message = 'Responses saved successfully'
         return status_message
     except HTTPError as http_error:
