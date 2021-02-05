@@ -211,7 +211,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="pageReload">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -315,6 +315,16 @@
             checkboxes[i].checked = source.checked;
         }
     }
+</script>
+
+<script>
+    function pageReload(){
+        document.getElementById("saveFormButton");
+            setTimeout(function(){ 
+                location.reload();
+            }, 5000);
+        }
+
 </script>
 
 
