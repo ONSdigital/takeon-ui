@@ -9,6 +9,8 @@
 {% endblock page_header %}
 
 {% block content %}
+
+<fieldset id="fieldset">
 ​
 ​<div class="mainContent">
     <div class="grid">
@@ -266,6 +268,7 @@
     </div>
 </div>
 
+</fieldset>
 
 <script>
     var override_button = document.getElementById("override_button")
@@ -317,8 +320,7 @@
     }
 </script>
 
-<script>
-
+{# <script>
     var classname = document.getElementsByClassName("saveFormButton");
     
     function pageReload(){
@@ -330,7 +332,11 @@
     for (var i = 0; i < classname.length; i++) {
         classname[i].addEventListener('click', pageReload, false);
     }
+</script> #}
 
+<script>
+    var fieldset = document.getElementById("fieldset");
+    saveFormButton.onclick = function () { fieldset.disabled = true;}
 </script>
 
 
