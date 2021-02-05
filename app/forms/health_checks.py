@@ -1,9 +1,11 @@
-from flask import Blueprint
+from flask import Flask
 
-healtchecks_blueprint = Blueprint(
-    name='healthchecks', import_name=__name__, url_prefix='/health')
+app = Flask(__name__)
+# healtchecks_blueprint = Blueprint(
+#     name='health_checks', import_name=__name__, url_prefix='/health')
 
 
-@healtchecks_blueprint.route('/status', methods=['GET', 'POST'])
+# @healtchecks_blueprint.route('/status', methods=['GET', 'POST'])
+app.route("/health")
 def health_check():
     return 'Container is healthy'
