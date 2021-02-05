@@ -213,7 +213,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="pageReload">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -338,9 +338,12 @@
     var fieldset = document.getElementById("fieldset");
     saveFormButton.onclick = function () { fieldset.disabled = true;}
 
-    setTimeout(function(){ 
-            location.reload();
-        }, 5000);
+    setTimeout(function () {
+    if(window.location.hash != '#r') {
+        window.location.hash = 'r';
+        window.location.reload(1);
+        }
+    }, 5000);
 
 </script>
 
