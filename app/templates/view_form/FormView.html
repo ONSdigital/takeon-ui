@@ -320,7 +320,7 @@
     }
 </script>
 
-<!-- {# <script>
+{# <script>
     var classname = document.getElementsByClassName("saveFormButton");
     
     function pageReload(){
@@ -332,22 +332,19 @@
     for (var i = 0; i < classname.length; i++) {
         classname[i].addEventListener('click', pageReload, false);
     }
-</script> #} -->
+</script> #}
 
 <script>
     var fieldset = document.getElementById("fieldset");
-    saveFormButton.onclick = function () { 
-        fieldset.disabled = true;
-        setTimeout(function() {window.location.reload(); }, 5000)
-    }
+    saveFormButton.onclick = function () { fieldset.disabled = true;}
 
-    // if (document.referrer !== document.location.href) {
-    // setTimeout(function() {
-    //     document.location.reload()
-    // }, 5000);
-    // }
+    if (document.referrer !== document.location.href) {
+    setTimeout(function() {
+        document.location.reload()
+    }, 5000);
+    }
     
-    // { fieldset.disabled = false;}
+    { fieldset.disabled = false;}
 
 </script>
 
