@@ -318,12 +318,18 @@
 </script>
 
 <script>
+
+    var classname = document.getElementsByClassName("saveFormButton");
+    
     function pageReload(){
-        document.getElementById("saveFormButton");
             setTimeout(function(){ 
-                location.reload();
-            }, 5000);
-        }
+            location.reload();
+        }, 5000);
+    }
+    
+    for (var i = 0; i < classname.length; i++) {
+        classname[i].addEventListener('click', pageReload, false);
+    }
 
 </script>
 
