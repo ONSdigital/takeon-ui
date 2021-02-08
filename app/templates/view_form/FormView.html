@@ -213,7 +213,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="disable_page">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -335,19 +335,29 @@
 </script> #}
 
 <script>
-    var fieldset = document.getElementById("fieldset");
+    {# var fieldset = document.getElementById("fieldset");
     var saveFormButton = document.getElementById("saveFormButton")
     saveFormButton.addEventListener("click", function () { 
         fieldset.disabled = true;
         window.setTimeout('location.reload()', 5000);
-    })
-    
-    {# if (document.referrer !== document.location.href) {
-    setTimeout(function() {
-        document.location.reload()
-    }, 5000);
-    } 
-    window.setTimeout('location.reload()', 3000); #}
+    }) #}
+
+    {# var fieldset = document.getElementById("fieldset");
+    saveFormButton.onclick = function () { fieldset.disabled = true;}
+
+
+        function select_all(source) {
+        checkboxes = document.getElementsByName("override-checkbox");
+        for(var i=0; i < checkboxes.length; i++){
+            checkboxes[i].checked = source.checked;
+        }
+    } #}
+
+    function disable_page(){
+        fieldset = document.getElementById("fieldset");
+        fieldset.disabled = true;
+    }
+
 
 </script>
 
