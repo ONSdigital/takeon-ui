@@ -336,12 +336,12 @@
 
 <script>
     var fieldset = document.getElementById("fieldset");
-    saveFormButton.onsubmit = function () { 
+    saveFormButton.addEventListener("click", function () { 
         fieldset.disabled = true;
         setTimeout(function() {
         document.location.reload()
         }, 5000);
-    }
+    })
     
     {# if (document.referrer !== document.location.href) {
     setTimeout(function() {
