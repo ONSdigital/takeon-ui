@@ -81,7 +81,7 @@ def view_form(inqcode, period, ruref):
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
         #time.sleep(5)
-        #return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
+        return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(
         template_name_or_list=form_view_template_HTML,
