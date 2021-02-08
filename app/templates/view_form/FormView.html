@@ -338,6 +338,9 @@
     var fieldset = document.getElementById("fieldset");
     saveFormButton.onclick = function () { 
         fieldset.disabled = true;
+        setTimeout(function() {
+        document.location.reload()
+        }, 5000);
     }
     
     {# if (document.referrer !== document.location.href) {
