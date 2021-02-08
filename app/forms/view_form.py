@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from flask import render_template, Blueprint, request, redirect, url_for, current_app, abort
 from app.utilities.helpers import build_uri, get_user, question_order
 from app.utilities.filter_validations import filter_validations
@@ -79,6 +80,7 @@ def view_form(inqcode, period, ruref):
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
+        time.sleep(5)
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
 
     return render_template(

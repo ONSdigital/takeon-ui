@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<fieldset id="fieldset">
+<fieldset id="fieldset" enabled>
 ​
 ​<div class="mainContent">
     <div class="grid">
@@ -338,17 +338,13 @@
     var fieldset = document.getElementById("fieldset");
     saveFormButton.onclick = function () { 
         fieldset.disabled = true;
-        setTimeout(function() { document.location.reload() }, 5000);
-        fieldset.disabled = false
     }
     
-    if (document.referrer !== document.location.href) {
+    {# if (document.referrer !== document.location.href) {
     setTimeout(function() {
         document.location.reload()
     }, 5000);
-    }
-    
-    // { fieldset.disabled = false;}
+    } #}
 
 </script>
 
