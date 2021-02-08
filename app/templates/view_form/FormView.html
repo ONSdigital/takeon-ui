@@ -339,16 +339,15 @@
     var saveFormButton = document.getElementById("saveFormButton")
     saveFormButton.addEventListener("submit", function () { 
         fieldset.disabled = true;
-        setTimeout(function() {
-        window.location.reload()
-        }, 5000);
+        window.setTimeout('location.reload()', 5000);
     })
     
     {# if (document.referrer !== document.location.href) {
     setTimeout(function() {
         document.location.reload()
     }, 5000);
-    } #}
+    } 
+    window.setTimeout('location.reload()', 3000); #}
 
 </script>
 
