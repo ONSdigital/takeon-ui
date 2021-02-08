@@ -355,12 +355,14 @@
 
     function disable_page(source){
         document.getElementById("fieldset").disabled = true;
-    }
+        setTimeout(function(){ 
+            location.reload();
+        }, 5000);
     $.ajax({
             url: 'viewform',
             type: 'post',
         })
-    window.location.reload()
+    window.location.reload()}
 
 </script>
 
