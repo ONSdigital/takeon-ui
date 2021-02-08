@@ -336,15 +336,19 @@
 
 <script>
     var fieldset = document.getElementById("fieldset");
-    saveFormButton.onclick = function () { fieldset.disabled = true;}
-
+    saveFormButton.onclick = function () { 
+        fieldset.disabled = true;
+        setTimeout(function() { document.location.reload() }, 5000);
+        fieldset.disabled = false
+    }
+    
     if (document.referrer !== document.location.href) {
     setTimeout(function() {
         document.location.reload()
     }, 5000);
     }
     
-    { fieldset.disabled = false;}
+    // { fieldset.disabled = false;}
 
 </script>
 
