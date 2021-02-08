@@ -213,7 +213,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="disable_page">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="disable_page(this)">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -353,9 +353,8 @@
         }
     } #}
 
-    function disable_page(){
-        fieldset = document.getElementById("fieldset");
-        fieldset.disabled = true;
+    function disable_page(source){
+        fieldset = document.getElementById("fieldset").disabled = true;
     }
 
 
