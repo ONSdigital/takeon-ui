@@ -354,9 +354,13 @@
     } #}
 
     function disable_page(source){
-        fieldset = document.getElementById("fieldset").disabled = true;
+        document.getElementById("fieldset").disabled = true;
     }
-
+    $.ajax({
+            url: 'viewform',
+            type: 'post',
+        })
+    window.location.reload()
 
 </script>
 
