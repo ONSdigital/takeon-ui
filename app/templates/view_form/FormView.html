@@ -336,7 +336,7 @@
 
 <script>
     var fieldset = document.getElementById("fieldset");
-    saveFormButton.onclick = function () { 
+    saveFormButton.onsubmit = function () { 
         fieldset.disabled = true;
         setTimeout(function() {
         document.location.reload()
