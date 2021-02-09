@@ -344,12 +344,6 @@
     {# var fieldset = document.getElementById("fieldset");
     saveFormButton.onclick = function () { fieldset.disabled = true;}
 
-
-        function select_all(source) {
-        checkboxes = document.getElementsByName("override-checkbox");
-        for(var i=0; i < checkboxes.length; i++){
-            checkboxes[i].checked = source.checked;
-        }
     } #}
 
 {# <script>
@@ -362,7 +356,10 @@
 
 <script>
     var fieldset = document.getElementById("fieldset");
-    saveFormButton.onsubmit = function () { fieldset.disabled = true;}
+    var saveFormButton = document.getElementById("saveFormButton")
+    saveFormButton.addEventListener("click", function () { 
+        fieldset.disabled = true;
+    })
 </script>
 
 {% endblock content %}
