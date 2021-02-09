@@ -213,7 +213,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="disable_page(this)">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onClick="this.disabled=true">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -334,7 +334,6 @@
     }
 </script> #}
 
-<script>
     {# var fieldset = document.getElementById("fieldset");
     var saveFormButton = document.getElementById("saveFormButton")
     saveFormButton.addEventListener("click", function () { 
@@ -353,12 +352,13 @@
         }
     } #}
 
+{# <script>
     function disable_page(source){
         document.getElementById("fieldset").disabled = false
     ;
     }
 
-</script>
+</script> #}
 
 
 {% endblock content %}
