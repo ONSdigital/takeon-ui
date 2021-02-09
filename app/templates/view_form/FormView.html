@@ -49,7 +49,7 @@
                         <a href="#tabId2" class="tab tab--row" data-ga="click" data-ga-category="tabs" data-ga-action="Show: Historic Data" data-ga-label="Show: Historic Data" aria-selected="false">Historic Data</a></li>
                 </ul>
 
-                <form method="post" id="responseForm" action="{{ url_for('view_form.view_form', inqcode=survey, period=period, ruref=ruref) }}">
+                <form method="post" id="responseForm" action="{{ url_for('view_form.view_form', inqcode=survey, period=period, ruref=ruref) }}" onSubmit="document.getElementById('saveFormButton').disabled=true;">
 
                     <section id="tabId1" class="tabs__panel">
 
@@ -354,21 +354,21 @@
     save_and_validate_button.addEventListener("click", function()
     {
         fieldset.disabled = true;
-        var reference  = "{{ contributor_details['reference'] }}";
-        var period     = "{{ contributor_details['period'] }}";
-        var survey     = "{{ contributor_details['survey'] }}";
-        reference_data['reference']          = reference
-        reference_data['period']             = period
-        reference_data['survey']             = survey
-        var js_data = JSON.stringify(reference_data)
-        $.ajax({
-            url: 'viewform',
-            type: 'post',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: js_data,
-            async: false
-        })
+        // var reference  = "{{ contributor_details['reference'] }}";
+        // var period     = "{{ contributor_details['period'] }}";
+        // var survey     = "{{ contributor_details['survey'] }}";
+        // reference_data['reference']          = reference
+        // reference_data['period']             = period
+        // reference_data['survey']             = survey
+        // var js_data = JSON.stringify(reference_data)
+        // $.ajax({
+        //     url: 'viewform',
+        //     type: 'post',
+        //     contentType: 'application/json',
+        //     dataType: 'json',
+        //     data: js_data,
+        //     async: false
+        // })
         setTimeout(window.location.reload(), 5000)
     }
 </script>
