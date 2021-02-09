@@ -49,7 +49,7 @@
                         <a href="#tabId2" class="tab tab--row" data-ga="click" data-ga-category="tabs" data-ga-action="Show: Historic Data" data-ga-label="Show: Historic Data" aria-selected="false">Historic Data</a></li>
                 </ul>
 
-                <form method="post" id="responseForm" action="{{ url_for('view_form.view_form', inqcode=survey, period=period, ruref=ruref) }}" onSubmit="document.getElementById('saveFormButton').disabled=true;">
+                <form method="post" id="responseForm" action="{{ url_for('view_form.view_form', inqcode=survey, period=period, ruref=ruref) }}" onSubmit="return disableButton(this);">
 
                     <section id="tabId1" class="tabs__panel">
 
@@ -348,12 +348,12 @@
     })
 </script>
 
-<script>
+<!-- <script>
     var fieldset = document.getElementById("fieldset");
     var save_and_validate_button = document.getElementById("saveFormButton")
     save_and_validate_button.addEventListener("click", function()
     {
-        fieldset.disabled = true;
+        fieldset.disabled = true; -->
         // var reference  = "{{ contributor_details['reference'] }}";
         // var period     = "{{ contributor_details['period'] }}";
         // var survey     = "{{ contributor_details['survey'] }}";
@@ -369,8 +369,21 @@
         //     data: js_data,
         //     async: false
         // })
-        setTimeout(window.location.reload(), 5000)
+        <!-- setTimeout(window.location.reload(), 5000)
     }
+</script> -->
+
+<script>
+    function disableButton(form)
+    {
+        form.saveFormButton.disabled = true;
+        form.saveFormButton.value = "Running Validation...";
+        return true;
+    }
+
+
 </script>
+
+
 
 {% endblock content %}
