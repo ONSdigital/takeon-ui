@@ -9,7 +9,9 @@
 {% endblock page_header %}
 
 {% block content %}
-​
+
+<fieldset enabled>
+
 ​<div class="mainContent">
     <div class="grid">
         <div class="grid__col col-11@m">
@@ -265,7 +267,7 @@
         </div>
     </div>
 </div>
-
+</fieldset>
 
 <script>
     var override_button = document.getElementById("override_button")
@@ -317,13 +319,13 @@
     }
 </script>
 
-<!-- <script>
+<script>
     var fieldset = document.getElementById("fieldset");
     var saveFormButton = document.getElementById("saveFormButton")
     saveFormButton.addEventListener("click", function () { 
         fieldset.disabled = true;
     })
-</script> -->
+</script>
 
 <!-- <script>
     var fieldset = document.getElementById("fieldset");
@@ -350,15 +352,7 @@
     }
 </script> -->
 
-<script>
-    function disableButton(form)
-    {
-        form.saveFormButton.disabled = true;
-        form.saveFormButton.value = "Running Validation...";
-        return true;
-    }
-
-</script>
+ 
 
 
 
