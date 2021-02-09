@@ -213,7 +213,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onsubmit="disableButton()">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -359,10 +359,10 @@
     }
 
 </script> #}
+
 <script>
-    function disableButton(){
-      document.getElementById("fieldset").disabled = true;
-  }
+    var fieldset = document.getElementById("fieldset");
+    saveFormButton.onsubmit = function () { fieldset.disabled = true;}
 </script>
 
 {% endblock content %}
