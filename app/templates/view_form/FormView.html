@@ -9,8 +9,6 @@
 {% endblock page_header %}
 
 {% block content %}
-
-<fieldset id="fieldset" enabled>
 ​
 ​<div class="mainContent">
     <div class="grid">
@@ -268,7 +266,6 @@
     </div>
 </div>
 
-</fieldset>
 
 <script>
     var override_button = document.getElementById("override_button")
@@ -320,40 +317,20 @@
     }
 </script>
 
-    {# var fieldset = document.getElementById("fieldset");
-    var saveFormButton = document.getElementById("saveFormButton")
-    saveFormButton.addEventListener("click", function () { 
-        fieldset.disabled = true;
-        window.setTimeout('location.reload()', 5000);
-    }) #}
-
-    {# var fieldset = document.getElementById("fieldset");
-    saveFormButton.onclick = function () { fieldset.disabled = true;}
-
-    } #}
-
-{# <script>
-    function disable_page(source){
-        document.getElementById("fieldset").disabled = false
-    ;
-    }
-
-</script> #}
-
-<script>
+<!-- <script>
     var fieldset = document.getElementById("fieldset");
     var saveFormButton = document.getElementById("saveFormButton")
     saveFormButton.addEventListener("click", function () { 
         fieldset.disabled = true;
     })
-</script>
+</script> -->
 
 <!-- <script>
     var fieldset = document.getElementById("fieldset");
     var save_and_validate_button = document.getElementById("saveFormButton")
     save_and_validate_button.addEventListener("click", function()
     {
-        fieldset.disabled = true; -->
+        fieldset.disabled = true;
         // var reference  = "{{ contributor_details['reference'] }}";
         // var period     = "{{ contributor_details['period'] }}";
         // var survey     = "{{ contributor_details['survey'] }}";
@@ -369,7 +346,7 @@
         //     data: js_data,
         //     async: false
         // })
-        <!-- setTimeout(window.location.reload(), 5000)
+        setTimeout(window.location.reload(), 5000)
     }
 </script> -->
 
@@ -380,7 +357,6 @@
         form.saveFormButton.value = "Running Validation...";
         return true;
     }
-
 
 </script>
 
