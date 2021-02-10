@@ -319,12 +319,17 @@
     }
 </script>
 
-<script>
-    var fieldset = document.getElementById("fieldset");
+<!-- {# <script>
     var saveFormButton = document.getElementById("saveFormButton");
     saveFormButton.addEventListener("click", function () { 
-        fieldset.disabled = true;
+        alert("Refreshing in 5 seconds");
     })
+</script> #} -->
+
+
+<script>
+    document.getElementById('saveFormButton').innerHTML='<b>Refreshing in 5 seconds, Please wait</b>'; 
+    setTimeout(function() {document.getElementById('saveFormButton').innerHTML='';},5000);
 </script>
 
 <!-- <script>
