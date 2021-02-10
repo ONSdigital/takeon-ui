@@ -318,12 +318,9 @@
 </script>
 
 <script>
-
-    
     function popup() {
-
         var w = window.open('','','width=auto,height=auto')
-	    w.document.write("{{ html_text }}")
+	    w.document.write('<h1> Updating Contributor Details, Please wait... </h1>')
 	    w.focus()
 	    setTimeout(function() {w.close();}, 5000)
         }
