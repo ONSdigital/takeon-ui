@@ -327,9 +327,10 @@
 
 <script>
     function popup() {
-        document.getElementById('saveFormButton').innerHTML='<b>Refreshing in 5 seconds, Please wait</b>'; 
-        setTimeout(function() {document.getElementById('saveFormButton').innerHTML='';},5000);
-    }
+        var w = window.open('','','width=auto,height=auto')
+	    w.document.write('Saving & Validating data. Please wait')
+	    w.focus()
+	    setTimeout(function() {w.close();}, 5000)    }
 </script>
 
 <!-- <script>
