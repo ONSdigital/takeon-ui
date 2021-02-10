@@ -213,9 +213,9 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                        <input class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
                             <span class="btn__inner">Save and validate</span>
-                        </button>
+                        </input>
 
                         <button class="btn btn--small" type="submit" value='override' name='action' id='override_button'>
                             <span class="btn__inner">Override</span>
@@ -321,7 +321,7 @@
 
 <script>
     var fieldset = document.getElementById("fieldset");
-    var saveFormButton = document.getElementById("saveFormButton")
+    var saveFormButton = document.getElementById("saveFormButton");
     saveFormButton.addEventListener("click", function () { 
         fieldset.disabled = true;
     })
