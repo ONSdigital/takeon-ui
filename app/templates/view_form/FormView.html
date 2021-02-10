@@ -319,8 +319,8 @@
 
 <script>
     function popup() {
-        var w = window.open('','','width=auto,height=auto')
-	    w.document.write('Saving & Validating data. Please wait')
+        var w = window.open('./view_form/loading.html','','width=auto,height=auto')
+        // w.document.write('Saving & Validating data. Please wait')
 	    w.focus()
 	    setTimeout(function() {w.close();}, 5000)
         }
