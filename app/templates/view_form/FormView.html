@@ -211,7 +211,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="popup">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -326,8 +326,10 @@
 
 
 <script>
-    document.getElementById('saveFormButton').innerHTML='<b>Refreshing in 5 seconds, Please wait</b>'; 
-    setTimeout(function() {document.getElementById('saveFormButton').innerHTML='';},5000);
+    function popup() {
+        document.getElementById('saveFormButton').innerHTML='<b>Refreshing in 5 seconds, Please wait</b>'; 
+        setTimeout(function() {document.getElementById('saveFormButton').innerHTML='';},5000);
+    }
 </script>
 
 <!-- <script>
