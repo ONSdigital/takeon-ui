@@ -317,49 +317,13 @@
     }
 </script>
 
-<!-- {# <script>
-    var saveFormButton = document.getElementById("saveFormButton");
-    saveFormButton.addEventListener("click", function () { 
-        alert("Refreshing in 5 seconds");
-    })
-</script> #} -->
-
-
 <script>
     function popup() {
         var w = window.open('','','width=auto,height=auto')
 	    w.document.write('Saving & Validating data. Please wait')
 	    w.focus()
-	    setTimeout(function() {w.close();}, 5000)    }
+	    setTimeout(function() {w.close();}, 5000)
+        }
 </script>
-
-<!-- <script>
-    var fieldset = document.getElementById("fieldset");
-    var save_and_validate_button = document.getElementById("saveFormButton")
-    save_and_validate_button.addEventListener("click", function()
-    {
-        fieldset.disabled = true;
-        // var reference  = "{{ contributor_details['reference'] }}";
-        // var period     = "{{ contributor_details['period'] }}";
-        // var survey     = "{{ contributor_details['survey'] }}";
-        // reference_data['reference']          = reference
-        // reference_data['period']             = period
-        // reference_data['survey']             = survey
-        // var js_data = JSON.stringify(reference_data)
-        // $.ajax({
-        //     url: 'viewform',
-        //     type: 'post',
-        //     contentType: 'application/json',
-        //     dataType: 'json',
-        //     data: js_data,
-        //     async: false
-        // })
-        setTimeout(window.location.reload(), 5000)
-    }
-</script> -->
-
- 
-
-
 
 {% endblock content %}
