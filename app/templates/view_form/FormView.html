@@ -47,7 +47,7 @@
                         <a href="#tabId2" class="tab tab--row" data-ga="click" data-ga-category="tabs" data-ga-action="Show: Historic Data" data-ga-label="Show: Historic Data" aria-selected="false">Historic Data</a></li>
                 </ul>
 
-                <form method="post" id="responseForm" action="{{ url_for('view_form.view_form', inqcode=survey, period=period, ruref=ruref) }}" onsubmit="document.getElementById('saveFormButton').disabled=true">
+                <form method="post" id="responseForm" action="{{ url_for('view_form.view_form', inqcode=survey, period=period, ruref=ruref) }}">
 
                     <section id="tabId1" class="tabs__panel">
 
@@ -211,7 +211,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" name="save-and-validate">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="this.form.submit();this.disabled=true;this.value='Sending, please wait...';">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
