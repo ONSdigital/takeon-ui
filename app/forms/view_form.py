@@ -66,7 +66,7 @@ def view_form(inqcode, period, ruref):
         log.info("filtered validations: %s", filtered_validations)
         response_and_validations = combine_responses_and_validations(view_form_data, filtered_validations)
         log.info("response_and_validations: %s", response_and_validations)
-        ordered_response_and_validations = question_order(response_and_validations, log)
+        ordered_response_and_validations = question_order(response_and_validations)
         log.info("Combined Response and Validation Info Data: %s", ordered_response_and_validations)
 
         override_button = override_all_button(ordered_response_and_validations)
