@@ -211,7 +211,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="this.disabled=true;this.value='Sending, please wait...';document.forms['responseForm'].submit();">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -315,6 +315,16 @@
             checkboxes[i].checked = source.checked;
         }
     }
+</script>
+
+<script>
+    $('responseForm').submit(function(){
+  $(this).find(':submit').attr('disabled','disabled');
+    });
+</script>
+
+<script>
+    document.getElementById("saveFormButton").disabled = false;
 </script>
 
 
