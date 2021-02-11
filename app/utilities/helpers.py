@@ -149,7 +149,7 @@ def json_validator(data, log):
 
 
 # This function reordes the questions based off the displayorder value 
-def question_order(response_and_validations, log):
+def question_order(response_and_validations):
     try:
         questions = response_and_validations["form_validation_outputs"]
         sorted_questions = (sorted(questions, key = lambda i: i['displayorder']))
@@ -157,10 +157,10 @@ def question_order(response_and_validations, log):
         return sorted_response_and_validations
 
     except KeyError as key_error:
-        log.error("Data missing displayorder" + str(key_error))
+        raise KeyError("Data missing displayorder" + str(key_error))
 
     except TypeError as type_error:
-        log.error("Error with data type converting to JSON " + str(type_error))
+        raise TypeError("Error with data type converting to JSON " + str(type_error))
 
     except Exception as error:
-        log.error("Error: " + error)
+        raise Exception("Error: " + error)
