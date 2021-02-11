@@ -3,10 +3,10 @@
 ### Pre-Requisites
  - Browser: 
     - Chrome
-    - Version: 83.0.4103.61  
+    - Version: <latest> eg:83.0.4103.61
    
  - Chromedriver:
-    - Chromedriver version - 83.0.4103.39
+    - Chromedriver version - <compatible to browser version> eg:83.0.4103.39
    
       As long as the browser version and chromedriver are compatible to each other even if you don't have the same browser version mentioned here and you can check that in 
       https://chromedriver.chromium.org/downloads when downloading the chromedriver if not the tests will fail.
@@ -32,9 +32,11 @@
 ### Running Tests
 
 -  Setting up the environment:
-
-        export TAKEON_URL="http://{URL}"
-        export COGNITO_USER_POOL="{COGNITO_USER_POOL}"
+        export AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
+        export AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
+        export AWS_SESSION_TOKEN="<AWS_SESSION_TOKEN>" 
+        export TAKEON_URL="http://<URL>"
+        export COGNITO_USER_POOL="<COGNITO_USER_POOL>"
         Replace URL with the enviroment url you wish to test.
         Note: make sure while setting up the url it has 'http://' protocol otherwise tests will fail
      
@@ -97,15 +99,22 @@
    - To run tests using a docker image
       
       switch to the tests folder cd takeon-ui/tests/ 
-      Run the export command in the terminal to set the url
-                    
-          export TAKEON_URL="URL"
+      Run the export below commands in the terminal to set the AWS Credentials, Env Url and cognito user pool
           
-      Replace URL with the environment url you wish to test.
+          export AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
+          export AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
+          export AWS_SESSION_TOKEN="<AWS_SESSION_TOKEN>"          
+          export TAKEON_URL="http://<URL>"
+          export TAKEON_URL="<COGNITO_USER_POOL>"
+        
       Run the below make command 
-          
+                 
           make docker-run  
-          
-      Finally to see if the tests been run successfully there will be a folder called docker_results gets created automatically after the tests run 
-      and will have the screenshots which are been taken after each scenario. 
-         
+            
+      Finally  you will see the test result like this
+        
+            
+          2 features passed, 0 failed, 52 skipped
+          3 scenarios passed, 0 failed, 435 skipped
+          23 steps passed, 0 failed, 3577 skipped, 0 undefined
+

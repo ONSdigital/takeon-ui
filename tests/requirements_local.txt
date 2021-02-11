@@ -1,2 +1,7 @@
 selenium==3.141.0
 behave==1.2.6
+boto3==1.16.7
+botocore==1.19.7
+flake8==3.7.7
+flake8-polyfill==1.0.2
+spp-cognito-auth @ git+https://github.com/ONSdigital/spp-cognito-auth.git@a428c0af471710e885cad1056074ffb9db3456b9

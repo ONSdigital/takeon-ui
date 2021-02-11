@@ -18,3 +18,4 @@ flake8==3.7.7
 flake8-polyfill==1.0.2
 spp-cognito-auth @ git+https://github.com/ONSdigital/spp-cognito-auth.git@a428c0af471710e885cad1056074ffb9db3456b9
 spp-logger @ git+https://github.com/ONSdigital/spp-logger.git@609c91c85fb9f4a3c75c06c4eec60ad81034dbd5
+immutables==0.14
