@@ -321,13 +321,7 @@
 <script>
     function popup() {
         var w = window.open('','','width=auto,height=auto')
-	    w.document.write(`{% extends "base.html" %}
-        {% block title %}Contributor Details{% endblock title %}
-        {% block page_header %}
-            Loading Data Clearing
-        {% endblock page_header %}
-        {% block content %}
-        {% endblock content %}`)
+	    w.document.write(`{% extends "base.html" %}`)
 	    w.focus()
 	    setTimeout(function() {w.close();}, 5000)
         }
