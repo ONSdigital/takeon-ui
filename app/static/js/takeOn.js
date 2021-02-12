@@ -79,17 +79,24 @@ function popup() {
             <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap mainContent">
                 <div class="grid__col col-auto u-flex-shrink">
                     <div class="header__title">
+                        Loading Data Clearing
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
+    
+    <br>
+    <br>
     <body> 
         <h1>Loading, please wait</h1>
     </body>
-
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
     <footer class="footer " data-ga-element="footer">
         <div class="container">
             <div class="grid">
