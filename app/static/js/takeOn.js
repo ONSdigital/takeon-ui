@@ -57,8 +57,7 @@ function popup() {
     </head>
 
     <body>
-    <div class="mainContent"> 
-    <div class="phase-banner mainContent">
+    <div class="phase-banner style="padding-left:22px; padding-right:16px;">
         <div class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap">
             <div class="grid__col col-auto u-flex-no-grow">
                 <h3 class="phase-banner__badge">BETA</h3>
@@ -70,14 +69,14 @@ function popup() {
     </div>
 
     <header class="header header--internal header--thin">
-        <div class="header__top mainContent" role="banner">
+        <div class="header__top style="padding-left:22px; padding-right:16px;" role="banner">
             <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                 <div class="grid__col col-auto">
                 </div>
             </div>
         </div>
         <div class="header__main">
-            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap mainContent">
+            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap style="padding-left:22px; padding-right:16px;">
                 <div class="grid__col col-auto u-flex-shrink">
                     <div class="header__title">
                         Data Clearing
@@ -118,7 +117,6 @@ function popup() {
             </div>
         </div>
     </footer>
-    </div>
     </body>
 
     </html>`)
