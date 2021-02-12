@@ -74,7 +74,7 @@ function popup() {
             <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                 <div class="grid__col col-auto">
                     <a class="header__logo-link" href="/">
-                        <img class="header__logo" src="{{ url_for('static',filename='img/ons-logo-white.svg') }}"
+                        <img class="header__logo" src="static/img/ons-logo-white.svg"
                             alt="Office for National Statistics logo">
                     </a>
                 </div>
