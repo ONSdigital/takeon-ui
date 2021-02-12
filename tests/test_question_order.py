@@ -1,7 +1,6 @@
 import pytest
 from app.utilities.helpers import question_order
 
-
 data_output = {'form_validation_outputs': [{'questioncode': '1000', 'response': '', 'displayquestionnumber': 'Q1', 'displaytext': 'This is a numeric question - Total turnover', 'displayorder': 20, 'validation_info': [], 'panel': ''}, 
         {'questioncode': '1001', 'response': '', 'displayquestionnumber': 'Q2', 'displaytext': 'This is another numeric question - Internet Sales', 'displayorder': 2, 'validation_info': [], 'panel': ''}, 
         {'questioncode': '2000', 'response': '', 'displayquestionnumber': 'Q3', 'displaytext': 'This is a checkbox question', 'displayorder': 3, 'validation_info': [], 'panel': ''}, 

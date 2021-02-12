@@ -1,4 +1,3 @@
-from app.setup import log
 # Combine Form response and Validation data
 
 def extract_question_data(form_data, index):
@@ -58,12 +57,12 @@ def combine_responses_and_validations(form_data, validation_data):
         output_dictionary['form_validation_outputs'] = combined_array
         return output_dictionary
     except ValueError as value_error:
-        log.error("Error with JSON Structure: " + str(value_error))
+        raise ValueError("Error with JSON Structure: " + str(value_error))
     except KeyError as key_error:
-        log.error("Error with missing JSON Keys " + str(key_error))
+        raise KeyError("Error with missing JSON Keys " + str(key_error))
     except TypeError as type_error:
-        log.error("Error with data type converting to JSON " + str(type_error))
+        raise TypeError("Error with data type converting to JSON " + str(type_error))
     except Exception as error:
-        log.error("Error " + str(error))
+        raise Exception("Error " + str(error))
 
     return {}
