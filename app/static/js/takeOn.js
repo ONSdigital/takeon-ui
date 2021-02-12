@@ -26,7 +26,8 @@ function popup() {
     var w = window.open('','','width=auto,height=auto')
     w.document.write(`<!doctype html>
     <html lang="en-gb" dir="ltr" class="no-js">
-
+    ​
+    <div class="mainContent">    
     <head>
 
         <meta charset="utf-8">
@@ -79,7 +80,7 @@ function popup() {
             <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap mainContent">
                 <div class="grid__col col-auto u-flex-shrink">
                     <div class="header__title">
-                        Loading Data Clearing
+                        Data Clearing
                     </div>
                 </div>
             </div>
@@ -89,14 +90,13 @@ function popup() {
     <br>
     <br>
     <body> 
-        <h1>Loading, please wait</h1>
+        <h2>Loading, please wait</h2>
     </body>
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    
+
+
     <footer class="footer " data-ga-element="footer">
         <div class="container">
             <div class="grid">
@@ -120,6 +120,7 @@ function popup() {
     </footer>
 
     </body>
+    </div>
 
     </html>`)
 
