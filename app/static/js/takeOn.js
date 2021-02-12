@@ -26,8 +26,7 @@ function popup() {
     var w = window.open('','','width=auto,height=auto')
     w.document.write(`<!doctype html>
     <html lang="en-gb" dir="ltr" class="no-js">
-    ​
-    <div class="mainContent">    
+    ​   
     <head>
 
         <meta charset="utf-8">
@@ -58,6 +57,7 @@ function popup() {
     </head>
 
     <body>
+    <div class="mainContent"> 
     <div class="phase-banner mainContent">
         <div class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap">
             <div class="grid__col col-auto u-flex-no-grow">
@@ -118,9 +118,8 @@ function popup() {
             </div>
         </div>
     </footer>
-
-    </body>
     </div>
+    </body>
 
     </html>`)
 
