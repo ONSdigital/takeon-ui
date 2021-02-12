@@ -45,15 +45,14 @@ function popup() {
         <link rel="apple-touch-icon" type="image/png"
             href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/apple-touch-icon.png" sizes="180x180">
         <link rel="manifest" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/manifest.json">
-                <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/css/main.css" media="all"
-                    type="text/css">
-                <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" media="all" type="text/css">
-                <script>var ONS_assets_base_URL='https://cdn.ons.gov.uk/sdc/design-system/24.0.3/';</script>
-                <script src="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/scripts/main.js"></script>
-
-                <script type="text/javascript"
-                        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-                <script type="text/javascript" src="{{ url_for('static', filename='js/industry-range.js') }}"></script>
+        <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/css/main.css" media="all"
+            type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" media="all" type="text/css">
+        <script>var ONS_assets_base_URL='https://cdn.ons.gov.uk/sdc/design-system/24.0.3/';</script>
+        <script src="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/scripts/main.js"></script>
+        <script type="text/javascript"
+                src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/industry-range.js') }}"></script>
 
     </head>
 
@@ -73,10 +72,6 @@ function popup() {
         <div class="header__top mainContent" role="banner">
             <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                 <div class="grid__col col-auto">
-                    <a class="header__logo-link" href="/">
-                        <img class="header__logo" src="static/img/ons-logo-white.svg"
-                            alt="Office for National Statistics logo">
-                    </a>
                 </div>
             </div>
         </div>
@@ -85,17 +80,6 @@ function popup() {
                 <div class="grid__col col-auto u-flex-shrink">
                     <div class="header__title">
                     </div>
-                </div>
-
-                <div class="grid__col col-auto u-flex-no-shrink u-d-no@xs@m">
-                    <a href="{{ url_for('auth.logout') }}" role="button" class="btn btn--ghost u-d-no@xs@m btn--exit">
-                    <span class="btn__inner">Sign out
-                        <svg class="svg-icon" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.85,7.65l-2.5-2.5a.5.5,0,0,0-.71,0,.48.48,0,0,0-.15.36V7h-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h3v1.5A.49.49,0,0,0,11,11a.48.48,0,0,0,.34-.14l2.51-2.5a.49.49,0,0,0,0-.68Z" transform="translate(-2 -2)" />
-                        <path d="M8.5,14h-6a.5.5,0,0,1-.5-.5V2.5A.5.5,0,0,1,2.5,2h6a.5.5,0,0,1,.5.5V3a.5.5,0,0,1-.5.5h-5v9h5A.5.5,0,0,1,9,13v.5A.5.5,0,0,1,8.5,14Z" transform="translate(-2 -2)" />
-                        </svg>
-                    </span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -131,6 +115,7 @@ function popup() {
     </body>
 
     </html>`)
+
     w.focus()
     setTimeout(function() {w.close();}, 5000)
     }
