@@ -21,3 +21,116 @@ if (isLockedBy != ""){
 }
 
 document.getElementById("Form2").style.display = "block"
+
+function popup() {
+    var w = window.open('','','width=auto,height=auto')
+    w.document.write(`<!doctype html>
+    <html lang="en-gb" dir="ltr" class="no-js">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/css/main.css">
+        <meta name="msapplication-config"
+            content="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/browserconfig.json">
+        <link rel="icon" type="image/x-icon" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.1/favicons/favicon.ico">
+        <link rel="icon" type="image/png"
+            href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png"
+            href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="mask-icon" color="#5BBAD5"
+            href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/safari-pinned-tab.svg">
+        <link rel="apple-touch-icon" type="image/png"
+            href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/apple-touch-icon.png" sizes="180x180">
+        <link rel="manifest" href="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/favicons/manifest.json">
+                <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/16.1.0/css/main.css" media="all"
+                    type="text/css">
+                <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" media="all" type="text/css">
+                <script>var ONS_assets_base_URL='https://cdn.ons.gov.uk/sdc/design-system/24.0.3/';</script>
+                <script src="https://cdn.ons.gov.uk/sdc/design-system/24.0.3/scripts/main.js"></script>
+
+                <script type="text/javascript"
+                        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+                <script type="text/javascript" src="{{ url_for('static', filename='js/industry-range.js') }}"></script>
+
+    </head>
+
+    <body>
+    <div class="phase-banner mainContent">
+        <div class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap">
+            <div class="grid__col col-auto u-flex-no-grow">
+                <h3 class="phase-banner__badge">BETA</h3>
+            </div>
+            <div class="grid__col col-auto u-flex-shrink">
+                <p class="phase-banner__desc u-fs-s u-mb-no">This is a work in progress</p>
+            </div>
+        </div>
+    </div>
+
+    <header class="header header--internal header--thin">
+        <div class="header__top mainContent" role="banner">
+            <div class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
+                <div class="grid__col col-auto">
+                    <a class="header__logo-link" href="/">
+                        <img class="header__logo" src="{{ url_for('static',filename='img/ons-logo-white.svg') }}"
+                            alt="Office for National Statistics logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="header__main">
+            <div class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap mainContent">
+                <div class="grid__col col-auto u-flex-shrink">
+                    <div class="header__title">
+                    </div>
+                </div>
+
+                <div class="grid__col col-auto u-flex-no-shrink u-d-no@xs@m">
+                    <a href="{{ url_for('auth.logout') }}" role="button" class="btn btn--ghost u-d-no@xs@m btn--exit">
+                    <span class="btn__inner">Sign out
+                        <svg class="svg-icon" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.85,7.65l-2.5-2.5a.5.5,0,0,0-.71,0,.48.48,0,0,0-.15.36V7h-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h3v1.5A.49.49,0,0,0,11,11a.48.48,0,0,0,.34-.14l2.51-2.5a.49.49,0,0,0,0-.68Z" transform="translate(-2 -2)" />
+                        <path d="M8.5,14h-6a.5.5,0,0,1-.5-.5V2.5A.5.5,0,0,1,2.5,2h6a.5.5,0,0,1,.5.5V3a.5.5,0,0,1-.5.5h-5v9h5A.5.5,0,0,1,9,13v.5A.5.5,0,0,1,8.5,14Z" transform="translate(-2 -2)" />
+                        </svg>
+                    </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <body> 
+        <h1>Loading, please wait</h1>
+    </body>
+
+
+    <footer class="footer " data-ga-element="footer">
+        <div class="container">
+            <div class="grid">
+                <div class="grid__col col-4@m">
+                    <!-- Footer text here -->
+                </div>
+                <div class="grid__col u-mt-m u-mb-m">
+                    <hr class="footer__hr">
+                </div>
+                <div class="grid__col">
+                    <div class="footer__license">
+                        <img alt="OGL" class="footer__ogl-img"
+                            src="{{ url_for('static',filename='img/UKOpenGovernmentLicence-grey.svg') }}">
+                        All content is available under the <a
+                            href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                            class="footer__link">Open Government Licence v3.0</a>, except where otherwise stated
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </body>
+
+    </html>`)
+    w.focus()
+    setTimeout(function() {w.close();}, 5000)
+    }
