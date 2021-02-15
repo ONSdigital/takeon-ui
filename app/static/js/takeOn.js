@@ -122,5 +122,5 @@ function popup() {
     </html>`)
 
     w.focus()
-    setTimeout(function() {w.close();}, 5000)
+    setTimeout(function() {w.close();}, 6000)
     }
