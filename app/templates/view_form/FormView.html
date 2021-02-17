@@ -5,11 +5,11 @@
 {% block page_header %}
 ​
     Data Clearing
-​
+​<script type=text/javascript src="{{ url_for('static', filename='js/takeOn.js') }}"></script>
 {% endblock page_header %}
 
 {% block content %}
-​
+
 ​<div class="mainContent">
     <div class="grid">
         <div class="grid__col col-11@m">
@@ -211,7 +211,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="popup()">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -266,6 +266,7 @@
     </div>
 </div>
 
+{% endblock content %}
 
 <script>
     var override_button = document.getElementById("override_button")
@@ -317,5 +318,8 @@
     }
 </script>
 
+<script>
+    
+</script>
 
-{% endblock content %}
+
