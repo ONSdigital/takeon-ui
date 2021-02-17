@@ -6,8 +6,8 @@ from app.setup import log, api_caller
 
 baw_notify_url = os.getenv('BAW_NOTIFY_URL')
 baw_notify_key = os.getenv('BAW_NOTIFY_KEY')
-bpm_notify_url = os.getenv('BPM_NOTIFY_URL')
-bpm_notify_key = os.getenv('BPM_NOTIFY_KEY')
+baw_notify_override_url = os.getenv('BAW_NOTIFY_OVERRIDE_URL')
+baw_notify_override_key = os.getenv('BAW_NOTIFY_OVERRIDE_KEY')
 
 
 def send_notification_to_queue(reference, period, survey):
@@ -24,17 +24,22 @@ def send_notification_to_queue(reference, period, survey):
     log.info("Response from BAW Notify Queue: %s", response)
 
 
-def send_notification_to_BPM_queue(reference, period, survey, status, validation_bool, se_flag):
-
+def send_override_notification_to_queue(override_json_data):
+    try:
+        json.loads(override_json_data)
+    except ValueError as error:
+        log.info(f"Error with override JSON data: {error}, {override_json_data}")
+        raise ValueError
+    
     notification_to_send = [{
-        "reference": reference,
+        "reference": override_json_data['reference'],
         "BPMvalidationCallID": "0",
-        "survey": survey,
-        "period": period,
-        "status": status,
-        "validationPassed": validation_bool,
-        "selective_editing_flag": se_flag}]
-    header = {"x-api-key": bpm_notify_key}
+        "survey": override_json_data['survey'],
+        "period": override_json_data['period'],
+        "status": override_json_data['status'],
+        "validationPassed": override_json_data['validation_bool'],
+        "selective_editing_flag": override_json_data['se_flag']}]
+    header = {"x-api-key": baw_notify_override_key}
     response = api_caller.validation_overides(
-        bpm_notify_url, json.dumps(notification_to_send), header)
+        baw_notify_override_url, json.dumps(notification_to_send), header)
     log.info("Response from BPM Notify Queue: %s", response)

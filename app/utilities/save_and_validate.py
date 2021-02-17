@@ -40,7 +40,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         log.info("Response from save request: %s", response)
         if not response == "{\"continue\":\"No question responses to save\"}":
             log.info("Data edited. Sending notification to BAW...")
-            (ruref, period, inqcode)
+            send_notification_to_queue(ruref, period, inqcode)
         status_message = 'Responses saved successfully'
         return status_message
     except HTTPError as http_error:
@@ -55,6 +55,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
     except RequestException as requests_error:
         status_message = 'There was a problem with your request ' + requests_error + 'Please contact Data Clearing Support Team'
         log.info('Requests Error: %s', requests_error)
+
 
 def validate(inqcode, period, ruref):
     log.info('save validation button pressed')
