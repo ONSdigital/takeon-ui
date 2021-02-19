@@ -37,8 +37,8 @@ def send_override_notification_to_queue(override_json_data):
         "survey": override_json_data['survey'],
         "period": override_json_data['period'],
         "status": override_json_data['status'],
-        "validationPassed": override_json_data['validation_bool'],
-        "selective_editing_flag": override_json_data['se_flag']}]
+        "validationPassed": override_json_data['validationPassed'],
+        "selective_editing_flag": override_json_data['selective_editing_flag']}]
     header = {"x-api-key": baw_notify_override_key}
     response = api_caller.validation_overides(
         baw_notify_override_url, json.dumps(notification_to_send), header)
