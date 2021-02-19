@@ -1,4 +1,4 @@
-from behave import given, when
+from behave import given, when, then
 from pages.test_survey.test_survey_contributor_details_page import TestSurveyContributorDetailsPage
 from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 
@@ -36,3 +36,28 @@ def validate_the_current_period_details(context, validation_type=None):
 def current_period_factor_type(context, factor):
     if context.survey == '023' or context.survey == '999A':
         context.factor_type = factor
+
+
+@given(u'I have the contributor responses returned for {days_returned} as compared to {actual_days_returned}')
+def step_impl(context, days_returned, actual_days_returned):
+    pass
+
+
+@given(u'the period start date set as {period_start_date} with period end date as {period_end_date}')
+def step_impl(context, period_start_date, period_end_date):
+    pass
+
+
+@when(u'I edited the contributor response {values} on questions {question_codes}')
+def step_impl(context, values, question_codes):
+    pass
+
+
+@then(u'the adjusted response values {dates_range} should be {adjusted_response}compared to {values}')
+def step_impl(context, dates_range, adjusted_response, values):
+    pass
+
+
+@then(u'the "validation" message should {is_validation_exists} displayed for question codes {question_codes}')
+def step_impl(context, is_validation_exists, question_codes):
+    pass

@@ -13,7 +13,7 @@ class CheckValuesContributorDetails:
 
     def check_if_validation_status_changed(self):
         i = 0
-        while i < 3:
+        while i < 6:
             status = GetContributorDetails().get_validation_status().lower()
 
             if status == 'check needed':
