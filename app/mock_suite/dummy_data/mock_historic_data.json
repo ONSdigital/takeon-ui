@@ -1,1 +1,1492 @@
-{"history_data": [{"reference": "12000534932", "period": "201903", "view_form_responses": [{"displaytext": "Period start date", "instance": 0, "response": "20190304", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": 0, "response": "20190328", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": 0, "response": "10000", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": 0, "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201902", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201901", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201812", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201811", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201810", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201809", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201808", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201807", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201806", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201805", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}, {"reference": "12000534932", "period": "201804", "view_form_responses": [{"displaytext": "Period start date", "instance": "", "response": "", "questioncode": "11", "displayorder": 1, "displayquestionnumber": "Q11", "type": "DATE"}, {"displaytext": "Period end date", "instance": "", "response": "", "questioncode": "12", "displayorder": 2, "displayquestionnumber": "Q12", "type": "DATE"}, {"displaytext": "Total retail turnover", "instance": "", "response": "", "questioncode": "20", "displayorder": 3, "displayquestionnumber": "Q20", "type": "NUMERIC"}, {"displaytext": "Internet sales", "instance": "", "response": "", "questioncode": "21", "displayorder": 4, "displayquestionnumber": "Q21", "type": "NUMERIC"}, {"displaytext": "Comment about reason for turnover changes", "instance": "", "response": "", "questioncode": "146", "displayorder": 5, "displayquestionnumber": "Q146", "type": "TEXT"}, {"displaytext": "Did significant turnover changes occur?", "instance": "", "response": "", "questioncode": "146a", "displayorder": 6, "displayquestionnumber": "Q146a", "type": "TEXT"}, {"displaytext": "In-store or online promotions was the reason", "instance": "", "response": "", "questioncode": "146b", "displayorder": 7, "displayquestionnumber": "Q146b", "type": "TEXT"}, {"displaytext": "Special events was the reason", "instance": "", "response": "", "questioncode": "146c", "displayorder": 8, "displayquestionnumber": "Q146c", "type": "TEXT"}, {"displaytext": "Calendar events was the reason", "instance": "", "response": "", "questioncode": "146d", "displayorder": 9, "displayquestionnumber": "Q146d", "type": "TEXT"}, {"displaytext": "Weather was the reason", "instance": "", "response": "", "questioncode": "146e", "displayorder": 10, "displayquestionnumber": "Q146e", "type": "TEXT"}, {"displaytext": "Store closures was the reason", "instance": "", "response": "", "questioncode": "146f", "displayorder": 11, "displayquestionnumber": "Q146f", "type": "TEXT"}, {"displaytext": "Store openings was the reason", "instance": "", "response": "", "questioncode": "146g", "displayorder": 12, "displayquestionnumber": "Q146g", "type": "TEXT"}, {"displaytext": "Other reason", "instance": "", "response": "", "questioncode": "146h", "displayorder": 13, "displayquestionnumber": "Q146h", "type": "TEXT"}], "survey": "023"}]}
+{
+    "history_data": [
+      {
+        "reference": "12000534932",
+        "period": "201903",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": 0,
+            "response": "20190304",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": 0,
+            "response": "20190328",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": 0,
+            "response": "10000",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": 0,
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201902",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201901",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201812",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201811",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201810",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201809",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201808",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201807",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201806",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201805",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      },
+      {
+        "reference": "12000534932",
+        "period": "201804",
+        "view_form_responses": [
+          {
+            "displaytext": "Period start date",
+            "instance": "",
+            "response": "",
+            "questioncode": "11",
+            "displayorder": 1,
+            "displayquestionnumber": "Q11",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Period end date",
+            "instance": "",
+            "response": "",
+            "questioncode": "12",
+            "displayorder": 2,
+            "displayquestionnumber": "Q12",
+            "type": "DATE"
+          },
+          {
+            "displaytext": "Total retail turnover",
+            "instance": "",
+            "response": "",
+            "questioncode": "20",
+            "displayorder": 3,
+            "displayquestionnumber": "Q20",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Internet sales",
+            "instance": "",
+            "response": "",
+            "questioncode": "21",
+            "displayorder": 4,
+            "displayquestionnumber": "Q21",
+            "type": "NUMERIC"
+          },
+          {
+            "displaytext": "Comment about reason for turnover changes",
+            "instance": "",
+            "response": "",
+            "questioncode": "146",
+            "displayorder": 5,
+            "displayquestionnumber": "Q146",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Did significant turnover changes occur?",
+            "instance": "",
+            "response": "",
+            "questioncode": "146a",
+            "displayorder": 6,
+            "displayquestionnumber": "Q146a",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "In-store or online promotions was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146b",
+            "displayorder": 7,
+            "displayquestionnumber": "Q146b",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Special events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146c",
+            "displayorder": 8,
+            "displayquestionnumber": "Q146c",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Calendar events was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146d",
+            "displayorder": 9,
+            "displayquestionnumber": "Q146d",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Weather was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146e",
+            "displayorder": 10,
+            "displayquestionnumber": "Q146e",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store closures was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146f",
+            "displayorder": 11,
+            "displayquestionnumber": "Q146f",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Store openings was the reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146g",
+            "displayorder": 12,
+            "displayquestionnumber": "Q146g",
+            "type": "TEXT"
+          },
+          {
+            "displaytext": "Other reason",
+            "instance": "",
+            "response": "",
+            "questioncode": "146h",
+            "displayorder": 13,
+            "displayquestionnumber": "Q146h",
+            "type": "TEXT"
+          }
+        ],
+        "survey": "023"
+      }
+    ]
+  }
