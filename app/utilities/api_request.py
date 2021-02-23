@@ -101,6 +101,9 @@ class ApiRequest:
     def run_validation(self, endpoint, data, headers):
         return self.request_post_api_gateway(endpoint=endpoint, data=data, headers=headers).text
 
+    def notify_override(self, endpoint, data, headers):
+        return self.request_post_api_gateway(endpoint=endpoint, data=data, headers=headers).text
+
 
 class TakeonApiException(Exception):
     status_code = 400

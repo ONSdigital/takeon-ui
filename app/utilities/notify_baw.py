@@ -40,6 +40,5 @@ def send_override_notification_to_queue(override_data):
         "validationPassed": override_json_data['validationPassed'],
         "selective_editing_flag": override_json_data['selective_editing_flag']}]
     header = {"x-api-key": baw_notify_override_key}
-    response = api_caller.validation_overrides(
-        baw_notify_override_url, json.dumps(notification_to_send), header)
+    response = api_caller.notify_override(baw_notify_override_url, json.dumps(notification_to_send), header)
     log.info("Response from BPM Notify Queue: %s", response)
