@@ -74,9 +74,6 @@ def view_form(inqcode, period, ruref):
     except Exception as error:
         log.info("Error %s", error)
 
-    log.info("Filtered Validations output: %s",
-             filter_validations(validations))
-
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
