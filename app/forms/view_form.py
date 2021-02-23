@@ -113,6 +113,7 @@ def override_validations(inqcode, period, ruref):
         override_data_to_send = api_caller.validation_overrides(parameters='', data=json.dumps(json_data))
 
         log.info("Sending override information to validation-bpmtransform queue...")
+        log.info("Override_data_to_send: %s", override_data_to_send)
         send_override_notification_to_queue(override_data_to_send)
 
         return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
