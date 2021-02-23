@@ -24,11 +24,11 @@ def send_notification_to_queue(reference, period, survey):
     log.info("Response from BAW Notify Queue: %s", response)
 
 
-def send_override_notification_to_queue(override_json_data):
+def send_override_notification_to_queue(override_data):
     try:
-        json.loads(override_json_data)
+        override_json_data = json.loads(override_data)
     except ValueError as error:
-        log.info(f"Error with override JSON data: {error}, {override_json_data}")
+        log.info(f"Error with override JSON data: {error}, {override_data}")
         raise ValueError
     
     notification_to_send = [{
