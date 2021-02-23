@@ -31,14 +31,14 @@ def send_override_notification_to_queue(override_data):
         log.info(f"Error with override JSON data: {error}, {override_data}")
         raise ValueError
     
-    notification_to_send = [{
+    notification_to_send = {
         "reference": override_json_data['reference'],
         "BPMvalidationCallID": "0",
         "survey": override_json_data['survey'],
         "period": override_json_data['period'],
         "status": override_json_data['status'],
         "validationPassed": override_json_data['validationPassed'],
-        "selective_editing_flag": override_json_data['selective_editing_flag']}]
+        "selective_editing_flag": override_json_data['selective_editing_flag']}
     header = {"x-api-key": baw_notify_override_key}
     response = api_caller.notify_override(baw_notify_override_url, json.dumps(notification_to_send), header)
     log.info("Response from BPM Notify Queue: %s", response)
