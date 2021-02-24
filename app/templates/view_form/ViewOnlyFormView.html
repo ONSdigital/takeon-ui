@@ -58,7 +58,7 @@
                                     <th scope="col" class="table__header col-1@m">Number</th>
                                     <th scope="col" class="table__header col-4@m">Question</th>
                                     <th scope="col" class="table__header col-2@m">Response</th>
-                                    {% if survey == '888A' %}
+                                    {% if survey == '023' %}
                                         <th scope="col" class="table__header col-2@m">Adjusted Response</th>
                                     {% endif %}
                                 </tr>
@@ -87,7 +87,7 @@
                                             </p>   
                                         </td>
 
-                                        {% if survey == '888A' %}
+                                        {% if survey == '023' %}
                                         <td class="table__cell ">
                                             {% if datum['type'] == 'NUMERIC' %}
                                                 {% if datum['adjustedresponse'] == NULL %}
