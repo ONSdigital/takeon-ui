@@ -47,6 +47,7 @@ log = set_logger()
 
 api_caller = ApiRequest(log, service="business-layer", mocking=settings.MOCKING)
 
+
 def create_app(setting_overrides=None):
     # Define the WSGI application object
     application = Flask(__name__, static_url_path='/s', static_folder='./static')
