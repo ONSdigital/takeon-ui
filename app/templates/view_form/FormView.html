@@ -5,11 +5,11 @@
 {% block page_header %}
 ​
     Data Clearing
-​
+​<script type=text/javascript src="{{ url_for('static', filename='js/takeOn.js') }}"></script>
 {% endblock page_header %}
 
 {% block content %}
-​
+
 ​<div class="mainContent">
     <div class="grid">
         <div class="grid__col col-11@m">
@@ -58,6 +58,7 @@
                                     <th scope="col" class="table__header col-1@m">Number</th>
                                     <th scope="col" class="table__header col-4@m">Question</th>
                                     <th scope="col" class="table__header col-2@m">Response</th>
+                                    <th scope="col" class="table__header col-2@m">Adjusted Response</th>
                                     <th scope="col" class="table__header ">Question Status</th>
                                 </tr>
                             </thead>
@@ -88,6 +89,20 @@
                                                     <p class="field">
                                                         <input name="{{ datum['questioncode'] }}" value="{{ datum['response'] }}" type="text" id="{{ datum['questioncode'] }}" class="input input--text input-type__input input--w-10">
                                                     </p>
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="table__cell ">
+                                                {% if datum['type'] == 'NUMERIC' %}
+                                                    {% if datum['adjustedresponse'] == NULL %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"></label>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                        </p>
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
 
@@ -155,6 +170,20 @@
                                             </td>
 
                                             <td class="table__cell ">
+                                                {% if datum['type'] == 'NUMERIC' %}
+                                                    {% if datum['adjustedresponse'] == NULL %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"></label>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="field">
+                                                            <label for="{{ datum['questioncode'] }}"> {{ datum["adjustedresponse"] }} </label>
+                                                        </p>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="table__cell ">
                                             </td>
 
                                         {% endif %}
@@ -182,7 +211,7 @@
                         <br>
                         <br>
 
-                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action">
+                        <button class="btn btn--small" type="submit" id="saveFormButton" value="save-and-validate" name="action" onclick="popup()">
                             <span class="btn__inner">Save and validate</span>
                         </button>
 
@@ -237,6 +266,7 @@
     </div>
 </div>
 
+{% endblock content %}
 
 <script>
     var override_button = document.getElementById("override_button")
@@ -288,5 +318,3 @@
     }
 </script>
 
-
-{% endblock content %}
