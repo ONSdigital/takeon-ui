@@ -33,12 +33,14 @@ def submit_search_details(context, reference, survey_value=None, period=None):
 @when(u'I search for the {survey} with {reference} for the period {period}')
 def select_the_reference_form(context, reference, survey, period_type, period, sic_code=None):
     context.survey = survey
+    context.period = period
     context.period_type = period_type
     context.contributor_page = ContributorSearchPage()
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period, sic_code)
 
 
 @given(u'I submit the "{value_type}" {values} for questions')
+@when(u'I submit the "{value_type}" {values} for questions')
 def submit_the_question_data_values(context, value_type, values):
     context.question_codes = []
     for row in context.table.rows:

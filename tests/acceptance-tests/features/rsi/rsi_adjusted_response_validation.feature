@@ -1,6 +1,6 @@
 Feature: RSI Survey - check the date adjusted response values for date anomalies
   No of contributor's returned period days in for Short period parameter(S flag) is 27
-  and for Long period parameter(L flag) is 35 
+  and for Long period parameter(L flag) is 35
 
 
   Background:

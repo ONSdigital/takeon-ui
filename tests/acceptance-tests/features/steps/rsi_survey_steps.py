@@ -1,4 +1,6 @@
 from behave import given, when, then
+
+from pages.rsi.rsi_date_adjusted_response_validation import RsiDateAdjustedResponseValidation
 from pages.test_survey.test_survey_contributor_details_page import TestSurveyContributorDetailsPage
 from pages.rsi.rsi_contributor_details_page import RsiContributorDetailsPage
 
@@ -39,25 +41,18 @@ def current_period_factor_type(context, factor):
 
 
 @given(u'I have the contributor responses returned for {days_returned} as compared to {actual_days_returned}')
-def step_impl(context, days_returned, actual_days_returned):
-    pass
+def contributor_response(context, days_returned, actual_days_returned):
+    context.days_returned = days_returned
+    context.actual_days_returned = actual_days_returned
 
 
 @given(u'the period start date set as {period_start_date} with period end date as {period_end_date}')
-def step_impl(context, period_start_date, period_end_date):
-    pass
+def period_dates(context, period_start_date, period_end_date):
+    RsiDateAdjustedResponseValidation().submit_period_dates(context.period, period_start_date, period_end_date)
 
 
-@when(u'I edited the contributor response {values} on questions {question_codes}')
-def step_impl(context, values, question_codes):
-    pass
-
-
-@then(u'the adjusted response values {dates_range} should be {adjusted_response}compared to {values}')
-def step_impl(context, dates_range, adjusted_response, values):
-    pass
-
-
-@then(u'the "validation" message should {is_validation_exists} displayed for question codes {question_codes}')
-def step_impl(context, is_validation_exists, question_codes):
-    pass
+@then(u'the adjusted response values for {dates_range} should be {adjusted_response} as expected response')
+def check_adjusted_responses(context, dates_range, adjusted_response):
+    context.dates_range = dates_range
+    context.adjusted_response = adjusted_response
+    RsiDateAdjustedResponseValidation().check_adjusted_responses(dates_range, context.values, adjusted_response)
