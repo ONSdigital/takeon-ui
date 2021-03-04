@@ -51,7 +51,7 @@ def period_dates(context, period_start_date, period_end_date):
     RsiDateAdjustedResponseValidation().submit_period_dates(context.period, period_start_date, period_end_date)
 
 
-@then(u'the adjusted response values for {dates_range} should be {adjusted_response} as expected response')
+@then(u'check the adjusted response values for {dates_range} should be {adjusted_response} as expected response')
 def check_adjusted_responses(context, dates_range, adjusted_response):
     context.dates_range = dates_range
     context.adjusted_response = adjusted_response

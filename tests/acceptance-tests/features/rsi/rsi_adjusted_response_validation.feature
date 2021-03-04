@@ -16,7 +16,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
       | Q20            |
       | Q21            |
     And I trigger the validation process
-    Then the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
+    Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                      | actualStartDate | actualEndDate | cValues | adjustedResponse |
       | 12000534932 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | same             |
@@ -31,7 +31,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
       | Q20            |
       | Q21            |
     And I trigger the validation process
-    Then the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
+    Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                                | actualStartDate | actualEndDate | cValues     | adjustedResponse |
       | 12000534932 | 201903 | outside date range                        | 20190404        | 20190428      | 100,101     | blank            |
