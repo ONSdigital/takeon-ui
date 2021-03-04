@@ -43,7 +43,7 @@ class ApiRequest:
 
     def view_form_responses(self, parameters):
         if self.mock:
-            return mock_get_validation(url_connect=parameters).text
+            return mock_view_form_responses(url_connect=parameters).text
         return self.request_get(endpoint="/viewform/responses", parameters=parameters).text
 
     def contributor_search(self, parameters):
@@ -103,6 +103,11 @@ class ApiRequest:
 
     def notify_override(self, endpoint, data, headers):
         return self.request_post_api_gateway(endpoint=endpoint, data=data, headers=headers).text
+  
+    def get_historic_data(self, parameters):
+        if self.mock:
+            return mock_historic_data(url_connect=parameters).text
+        return self.request_get(endpoint="/viewform/historydata", parameters=parameters).text
 
 
 class TakeonApiException(Exception):
@@ -163,7 +168,7 @@ def mock_form_response(mock=None, url_connect=None):
 
 @requests_mock.Mocker()
 def mock_get_validation(mock=None, url_connect=None):
-    mocked_up_data = mock_suite.MockSuite("mock_validation_outputs.json").get_data()
+    mocked_up_data = mock_suite.MockSuite("mock_validations.json").get_data()
     url = localhost_url + url_connect
     mock.get(url, text=mocked_up_data)
     return requests.get(url)
@@ -188,6 +193,22 @@ def mock_contributor_search_error_blank(mock=None, url_connect=None):
 @requests_mock.Mocker()
 def mock_contributor_search_error_populated(mock=None, url_connect=None):
     mocked_up_data = mock_suite.MockSuite(mocked_validation_output).get_data()
+    url = localhost_url + url_connect
+    mock.get(url, text=mocked_up_data)
+    return requests.get(url)
+
+
+@requests_mock.Mocker()
+def mock_historic_data(mock=None, url_connect=None):
+    mocked_up_data = mock_suite.MockSuite("mock_historic_data.json").get_data()
+    url = localhost_url + url_connect
+    mock.get(url, text=mocked_up_data)
+    return requests.get(url)
+
+
+@requests_mock.Mocker()
+def mock_view_form_responses(mock=None, url_connect=None):
+    mocked_up_data = mock_suite.MockSuite("mock_view_form_responses.json").get_data()
     url = localhost_url + url_connect
     mock.get(url, text=mocked_up_data)
     return requests.get(url)

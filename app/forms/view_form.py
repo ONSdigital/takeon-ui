@@ -53,7 +53,7 @@ def view_form(inqcode, period, ruref):
         view_form_data = json.loads(view_forms)
         log.info("View Form Data: %s", view_form_data)
 
-        historic_data = api_caller.request_get(endpoint="/viewform/historydata", parameters=parameters).text
+        historic_data = api_caller.get_historic_data(parameters=parameters)
         historic_data_json = json.loads(historic_data)
         log.info("History Data: %s", historic_data_json)
 
