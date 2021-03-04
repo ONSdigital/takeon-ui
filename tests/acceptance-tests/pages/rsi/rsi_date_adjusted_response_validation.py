@@ -3,25 +3,21 @@ from selenium.webdriver.common.by import By
 from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
-from pages.common.contributor_details.check_messages_contributor_details import CheckMessagesContributorDetails
-from pages.common.contributor_details.check_values_contributor_details import CheckValuesContributorDetails
 from pages.common.contributor_details.get_contributor_details import GetContributorDetails
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.locators import contributor_details
 
 
 class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
-    PERIOD_START_DATE_ELEMENT = '11'
-    PERIOD_END_DATE_ELEMENT = '12'
-    period = ''
-    start_date = ''
-    end_date = ''
+    end_date = None
+    start_date = None
+    period = None
 
     def set_period_start_date(self, value):
-        SeleniumCore.set_current_data_text(self.PERIOD_START_DATE_ELEMENT, value)
+        SeleniumCore.set_current_data_text(contributor_details.PERIOD_START_DATE_ELEMENT, value)
 
     def set_period_end_date(self, value):
-        SeleniumCore.set_current_data_text(self.PERIOD_END_DATE_ELEMENT, value)
+        SeleniumCore.set_current_data_text(contributor_details.PERIOD_END_DATE_ELEMENT, value)
 
     def submit_period_dates(self, period, start_date, end_date):
         RsiDateAdjustedResponseValidation.period = period
@@ -31,20 +27,22 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
         self.set_period_end_date(RsiDateAdjustedResponseValidation.end_date)
 
     def check_adjusted_responses(self, *responses):
-        self.date_range = responses[0]
         self.actual_response_values = Utilities.get_values_as_a_list(responses[1])
         self.expected_response_type = Utilities.get_values_as_a_list(responses[2])[0]
 
-        total_turnover = self.get_adjusted_response('Q20')
-        internet_sales = self.get_adjusted_response('Q21')
+        total_turnover = self.get_adjusted_response(contributor_details.TOTAL_TURNOVER_QUESTION_ELEMENT)
+        internet_sales = self.get_adjusted_response(contributor_details.INTERNET_SALES_QUESTION_ELEMENT)
 
-        expected_response_type = Utilities.convert_blank_data_value(self.expected_response_type)
-        t_turnover = Utilities.convert_blank_data_value(self.compare_values(total_turnover, 0))
-        i_sales = Utilities.convert_blank_data_value(self.compare_values(internet_sales, 1))
+        expected_response_type = Utilities.convert_blank_data_value(
+            self.expected_response_type)
+        t_turnover = self.compare_values(total_turnover, 0)
+        i_sales = self.compare_values(internet_sales, 1)
 
-        ReportingHelper.check_single_message_matches('Q21', t_turnover, expected_response_type)
+        ReportingHelper.check_single_message_matches(contributor_details.TOTAL_TURNOVER_QUESTION_ELEMENT, t_turnover,
+                                                     expected_response_type)
 
-        ReportingHelper.check_single_message_matches('Q20', i_sales, expected_response_type)
+        ReportingHelper.check_single_message_matches(contributor_details.INTERNET_SALES_QUESTION_ELEMENT, i_sales,
+                                                     expected_response_type)
 
     def get_adjusted_response(self, question_code):
 
@@ -54,19 +52,16 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
         adjusted_response = question_row.find_element(By.XPATH, element).text
         return adjusted_response
 
-    def get_adjusted_internet_sales_response(self):
-        return SeleniumCore.get_attribute_element_text(By.ID, '21')
-
     def compare_values(self, adjusted_response, i):
         period = RsiDateAdjustedResponseValidation.period
         start_date = RsiDateAdjustedResponseValidation.start_date
         end_date = RsiDateAdjustedResponseValidation.end_date
 
         actual_days_returned = 25
-        if period == '201903' and period in start_date and period in end_date and adjusted_response != '':
+        if period == '201903' and start_date != '' and end_date != '' and adjusted_response != '':
 
-            if start_date <= end_date:
-                no_of_days_returned = abs((int(end_date) - int(start_date))) + 1
+            if self.start_date <= self.end_date:
+                no_of_days_returned = abs((int(self.end_date) - int(self.start_date))) + 1
                 act_response = float(self.actual_response_values[i])
                 adj_response = float(adjusted_response)
 
@@ -81,6 +76,6 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
             if float(adjusted_response) == float(
                     self.actual_response_values[i]):
                 return "same"
-            
+
         else:
             return "blank"
