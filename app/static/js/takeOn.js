@@ -12,15 +12,6 @@ function openTab(evt, details) {
     evt.currentTarget.className += " active";
 	}
 
-var isLockedBy = "{{ locked }}"
-if (isLockedBy != ""){
-    document.getElementById("saveFormButton").disabled = true;
-    document.getElementById("saveFormButton").style.color = "grey";
-    var bar = document.getElementById("lockedInfo");
-    bar.style.display = "block";
-}
-
-document.getElementById("Form2").style.display = "block"
 
 function popup() {
     var w = window.open('','','width=auto,height=auto')

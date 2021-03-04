@@ -10,6 +10,7 @@ from app.utilities.check_status import check_status
 from app.setup import log, api_caller
 from app.utilities.save_and_validate import save_form, validate
 from spp_cognito_auth import requires_auth, requires_role
+from app.utilities.notify_baw import send_override_notification_to_queue
 
 view_form_blueprint = Blueprint(
     name='view_form', import_name=__name__, url_prefix='/contributor_search')
@@ -74,7 +75,6 @@ def view_form(inqcode, period, ruref):
     except Exception as error:
         log.info("Error %s", error)
 
-
     if request.form and request.form['action'] == 'save-and-validate':
         save_form(parameters, request.form, inqcode, period, ruref)
         validate(inqcode, period, ruref)
@@ -102,15 +102,23 @@ def view_form(inqcode, period, ruref):
 @requires_auth
 @requires_role(["dev", "survey.*.write", "survey.*.manager"])
 def override_validations(inqcode, period, ruref):
-    json_data = request.json
-    log.info("Checkbox checked data: %s", str(json_data))
-    ruref = json_data['reference']
-    inqcode = json_data['survey']
-    period = json_data['period']
+    try:
+        json_data = request.json
+        log.info("Checkbox checked data: %s", str(json_data))
+        ruref = json_data['reference']
+        inqcode = json_data['survey']
+        period = json_data['period']
 
-    api_caller.validation_overrides(parameters='', data=json.dumps(json_data))
-    log.info("Overriding Validations...")
-    return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
+        log.info("Overriding Validations...")
+        override_data_to_send = api_caller.validation_overrides(parameters='', data=json.dumps(json_data))
+
+        log.info("Sending override information to validation-bpmtransform queue...")
+        log.info("Override_data_to_send: %s", override_data_to_send)
+        send_override_notification_to_queue(override_data_to_send)
+
+        return redirect(url_for('view_form.view_form', inqcode=inqcode, period=period, ruref=ruref))
+    except Exception as error:
+        raise Exception(f"Error with overriding validations: {error}")
 
 
 def extract_responses(data) -> dict:

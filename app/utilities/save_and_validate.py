@@ -56,6 +56,7 @@ def save_form(parameters, requestform, inqcode, period, ruref):
         status_message = 'There was a problem with your request ' + requests_error + 'Please contact Data Clearing Support Team'
         log.info('Requests Error: %s', requests_error)
 
+
 def validate(inqcode, period, ruref):
     log.info('save validation button pressed')
     json_data = {"survey": inqcode, "period": period,

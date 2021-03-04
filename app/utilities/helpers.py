@@ -164,3 +164,13 @@ def question_order(response_and_validations):
 
     except Exception as error:
         raise Exception("Error: " + error)
+
+
+def validate_json(json_data):
+    try:
+        valid_json_data = json.loads(json_data)
+    except ValueError as error:
+        raise ValueError(error)
+    except TypeError as error:
+        raise TypeError(error)
+    return valid_json_data
