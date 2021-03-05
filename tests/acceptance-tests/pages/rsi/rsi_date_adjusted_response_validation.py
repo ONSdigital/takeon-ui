@@ -4,6 +4,7 @@ from base.reporting_helper import ReportingHelper
 from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
 from pages.common.contributor_details.get_contributor_details import GetContributorDetails
+from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
 from pages.common.contributor_details_page import ContributorDetailsPage
 from pages.locators import contributor_details
 
@@ -13,18 +14,12 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
     start_date = None
     period = None
 
-    def set_period_start_date(self, value):
-        SeleniumCore.set_current_data_text(contributor_details.PERIOD_START_DATE_ELEMENT, value)
-
-    def set_period_end_date(self, value):
-        SeleniumCore.set_current_data_text(contributor_details.PERIOD_END_DATE_ELEMENT, value)
-
     def submit_period_dates(self, period, start_date, end_date):
         RsiDateAdjustedResponseValidation.period = period
         RsiDateAdjustedResponseValidation.start_date = Utilities.convert_blank_data_value(start_date)
         RsiDateAdjustedResponseValidation.end_date = Utilities.convert_blank_data_value(end_date)
-        self.set_period_start_date(RsiDateAdjustedResponseValidation.start_date)
-        self.set_period_end_date(RsiDateAdjustedResponseValidation.end_date)
+        SubmitContributorDetails().submit_period_dates(RsiDateAdjustedResponseValidation.start_date,
+                                                       RsiDateAdjustedResponseValidation.end_date)
 
     def check_adjusted_responses(self, *responses):
         self.actual_response_values = Utilities.get_values_as_a_list(responses[1])

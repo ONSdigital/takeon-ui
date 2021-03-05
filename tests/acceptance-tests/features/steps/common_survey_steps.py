@@ -47,7 +47,8 @@ def submit_the_question_data_values(context, value_type, values):
         for cell in row.cells:
             context.question_codes.append(cell)
     context.values = values
-    ContributorDetailsPage().submit_values_for_survey_questions(context.survey, context.question_codes, values)
+    ContributorDetailsPage().submit_values_for_survey_questions(context.period, context.survey, context.question_codes,
+                                                                values)
 
 
 @given(u'I submit the "{value_type}" {comment_value} for question {question}')
@@ -55,7 +56,7 @@ def submit_the_question_data_values(context, value_type, values):
 def submit_the_question_type_values(context, value_type, comment_value, question):
     context.question_codes = question.upper()
     context.values = comment_value
-    ContributorDetailsPage().submit_question_value(context.survey, value_type, comment_value, question)
+    ContributorDetailsPage().submit_question_value(context.period, context.survey, value_type, comment_value, question)
 
 
 @given(u'I trigger the validation process')

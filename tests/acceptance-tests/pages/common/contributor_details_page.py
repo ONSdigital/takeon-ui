@@ -17,8 +17,8 @@ class ContributorDetailsPage(BasePage):
 
     # SubmitContributorDetails
 
-    def submit_question_value(self, survey, value_type, value, question):
-        SubmitContributorDetails().submit_question_value(survey, value_type, value, question)
+    def submit_question_value(self, period, survey, value_type, value, question):
+        SubmitContributorDetails().submit_question_value(period,survey, value_type, value, question)
 
     def submit_values_for_survey_questions(self, *questions_and_values):
         SubmitContributorDetails().submit_values_for_survey_questions(questions_and_values)
