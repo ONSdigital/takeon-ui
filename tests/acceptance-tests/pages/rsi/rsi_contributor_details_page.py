@@ -51,7 +51,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         self.set_internet_sales_value(internet_sales)
         CheckValuesContributorDetails().save_the_application()
 
-    def validate_the_current_period_details(self, internet_sales, total_sales):
+    def validate_the_current_period_details(self, period, internet_sales, total_sales):
+        SubmitContributorDetails().submit_default_period_dates(period)
         self.set_internet_sales_value(internet_sales)
         self.set_total_turnover_sales_value(total_sales)
         CheckValuesContributorDetails().save_the_application()

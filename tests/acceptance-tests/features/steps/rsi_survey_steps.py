@@ -17,7 +17,7 @@ def submit_sales_values(context, internet_sales, total_sales):
     context.total_sales = total_sales
     context.values = None
     if context.survey == '023':
-        RsiContributorDetailsPage().submit_sales_values(context.period,context.period_type, context.internet_sales,
+        RsiContributorDetailsPage().submit_sales_values(context.period, context.period_type, context.internet_sales,
                                                         context.total_sales)
     else:
         TestSurveyContributorDetailsPage().submit_sales_values(context.period_type, context.internet_sales,
@@ -27,7 +27,7 @@ def submit_sales_values(context, internet_sales, total_sales):
 @when(u'I validate {validation_type} current period details')
 def validate_the_current_period_details(context, validation_type=None):
     if context.survey == '023':
-        RsiContributorDetailsPage().validate_the_current_period_details(context.current_internet_sales,
+        RsiContributorDetailsPage().validate_the_current_period_details(context.period, context.current_internet_sales,
                                                                         context.total_sales)
     else:
         TestSurveyContributorDetailsPage().validate_the_current_period_details(validation_type,
