@@ -5,22 +5,23 @@ from pages.locators import contributor_details
 
 class SubmitContributorDetails:
 
-    def submit_question_value(self, period, survey, value_type, value, question):
+    def submit_question_value(self, period, period_start_date, survey, value_type, value, question):
         if value_type:
-            self.submit_sales_value(period, survey, value, question)
+            self.submit_sales_value(period, period_start_date, survey, value, question)
 
-    def submit_sales_value(self, period, survey, value, question):
+    def submit_sales_value(self, period, period_start_date, survey, value, question):
         value = Utilities.convert_blank_data_value(value)
         question_element = Utilities.get_question_code_element(survey, question)
-        self.submit_default_period_dates(period)
+        self.submit_default_period_dates(period, period_start_date)
         SeleniumCore.set_current_data_text(question_element, value)
 
     def submit_values_for_survey_questions(self, questions_and_values):
         period = questions_and_values[0]
-        self.submit_default_period_dates(period)
-        survey = questions_and_values[1]
-        questions_list = questions_and_values[2]
-        commodity_values = Utilities.get_values_as_a_list(questions_and_values[3])
+        period_start_date = questions_and_values[1]
+        self.submit_default_period_dates(period, period_start_date)
+        survey = questions_and_values[2]
+        questions_list = questions_and_values[3]
+        commodity_values = Utilities.get_values_as_a_list(questions_and_values[4])
 
         if len(commodity_values) > 1 and type(questions_list) == list:
             self.submit_values_as_a_list_for_multiple_questions(survey, questions_list, commodity_values)
@@ -65,12 +66,12 @@ class SubmitContributorDetails:
         else:
             self.submit_default_period_dates()
 
-    def submit_default_period_dates(self, period):
-        if period == '201903':
+    def submit_default_period_dates(self, period, period_start_date):
+        if period == '201903' and period_start_date is None:
             self.set_period_start_date('20190304')
             self.set_period_end_date('20190328')
-        elif period == '201904':
+        elif period == '201904' and period_start_date is None:
             self.set_period_start_date('20190404')
             self.set_period_end_date('20190428')
-        else:
-            assert False, 'Period do not match the expected period: ' + period
+        elif period is None or period_start_date is None:
+            assert False, period + ' :period or ' + period_start_date + ' :period start date do not exists'

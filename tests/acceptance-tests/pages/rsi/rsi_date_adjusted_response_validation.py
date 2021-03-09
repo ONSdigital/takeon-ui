@@ -28,16 +28,14 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
         total_turnover = self.get_adjusted_response(contributor_details.TOTAL_TURNOVER_QUESTION_ELEMENT)
         internet_sales = self.get_adjusted_response(contributor_details.INTERNET_SALES_QUESTION_ELEMENT)
 
-        expected_response_type = Utilities.convert_blank_data_value(
-            self.expected_response_type)
         t_turnover = self.compare_values(total_turnover, 0)
         i_sales = self.compare_values(internet_sales, 1)
 
         ReportingHelper.check_single_message_matches(contributor_details.TOTAL_TURNOVER_QUESTION_ELEMENT, t_turnover,
-                                                     expected_response_type)
+                                                     self.expected_response_type)
 
         ReportingHelper.check_single_message_matches(contributor_details.INTERNET_SALES_QUESTION_ELEMENT, i_sales,
-                                                     expected_response_type)
+                                                     self.expected_response_type)
 
     def get_adjusted_response(self, question_code):
 
@@ -71,6 +69,12 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
             if float(adjusted_response) == float(
                     self.actual_response_values[i]):
                 return "same"
-
+        elif period == '201903' and adjusted_response != '':
+            if float(adjusted_response) > float(
+                    self.actual_response_values[i]):
+                return "increased"
+            elif float(adjusted_response) == float(
+                    self.actual_response_values[i]):
+                return "same"
         else:
             return "blank"

@@ -51,7 +51,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
       | 12000748571 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
 
 
-  Scenario Outline: SPP-1711 - check the adjusted response return as expected for blank values for blank dates on form 5,6 and 7
+  Scenario Outline: SPP-1711 - check the adjusted response return as expected for blank dates on form 5,6 and 7
     Given I search for the survey "023" with <reference> for the current period <period>
     And the period start date set as <actualStartDate> with period end date as <actualEndDate>
     When I submit the "contributor response values" <cValues> for questions

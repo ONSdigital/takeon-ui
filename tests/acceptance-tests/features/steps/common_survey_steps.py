@@ -35,6 +35,7 @@ def select_the_reference_form(context, reference, survey, period_type, period, s
     context.survey = survey
     context.period = period
     context.period_type = period_type
+    context.period_start_date = None
     context.contributor_page = ContributorSearchPage()
     context.contributor_page.select_the_reference_view_form(context.survey, reference, period, sic_code)
 
@@ -47,7 +48,9 @@ def submit_the_question_data_values(context, value_type, values):
         for cell in row.cells:
             context.question_codes.append(cell)
     context.values = values
-    ContributorDetailsPage().submit_values_for_survey_questions(context.period, context.survey, context.question_codes,
+    ContributorDetailsPage().submit_values_for_survey_questions(context.period, context.period_start_date,
+                                                                context.survey,
+                                                                context.question_codes,
                                                                 values)
 
 
@@ -56,7 +59,8 @@ def submit_the_question_data_values(context, value_type, values):
 def submit_the_question_type_values(context, value_type, comment_value, question):
     context.question_codes = question.upper()
     context.values = comment_value
-    ContributorDetailsPage().submit_question_value(context.period, context.survey, value_type, comment_value, question)
+    ContributorDetailsPage().submit_question_value(context.period, context.period_start_date, context.survey,
+                                                   value_type, comment_value, question)
 
 
 @given(u'I trigger the validation process')
@@ -109,7 +113,8 @@ def check_multiple_validation_messages(context, validation_message, is_validatio
                                        comment=None):
     if not question_codes and comment:
         question_codes = context.question_codes
-        ContributorDetailsPage().check_multiple_comment_text_messages(context.survey, question_codes, context.values)
+        ContributorDetailsPage().check_multiple_comment_text_messages(context.survey, question_codes,
+                                                                      context.values)
     elif not question_codes:
         question_codes = context.question_codes
         ContributorDetailsPage().check_multiple_questions_validation_messages(context.survey, question_codes,
@@ -121,9 +126,8 @@ def check_multiple_validation_messages(context, validation_message, is_validatio
                                                                               is_validation_exists)
 
 
-@then(
-    u'the validation should return {result} if the "{validation_check}" '
-    u'{operator_type} threshold value {threshold_value}')
+@then(u'the validation should return {result} if the "{validation_check}" '
+      u'{operator_type} threshold value {threshold_value}')
 def check_validation_by_operator(context, result, validation_check, operator_type, threshold_value):
     page = ContributorDetailsPage()
     if validation_check == 'turnover ratio is':
@@ -148,7 +152,8 @@ def check_validation_by_operator(context, result, validation_check, operator_typ
             RsiContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
                                                                              threshold_value, result)
         elif context.survey == '999A':
-            TestSurveyContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type, operator_type,
+            TestSurveyContributorDetailsPage().check_pop_ratio_of_ratios_validation(context.factor_type,
+                                                                                    operator_type,
                                                                                     threshold_value, result)
 
 

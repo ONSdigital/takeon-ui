@@ -12,11 +12,13 @@ def run_the_validation_process(context, period_value, question_codes=None):
     page = ContributorDetailsPage()
     if context.period_type == "previous":
         context.comparison_value_one = period_value
-        page.validate_the_previous_period_details(context.survey, question_codes, context.comparison_value_one)
+        page.validate_the_previous_period_details(context.survey, context.period_start_date, question_codes,
+                                                  context.comparison_value_one)
     elif context.period_type == "current":
         context.question_codes = question_codes
         context.comparison_value_two = period_value
-        page.validate_the_current_period_details(context.survey, context.question_codes, context.comparison_value_two)
+        page.validate_the_current_period_details(context.survey, context.period_start_date, context.question_codes,
+                                                 context.comparison_value_two)
 
 
 @then(
