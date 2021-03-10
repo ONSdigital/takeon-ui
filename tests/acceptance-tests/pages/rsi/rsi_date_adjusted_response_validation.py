@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
-from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
 from pages.common.contributor_details.get_contributor_details import GetContributorDetails
 from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
