@@ -49,7 +49,7 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
         start_date = RsiDateAdjustedResponseValidation.start_date
         end_date = RsiDateAdjustedResponseValidation.end_date
 
-        actual_days_returned = 25
+        days_returned_period = 25
         if period == '201903' and start_date != '' and end_date != '' and adjusted_response != '':
 
             if self.start_date <= self.end_date:
@@ -57,23 +57,13 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
                 act_response = float(self.actual_response_values[i])
                 adj_response = float(adjusted_response)
 
-                if no_of_days_returned == actual_days_returned and adj_response == act_response:
-                    return "same"
-                elif no_of_days_returned < actual_days_returned and adj_response > act_response:
+                if no_of_days_returned <= days_returned_period and adj_response > act_response:
                     return "increased"
-                elif no_of_days_returned > actual_days_returned:
+                elif no_of_days_returned > days_returned_period:
                     return "blank"
-
-        elif period == '201903' and start_date == '' and end_date == '':
-            if float(adjusted_response) == float(
-                    self.actual_response_values[i]):
-                return "same"
         elif period == '201903' and adjusted_response != '':
             if float(adjusted_response) > float(
                     self.actual_response_values[i]):
                 return "increased"
-            elif float(adjusted_response) == float(
-                    self.actual_response_values[i]):
-                return "same"
         else:
             return "blank"

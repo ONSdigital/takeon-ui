@@ -19,13 +19,13 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                      | actualStartDate | actualEndDate | cValues | adjustedResponse |
-      | 12000534932 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | same             |
+      | 12000534932 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
       | 12000534932 | 201903 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
       | 12000534932 | 201903 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
-      | 12000613746 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | same             |
+      | 12000613746 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
       | 12000613746 | 201903 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
       | 12000613746 | 201903 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
-      | 12000748571 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | same             |
+      | 12000748571 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
       | 12000748571 | 201903 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
       | 12000748571 | 201903 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
 
@@ -62,14 +62,14 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                                | actualStartDate | actualEndDate | cValues | adjustedResponse |
-      | 12000534932 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | same             |
+      | 12000534932 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
       | 12000534932 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
-      | 12000534932 | 201903 | blank date range                          | blank           | blank         | 100,101 | same             |
-      | 12000613746 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | same             |
+      | 12000534932 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
+      | 12000613746 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
       | 12000613746 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
-      | 12000613746 | 201903 | blank date range                          | blank           | blank         | 100,101 | same             |
-      | 12000748571 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | same             |
+      | 12000613746 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
+      | 12000748571 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
       | 12000748571 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
-      | 12000748571 | 201903 | blank date range                          | blank           | blank         | 100,101 | same             |
+      | 12000748571 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
 
 
