@@ -11,7 +11,7 @@ class ContributorOverrideDetails:
         exp_msg = GetContributorDetails().get_validation_message(survey, exp_msg)
         question_row = GetContributorDetails().get_question_code_row_details(
             contributor_details.CURRENT_DATA_TAB_ELEMENT, question_code)
-        elements = contributor_details.ERROR_MESSAGES_COLUMN + contributor_details.OVERRIDE_MESSAGE_LABEL
+        elements = contributor_details.ERROR_MESSAGES_COLUMN + contributor_details.ERROR_LABEL
         override_messages_elements = question_row.find_elements(By.XPATH, elements)
         ReportingHelper.check_elements_message_matches(question_code, override_messages_elements, exp_msg)
 

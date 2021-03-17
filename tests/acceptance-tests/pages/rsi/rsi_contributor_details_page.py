@@ -5,6 +5,7 @@ from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
 from pages.common.contributor_details.check_messages_contributor_details import CheckMessagesContributorDetails
 from pages.common.contributor_details.check_values_contributor_details import CheckValuesContributorDetails
+from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
 from pages.common.contributor_details_page import ContributorDetailsPage
 
 
@@ -21,25 +22,27 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
     def set_total_turnover_sales_value(self, value):
         SeleniumCore.set_current_data_text(self.QUESTION_TOTAL_TURNOVER_ELEMENT, value)
 
-    def submit_sales_values(self, period_type, internet_sales, total_sales):
+    def submit_sales_values(self, period, period_start_date, period_type, internet_sales, total_sales):
         if period_type == 'previous':
-            self.submit_pp_sales_values(internet_sales, total_sales)
+            self.submit_pp_sales_values(period, period_start_date, internet_sales, total_sales)
         if period_type == 'current':
-            self.submit_cp_sales_values(internet_sales, total_sales)
+            self.submit_cp_sales_values(period, period_start_date, internet_sales, total_sales)
 
-    def submit_pp_sales_values(self, internet_sales, total_sales):
+    def submit_pp_sales_values(self, period, period_start_date, internet_sales, total_sales):
         global pp_internet_sales, pp_total_sales
         pp_internet_sales = Utilities.convert_blank_data_value(internet_sales)
         pp_total_sales = Utilities.convert_blank_data_value(total_sales)
+        SubmitContributorDetails().submit_default_period_dates(period, period_start_date)
         self.set_internet_sales_value(pp_internet_sales)
         self.set_total_turnover_sales_value(pp_total_sales)
         CheckValuesContributorDetails().save_the_application()
         SeleniumCore.close_the_current_window()
 
-    def submit_cp_sales_values(self, internet_sales, total_sales):
+    def submit_cp_sales_values(self, period, period_start_date, internet_sales, total_sales):
         global cp_internet_sales, cp_total_sales
         cp_internet_sales = Utilities.convert_blank_data_value(internet_sales)
         cp_total_sales = Utilities.convert_blank_data_value(total_sales)
+        SubmitContributorDetails().submit_default_period_dates(period, period_start_date)
         self.set_internet_sales_value(cp_internet_sales)
         self.set_total_turnover_sales_value(cp_total_sales)
         CheckValuesContributorDetails().save_the_application()
@@ -48,7 +51,8 @@ class RsiContributorDetailsPage(ContributorDetailsPage):
         self.set_internet_sales_value(internet_sales)
         CheckValuesContributorDetails().save_the_application()
 
-    def validate_the_current_period_details(self, internet_sales, total_sales):
+    def validate_the_current_period_details(self, period, period_start_date, internet_sales, total_sales):
+        SubmitContributorDetails().submit_default_period_dates(period, period_start_date)
         self.set_internet_sales_value(internet_sales)
         self.set_total_turnover_sales_value(total_sales)
         CheckValuesContributorDetails().save_the_application()

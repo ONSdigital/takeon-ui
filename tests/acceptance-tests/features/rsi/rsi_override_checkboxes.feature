@@ -1,4 +1,4 @@
-Feature: RSI Survey - Override Checkboxes - Validation Value Present SIC (VPSIC)
+Feature: RSI Survey - check Override Checkboxes validation
 
   Background:
     Given "test-user" exists with the password "test-Password123" and roles ["dev"]
