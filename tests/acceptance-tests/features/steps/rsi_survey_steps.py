@@ -60,4 +60,5 @@ def period_dates(context, period_start_date, period_end_date):
 def check_adjusted_responses(context, dates_range, adjusted_response):
     context.dates_range = dates_range
     context.adjusted_response = adjusted_response
-    RsiDateAdjustedResponseValidation().check_adjusted_responses(dates_range, context.values, adjusted_response)
+    RsiDateAdjustedResponseValidation().check_adjusted_responses(dates_range, context.question_codes, context.values,
+                                                                 adjusted_response)
