@@ -19,15 +19,15 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                      | actualStartDate | actualEndDate | cValues | adjustedResponse |
-      | 12000534932 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
-      | 12000534932 | 201903 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
-      | 12000534932 | 201903 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
-      | 12000613746 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
-      | 12000613746 | 201903 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
-      | 12000613746 | 201903 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
-      | 12000748571 | 201903 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
-      | 12000748571 | 201903 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
-      | 12000748571 | 201903 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
+      | 12000000007 | 201912 | 25 days short period date range | 20191204        | 20191228      | 100,101 | increased        |
+      | 12000000007 | 201912 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
+      | 12000000007 | 201912 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
+      | 12000000011 | 201912 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
+      | 12000000011 | 201912 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
+      | 12000000011 | 201912 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
+      | 12000000021 | 201912 | 25 days short period date range | 20190304        | 20190328      | 100,101 | increased        |
+      | 12000000021 | 201912 | 24 days short period date range | 20190304        | 20190327      | 100,101 | increased        |
+      | 12000000021 | 201912 | 1 day short period date range   | 20190304        | 20190304      | 100,101 | increased        |
 
   Scenario Outline: SPP-1711 - check the adjusted response return blank values for date anomalies validation on form 5,6 and 7
     Given I search for the survey "023" with <reference> for the current period <period>
@@ -40,15 +40,15 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                       | actualStartDate | actualEndDate | cValues     | adjustedResponse |
-      | 12000534932 | 201903 | outside date range               | 20190404        | 20190428      | 100,101     | blank            |
-      | 12000534932 | 201903 | start date greater than end date | 20190328        | 20190304      | 100,101     | blank            |
-      | 12000534932 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
-      | 12000613746 | 201903 | outside date range               | 20190404        | 20190428      | 100,101     | blank            |
-      | 12000613746 | 201903 | start date greater than end date | 20190328        | 20190304      | 100,101     | blank            |
-      | 12000613746 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
-      | 12000748571 | 201903 | outside date range               | 20190404        | 20190428      | 100,101     | blank            |
-      | 12000748571 | 201903 | start date greater than end date | 20190328        | 20190304      | 100,101     | blank            |
-      | 12000748571 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
+      | 12000000008 | 201903 | outside date range               | 20190404        | 20190428      | 100,101     | blank            |
+      | 12000000008 | 201903 | start date greater than end date | 20190328        | 20190304      | 100,101     | blank            |
+      | 12000000008 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
+      | 12000000012 | 201903 | outside date range               | 20190404        | 20190428      | 100,101     | blank            |
+      | 12000000012 | 201903 | start date greater than end date | 20190328        | 20190304      | 100,101     | blank            |
+      | 12000000012 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
+      | 12000000022 | 201903 | outside date range               | 20190404        | 20190428      | 100,101     | blank            |
+      | 12000000022 | 201903 | start date greater than end date | 20190328        | 20190304      | 100,101     | blank            |
+      | 12000000022 | 201903 | date range with blank variables  | 20190304        | 20190328      | blank,blank | blank            |
 
 
   Scenario Outline: SPP-1711 - check the adjusted response return as expected for blank dates on form 5,6 and 7
@@ -62,14 +62,28 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
     Examples:
       | reference   | period | datesRange                                | actualStartDate | actualEndDate | cValues | adjustedResponse |
-      | 12000534932 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
-      | 12000534932 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
-      | 12000534932 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
-      | 12000613746 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
-      | 12000613746 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
-      | 12000613746 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
-      | 12000748571 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
-      | 12000748571 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
-      | 12000748571 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
+      | 12000000009 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
+      | 12000000009 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
+      | 12000000009 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
+      | 12000000013 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
+      | 12000000013 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
+      | 12000000013 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
+      | 12000000023 | 201903 | defaults to expected for blank start date | blank           | 20190428      | 100,101 | increased        |
+      | 12000000023 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
+      | 12000000023 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
 
-
+  Scenario Outline: SPP-1670 - check the adjusted responses for numeric questions on form 6 and 7
+    Given I search for the survey "023" with <reference> for the current period <period>
+    And the period start date set as <actualStartDate> with period end date as <actualEndDate>
+    When I submit the "contributor response values" <values> for questions
+      | question_codes |
+      | Q22            |
+      | Q23            |
+      | Q24            |
+      | Q25            |
+      | Q26            |
+    And I trigger the validation process
+    Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
+    Examples:
+      | reference   | period | values    | datesRange                                | actualStartDate | actualEndDate | adjustedResponse |
+      | 12000000011 | 201912 | 1,1,1,1,1 | defaults to expected for blank start date | 20191204        | 20191220      | increased        |
