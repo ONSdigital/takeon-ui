@@ -72,7 +72,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
       | 12000000023 | 201903 | defaults to expected for blank end date   | 20190320        | blank         | 100,101 | increased        |
       | 12000000023 | 201903 | blank date range                          | blank           | blank         | 100,101 | increased        |
 
-  Scenario Outline: SPP-1670 - check the adjusted responses for numeric questions on form 6 and 7
+  Scenario Outline: SPP-1670 - check the adjusted responses for numeric and derived questions on form 6
     Given I search for the survey "023" with <reference> for the current period <period>
     And the period start date set as <actualStartDate> with period end date as <actualEndDate>
     When I submit the "contributor response values" <values> for questions
@@ -84,6 +84,26 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
       | Q26            |
     And I trigger the validation process
     Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
+    And  check no adjusted response displayed for question code "Q7034"
     Examples:
-      | reference   | period | values    | datesRange                                | actualStartDate | actualEndDate | adjustedResponse |
-      | 12000000011 | 201912 | 1,1,1,1,1 | defaults to expected for blank start date | 20191204        | 20191220      | increased        |
+      | reference   | period | values    | datesRange                      | actualStartDate | actualEndDate | adjustedResponse |
+      | 12000000011 | 201912 | 5,4,3,2,1 | 25 days short period date range | 20191204        | 20191228      | increased        |
+
+
+  Scenario Outline: SPP-1670 - check the adjusted responses for numeric and derived questions on form 7
+    Given I search for the survey "023" with <reference> for the current period <period>
+    And the period start date set as <actualStartDate> with period end date as <actualEndDate>
+    When I submit the "contributor response values" <values> for questions
+      | question_codes |
+      | Q22            |
+      | Q23            |
+      | Q24            |
+      | Q25            |
+      | Q26            |
+      | Q27            |
+    And I trigger the validation process
+    Then check the adjusted response values for <datesRange> should be <adjustedResponse> as expected response
+    And  check no adjusted response displayed for question code "Q7034"
+    Examples:
+      | reference   | period | values      | datesRange                      | actualStartDate | actualEndDate | adjustedResponse |
+      | 12000000021 | 201912 | 6,5,4,3,2,1 | 25 days short period date range | 20191204        | 20191228      | increased        |

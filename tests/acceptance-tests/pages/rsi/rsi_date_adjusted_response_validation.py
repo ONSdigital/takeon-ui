@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 from base.reporting_helper import ReportingHelper
-from base.selenium_core import SeleniumCore
 from base.utilities import Utilities
 from pages.common.contributor_details.get_contributor_details import GetContributorDetails
 from pages.common.contributor_details.submit_contributor_details import SubmitContributorDetails
@@ -22,19 +21,25 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
                                                        RsiDateAdjustedResponseValidation.end_date)
 
     def check_adjusted_responses(self, *responses):
-        self.expected_response_type = Utilities.get_values_as_a_list(responses[3])[0]
+        if len(responses) > 2:
+            self.expected_response_type = Utilities.get_values_as_a_list(responses[3])[0]
         questions_list = responses[1]
         count = 0
-        for question in questions_list:
-            question_element = Utilities.get_question_code_element('023', question)
-            # question = Utilities.get_values_as_a_list(responses[1])
-            self.actual_response_values = Utilities.get_values_as_a_list(responses[2])[count]
-            question_one_value = self.get_adjusted_response(question)
+        if len(questions_list) > 1 and type(questions_list) == list:
+            for question in questions_list:
+                self.actual_response_values = Utilities.get_values_as_a_list(responses[2])[count]
+                question_one_value = self.get_adjusted_response(question)
+                question_one = self.compare_values(question_one_value, 0)
+                ReportingHelper.check_single_message_matches(question,
+                                                             question_one,
+                                                             self.expected_response_type)
+                count += 1
+        else:
+            question_one_value = self.get_adjusted_response(questions_list)
             question_one = self.compare_values(question_one_value, 0)
-            ReportingHelper.check_single_message_matches(question,
+            ReportingHelper.check_single_message_matches(questions_list,
                                                          question_one,
-                                                         self.expected_response_type)
-            count = +1
+                                                         'blank')
 
     def get_adjusted_response(self, question_code):
 
@@ -66,3 +71,6 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
                 return "increased"
         else:
             return "blank"
+
+    def check_adjusted_response_for_derived_question(self, *responses):
+        self.check_adjusted_responses(responses)

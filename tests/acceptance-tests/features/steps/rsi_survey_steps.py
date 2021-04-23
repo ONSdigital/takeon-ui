@@ -62,3 +62,8 @@ def check_adjusted_responses(context, dates_range, adjusted_response):
     context.adjusted_response = adjusted_response
     RsiDateAdjustedResponseValidation().check_adjusted_responses(dates_range, context.question_codes, context.values,
                                                                  adjusted_response)
+
+
+@then(u'check no adjusted response displayed for question code "{derived_question}"')
+def check_adjusted_responses(context, derived_question):
+    RsiDateAdjustedResponseValidation().check_adjusted_responses(context.dates_range, derived_question)
