@@ -10,7 +10,7 @@ selenium==3.141.0
 WTForms==2.2.1
 gevent==1.5.0
 greenlet==1.0.0
-gunicorn==21.0.0
+gunicorn==20.1.0
 behave==1.2.6
 boto3==1.16.7
 botocore==1.19.7
