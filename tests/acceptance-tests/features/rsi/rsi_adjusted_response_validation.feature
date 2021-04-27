@@ -20,7 +20,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Examples:
       | reference   | period | datesRange                                | actualStartDate | actualEndDate | cValues     | adjustedResponse |
       | 12000534932 | 201812 | 24 days short period date range           | 20181204        | 20181227      | 100,101     | decreased        |
-      | 12000534932 | 201812 | 1 day short period date range             | 20181204        | 20181204      | 100,101     | decreased        |
+      | 12000534932 | 201812 | 1 day short period date range             | 20181204        | 20181204      | 100,101     | increased        |
       | 12000534932 | 201812 | outside date range                        | 20190304        | 20190328      | 100,101     | blank            |
       | 12000534932 | 201812 | start date greater than end date          | 20181228        | 20181204      | 100,101     | blank            |
       | 12000534932 | 201812 | date range with blank variables           | 20181204  `     | 20181228      | blank,blank | blank            |
@@ -46,7 +46,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Examples:
       | reference   | period | values                                    | datesRange                                | actualStartDate | actualEndDate | adjustedResponse |
       | 12000694171 | 201904 | 100,101,5,4,3,2,1                         | 24 days short period date range           | 20190404        | 20190427      | decreased        |
-      | 12000694171 | 201904 | 100,101,5,4,3,2,1                         | 1 day short period date range             | 20190404        | 20190404      | decreased        |
+      | 12000694171 | 201904 | 100,101,5,4,3,2,1                         | 1 day short period date range             | 20190404        | 20190404      | increased        |
       | 12000694171 | 201904 | 100,101,5,4,3,2,1                         | defaults to expected for blank start date | blank           | 20190420      | decreased        |
       | 12000694171 | 201904 | 100,101,5,4,3,2,1                         | defaults to expected for blank end date   | 20190320        | blank         | decreased        |
       | 12000694171 | 201904 | 100,101,5,4,3,2,1                         | blank date range                          | blank           | blank         | decreased        |
@@ -72,7 +72,7 @@ Feature: RSI Survey - check the date adjusted response values for date anomalies
     Examples:
       | reference   | period | values                                    | datesRange                                | actualStartDate | actualEndDate | adjustedResponse |
       | 12000818161 | 201903 | 100,101,5,4,3,2,1                         | 24 days short period date range           | 20190304        | 20190327      | decreased        |
-      | 12000818161 | 201903 | 100,101,5,4,3,2,1                         | 1 day short period date range             | 20190304        | 20190304      | decreased        |
+      | 12000818161 | 201903 | 100,101,5,4,3,2,1                         | 1 day short period date range             | 20190304        | 20190304      | increased        |
       | 12000818161 | 201903 | 100,101,5,4,3,2,1                         | defaults to expected for blank start date | blank           | 20190420      | decreased        |
       | 12000818161 | 201903 | 100,101,5,4,3,2,1                         | defaults to expected for blank end date   | 20190320        | blank         | decreased        |
       | 12000818161 | 201903 | 100,101,5,4,3,2,1                         | blank date range                          | blank           | blank         | decreased        |
