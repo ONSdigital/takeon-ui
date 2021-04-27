@@ -56,14 +56,14 @@ def period_dates(context, period_start_date, period_end_date):
                                                             context.period_end_date)
 
 
-@then(u'check the adjusted response values for {dates_range} should be {adjusted_response} as expected response')
-def check_adjusted_responses(context, dates_range, adjusted_response):
+@then(u'check the adjusted response values for {dates_range} should be {adjusted_response} with status as {status}')
+def check_adjusted_responses(context, dates_range, adjusted_response, status):
     context.dates_range = dates_range
     context.adjusted_response = adjusted_response
     RsiDateAdjustedResponseValidation().check_adjusted_responses(dates_range, context.question_codes, context.values,
-                                                                 adjusted_response)
+                                                                 adjusted_response, status)
 
 
 @then(u'check no adjusted response displayed for question code "{derived_question}"')
-def check_adjusted_responses(context, derived_question):
-    RsiDateAdjustedResponseValidation().check_adjusted_responses(context.dates_range, derived_question)
+def check_derived_question_adjusted_response(context, derived_question):
+    RsiDateAdjustedResponseValidation().check_derived_question_adjusted_responses(context.dates_range, derived_question)

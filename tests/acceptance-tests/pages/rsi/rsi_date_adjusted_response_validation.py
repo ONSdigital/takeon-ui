@@ -23,6 +23,7 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
     def check_adjusted_responses(self, *responses):
         if len(responses) > 2:
             self.expected_response_type = Utilities.get_values_as_a_list(responses[3])[0]
+            self.form_status = responses[4]
         questions_list = responses[1]
         count = 0
         if len(questions_list) > 1 and type(questions_list) == list:
@@ -34,12 +35,14 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
                                                              question_one,
                                                              self.expected_response_type)
                 count += 1
-        else:
-            question_one_value = self.get_adjusted_response(questions_list)
-            question_one = self.compare_values(question_one_value)
-            ReportingHelper.check_single_message_matches(questions_list,
-                                                         question_one,
-                                                         'blank')
+
+    def check_derived_question_adjusted_responses(self, *responses):
+        questions_list = responses[1]
+        question_one_value = self.get_adjusted_response(questions_list)
+        question_one = self.compare_values(question_one_value)
+        ReportingHelper.check_single_message_matches(questions_list,
+                                                     question_one,
+                                                     'blank')
 
     def get_adjusted_response(self, question_code):
 
@@ -50,14 +53,12 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
         return adjusted_response
 
     def compare_values(self, adjusted_response):
-        period = RsiDateAdjustedResponseValidation.period
         start_date = RsiDateAdjustedResponseValidation.start_date
         end_date = RsiDateAdjustedResponseValidation.end_date
 
-        if start_date != '' and end_date != '' and adjusted_response != '':
+        if start_date != '' and end_date != '' and adjusted_response != '' and self.form_status != 'form saved':
 
             if self.start_date <= self.end_date:
-                # no_of_days_returned = abs((int(self.end_date) - int(self.start_date))) + 1
                 act_response = float(self.actual_response_values)
                 adj_response = float(adjusted_response)
 
@@ -65,7 +66,9 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
                     return "increased"
                 elif adj_response < act_response:
                     return "decreased"
-        elif adjusted_response != '':
+                else:
+                    return "blank"
+        elif adjusted_response != '' and self.form_status != 'form saved':
             if float(adjusted_response) > float(
                     self.actual_response_values):
                 return "increased"
