@@ -29,14 +29,14 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
             for question in questions_list:
                 self.actual_response_values = Utilities.get_values_as_a_list(responses[2])[count]
                 question_one_value = self.get_adjusted_response(question)
-                question_one = self.compare_values(question_one_value, 0)
+                question_one = self.compare_values(question_one_value)
                 ReportingHelper.check_single_message_matches(question,
                                                              question_one,
                                                              self.expected_response_type)
                 count += 1
         else:
             question_one_value = self.get_adjusted_response(questions_list)
-            question_one = self.compare_values(question_one_value, 0)
+            question_one = self.compare_values(question_one_value)
             ReportingHelper.check_single_message_matches(questions_list,
                                                          question_one,
                                                          'blank')
@@ -49,7 +49,7 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
         adjusted_response = question_row.find_element(By.XPATH, element).text
         return adjusted_response
 
-    def compare_values(self, adjusted_response, i):
+    def compare_values(self, adjusted_response):
         period = RsiDateAdjustedResponseValidation.period
         start_date = RsiDateAdjustedResponseValidation.start_date
         end_date = RsiDateAdjustedResponseValidation.end_date
@@ -58,7 +58,7 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
 
             if self.start_date <= self.end_date:
                 # no_of_days_returned = abs((int(self.end_date) - int(self.start_date))) + 1
-                act_response = float(self.actual_response_values[i])
+                act_response = float(self.actual_response_values)
                 adj_response = float(adjusted_response)
 
                 if adj_response > act_response:
@@ -67,8 +67,10 @@ class RsiDateAdjustedResponseValidation(ContributorDetailsPage):
                     return "decreased"
         elif adjusted_response != '':
             if float(adjusted_response) > float(
-                    self.actual_response_values[i]):
+                    self.actual_response_values):
                 return "increased"
+            else:
+                return "decreased"
         else:
             return "blank"
 
