@@ -1,34 +1,29 @@
 import json
 import requests
 import requests_mock
-from kubernetes.client.rest import ApiException
 from app.mock_suite import mock_suite
-from app.utilities.kubernetes_config import KubernetesConfig
 
 
 localhost_url = "http://localhost:8090/"
 mocked_validation_output = "mock_validation_outputs.json"
 json_application = "Application/Json"
 
-
 class ApiRequest:
     def __init__(self, log, service="business-layer", mocking=True):
         self.log = log
         self.mock = mocking
+        self.ip = os.getenv('BLHOST')
+        self.ip = os.getenv('BLPORT')
         # print('Mocking status: {}'.format(self.mock))
-        if not self.mock:
-            self.kube = KubernetesConfig(log, service)
 
     def build_endpoint(self, endpoint, parameters):
-        return "http://" + self.kube.get_ip() + ":" + self.kube.get_port() + endpoint + "/{}".format(parameters)
+        return "http://" + self.ip + ":" + self.port + endpoint + "/{}".format(parameters)
 
     def request_get(self, endpoint, parameters):
         try:
             return requests.get(self.build_endpoint(endpoint, parameters))
-        except ApiException as error:
+        except requests.exceptions.RequestException as error:
             raise TakeonApiException(error.body, status_code=410)
-        # except ConnectionError as error:
-            # raise TakeonApiException(error.args, status_code=410)
         except requests.RequestException as error:
             raise TakeonApiException(error.args, status_code=410)
 

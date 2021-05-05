@@ -74,8 +74,8 @@ def validate(inqcode, period, ruref):
         status_message = "Connection Error. Unable to Connect to API Gateway"
         log.info('API request error occured: %s', connection_err)
     except Exception as e:
-        status_message = 'Validation Error. Kubernetes secret does not exist or is incorrect'
-        log.info('Validation Error Occurred: %s', e)
+        status_message = 'Unable to start validation process.'
+        log.info('Call validation error: %s', e)
         return render_template(
             template_name_or_list="./error_templates/validate_error.html",
             error=e
