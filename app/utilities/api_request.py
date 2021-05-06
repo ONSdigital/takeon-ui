@@ -1,37 +1,46 @@
 import json
 import requests
+import os
 import requests_mock
 from app.mock_suite import mock_suite
-
 
 localhost_url = "http://localhost:8090/"
 mocked_validation_output = "mock_validation_outputs.json"
 json_application = "Application/Json"
 
+
 class ApiRequest:
     def __init__(self, log, service="business-layer", mocking=True):
         self.log = log
         self.mock = mocking
-        self.ip = os.getenv('BLHOST')
-        self.ip = os.getenv('BLPORT')
+        self.ip = os.getenv("BLHOST")
+        self.port = os.getenv("BLPORT")
         # print('Mocking status: {}'.format(self.mock))
 
     def build_endpoint(self, endpoint, parameters):
-        return "http://" + self.ip + ":" + self.port + endpoint + "/{}".format(parameters)
+        return (
+            "http://" + self.ip + ":" + self.port + endpoint + "/{}".format(parameters)
+        )
 
     def request_get(self, endpoint, parameters):
         try:
-            return requests.get(self.build_endpoint(endpoint, parameters))
+            endpoint = self.build_endpoint(endpoint, parameters)
+            self.log.info("Get request: %s", endpoint)
+            return requests.get(endpoint)
         except requests.exceptions.RequestException as error:
             raise TakeonApiException(error.body, status_code=410)
         except requests.RequestException as error:
             raise TakeonApiException(error.args, status_code=410)
 
     def request_put(self, endpoint, parameters, data, headers):
-        return requests.put(self.build_endpoint(endpoint, parameters), data=data, headers=headers)
+        return requests.put(
+            self.build_endpoint(endpoint, parameters), data=data, headers=headers
+        )
 
     def request_post(self, endpoint, parameters, data, headers):
-        return requests.post(self.build_endpoint(endpoint, parameters), data=data, headers=headers)
+        endpoint = self.build_endpoint(endpoint, parameters)
+        self.log.info("Post request: %s", endpoint)
+        return requests.post(endpoint, data=data, headers=headers)
 
     def request_post_api_gateway(self, endpoint, data, headers):
         return requests.post(endpoint, data=data, headers=headers)
@@ -39,27 +48,37 @@ class ApiRequest:
     def view_form_responses(self, parameters):
         if self.mock:
             return mock_view_form_responses(url_connect=parameters).text
-        return self.request_get(endpoint="/viewform/responses", parameters=parameters).text
+        return self.request_get(
+            endpoint="/viewform/responses", parameters=parameters
+        ).text
 
     def contributor_search(self, parameters):
         if self.mock:
             return mock_contributor_search_screen(url_connect=parameters).text
-        return self.request_get(endpoint="/contributor/qlSearch", parameters=parameters).text
+        return self.request_get(
+            endpoint="/contributor/qlSearch", parameters=parameters
+        ).text
 
     def form_definition(self, parameters):
         if self.mock:
             return mock_form_definition(url_connect=parameters).text
-        return self.request_get(endpoint="/FormDefinition/GetFormDefinition", parameters=parameters).text
+        return self.request_get(
+            endpoint="/FormDefinition/GetFormDefinition", parameters=parameters
+        ).text
 
     def contributor_search_without_paging(self, parameters):
         if self.mock:
             return mock_contributor_search(url_connect=parameters).text
-        return self.request_get(endpoint="/contributor/search", parameters=parameters).text
+        return self.request_get(
+            endpoint="/contributor/search", parameters=parameters
+        ).text
 
     def form_response(self, parameters):
         if self.mock:
             return mock_form_response(url_connect=parameters).text
-        return self.request_get(endpoint="/Response/QuestionResponse", parameters=parameters).text
+        return self.request_get(
+            endpoint="/Response/QuestionResponse", parameters=parameters
+        ).text
 
     def update_response(self, parameters, data):
         if self.mock:
@@ -68,7 +87,8 @@ class ApiRequest:
             endpoint="/Upsert/CompareResponses",
             data=bytes(json.dumps(data), encoding="utf-8"),
             headers={"Content-Type": json_application},
-            parameters=parameters).text
+            parameters=parameters,
+        ).text
 
     def save_response(self, parameters, data):
         if self.mock:
@@ -77,32 +97,48 @@ class ApiRequest:
             endpoint="/response/save",
             data=bytes(json.dumps(data), encoding="utf-8"),
             headers={"Content-Type": json_application},
-            parameters=parameters).text
+            parameters=parameters,
+        ).text
 
     def graphql_post(self, parameters):
         if self.mock:
             return mock_next_page(url_connect=parameters).text
-        return self.request_get(endpoint="/contributor/qlSearch", parameters=parameters).text
+        return self.request_get(
+            endpoint="/contributor/qlSearch", parameters=parameters
+        ).text
 
     def validation_outputs(self, parameters):
         if self.mock:
             return mock_get_validation(url_connect=parameters).text
-        return self.request_get(endpoint="/validation/validationoutput", parameters=parameters).text
+        return self.request_get(
+            endpoint="/validation/validationoutput", parameters=parameters
+        ).text
 
     def validation_overrides(self, parameters, data):
         # self.request_post(endpoint="/validation/saveOverrides", parameters=parameters, data=data, headers=headers)
-        return self.request_post(endpoint="/validation/saveOverrides", parameters=parameters, data=data, headers={"Content-Type": json_application}).text
+        return self.request_post(
+            endpoint="/validation/saveOverrides",
+            parameters=parameters,
+            data=data,
+            headers={"Content-Type": json_application},
+        ).text
 
     def run_validation(self, endpoint, data, headers):
-        return self.request_post_api_gateway(endpoint=endpoint, data=data, headers=headers).text
+        return self.request_post_api_gateway(
+            endpoint=endpoint, data=data, headers=headers
+        ).text
 
     def notify_override(self, endpoint, data, headers):
-        return self.request_post_api_gateway(endpoint=endpoint, data=data, headers=headers).text
-  
+        return self.request_post_api_gateway(
+            endpoint=endpoint, data=data, headers=headers
+        ).text
+
     def get_historic_data(self, parameters):
         if self.mock:
             return mock_historic_data(url_connect=parameters).text
-        return self.request_get(endpoint="/viewform/historydata", parameters=parameters).text
+        return self.request_get(
+            endpoint="/viewform/historydata", parameters=parameters
+        ).text
 
 
 class TakeonApiException(Exception):
@@ -117,7 +153,7 @@ class TakeonApiException(Exception):
 
     def to_dict(self):
         output = dict(self.payload or ())
-        output['message'] = self.message
+        output["message"] = self.message
         return output
 
 
