@@ -8,7 +8,7 @@ valid_input_data = {
     "period": "201904",
     "status": "CLEAR",
     "error": None,
-    "selective_editing_flag": "PASSED"
+    "selective_editing_flag": None
   }
 
 
@@ -17,7 +17,7 @@ missing_key_data = {
         "survey": "023",
         "period": "201904",
         "error": None,
-        "selective_editing_flag": "PASSED"
+        "selective_editing_flag": None
   }
 
 
