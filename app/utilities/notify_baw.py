@@ -52,12 +52,11 @@ def build_notify_data_to_send(override_json_data):
     try:
         notification_to_send = {
                                 "reference": override_json_data['reference'],
-                                "BPMvalidationCallID": "0",
                                 "survey": override_json_data['survey'],
                                 "period": override_json_data['period'],
                                 "status": override_json_data['status'],
-                                "validationPassed": override_json_data['validationPassed'],
-                                "selective_editing_flag": override_json_data['selective_editing_flag']}
+                                "error": None,
+                                "selective_editing_flag": None}
     except KeyError as error:
         raise KeyError(error)
     return notification_to_send
